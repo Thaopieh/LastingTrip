@@ -1,0 +1,73 @@
+.layout-orders{
+    display: flex;
+}
+.orders-container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    min-height: 100vh;
+    width: 90%;
+    margin-top: 60px;
+  }
+  
+.orders-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+.orders-search-create{
+    background-color: #6cb2e4;
+    color: #fff;
+
+  }
+  .orders-search-create {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #2697e8;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .orders-search p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #92bcf0;
+  }
+.orders-search-btn{
+    display: flex;
+    align-items: center;
+  }
+.orders-search-btn form {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    
+  }
+  
+.orders-search-btn input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    outline: none;
+  }
+.orders-table th{
+    font-size: 15px;
+}
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    
+  }
+.orders-table th{
+    font-size: 19px;
+    padding: 0 50px;
+}
+.orders-quantity{
+    margin-top: 30px;
+    margin-bottom: 30px ;
+}

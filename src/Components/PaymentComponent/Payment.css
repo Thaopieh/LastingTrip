@@ -1,0 +1,347 @@
+.image {
+    width: 130px;
+    height: 100%;
+    border-radius: 8px;
+    background-color: #f0f2f5;
+}
+.layout-payment{
+    background-color:rgb(239, 239, 239) ;
+    
+}
+.payment-main-layout{
+    display: flex;
+    margin-left: 90px;
+}
+.payment-main-wrapper{
+    background-color:rgb(255, 255, 255);
+    border-radius: 10px;
+    width: 768px;
+    height:339.4px;
+    margin-top: 50px;
+    margin-left: 20px   ;
+    margin-bottom: 70  px;
+}   
+.hotel-detail{
+    display: flex;
+    padding-top: 10px;
+    border-radius: 6px;
+    padding-bottom: 10px;
+    border-bottom: dashed 2px rgb(183, 180, 180);
+   
+    
+}
+.hotel-detail .left{}
+.facilities .facility-item {
+    display: inline-flex;
+    align-items: center;
+    line-height: 18px;
+    margin-right: 16px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.guest-info{
+    width: 768px;
+    height:272px;
+    margin-left:20px ;
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+    margin-bottom: 40px;
+}
+.hotel-detail-left{
+    margin:0 16px;
+}
+.hotel-name{
+    margin-bottom: 25px;
+}
+.room-name{
+    margin-bottom: 10px;
+}
+.f-name{
+    font-size: 14px;
+    padding-left: 9px;
+}
+.Option-gift{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(249, 227, 220);
+}
+.Option-btn{
+    margin-left:201px;
+}
+#fname{
+    margin-bottom: 29px;
+    border-style: none;
+    outline: none;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    padding-right: 235px;
+
+}
+.guest-info-username-label{
+    position: absolute;
+    top: 67px;
+    left: 22px;
+}
+.guest-info-email-label {
+    position: absolute;
+    top: 143px;
+        left: 25px;
+    
+}
+.cancel-policy{
+    margin-top: 56px;
+}
+.green-hightlight{
+    color:#06aebd;
+    padding: 0 5px;
+}
+.Pro-desc{
+    margin: 10px 0 ;
+    list-style: none;
+    padding-left: 10px;
+}
+
+.guest-info-username-input{
+    padding-top: 30px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 15px   ;
+    border-radius: 4px
+    
+    
+}
+.guest-info-email-input{
+    padding-top: 30px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 15px    ;
+    border-radius: 4px;
+}
+.guest-info-email{
+    padding-top: 30px;
+}
+.guest-info-text-p1 p{
+    font-size: 20px;
+    padding-left: 20px;
+    font-weight: 600;
+}
+.guest-info-text-p2 p{
+    font-size: 15px;
+    padding-left: 20px;
+    
+}
+.form-payment{
+    margin-left: 20px;
+}
+.payment-side{
+    height: 406px;
+    width: 376px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-left: 60px;
+}
+.priceDetail-content{
+    margin-top: 25px;
+    padding-left: 10px;
+  
+
+}
+.priceDetail-title{
+    margin-top: 10px;
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.priceDetail-desc{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.priceDetail-descPrice{
+    padding:5px 0 ;
+    padding-right: 10px;
+    
+}
+.priceDetail-totalPrice{
+    display: flex;
+    
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: dashed 2px rgb(183, 180, 180);
+   
+
+}
+.priceDetail-descName{
+    font-size: 17px;
+
+}
+.price{
+    padding-right: 10px;
+}.discount-container{
+    width: 768px;
+    height:168px;
+    background-color: white;
+    margin-left:20px ;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+}
+.discount-container-action{
+    display: flex;
+    justify-content: space-between;
+}
+.discount-container-input {
+    padding:0 10px ;
+    height: 54px;
+    line-height: 1;
+    font-size: 16px;
+    font-weight: 700;
+    width: 98%;
+    box-sizing: border-box;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    position: absolute;
+    right: 5px;
+}
+.discount-container-text{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    margin-top: 5px;
+
+}
+.action-text{
+    margin-left: 10px;
+}
+
+.action-icon{
+    margin-right: 10px; 
+}
+.discount-container-input1{
+    width: 100%;
+    height:80%;
+    outline: none;
+    border-style: none;
+}
+.discount-container-button{
+    position: absolute;
+    top:102px;
+    right: 22px;
+    
+   
+}
+.discount-container-button1{
+    padding: 8px 16px;
+    background-color: blue;
+    border-radius: 5px;
+    position: absolute;
+    top: -4px;
+    right: 0px;
+}
+.action-icon-text{
+    margin-right: 5px;
+}
+
+.request-container{
+    width: 768px;
+    height:168px;
+    background-color: white;
+    margin-left:20px ;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 30px;
+}
+.request-container-action{
+    display: flex;
+    justify-content: space-between;
+}
+.request-container-input {
+    padding:0 10px ;
+    height: 54px;
+    line-height: 1;
+    font-size: 16px;
+    font-weight: 700;
+    width: 98%;
+    box-sizing: border-box;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    position: absolute;
+    right: 5px;
+}
+.request-container-text{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    margin-top: 5px;
+
+}
+.request-action-text{
+    margin-left: 10px;
+}
+
+.request-action-icon{
+    margin-right: 10px; 
+}
+.request-container-input1{
+    width: 100%;
+    height:80%;
+    outline: none;
+    border-style: none;
+}
+.request-container-button{
+    position: absolute;
+    top:102px;
+    right: 22px;
+    
+   
+}
+.request-container-button1{
+    padding: 8px 16px;
+    background-color: blue;
+    border-radius: 5px;
+}
+.request-action-text{
+    margin-right: 5px;
+}
+.next-step-container{
+    width: 768px;
+    height:168px;
+    background-color: white;
+    margin-left:20px ;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 30px;
+}
+.next-step-content{
+    padding: 15px 10px;
+   
+}
+.subscribe-txt{
+    padding-left: 10px;
+}
+.next-step-button1{
+    width: 96%;
+    height:50px; 
+    margin-top: 10px;
+    margin-left: 10px;   
+}
+.next-step-button1-content{
+    display: flex   ;
+    align-items: center;
+    justify-content: center;
+}

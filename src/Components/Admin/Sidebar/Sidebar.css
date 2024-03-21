@@ -1,0 +1,39 @@
+*{
+    font-family: Ubuntu, sans-serif;
+}
+.sidebar{
+    width: 300px;
+    min-height: 100vh;
+    margin-top: 60px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #667eea , #764ba2);
+    
+}
+.search-icon{
+    padding-left: 18px;
+    padding-right: 5px;
+    font-size: 17px ;
+    color: white;
+}
+a{
+    text-decoration: none;
+    margin: 30px 20px 30px 10px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+  
+}
+.li-sidebar a{
+    width: 100%;
+}
+.li-sidebar{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+.li-sidebar:hover{
+    background-color:#6633FF;
+    border-radius: 5px;
+    
+}
