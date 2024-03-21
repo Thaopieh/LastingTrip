@@ -30,11 +30,11 @@
 # Giới thiệu nhóm
 Xin chào mọi người! Chúng em là nhóm 11 đến từ lớp NT208.O22.ANTT.
 Nhóm chúng em gồm 5 thành viên:
-* Trịnh Thị Bích Thảo (Nhóm trưởng)
-* Thái Ngọc Diễm Trinh
-* Huỳnh Trung Thuận
-* Lê Hiệp Thuận
-* Nguyễn Đình Quang
+* 22521376 - Trịnh Thị Bích Thảo (Nhóm trưởng)
+* 22521541 - Thái Ngọc Diễm Trinh
+* 22521444 - Huỳnh Trung Thuận
+* 22521446 - Lê Hiệp Thuận
+* 22521202 - Nguyễn Đình Quang
 
 # Giới thiệu đồ án
 ## Lý do chọn đề tài
