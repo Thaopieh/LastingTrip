@@ -1,0 +1,47 @@
+.sidebar {
+    position: fixed;  /* Ensures sidebar stays in place when scrolling */
+    top: 0;
+    left: 0;
+    width: 250px;      /* Adjust width as needed */
+    height: 100vh;     /* Full viewport height, adjust if needed */
+    background-color: #f5f5f5;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;     /* Enables vertical layout */
+    flex-direction: column; /* Stacks elements vertically */
+    padding: 20px;
+  }
+  
+  /* Logo styles */
+  .logo {
+    margin: 0 0 15px 0; /* Adjust margin as needed */
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Menu container styles */
+  .menu-container {
+    flex: 1;  /* Fills remaining space in the sidebar */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  /* Spacing between menu items */
+  }
+  
+  /* Title (menu item) styles */
+  .title {
+    cursor: pointer;  /* Indicates clickable menu items */
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;  /* Smooth hover effect */
+  }
+  
+  /* Title (menu item) hover effect */
+  .title:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Logout style (assuming it's a title as well) */
+  .logout {
+    color: #c0392b;  /* Reddish color for logout to stand out */
+  }

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/coupons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/coupons.js"></script>
+    <title>Coupon</title>
+</head>
+
+<body>
+    {{> sidebar}}
+    <div class='layout'>
+        <div class='coupons-container'>
+            <div class='coupons-search'>
+                <p>MANAGE COUPONS</p>
+                <div class='coupons-search-btn'>
+                    <div class='coupons-search-create'>+ Create</div>
+                </div>
+            </div>
+            <div class='coupons-table'>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>CODE</th>
+                        <th>PERCENT</th>
+                        <th>BEGIN</th>
+                        <th>END</th>
+                        <th>ACTION</th>
+                    </tr>
+                    {{#each datatable}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.code}}</td>
+                        <td>{{this.percent}}</td>
+                        <td>{{this.begin}}</td>
+                        <td>{{this.end}}</td>
+                        <td>
+                            <button type="button" class="editCoupon" value={{this.id}}>Edit</button>
+                            <button type="button" class="deleteCoupon" value={{this.id}}>Delete</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="coupon-popup-overlay1">
+        {{!-- <div class="coupon-popup1"> --}}
+            {{!-- <span class="custom-close-btn1">&times;</span> --}}
+            {{!-- <h2>Coupon-Edit-Form</h2> --}}
+            {{!-- <form id="CouponForm"> --}}
+                {{!-- <input type="text" id="code" name="code" placeholder="Code" autocomplete="current-text"> --}}
+                {{!-- -<input type="text" id="percent" name="percent" placeholder="percent"
+                    autocomplete="current-percent"> --}}
+                {{!-- <div class="input-group"> --}}
+                    {{!-- <input type="date" id="begin" name="begin" autocomplete="current-date"> --}}
+                    {{!-- <input type="date" id="end" name="end" autocomplete="current-date"> --}}
+                    {{!-- </div> --}}
+                {{!-- <input type="submit" class="crbutton" value="Create"> --}}
+                {{!-- </form> --}}
+            {{!-- </div> --}}
+    </div>
+    <div class="coupon-popup-overlay">
+        <div class="coupon-popup">
+            <span class="coupon-close-btn">&times;</span>
+            <h2>Coupon-Form</h2>
+            <form id="CouponForm">
+                <input type="text" id="code" name="code" placeholder="Code" autocomplete="current-text">
+                <input type="text" id="percent" name="percent" placeholder="percent" autocomplete="current-percent">
+                <div class="input-group">
+                    <input type="date" id="begin" name="begin" autocomplete="current-date">
+                    <input type="date" id="end" name="end" autocomplete="current-date">
+                </div>
+                <input type="submit" class="crbutton" value="Create">
+            </form>
+        </div>
+    </div>
+    <div class="coupon-popup-overlay-delete">
+        <div class="coupon-popup-delete">
+            <h2>Success!</h2>
+            <p>Coupon deleted successfully.</p>
+            <button class="close-btn1">Close</button>
+        </div>
+    </div>
+</body>
+
+</html>
