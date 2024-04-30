@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map Embedding</title>
+    <script type='text/javascript' src='https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js'></script>
+    <style>
+        #map {
+            width: 600px;
+            height: 450px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        var subscriptionKey = 'CRnv6JeUncCqXkf-7laEaGJD4F15oNqiiF9nSpWw6_8';
+        var address = '192a7bcf-1395-4cd2-ac29-08f8bbbd0937';
+
+        // Tạo URL cho Geocoding API
+        var geocodingUrl = 'https://atlas.microsoft.com/search/address/json?api-version=1.0&subscription-key=' + subscriptionKey + '&query=' + encodeURIComponent(address);getmap
+
+        // Lấy tọa độ địa lý từ API Geocoding
+        fetch(geocodingUrl)
+            .then(response => response.json())
+            .then(data => {
+                var coordinates = data.results[0].position;
+
+                // Tạo bản đồ và đánh dấu vị trí của khách sạn
+                var map = new atlas.Map('map', {
+                    center: coordinates,
+                    zoom: 15,
+                    language: 'vi-VN',
+                    authOptions: {
+                        authType: 'subscriptionKey',
+                        subscriptionKey: subscriptionKey
+                    }
+                });
+
+                var marker = new atlas.HtmlMarker({
+                    position: coordinates,
+                    htmlContent: '<div style="background-color: #0078D4; color: white; padding: 5px;">Khách sạn của bạn</div>'
+                });
+
+                map.markers.add(marker);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>

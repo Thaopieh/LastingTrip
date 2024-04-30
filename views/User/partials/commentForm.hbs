@@ -1,0 +1,77 @@
+<form name="reviewForm" id="reviewForm" method="post" action="">
+  <table style="border-collapse: collapse;">
+    <tr>
+      <td style="padding: 5px 10px;">Đánh giá số sao</td>
+      <td style="padding: 5px 10px;">
+         {{>starRating}} 
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 10px;">Nội dung</td>
+      <td style="padding: 5px 10px;">
+        <textarea style="border: solid 1px #ddd; padding: 5px 20px; width: 100%;" cols="30" rows="10" name="content"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 10px;"></td>
+      <td style="padding: 5px 10px;">
+        <input type="submit" style="width: auto; background: red; color: #fff; border: none; padding: 5px 20px;" value="Gửi feedback" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+<script>
+// Đợi cho trang được tải hoàn toàn trước khi thực hiện các thao tác DOM
+document.querySelector("#reviewForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var ratingValue = document.querySelector("input[name='rating']:checked").value;
+    var rating = parseInt(ratingValue, 10);
+    var content = document.querySelector("textarea[name='content']").value;
+    var hotelId = window.location.pathname.split('/').pop();
+    hotelId = parseInt(hotelId, 10);
+    var guestId = localStorage.getItem("id");
+    guestId = parseInt(guestId, 10);
+
+    if (!guestId || !hotelId || rating === undefined || !content) {
+        console.log("Invalid input data");
+        return;
+    }
+
+    // Gửi dữ liệu đến máy chủ
+    fetch('http://localhost:3000/api/v1/reviews/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            rating: rating,
+            description: content,
+            hotelId: hotelId,
+            guestId: guestId
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Review submitted successfully:", data);
+
+        // Xóa thông tin trên biểu mẫu
+        document.querySelector("input[name='rating']:checked").checked = false;
+        document.querySelector("textarea[name='content']").value = '';
+
+        // Hiển thị hộp thoại thông báo
+        alert("Review submitted successfully!");
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Xử lý lỗi
+    });
+});
+
+</script>

@@ -1,0 +1,62 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Website Layout | CodingLab</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+
+<body>
+  <div class="template">
+
+      <div class="menu">
+      <div class="logo">
+        <a href="#" style="text-align: center;">Lasting Trip</a>
+      </div>
+        <ul>
+          {{!-- <li><i class="fas fa-qrcode"></i>
+            <a href="#">Dashboard</a>
+          </li> --}}
+          <li>
+            <i class="fas fa-user"></i>
+            <a href="#">KHÁCH HÀNG</a>
+          </li>
+          <li>
+            <i class="fas fa-user"></i>
+            <a href="#">CHỦ KHÁCH SẠN</a>
+          </li>
+
+          <li>
+            <i class="fas fa-hotel"></i>
+            <a href="#">KHÁCH SẠN</a>
+          </li>
+          <li>
+            <i class="fas fa-stream"></i>
+            <a href="#">ĐƠN ĐẶT HÀNG</a>
+          </li>
+          <li>
+            <i class="fas fa-money-bill"></i>
+            <a href="#">PHIẾU GIẢM GIÁ</a>
+          </li>
+          {{!-- <li>
+            <i class="far fa-comments"></i>
+            <a href="#">Feedback</a>
+          </li> --}}
+          <li>
+            <i class="fas fa-sign-out-alt"></i>
+            <a href="#">Log out</a>
+          </li>
+        </ul>
+      </div>
+  <div class="content">
+    {{>createClient}}
+  </div>
+  </div>
+
+</body>
+
+</html>
