@@ -1,0 +1,131 @@
+.layout-chatbot{
+    background:url(https://wiki-travel.com.vn/Uploads/picture/UyenMac-232224062252-resort-thai-lan-1.jpg) ;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.chatbot-container{
+    width:1000px; ;
+    height: 600px;
+    justify-content: center;
+    margin-left: 150px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.chatbot-container-header{
+    background-color: #f3f2f2;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;    
+}
+.chatbot-container-header img{
+    margin-left: 4px;
+}
+.chatbot-container-header-content{
+    margin-left:20px;
+    border-radius: 4px;
+}
+.chatbot-container-header-content h3{
+    margin: 0px;
+}
+.chatbot-container-header-content p{
+    margin: 0px;
+    font-size: 13px;
+    padding-top: 5px;
+    font-weight: 400;
+    margin-left: 18px;
+}
+.chatbot-container-main-left{
+   
+}
+.chatbot-image{
+    height: 40px;
+    border-radius: 50%;
+
+}
+.chatbot-container-main{
+    display: flex;  
+
+}
+.chatbot-container-main-left{
+}
+.chatbot-container-main-right{
+    height: 600px;
+    width: 384px;
+    background-color: rgb(240, 236, 236);
+}
+.chatbot-container-main-left-on{
+    height: 500px;
+    width: 822px;
+    background-color: aliceblue;
+    
+}
+.chatbot-container-main-left-under{
+    height: 100px;
+    background-color: white;
+    position: relative;
+}
+.chatbot-container-main-left-on-agent{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-top: 20px;
+    margin-left: 10px;
+}
+.chatbot-container-main-left-on-agent p{
+    color:black;
+    font-weight: 400;
+    font-size: 15px;
+    background:#9ed1f7;
+    border-radius: 10px;
+    padding :10px;
+    margin-left: 10px;
+}
+.chatbot-container-main-left-on-client{
+    display: flex;
+    justify-content: end;
+}
+.chatbot-container-main-left-on-client p{
+    color: black;
+    padding:8px 24px;
+    background: rgb(239, 237, 237);
+    border-radius: 10px;
+    margin-right: 10px;
+    font-weight: 400;
+}
+.chatbot-container-main-left-under-icon{
+    display: flex;
+}
+.under-icon1{
+   width: 20px;
+    color:rgb(215, 213, 213);
+    padding: 0 12px;
+    margin-top: 10px;
+}
+.chatbot-container-main-left-under-input{
+    display: flex;
+}
+.chatbot-container-main-left-under input[type="submit"] {
+    padding: 8px 13px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 400px;
+  }
+  .chatbot-container-main-left-under input[type="text"] {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border:none;
+    width: 300px;
+  }

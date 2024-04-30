@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>enablesdksearchbarHTML</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <style type='text/css'>body{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',Helvetica,Arial,Sans-Serif}</style>
+</head>
+<body>
+    <div id='printoutPanel'></div>
+    
+    <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+    <script type='text/javascript'>
+        function loadMapScenario() {
+            var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                /* No need to set credentials if already passed in URL */
+                showSearchBar: true
+            });
+            
+            // Set the default search value to "Hồ Chí Minh"
+            var searchValue = "Đà Nẵng";
+
+            // Wait for the map to load
+            Microsoft.Maps.Events.addHandler(map, 'ready', function () {
+                // Create a search manager
+                var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+
+                // Geocode the search value
+                searchManager.geocode({
+                    callback: function (result, userData) {
+                        if (result && result.results && result.results.length > 0) {
+                            // Set the map view to the geocoded location
+                            map.setView({ bounds: result.results[0].bestView });
+
+                            // Create a pushpin at the geocoded location
+                            var pushpin = new Microsoft.Maps.Pushpin(result.results[0].location);
+                            map.entities.push(pushpin);
+                        }
+                    },
+                    errorCallback: function (error) {
+                        console.log(error);
+                    },
+                    query: searchValue,
+                    count: 1
+                });
+            });
+        }
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AtD3CqH5iJ4hZBfr2ug7Vlf3N8qw5hC2K9CMiD2EXvUgkIVi2ewyOc_j9CDlLpz1&callback=loadMapScenario' async defer></script>
+</body>
+</html>

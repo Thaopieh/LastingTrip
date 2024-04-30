@@ -1,0 +1,106 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/payment.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="title">
+        <h2>Thanh toán</h2>
+      </div>
+      <div class="d-flex">
+        <form action="" method="">
+          <label>
+            <span class="fname">Họ tên <span class="required">*</span></span>
+            <input type="text" name="fname" />
+          </label>
+          <label>
+            <span>Năm sinh<span class="required">*</span></span>
+            <input type="text" name="city" />
+          </label>
+          <label>
+            <span class="cccd">Căn cước công dân
+              <span class="required">*</span></span>
+            <input type="text" name="cccd" />
+          </label>
+          <label>
+            <span>Địa chỉ</span>
+            <input type="text" name="dc" />
+          </label>
+          <label>
+          </label>
+          <label>
+            <span>Số điện thoại<span class="required">*</span></span>
+            <input
+              type="text"
+              name="houseadd"
+              placeholder="0342730606"
+              required
+            />
+          </label>
+          <label>
+            <span>Email Address <span class="required">*</span></span>
+            <input type="email" name="city" />
+          </label>
+          <label>
+            <span>Yêu cầu đặc biệt</span>
+            <input type="text" name="request" placeholder="" />
+          </label>
+        </form>
+        <div class="Yorder">
+          <table>
+            <tr>
+              <th colspan="2">Đơn hàng của bạn</th>
+            </tr>
+            <tr>
+              <td>Marriott Nha Trang</td>
+              <td>2.300.000</td>
+            </tr>
+            <tr>
+              <td>Phụ thu</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Mã giảm giá</td>
+              <td><input type="text" /></td>
+            </tr>
+            <tr>
+              <td>Tổng cộng</td>
+              <td>2.300.000</td>
+            </tr>
+          </table><br />
+          <div>
+            <input type="radio" name="dbt" value="dbt" checked />
+            Thanh toán qua ngân hàng
+          </div>
+          <p>
+            Vui lòng chuyển khoản trực tiếp vào tài khoản ngân hàng của chúng
+            tôi. Nội dung chuyển khoản là số căn cước công dân của bạn.
+          </p>
+          <div>
+            <input type="radio" name="dbt" value="cd" />
+            Thanh toán trực tiếp
+          </div>
+          <div>
+            <input type="radio" name="dbt" value="cd" />
+            Paypal
+            <span>
+              <img
+                src="https://www.logolynx.com/images/logolynx/c3/c36093ca9fb6c250f74d319550acac4d.jpeg"
+                alt=""
+                width="50"
+              />
+            </span>
+          </div>
+          <button type="button">Place Order</button>
+        </div><!-- Yorder -->
+      </div>
+      <p class="return">Quay lại trang chủ </p>
+    </div>
+  </body>
+
+</html>
