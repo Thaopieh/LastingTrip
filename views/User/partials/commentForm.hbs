@@ -13,16 +13,48 @@
       </td>
     </tr>
     <tr>
+      <td style="padding: 5px 10px;">Tệp tin</td>
+      <td style="padding: 5px 10px;">
+        <input type="file" name="file" id="fileInput" onchange="previewImage()" />
+        <br>
+        <img id="preview" src="#" alt="Hình ảnh xem trước" style="max-width: 200px; display: none;">
+      </td>
+    </tr>
+    <tr>
       <td style="padding: 5px 10px;"></td>
       <td style="padding: 5px 10px;">
-        <input type="submit" style="width: auto; background: red; color: #fff; border: none; padding: 5px 20px;" value="Gửi feedback" />
+        <input type="submit" style="width: auto; background: red; color: #fff; border: none; padding: 5px 20px;" value="Gửi feedback" onclick="resetPreview()" />
       </td>
     </tr>
   </table>
 </form>
 
 <script>
-// Đợi cho trang được tải hoàn toàn trước khi thực hiện các thao tác DOM
+  function previewImage() {
+    var fileInput = document.getElementById('fileInput');
+    var preview = document.getElementById('preview');
+
+    // Kiểm tra xem người dùng đã chọn tệp tin hay chưa
+    if (fileInput.files && fileInput.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      }
+
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  }
+
+  function resetPreview() {
+    var preview = document.getElementById('preview');
+    preview.src = '';
+    preview.style.display = 'none';
+  }
+</script>
+
+<script>
 document.querySelector("#reviewForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -39,18 +71,21 @@ document.querySelector("#reviewForm").addEventListener("submit", function(event)
         return;
     }
 
+    // Lấy dữ liệu tệp từ mẫu
+    var fileInput = document.querySelector("input[type='file']");
+    var file = fileInput.files[0];
+    
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('rating', rating);
+    formData.append('description', content);
+    formData.append('hotelId', hotelId);
+    formData.append('guestId', guestId);
+
     // Gửi dữ liệu đến máy chủ
     fetch('http://localhost:3000/api/v1/reviews/create', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            rating: rating,
-            description: content,
-            hotelId: hotelId,
-            guestId: guestId
-        })
+        body: formData
     })
     .then(response => {
         if (!response.ok) {
@@ -64,6 +99,7 @@ document.querySelector("#reviewForm").addEventListener("submit", function(event)
         // Xóa thông tin trên biểu mẫu
         document.querySelector("input[name='rating']:checked").checked = false;
         document.querySelector("textarea[name='content']").value = '';
+        document.querySelector("input[type='file']").value = '';
 
         // Hiển thị hộp thoại thông báo
         alert("Review submitted successfully!");

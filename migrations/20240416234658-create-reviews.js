@@ -15,6 +15,9 @@ module.exports = {
       description: {
         type: Sequelize.TEXT,
       },
+      file: {
+        type: Sequelize.TEXT,
+      },
       hotelid: {
         type: Sequelize.INTEGER,
         references: {

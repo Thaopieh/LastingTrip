@@ -21,15 +21,13 @@ module.exports = {
       map: {
         type: Sequelize.STRING,
       },
-      linkMap: {
-        type: Sequelize.STRING,
-      },
+
       roomType: {
         type: Sequelize.STRING,
       },
-      TypeHotel:{
+      TypeHotel: {
         type: Sequelize.STRING,
-      } ,
+      },
       status: {
         type: Sequelize.STRING,
       },
@@ -39,14 +37,11 @@ module.exports = {
       type: {
         type: Sequelize.INTEGER,
       },
-      embedMap: {
-        type: Sequelize.TEXT,
-      },
       imageUrl: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       payment: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
