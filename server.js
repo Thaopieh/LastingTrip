@@ -7,6 +7,29 @@ const { rootRouter } = require("./routers");
 const app = express();
 app.use(cors());
 
+const TeachableMachine = require("@sashido/teachablemachine-node");
+
+const model = new TeachableMachine({
+  modelUrl: "https://teachablemachine.withgoogle.com/models/r6BBk-hiN/",
+});
+
+app.get("/image/classify", async (req, res) => {
+  const { url } = req.query;
+
+  return model
+    .classify({
+      imageUrl: url,
+    })
+    .then((predictions) => {
+      console.log(predictions);
+      return res.json(predictions);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.status(500).send("Something went wrong!");
+    });
+});
+
 // Setup JSON parsing
 app.use(express.json());
 
@@ -18,6 +41,14 @@ app.use("/api/v1", rootRouter);
 // Define routes
 app.get("/", (req, res) => {
   res.render("User/mainpage");
+});
+
+app.get("/imgClassifier", (req, res) => {
+  res.render("User/imgClassifier");
+});
+
+app.get("/chatbot", (req, res) => {
+  res.render("User/chatbot");
 });
 
 app.get("/hotelList", (req, res) => {
@@ -78,7 +109,10 @@ app.get("/dashboard", (req, res) => {
 const hbs = exphbs.create({
   extname: "hbs",
   defaultLayout: false,
-  partialsDir: [__dirname + "/views/User/partials", __dirname + "/views/Admin/partials"],
+  partialsDir: [
+    __dirname + "/views/User/partials",
+    __dirname + "/views/Admin/partials",
+  ],
 });
 
 app.engine("hbs", hbs.engine);

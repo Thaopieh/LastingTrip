@@ -20,3 +20,8 @@ function backToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+$(".chatbot").click(function () {
+  // Thực hiện chuyển hướng đến trang khác
+  window.location.href = "http://localhost:3000/chatbot";
+});

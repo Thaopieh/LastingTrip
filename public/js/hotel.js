@@ -48,7 +48,7 @@ $(document).ready(function () {
       <div class="col-7 left-sry">
       <h2>${data.name} </h2>
       <p><i class="fa-solid fa-location-dot"></i> ${data.map}
-        <button class="btn" data-bs-toggle="modal" data-bs-target="#mapModal" style="color: blue">Xem bản đồ</button>
+        <button class="btn" data-bs-toggle="modal" onclick="redirectToMap('${data.name}')" style="color: blue">Xem bản đồ</button>
       </p>
       <p><i class="bi bi-buildings-fill"></i>Hãy để chuyến đi của quý khách có một khởi đầu tuyệt vời khi ở lại
         khách sạn này, nơi có Wi-Fi miễn phí trong tất cả các phòng.
@@ -65,7 +65,7 @@ $(document).ready(function () {
             </div>
             <div class="modal-body">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.${data.embedMap}!5m2!1sen!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.!5m2!1sen!2s"
                 width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -389,20 +389,19 @@ $(document).ready(() => {
 $(document).ready(() => {
   var url = window.location.pathname;
   var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   $.ajax({
     url: "http://localhost:3000/api/v1/rooms?hotelId=" + hotelId,
     method: "GET",
 
     success: (data) => {
       data.forEach((item) => {
-        const breakfast = (item.price * 20) / 100;
+        const breakfast = numberWithCommas((item.price * 20) / 100);
         let amenities = "";
         if (item.roomServices && item.roomServices.length > 0) {
           item.roomServices.forEach((service) => {
-            // amenities += `<div class="item">
-            //                 <i class="fa-solid ${service.Amenity.class}"></i>
-            //                 <span>${service.Amenity.name}</span>
-            //               </div>`;
             amenities += `<div class="item">
             <span class="material-symbols-outlined"> ${service.Amenity.class} </span>
             <span class="baseRoom_baseRoom-facility_title__4PawP">${service.Amenity.name}</span>
@@ -411,6 +410,11 @@ $(document).ready(() => {
         } else {
           amenities = '<div class="item">No amenities available</div>';
         }
+
+        let peope_num = `<i class="fa-solid fa-user"></i>`.repeat(
+          item.quantity_people
+        );
+
         const card = `<div class="select-hotel">
         <div class="container-fluid" id="room-id">
           <h2>${item.name}</h2>
@@ -432,7 +436,7 @@ $(document).ready(() => {
                 </div>
                 <div class="baseroom_bed">
                   <span class="material-symbols-outlined"> bed </span>
-                  <span class="type-bed">1 giường King</span>
+                  <span class="type-bed">1 giường ${item.type_bed}</span>
                 </div>
                 <div class="baseroom_item">
                 ${amenities}
@@ -464,18 +468,20 @@ $(document).ready(() => {
                       <div class="info">
                         <span>Thanh toán online</span>
                       </div>
-                      <div class="info"><span>Đặt tối đa 10 phòng</span></div>
+                      <div class="info"><span>Đặt tối đa ${
+                        item.quantity
+                      } phòng</span></div>
                     </div>
                   </div>
                   <div class="col-lg-2">
                     <div class="people">
-                      <i class="fa-solid fa-user"></i>
-                      <i class="fa-solid fa-user"></i>
+                      ${peope_num}
+
                     </div>
                   </div>
                   <div class="col-lg-5">
                     <div class="room-price">
-                      <p>VND 5,234,753</p>
+                      <p>VND ${numberWithCommas(item.price)}</p>
                       <a href="#" class="btn btn-primary">Đặt phòng</a>
                     </div>
                   </div>

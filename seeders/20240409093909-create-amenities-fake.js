@@ -142,7 +142,7 @@ module.exports = {
       },
       {
         name: "Máy giặt",
-        class: "washing machine",
+        class: "local_laundry_service",
         type: 1,
         createdAt: "2024-04-01 04:26:18",
         updatedAt: "2024-04-01 04:26:18",

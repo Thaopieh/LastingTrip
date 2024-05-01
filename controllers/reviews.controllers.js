@@ -18,17 +18,41 @@ const createReview = async (req, res) => {
       return res.status(400).json({ error: "Invalid input data" });
     }
 
-    const newReview = await Reviews.create({
+    let newReviewData = {
       rating,
       description,
       hotelId,
       guestId,
-    });
+    };
+
+    const { file } = req;
+    if (file) {
+      const imagePath = file.path;
+      var cleanedPath = imagePath.replace(/^public/, "");
+      const urlImage = `localhost:3000${cleanedPath}`;
+      newReviewData.file = urlImage;
+    }
+
+    const newReview = await Reviews.create(newReviewData);
 
     res.status(201).send(newReview);
   } catch (error) {
     res.status(500).send(error);
   }
+};
+
+const uploadFile = async (req, res) => {
+  const { file } = req;
+  const imagePath = file.path;
+  var cleanedPath = imagePath.replace(/^public/, "");
+  const urlImage = `localhost:3000${cleanedPath}`;
+  const { user } = req;
+  const commentFound = await Reviews.findOne({
+    id: user.id,
+  });
+  commentFound.file = urlImage;
+  await commentFound.save();
+  res.send(commentFound);
 };
 
 const getAllReview = async (req, res) => {
@@ -122,4 +146,5 @@ module.exports = {
   updateReview,
   getDetailReview,
   getAllReview,
+  uploadFile,
 };
