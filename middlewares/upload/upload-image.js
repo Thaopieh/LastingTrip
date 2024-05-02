@@ -1,27 +1,32 @@
+const mkdirp = require("mkdirp");
 const multer = require("multer");
-const uploadImage = () => {
+
+const uploadImage = (type) => {
+  const made = mkdirp.sync(`./public/image/${type}`);
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "./public/image/comment-file"); // setup cho can luu file
+      cb(null, `./public/image/${type}`); // setup chổ cần lưu file
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname); // dat lai ten cho file
+      cb(null, Date.now() + "_" + file.originalname); // đặt lại tên cho file
     },
   });
   const upload = multer({
     storage: storage,
-    fileFilter: (req, file, cb) => {
-      const extensionIMG = [".png", ".jpg"];
-      const extension = file.originalname.slice(-4);
-      const check = extensionIMG.includes(extension);
+    fileFilter: function (req, file, cb) {
+      const extensionImageList = [".png", ".jpg", ".jpeg"];
+      const extension1 = file.originalname.slice(-4);
+      const extension2 = file.originalname.slice(-5);
+      const check = extensionImageList.includes(extension1) || extensionImageList.includes(extension2);
       if (check) {
         cb(null, true);
       } else {
-        cb(new Error("extension not invalid!"));
+        cb(new Error("extension không hợp lệ"));
       }
     },
   });
-  return upload.single("file");
+
+  return upload.single(type);
 };
 
 module.exports = {

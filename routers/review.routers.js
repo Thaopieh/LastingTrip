@@ -10,13 +10,12 @@ const {
 const { authenticate } = require("../middlewares/authen/authenticate");
 const { authorize } = require("../middlewares/authen/authorize");
 const { checkExist } = require("../middlewares/validations/checkExist");
-const { uploadImage } = require("../middlewares/upload/upload-image");
+const {   uploadImage} = require("../middlewares/upload/upload-image");
 const ReviewRouter = express.Router();
 
-ReviewRouter.post("/create", uploadImage(), createReview);
+ReviewRouter.post("/create", authenticate, uploadImage("file"), createReview);
 
-ReviewRouter.post("/upFile", authenticate, uploadImage(), uploadFile);
-
+ReviewRouter.post("/upFile", authenticate, uploadImage("file"), uploadFile);
 ReviewRouter.get("/", getAllReview);
 ReviewRouter.put("/:id", checkExist(Reviews), updateReview);
 ReviewRouter.delete("/:id", checkExist(Reviews), deleteReview);
