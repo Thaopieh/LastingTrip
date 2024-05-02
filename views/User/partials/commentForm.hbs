@@ -74,40 +74,54 @@ document.querySelector("#reviewForm").addEventListener("submit", function(event)
     // Lấy dữ liệu tệp từ mẫu
     var fileInput = document.querySelector("input[type='file']");
     var file = fileInput.files[0];
-    
+    const token = localStorage.getItem('token');
+
     var formData = new FormData();
     formData.append('file', file);
     formData.append('rating', rating);
     formData.append('description', content);
     formData.append('hotelId', hotelId);
     formData.append('guestId', guestId);
-
     // Gửi dữ liệu đến máy chủ
     fetch('http://localhost:3000/api/v1/reviews/create', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
+    method: 'POST',
+    body: formData,
+    headers: {token},
+})
+.then(response => {
+    if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error('Unauthorized: Please log in to submit a review.');
+        } else {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
-        return response.json();
-    })
-    .then(data => {
-        console.log("Review submitted successfully:", data);
+    }
+    return response.json();
+})
+.then(data => {
+    console.log("Review submitted successfully:", data);
 
-        // Xóa thông tin trên biểu mẫu
-        document.querySelector("input[name='rating']:checked").checked = false;
-        document.querySelector("textarea[name='content']").value = '';
-        document.querySelector("input[type='file']").value = '';
+    // Xóa thông tin trên biểu mẫu
+    document.querySelector("input[name='rating']:checked").checked = false;
+    document.querySelector("textarea[name='content']").value = '';
+    document.querySelector("input[type='file']").value = '';
 
-        // Hiển thị hộp thoại thông báo
-        alert("Review submitted successfully!");
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Xử lý lỗi
-    });
+    // Hiển thị hộp thoại thông báo
+    alert("Review submitted successfully!");
+})
+.catch(error => {
+    console.error('Error:', error);
+
+    // Kiểm tra nếu là lỗi Unauthorized (401)
+    if (error.message === 'Unauthorized: Please log in to submit a review.') {
+        // Hiển thị thông báo yêu cầu đăng nhập
+        alert('Bạn vui lòng đăng nhập để thực hiện đánh giá.');
+    } else {
+        // Xử lý các lỗi khác
+        // Ví dụ: hiển thị một thông báo lỗi chung
+        alert('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+    }
+});
 });
 
 </script>

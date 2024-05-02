@@ -46,7 +46,9 @@ app.get("/", (req, res) => {
 app.get("/imgClassifier", (req, res) => {
   res.render("User/imgClassifier");
 });
-
+app.get("/chatbotimage", (req, res) => {
+  res.render("User/chatbotImage");
+});
 app.get("/chatbot", (req, res) => {
   res.render("User/chatbot");
 });
