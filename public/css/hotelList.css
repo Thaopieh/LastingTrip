@@ -368,6 +368,9 @@ footer {
 .btn-group
 {
     width: 250px;
+    background-color: white;
+    color: black;
+    border: none;
 }
   .dropdown_menu li {
     padding : 0.7rem;

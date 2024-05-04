@@ -53,6 +53,7 @@ body.show-chatbot .chatbot-toggler span:last-child {
 }
 body.show-chatbot .chatbot1 {
   opacity: 1;
+  z-index: 1000;
   pointer-events: auto;
   transform: scale(1);
 }

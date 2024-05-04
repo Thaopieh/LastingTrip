@@ -298,10 +298,6 @@
   cursor: pointer;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
 .search-button {
   font-size: 18px;
   font-weight: 700;

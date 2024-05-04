@@ -103,7 +103,7 @@ $(document).ready(() => {
                     <p>${description}</p>
                     <p>
                       <i class="fa-solid fa-location-dot"></i>${item.map}
-                      <span><button class="btn" data-bs-toggle="modal" onclick="redirectToMap('${item.name}')" style="color: blue">Xem bản đồ</button></span>
+                      <span><button class="btn" data-bs-toggle="modal" onclick="redirectToMap('${item.name}' )" style="color: blue">Xem bản đồ</button></span>
                     </p>
                   </div>
                 </div>
@@ -431,7 +431,7 @@ window.addEventListener("beforeunload", function (event) {
 });
 function changeSort(sortType) {
   // Lấy phần tử button dropdown để thay đổi nội dung
-  const dropdownButton = document.getElementById("filte-dropdown");
+  const dropdownButton = document.getElementById("filter-dropdown");
 
   // Thay đổi nội dung của button dropdown
   dropdownButton.innerHTML = `<i class="fa-solid fa-sort"></i> Sắp xếp theo: ${sortType}`;

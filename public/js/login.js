@@ -30,8 +30,8 @@ form.addEventListener("submit", (e) => {
         localStorage.setItem("token", token);
         const id = result.id; // Giả sử token được trả về là thuộc tính 'token' của đối tượng result
         localStorage.setItem("id", id);
-        if (result.type === "admin") {
-          window.location.href = "/admin";
+        if (result.type === "ADMIN") {
+          window.location.href = "dashboard";
         } else {
           // Nếu đăng nhập thành công, chuyển hướng đến trang chủ
           window.location.href = "/";
