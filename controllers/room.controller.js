@@ -1,28 +1,51 @@
-const { Room, Hotels, roomService, Amenities } = require("../models");
+const { Room, Hotels, roomService, Amenities, UrlImageRoom } = require("../models");
 const { Op } = require("sequelize");
 const createRoom = async (req, res) => {
+  const {
+    name,
+    status,
+    price,
+    quantity,
+    quantity_people,
+    hotelId,
+    type_bed,
+  } = req.body;
+
   try {
-    const {
-      name,
-      status,
-      price,
-      quantity,
-      quantity_people,
-      hotelid,
-      type_bed,
-    } = req.body;
+    // Create a new room record in the database
     const newRoom = await Room.create({
       name,
       status,
       price,
       quantity,
       quantity_people,
-      hotelid,
+      hotelId,
       type_bed,
     });
+
+    // Retrieve uploaded files from the request
+    const { files } = req;
+    console.log(files);
+    // Iterate over each file and create a corresponding UrlImageRoom record
+    for (const file of files) {
+      const imagePath = file.path.replace(/^public/, ""); // Get relative path
+      const imageUrl = `http://localhost:3000/${imagePath}`; // Construct full image URL
+
+      // Create UrlImageRoom record associated with the new room
+      const imageUrlRecord = await UrlImageRoom.create({
+        url: imageUrl,
+        IdRoom: newRoom.id, // Associate the UrlImageRoom with the new room
+      });
+
+      console.log("Created UrlImageRoom record:", imageUrlRecord);
+    }
+
+    // Send a success response with the newly created room
     res.status(201).send(newRoom);
   } catch (error) {
-    res.status(500).send(error);
+    // Handle errors and send an error response
+    console.error("Error creating room:", error);
+    res.status(500).send({ error: "Failed to create room", message: error.message });
   }
 };
 const getAllRoom = async (req, res) => {
