@@ -106,6 +106,10 @@ app.get("/coupons", (req, res) => {
 app.get("/dashboard", (req, res) => {
   res.render("Admin/dashboard");
 });
+app.get("/admin", (req, res) => {
+  res.render("Admin/partials/createHotel");
+});
+
 
 // Configure Handlebars
 const hbs = exphbs.create({

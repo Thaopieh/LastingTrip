@@ -1,18 +1,14 @@
 const { Hotels } = require("../models");
-
+const {uploadImage2} = require ("../middlewares/upload/upload-mutileImage.js")
 const express = require("express");
 const {
   createHotel,
   getAllHotel,
   getDetailHotel,
-  getHotelsByType,
-  //   updateHotel,
-  //   deleteHotel,
 } = require("../controllers/hotel.controllers.js");
 
 const HotelRouter = express.Router();
-
-HotelRouter.post("/", createHotel);
+HotelRouter.post("/", uploadImage2("hotel", 10),createHotel);
 HotelRouter.get("/", getAllHotel);
 HotelRouter.get("/:id", getDetailHotel);
 

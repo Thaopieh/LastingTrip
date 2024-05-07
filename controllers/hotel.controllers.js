@@ -4,29 +4,51 @@ const {
   HotelAmenities,
   Amenities,
   Reviews,
+  UrlImageHotel
 } = require("../models");
 const { Op, literal } = require("sequelize");
 // const amenities = require("../models/amenities");
 const createHotel = async (req, res) => {
-  const { name, rate, comment, map, linkMap, roomType, status, cost, type } =
-    req.body;
+  const { name, rate, map, roomType, TypeHotel, status, cost, type, payment } = req.body;
+
   try {
+    // Create the hotel record
     const newHotel = await Hotels.create({
       name,
       rate,
-      comment,
       map,
-      linkMap,
       roomType,
+      TypeHotel,
       status,
       cost,
       type,
+      payment,
     });
+    console.log(newHotel);
+    const { files } = req;
+    console.log(files);
+    // Iterate over each file and create a corresponding UrlImageHotel record
+    for (const file of files) {
+      const imagePath = file.path.replace(/^public/, ""); // Get relative path
+      const imageUrl = `http://localhost:3000/${imagePath}`; // Construct full image URL
+
+      // Create UrlImageHotel record associated with the new hotel
+      const imageUrlRecord = await UrlImageHotel.create({
+        url: imageUrl,
+        HotelId: newHotel.id
+      });
+
+      console.log("Created UrlImageHotel record:", imageUrlRecord);
+    }
+
+    // Send the response with the newly created hotel
     res.status(201).send(newHotel);
   } catch (error) {
+    console.error("Error creating hotel:", error);
     res.status(500).send(error);
   }
 };
+
 
 function getOrderCriteria(sortType) {
   switch (sortType) {
@@ -273,7 +295,6 @@ module.exports = {
   createHotel,
   getAllHotel,
   getDetailHotel,
-
   //   updateHotel,
   //   deleteHotel,
 };

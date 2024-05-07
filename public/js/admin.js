@@ -25,6 +25,7 @@ $(document).ready(function () {
             user.id +
             '">Delete</button>';
           tableHtml += "</td>";
+          tableHtml += "<td><i class='fa-solid fa-image'></i></td>"; // Add icon
           tableHtml += "</tr>";
         });
         // Render dữ liệu vào bảng

@@ -30,10 +30,7 @@ module.exports = {
       type_bed: {
         type: Sequelize.STRING,
       },
-      imageUrl: {
-        type: Sequelize.STRING,
-      },
-      hotelid: {
+      hotelId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Hotels",
