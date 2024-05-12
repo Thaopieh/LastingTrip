@@ -9,7 +9,7 @@
     <tr>
       <td style="padding: 5px 10px;">Nội dung</td>
       <td style="padding: 5px 10px;">
-        <textarea style="border: solid 1px #ddd; padding: 5px 20px; width: 100%;" cols="30" rows="10" name="content"></textarea>
+        <textarea style="border: solid 1px #ddd; padding: 5px 20px; width: 80%;" cols="30" rows="10" name="content"></textarea>
       </td>
     </tr>
     <tr>
@@ -83,7 +83,7 @@ document.querySelector("#reviewForm").addEventListener("submit", function(event)
     formData.append('hotelId', hotelId);
     formData.append('guestId', guestId);
     // Gửi dữ liệu đến máy chủ
-    fetch('http://localhost:3000/api/v1/reviews/create', {
+    fetch('http://localhost:3030/api/v1/reviews/create', {
     method: 'POST',
     body: formData,
     headers: {token},

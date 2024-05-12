@@ -1,15 +1,14 @@
-const { Room, Hotels, roomService, Amenities, UrlImageRoom } = require("../models");
+const {
+  Room,
+  Hotels,
+  roomService,
+  Amenities,
+  UrlImageRoom,
+} = require("../models");
 const { Op } = require("sequelize");
 const createRoom = async (req, res) => {
-  const {
-    name,
-    status,
-    price,
-    quantity,
-    quantity_people,
-    hotelId,
-    type_bed,
-  } = req.body;
+  const { name, status, price, quantity, quantity_people, hotelId, type_bed } =
+    req.body;
 
   try {
     // Create a new room record in the database
@@ -29,7 +28,7 @@ const createRoom = async (req, res) => {
     // Iterate over each file and create a corresponding UrlImageRoom record
     for (const file of files) {
       const imagePath = file.path.replace(/^public/, ""); // Get relative path
-      const imageUrl = `http://localhost:3000/${imagePath}`; // Construct full image URL
+      const imageUrl = `http://localhost:3030/${imagePath}`; // Construct full image URL
 
       // Create UrlImageRoom record associated with the new room
       const imageUrlRecord = await UrlImageRoom.create({
@@ -45,7 +44,9 @@ const createRoom = async (req, res) => {
   } catch (error) {
     // Handle errors and send an error response
     console.error("Error creating room:", error);
-    res.status(500).send({ error: "Failed to create room", message: error.message });
+    res
+      .status(500)
+      .send({ error: "Failed to create room", message: error.message });
   }
 };
 const getAllRoom = async (req, res) => {
@@ -119,11 +120,15 @@ const updateRoom = async (req, res) => {
 const deleteRoom = async (req, res) => {
   const { id } = req.params;
   try {
-    room.destroy({
+    const roomm = await Room.findOne({
       where: {
         id,
       },
     });
+    if (!roomm) {
+      return res.status(404).send("Room not found!");
+    }
+    await roomm.destroy({ cascade: true });
     res.status(200).send("Successful");
   } catch (error) {
     res.status(500).send(error);

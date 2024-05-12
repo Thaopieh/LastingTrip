@@ -20,7 +20,7 @@ form.addEventListener("submit", (e) => {
   // Gửi yêu cầu POST đến URL xử lý dữ liệu đăng nhập
   // Gửi yêu cầu POST bằng Axios
   $.ajax({
-    url: "http://localhost:3000/api/v1/users/login",
+    url: "http://localhost:3030/api/v1/users/login",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify(data),

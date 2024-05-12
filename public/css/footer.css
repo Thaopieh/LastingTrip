@@ -61,3 +61,19 @@ footer img {
     padding-bottom: 35px;
 
 }
+
+@media (max-width :992px) {
+  
+  .footer__main{
+    display: grid;
+    grid-template: 3fr 3fr/ 3fr 3fr;
+    text-align: center;
+    
+  }
+
+  .footer__main .footer__item{
+    width: 90%;
+  }
+
+
+}

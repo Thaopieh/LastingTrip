@@ -1,35 +1,36 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('UrlImageRooms', {
+    await queryInterface.createTable("UrlImageRooms", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       IdRoom: {
         type: Sequelize.INTEGER,
         references: {
           model: "Rooms",
           key: "id",
+          onDelete: "CASCADE",
         },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('UrlImageRooms');
-  }
+    await queryInterface.dropTable("UrlImageRooms");
+  },
 };

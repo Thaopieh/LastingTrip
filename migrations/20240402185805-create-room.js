@@ -35,6 +35,7 @@ module.exports = {
         references: {
           model: "Hotels",
           key: "id",
+          onDelete: "CASCADE",
         },
       },
       createdAt: {

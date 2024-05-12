@@ -49,6 +49,25 @@ function numberWithCommas(x) {
 }
 
 $(document).ready(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    $("#broadcast").show();
+  }
+
+  $("#registerTime").on("click", function () {
+    window.location.href = "/register";
+  });
+
+  $("#loginTime").on("click", function () {
+    window.location.href = "/signin";
+  });
+  $(document).on("click", "#filter-header", function () {
+    $(".popup-overlay").show();
+  });
+  $(".close-btn").click(function () {
+    $(".popup-overlay").hide();
+  });
+
   const loaddata = (data) => {
     const numberOfResultsElement = $("#numberOfResults");
     const count = data.filter((item) => item.hasOwnProperty("id")).length;
@@ -67,26 +86,55 @@ $(document).ready(() => {
     data.forEach((item, index) => {
       let imageSrc;
       const formattedCost = numberWithCommas(item.cost);
-      if (item.type == 2) {
+      if (item.TypeHotel == "Hotel") {
         imageSrc = `/image/BudgetFriendly/Hotel_${i}.webp`;
         i++;
-      } else if (item.type == 3) {
+      } else if (item.TypeHotel == "resort") {
         imageSrc = `/image/TrendingGuestHouse/Hotel_${j}.webp`;
         j++;
-      } else if (item.type == 1) {
+      } else if (item.type == "homestay") {
         imageSrc = `/image/TopPicks/Hotel_${q}.webp`;
         q++;
       }
+
       const reviews = item.Reviews.map((review) => ({
         rating: review.rating,
         description: review.description,
       }));
       const description = reviews[0] ? reviews[0].description : "Tốt";
+      console.log(reviews);
 
-      const stars = `<i class="fas fa-star"></i>`.repeat(item.rate);
+      const roomType = item.Rooms.map((room) => ({
+        roomName: room.name,
+        numPeople: room.quantity_people,
+        price: room.price,
+        status: room.status,
+      }));
+
+      let roomWithMaxPrice; // Declare roomWithMaxPrice variable outside the if block
+
+      // Check if there are rooms available
+      roomWithMaxPrice = roomType.reduce((prev, current) => {
+        // Chỉ xem xét các phòng có status bằng 1
+        if (current.status) {
+          return prev.price < current.price ? prev : current;
+        } else {
+          return prev;
+        }
+      }, roomType[0]); // Sử dụng roomType[0] làm giá trị khởi tạo
+
+      let statusRoom = roomWithMaxPrice.status
+        ? "Còn phòng"
+        : "Tạm hết loại phòng này";
+
+      let peope_num = `<i class="fa-solid fa-user"></i>`.repeat(
+        roomWithMaxPrice.numPeople
+      );
+
+      const stars = `<i class="fas fa-star"></i>`.repeat(item.star);
       const card = `
         <div class="card mb-3">
-          <div class="row g-0">
+          <div class="row img-adjust g-0">
             <a href="/hotel/${item.id}" class="hotel-link wrap-img">
               <div class="col-md-4">
                 <img src="${imageSrc}" alt="...">
@@ -109,9 +157,9 @@ $(document).ready(() => {
                 </div>
                 <div class="room-type-price">
                   <div class="room-type">
-                    <p>${item.roomType} <i class="fa-solid fa-user"></i><i class="fa-solid fa-user"></i><i class="fa-solid fa-bath"></i><i class="fa-solid fa-bed"></i></p>
+                    <p>${roomWithMaxPrice.roomName} ${peope_num}<i class="fa-solid fa-bath"></i><i class="fa-solid fa-bed"></i></p>
                     <p class="card-text">
-                      <small class="text-body-secondary">${item.status}</small>
+                      <small class="text-body-secondary">${statusRoom}</small>
                     </p>
                   </div>
                   <div class="room-price">
@@ -119,8 +167,8 @@ $(document).ready(() => {
                     <a href="#" class="btn btn-primary">Kiểm tra</a>
                   </div>
                 </div>
-                <div class="get-lower-price">
-                  <a href="#"><span><i class="fa-solid fa-key"></i>Đăng nhập</span> hoặc <span>đăng kí</span> để xem giá ưu đãi hơn</a>
+                <div class="get-lower-price" id="broadcast">
+                  <a href="/signin" ><span id="loginTime"><i class="fa-solid fa-key"></i>Đăng nhập</span> hoặc <span id="registerTime">đăng kí</span> để xem giá ưu đãi hơn</a>
                 </div>
               </div>
             </div>
@@ -291,15 +339,16 @@ $(document).ready(() => {
       sortType: sortType,
     });
     console.log(combinedData);
-    // Gửi yêu cầu AJAX tới máy chủ
+
     $.ajax({
       type: "GET",
-      url: `http://localhost:3000/api/v1/hotels`,
+      url: `http://localhost:3030/api/v1/hotels`,
       data: combinedData,
       success: function (response) {
         console.log(response);
         // Xử lý kết quả trả về từ máy chủ
         loaddata(response);
+        localStorage.removeItem("location");
 
         // Cập nhật các tham số trên URL
         updateUrlParams(
@@ -352,7 +401,7 @@ $(document).ready(() => {
 
   // Event listener for search button click
   $("#search-hotel").on("click", function (e) {
-    e.preventDefault(); // Prevent default form submission
+    // e.preventDefault(); // Prevent default form submission
 
     // Call sendFilterRequest() to perform search
     sendFilterRequest();
@@ -388,7 +437,7 @@ $(document).ready(() => {
 
     // Gửi yêu cầu Ajax
     $.ajax({
-      url: "http://localhost:3000/api/v1/hotelAmenities/hotel/amenities",
+      url: "http://localhost:3030/api/v1/hotelAmenities/hotel/amenities",
       type: "POST", // Hoặc "GET" tùy thuộc vào API của bạn
       data: data,
       success: function (response) {

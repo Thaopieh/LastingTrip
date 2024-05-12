@@ -311,6 +311,10 @@
   width: 100%;
 }
 
+.search-button span{
+  color: white;
+}
+
 .search-button:hover {
   background-color: #2953d6;
 }
@@ -329,5 +333,227 @@
 
 #myDropdown .first
 {
+  width: 40%;
+}
+
+
+@media only screen and (max-width:1300px) {
+  .searchBox .hotel-searchBox {
+    top          : 26%;
+    left         : 13%;
+  }
+  .hotel-list-page{
+    height: 500px;
+  }
+  .ul-search {
+    grid-template-columns: 1fr;
+  }
+
+
+  .hotel-searchBox {
+    height  : 300px;
+    /* width: 30%; */
+    width   : 10%;
+
+
+  }
+
+  .flex {
+    flex-direction: column;
+    /* flex-shrink: calc(4); */
+    /* width      : 0px; */
+
+  }
+
+  .searchBox .list-destination,
+  .searchBox .rooms-and-guests,
+  .calendar-container {
+    width: 100%;
+  }
+
+  .search-container {
+    width: 20%;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .is-travel-working,
+  .star-rating {
+    display: none;
+  }
+}
+
+@media (max-width: 990px) {
+
+  .is-travel-working,
+  .star-rating,
+  .navbar,
+  .body_left {
+    display: none;
+  }
+
+  .body_right {
+    width: 100%;
+  }
+
+
+  .title_filter h3 {
+    display: none;
+  }
+
+  .title_filter .btn-group {
+    width : 100%;
+    margin: 10px 0;
+  }
+
+  /* .ul-search, */
+  /* .hotel-searchBox { */
+  /* display: none; */
+  /* } */
+
+  .footer__main {
+    display      : grid;
+    grid-template: 3fr 3fr/ 3fr 3fr;
+    text-align   : center;
+
+  }
+
+  .footer__main .footer__item {
+    width: 90%;
+  }
+}
+
+
+.toggle_btn {
+  display     : none;
+  font-size   : 30px;
+  color       : white;
+  float       : right;
+  line-height : 80px;
+  margin-right: 40px;
+  cursor      : pointer;
+}
+
+.navi {
+  background-color: blue;
+  /* height       : 120%; */
+}
+
+
+.nav-item {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+
+@media (max-width :992px) {
+  .toggle_btn {
+    display: block;
+  }
+
+  .navbar1,
+  .navi2 {
+    display: none;
+  }
+
+  .navi .row {
+    display: flex;
+  }
+
+  .navi .row>* {
+    width: 33.3%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td {
+    display: block;
+    width  : 100%;
+  }
+
+  tr {
+    display      : block;
+    margin-bottom: 30px;
+  }
+
+  .seo-htl-table-info table tbody {
+    display: block !important;
+  }
+
+  #noi-dung-collapse1 .container {
+    display              : grid;
+    grid-template-columns: 1fr;
+    padding              : 1em;
+    grid-row-gap         : 10px;
+  }
+
+  #noi-dung-collapse1 .row {
+    display              : grid;
+    text-align           : center;
+    justify-content      : center;
+    grid-template-columns: 1fr;
+    grid-gap             : 10px;
+    font-size            : 10px;
+  }
+
+  #noi-dung-collapse1 .col {
+    width: 100%;
+  }
+
+  #noi-dung-collapse2 .container {
+    display              : grid;
+    grid-template-columns: 1fr;
+    padding              : 1em;
+    grid-row-gap         : 10px;
+  }
+
+  #noi-dung-collapse2 .row {
+    display              : grid;
+    text-align           : center;
+    justify-content      : center;
+    grid-template-columns: 1fr;
+    grid-gap             : 10px;
+    font-size            : 10px;
+  }
+
+  #noi-dung-collapse2 .col {
+    width: 100%;
+  }
+
+  #noi-dung-collapse3 .container {
+    display              : grid;
+    grid-template-columns: 1fr;
+    padding              : 1em;
+    grid-row-gap         : 10px;
+  }
+
+  #noi-dung-collapse3 .row {
+    display              : grid;
+    text-align           : center;
+    justify-content      : center;
+    grid-template-columns: 1fr;
+    grid-gap             : 10px;
+    font-size            : 10px;
+  }
+
+  #noi-dung-collapse3 .col {
+    width: 100%;
+  }
+
+  .recommended .btn {
+    font-size: 10px !important;
+  }
+}
+
+/* body  */
+h3 {
+  font-size: 16px;
+}
+
+#myDropdown .first {
   width: 40%;
 }

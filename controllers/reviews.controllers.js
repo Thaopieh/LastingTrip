@@ -29,7 +29,7 @@ const createReview = async (req, res) => {
     if (file) {
       const imagePath = file.path;
       var cleanedPath = imagePath.replace(/^public/, "");
-      const urlImage = `localhost:3000${cleanedPath}`;
+      const urlImage = `localhost:3030${cleanedPath}`;
       newReviewData.file = urlImage;
     }
 
@@ -45,7 +45,7 @@ const uploadFile = async (req, res) => {
   const { file } = req;
   const imagePath = file.path;
   var cleanedPath = imagePath.replace(/^public/, "");
-  const urlImage = `localhost:3000${cleanedPath}`;
+  const urlImage = `localhost:3030${cleanedPath}`;
   const { user } = req;
   const commentFound = await Reviews.findOne({
     id: user.id,

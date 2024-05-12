@@ -98,18 +98,20 @@ async function updateHotelAmenity(req, res) {
 }
 
 async function deleteHotelAmenity(req, res) {
-  const hotelAmenityId = req.params.id;
+  const { id } = req.params;
 
   try {
-    const hotelAmenity = await HotelAmenities.findByPk(hotelAmenityId);
-
-    if (!hotelAmenity) {
-      return res.status(404).json({ message: "Hotel amenity not found" });
+    const RoomAmenity = await HotelAmenities.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!RoomAmenity) {
+      return res.status(404).send("RoomAmen not found!");
     }
+    await RoomAmenity.destroy();
 
-    await hotelAmenity.destroy();
-
-    res.json({ message: "Hotel amenity deleted successfully" });
+    res.json({ message: "Room amenity deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

@@ -1,6 +1,11 @@
 *{
     font-family: Ubuntu, sans-serif;
   }
+  /* style.css */
+#content1,
+#content2 {
+  display: none;
+}
   .layout {
     display: flex;
   }

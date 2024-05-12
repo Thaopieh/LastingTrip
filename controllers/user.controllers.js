@@ -1,12 +1,34 @@
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { Op } = require("sequelize");
 const register = async (req, res) => {
   const { name, email, password, numberPhone, type } = req.body;
+
   try {
-    // tao ra mot chuoi ngau nhien
+    // Kiểm tra xem email hoặc số điện thoại đã tồn tại hay chưa
+    const checkExistsResponse = await fetch(
+      "http://localhost:3030/api/v1/users/checkEmailPhoneExists",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, numberPhone }),
+      }
+    );
+
+    const checkExistsResult = await checkExistsResponse.json();
+
+    if (checkExistsResult.exists) {
+      // Nếu email hoặc số điện thoại đã tồn tại
+      return res
+        .status(400)
+        .json({ error: "Email or phone number already exists" });
+    }
+
+    // Nếu không tồn tại, tiến hành tạo người dùng mới
     const salt = bcrypt.genSaltSync(10);
-    // ma hoa chuoi salt + password
     const hashPassword = bcrypt.hashSync(password, salt);
     const newUser = await User.create({
       name,
@@ -15,11 +37,37 @@ const register = async (req, res) => {
       numberPhone,
       type,
     });
-    res.status(201).send(newUser);
+
+    return res.status(201).send(newUser);
   } catch (error) {
-    res.status(500).send(error);
+    console.error("Error registering user:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+const checkEmailExist = async (req, res) => {
+  const { email, numberPhone } = req.body;
+
+  try {
+    const existingUser = await User.findOne({
+      where: {
+        [Op.or]: [{ email }, { numberPhone }],
+      },
+    });
+
+    if (existingUser) {
+      // Nếu email hoặc số điện thoại đã tồn tại trong cơ sở dữ liệu
+      return res.status(200).json({ exists: true });
+    }
+
+    // Nếu không tồn tại
+    return res.status(200).json({ exists: false });
+  } catch (error) {
+    console.error("Error checking email and phone:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 const login = async (req, res) => {
   const { email, password } = req.body;
   // b1 tìm user dựa trên email
@@ -146,4 +194,5 @@ module.exports = {
   editUser,
   deleteUser,
   getDetailUser,
+  checkEmailExist,
 };

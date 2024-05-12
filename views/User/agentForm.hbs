@@ -1,0 +1,109 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/agent.css" />
+    <title>Thêm khách sạn</title>
+  </head>
+
+  <body>
+
+    <div class="layout">
+      <div class="agent-container">
+        <div class="agent-search">
+          <p>THÊM KHÁCH SẠN</p>
+          {{! <div class="agent-search-btn">
+                    <div class="agent-search-create">Thêm khách sạn</div>
+                </div> }}
+        </div>
+      </div>
+    </div>
+
+    {{! <div class="custom-popup-overlay"> }}
+    <div class="custom-popup">
+      <span class="custom-close-btn">&times;</span>
+      <form id="signupForm">
+        <label>Tên khách sạn</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Tên khách sạn *"
+          required
+          oninvalid="this.setCustomValidity('Vui lòng nhập tên khách sạn')"
+          oninput="this.setCustomValidity('')"
+        />
+
+        <label>Số sao</label>
+        <select class="form-select" name="Số sao khách sạn đạt chuẩn" id="star">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 </option>
+
+        </select>
+        <label>Địa chỉ</label>
+        <input
+          type="text"
+          id="map"
+          name="map"
+          placeholder="Địa chỉ *"
+          required
+          oninvalid="this.setCustomValidity('Vui lòng nhập địa chỉ khách sạn')"
+          oninput="this.setCustomValidity('')"
+        />
+
+        <label>Giá</label>
+        <input
+          type="text"
+          id="cost"
+          name="cost"
+          placeholder="Giá *"
+          required
+          oninvalid="this.setCustomValidity('Vui lòng nhập giá khách sạn')"
+          oninput="this.setCustomValidity('')"
+        />
+        <label>Loại khách sạn</label>
+        <select class="form-select" name="typehotel" id="type">
+          <option value="hotel">Hotel</option>
+          <option value="resort">Resort</option>
+          <option value="homestay">Homestay</option>
+          <option value="service apartment">Service apartment</option>
+
+        </select>
+
+        <label>Hình thức thanh toán</label>
+        <select class="form-select" name="payment" id="payment">
+          <option value="online">Online</option>
+          <option value="offline">Offline</option>
+        </select>
+
+        <label>Hình ảnh đính kèm</label>
+        <form
+          action="http://localhost:3030/api/v1/hotels/createHotel"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <input type="file" name="hotel" multiple />
+        </form>
+
+        <input type="submit" class="dkbutton" value="Đăng ký" />
+      </form>
+    </div>
+    {{!
+    </div> }}
+
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="/js/agent.js"></script>
+
+</html>

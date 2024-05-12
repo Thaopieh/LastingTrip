@@ -17,7 +17,9 @@ const uploadImage = (type) => {
       const extensionImageList = [".png", ".jpg", ".jpeg"];
       const extension1 = file.originalname.slice(-4);
       const extension2 = file.originalname.slice(-5);
-      const check = extensionImageList.includes(extension1) || extensionImageList.includes(extension2);
+      const check =
+        extensionImageList.includes(extension1) ||
+        extensionImageList.includes(extension2);
       if (check) {
         cb(null, true);
       } else {

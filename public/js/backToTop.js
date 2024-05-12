@@ -23,5 +23,5 @@ function backToTop() {
 
 $(".chatbot").click(function () {
   // Thực hiện chuyển hướng đến trang khác
-  window.location.href = "http://localhost:3000/chatbot";
+  window.location.href = "http://localhost:3030/chatbot";
 });
