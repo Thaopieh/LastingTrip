@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Lặp qua tất cả các phần tử có class là "dropdown-item"
   console.log("Document is ready.");
 
@@ -10,43 +10,51 @@ document.addEventListener("DOMContentLoaded", function() {
     const savedSearchData = JSON.parse(existingData);
 
     // Cập nhật các trường nhập liệu với dữ liệu đã lưu
-    document.getElementById("hotel-destination").value = savedSearchData.location;
+    document.getElementById("hotel-destination").value =
+      savedSearchData.location;
     document.getElementById("checkIn").value = savedSearchData.checkInDate;
     document.getElementById("checkOut").value = savedSearchData.checkOutDate;
-    document.getElementById("room-count").textContent = savedSearchData.numberOfRooms;
-    document.getElementById("adults-count").textContent = savedSearchData.numberOfAdults;
-    document.getElementById("children-count").textContent = savedSearchData.numberOfChildren;
+    document.getElementById("room-count").textContent =
+      savedSearchData.numberOfRooms;
+    document.getElementById("adults-count").textContent =
+      savedSearchData.numberOfAdults;
+    document.getElementById("children-count").textContent =
+      savedSearchData.numberOfChildren;
     const dropdownItems = document.querySelectorAll(".dropdown-item");
-    dropdownItems.forEach(function(item) {
+    dropdownItems.forEach(function (item) {
       const dataType = item.getAttribute("data-type");
       if (dataType === "room") {
         item.setAttribute("data-count", savedSearchData.numberOfRooms);
-        item.querySelector(".room-item-count").textContent = savedSearchData.numberOfRooms;
+        item.querySelector(".room-item-count").textContent =
+          savedSearchData.numberOfRooms;
       } else if (dataType === "adults") {
         item.setAttribute("data-count", savedSearchData.numberOfAdults);
-        item.querySelector(".adults-item-count").textContent = savedSearchData.numberOfAdults;
+        item.querySelector(".adults-item-count").textContent =
+          savedSearchData.numberOfAdults;
       } else if (dataType === "children") {
         item.setAttribute("data-count", savedSearchData.numberOfChildren);
-        item.querySelector(".children-item-count").textContent = savedSearchData.numberOfChildren;
+        item.querySelector(".children-item-count").textContent =
+          savedSearchData.numberOfChildren;
       }
     });
 
     console.log("Loaded existing search data from localStorage.");
     return; // Thoát khỏi hàm sau khi tải dữ liệu đã lưu
-  }});
-  function getItemCountByType(type) {
-    const element = document.querySelector(`.dropdown-item[data-type="${type}"]`);
-    if (element) {
-      const itemCount = element.getAttribute("data-count");
-      return itemCount;
-    }
-    return "0"; // Trả về "0" nếu không tìm thấy giá trị data-count
   }
+});
+function getItemCountByType(type) {
+  const element = document.querySelector(`.dropdown-item[data-type="${type}"]`);
+  if (element) {
+    const itemCount = element.getAttribute("data-count");
+    return itemCount;
+  }
+  return "0"; // Trả về "0" nếu không tìm thấy giá trị data-count
+}
 // Tìm đối tượng DOM tương ứng với nút "Search"
 var searchHotelButton = document.getElementById("search-hotel");
 
 // Thêm sự kiện click vào nút "Search" bằng cách sử dụng addEventListener
-searchHotelButton.addEventListener("click", function() {
+searchHotelButton.addEventListener("click", function () {
   console.log("Search button clicked");
   collectAndSendData();
 });
@@ -100,14 +108,14 @@ const collectAndSendData = () => {
     checkOutDate: checkOutDate,
     numberOfRooms: numberOfRooms,
     numberOfAdults: numberOfAdults,
-    numberOfChildren: numberOfChildren
+    numberOfChildren: numberOfChildren,
   };
   console.log(searchData);
   localStorage.removeItem("searchData");
   // Convert searchData to JSON and store in localStorage
   localStorage.setItem("searchData", JSON.stringify(searchData));
   console.log("New search data saved to localStorage.");
-}
+};
 
 var dropdownItems = document.querySelectorAll(".dropdown-item");
 
@@ -180,11 +188,11 @@ function updateDropdownButton() {
     " Adults, " +
     childrenCount +
     " Children ";
-};
+}
 var dropdown = document.getElementById("myDropdown");
 var dropdownBtn = document.getElementById("drop-all");
 
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function (event) {
   var target = event.target;
   var dropdownClicked = dropdown.contains(target);
   var dropdownBtnClicked = dropdownBtn.contains(target);
@@ -193,7 +201,7 @@ document.addEventListener("click", function(event) {
   }
 });
 // Function to toggle the dropdown when clicking on the button
-dropdownBtn.addEventListener("click", function() {
+dropdownBtn.addEventListener("click", function () {
   console.log("da click");
   var dropdown = document.getElementById("myDropdown");
   if (dropdown.style.display === "none" || dropdown.style.display === "") {

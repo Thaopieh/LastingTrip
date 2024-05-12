@@ -3,6 +3,7 @@ const path = require("path");
 const cors = require("cors");
 const exphbs = require("express-handlebars");
 const { sequelize } = require("./models");
+require("dotenv").config(); // Load các biến môi trường từ file .env
 const { rootRouter } = require("./routers");
 const app = express();
 app.use(cors());
@@ -43,9 +44,6 @@ app.get("/", (req, res) => {
   res.render("User/mainpage");
 });
 
-app.get("/imgClassifier", (req, res) => {
-  res.render("User/imgClassifier");
-});
 app.get("/chatbotimage", (req, res) => {
   res.render("User/chatbotImage");
 });
@@ -76,21 +74,6 @@ app.get("/signin", (req, res) => {
   res.render("User/signin");
 });
 
-app.get("/hotel/:id", (req, res) => {
-  const hotelId = req.params.id;
-
-  // Call API to get hotel information
-  fetch(`http://localhost:3000/api/v1/hotels?id=${hotelId}`)
-    .then((response) => response.json())
-    .then((data) => {
-      // Render Handlebars template and pass data into it
-      res.render("User/hotel", { hotel: data });
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      res.status(500).send("Internal Server Error");
-    });
-});
 app.get("/sidebar", (req, res) => {
   // Render the sidebar template directly (no need for separate route)
   res.render("sidebar");
@@ -110,6 +93,20 @@ app.get("/admin", (req, res) => {
   res.render("Admin/partials/createHotel");
 });
 
+app.get("/agent", (req, res) => {
+  res.render("User/agent");
+});
+app.get("/agent/addHotel", (req, res) => {
+  res.render("User/agentForm");
+});
+app.get("/agent/room", (req, res) => {
+  res.render("User/room");
+});
+app.get("/agent/room/:id", (req, res) => {
+  const hotelId = req.params.id;
+
+  res.render("User/room", { roomId: hotelId });
+});
 
 // Configure Handlebars
 const hbs = exphbs.create({
@@ -124,9 +121,26 @@ const hbs = exphbs.create({
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 
+const port = process.env.PORT || 3030; // Sử dụng port mặc định là 3030 nếu không có biến môi trường PORT
+
+app.get("/hotel/:id", (req, res) => {
+  const hotelId = req.params.id;
+
+  // Call API to get hotel information
+  fetch(`http://localhost:${port}/api/v1/hotels?id=${hotelId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Render Handlebars template and pass data into it
+      res.render("User/hotel", { hotel: data });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      res.status(500).send("Internal Server Error");
+    });
+});
 // Listen for connection events
-app.listen(3000, async () => {
-  console.log("App listening on http://localhost:3000");
+app.listen(port, async () => {
+  console.log("App listening on http://localhost:3030");
   try {
     await sequelize.authenticate();
     console.log(

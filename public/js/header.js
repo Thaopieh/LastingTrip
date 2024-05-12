@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Kiểm tra giá trị của token
   const token = getToken(); // Thay 'getToken()' bằng hàm lấy giá trị token của bạn
 
-  if (token !== null && token !== undefined) {
+  if (token) {
     // Nếu token có giá trị khác null, thay đổi HTML của phần tử li
     const signInSignUpLi = document.querySelector("#nav-login"); // Chọn phần tử li cần thay đổi
 
@@ -24,9 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("logout").addEventListener("click", function () {
       // Xóa token khỏi local storage
       localStorage.removeItem("token");
-      // Thực hiện các hành động khác sau khi đăng xuất (nếu cần)
-      // Ví dụ: Chuyển hướng đến trang đăng nhập
-      window.location.href = "http://localhost:3000/";
+      // Thực hiện chuyển hướng về trang đăng nhập
+      window.location.href = "http://localhost:3030/";
     });
   }
 });
@@ -37,3 +36,80 @@ function getToken() {
   return localStorage.getItem("token"); // Thay 'token' bằng key lưu trữ token của bạn
 }
 
+function toggleCollapse(btnNumber) {
+  const buttons = document.querySelectorAll(".btn-outline-info");
+  buttons.forEach((button, index) => {
+    if (index + 1 === btnNumber) {
+      button.classList.add("active");
+      button.style.color = "#fff"; // White text color
+      button.style.backgroundColor = "#10294D"; // Blue background color
+    } else {
+      button.classList.remove("active");
+      button.style.color = "#10294D"; // Blue text color
+      button.style.backgroundColor = "#f0f2f5"; // White background color
+    }
+  });
+
+  for (let i = 1; i <= 3; i++) {
+    const collapseId = "noi-dung-collapse" + i;
+    const collapseElement = document.getElementById(collapseId);
+    if (i === btnNumber) {
+      collapseElement.classList.add("show");
+    } else {
+      collapseElement.classList.remove("show");
+    }
+  }
+}
+
+const toggleBtn = document.querySelector(".toggle_btn");
+const toggleBtnIcon = document.querySelector(".toggle_btn i");
+const dropDownMenu = document.querySelector(".dropdown_menu");
+
+toggleBtn.addEventListener("click", function () {
+  // Kiểm tra trạng thái hiện tại của dropdown menu
+  const isOpen = dropDownMenu.style.display === "block";
+
+  // Nếu dropdown menu đang ẩn, hiển thị nó và chuyển đổi biểu tượng
+  if (!isOpen) {
+    dropDownMenu.style.display = "block";
+    toggleBtnIcon.classList.add("fa-xmark");
+    toggleBtnIcon.classList.remove("fa-bars");
+  } else {
+    // Nếu dropdown menu đang hiển thị, ẩn nó và chuyển đổi biểu tượng
+    dropDownMenu.style.display = "none";
+    toggleBtnIcon.classList.remove("fa-xmark");
+    toggleBtnIcon.classList.add("fa-bars");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const token = getToken(); // Lấy token
+
+  // Sự kiện click vào class toUserInfo
+  document.querySelector(".toUserInfo").addEventListener("click", function () {
+    // Kiểm tra nếu có token
+    if (token) {
+      // Di chuyển đến trang userInfor
+      window.location.href = "/userInfor";
+    } else {
+      // Hiển thị thông báo yêu cầu đăng nhập
+      alert("Vui lòng đăng nhập để xem thông tin cá nhân.");
+      // Chuyển hướng đến trang login
+      window.location.href = "/signin";
+    }
+  });
+  document.querySelector(".toUserInf").addEventListener("click", function () {
+    // Kiểm tra nếu có token
+    if (token) {
+      // Di chuyển đến trang userInfor
+      window.location.href = "/userInfor";
+    } else {
+      // Hiển thị thông báo yêu cầu đăng nhập
+      alert("Vui lòng đăng nhập để xem thông tin cá nhân.");
+      // Chuyển hướng đến trang login
+      window.location.href = "/signin";
+    }
+  });
+});
+
+// Các hàm khác như getToken và toggleCollapse vẫn giữ nguyên

@@ -1,4 +1,4 @@
-// const { user } = require("../models");
+const { User } = require("../models");
 // const { checkExist } = require("../middlewares/validations/checkExist");
 
 const express = require("express");
@@ -10,7 +10,9 @@ const {
   editUser,
   deleteUser,
   getDetailUser,
+  checkEmailExist,
 } = require("../controllers/user.controllers");
+const { checkExist } = require("../middlewares/validations/checkExist");
 
 const userRouter = express.Router();
 
@@ -25,6 +27,7 @@ userRouter.get("/getDetailUser/:id", getDetailUser);
 userRouter.get("/manageUsers", displayUser);
 userRouter.put("/editUser/:id", editUser);
 userRouter.delete("/deleteUser/:id", deleteUser);
+userRouter.post("/checkEmailPhoneExists", checkEmailExist);
 
 module.exports = {
   userRouter,

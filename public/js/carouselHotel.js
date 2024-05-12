@@ -2,18 +2,15 @@ $(document).ready(() => {
   const containerData = {
     carousel_topPick: {
       containerId: "carousel_topPick",
-      imagePath: "/image/TopPicks/",
-      apiEndpoint: "http://localhost:3000/api/v1/hotels?type=1",
+      sortType: "desc_feedback",
     },
     carousel_budgetFriendly: {
       containerId: "carousel_budgetFriendly",
-      imagePath: "/image/BudgetFriendly/",
-      apiEndpoint: "http://localhost:3000/api/v1/hotels?type=2",
+      sortType: "asc_price",
     },
     carousel_favorite: {
       containerId: "carousel_Trending",
-      imagePath: "/image/TrendingGuestHouse/",
-      apiEndpoint: "http://localhost:3000/api/v1/hotels?type=3",
+      sortType: "desc_rating",
     },
   };
 
@@ -24,27 +21,26 @@ $(document).ready(() => {
 
   // Gọi API và hiển thị dữ liệu cho mỗi container
   Object.values(containerData).forEach((containerConfig) => {
-    const { containerId, imagePath, apiEndpoint } = containerConfig;
+    const { containerId, sortType } = containerConfig;
     const container = $("#" + containerId);
 
     $.ajax({
-      url: apiEndpoint,
+      url: `http://localhost:3030/api/v1/hotels`,
       method: "GET",
+      data: { sortType: sortType },
       success: (data) => {
         data.forEach((item, index) => {
           let activeClass = index == 0 ? "active" : "";
-          const imageIndex = index + 1;
-          const imageSrc = imagePath + `Hotel_${imageIndex}.webp`;
+
           const formattedCost = numberWithCommas(item.cost);
           // var formattedCost = item.cost.toLocaleString();
-          // var message = `The cost is: ${formattedCost}`;
-
-          // console.log(message);
-          const card = `<div class="carousel-item ${activeClass}" id=${item.id}">
+          // var message = The cost is: ${formattedCost};
+          if (sortType === "asc_price" && item.cost < 1000000) {
+            const card = `<div class="carousel-item ${activeClass}" id=${item.id}">
               <a href="/hotel/${item.id}" target="_blank"  class="hotel-link" >
                 <div class="card" >
                   <div class="img-wrapper">
-                    <img src=${imageSrc} alt=${item.name}>
+                    <img src="" alt=${item.name}>
                   </div>
                   <div class="card-body">
                     <a class="click-item" href="/hotel/${item.id}" target="_blank">
@@ -58,7 +54,54 @@ $(document).ready(() => {
               </a>
             </div>`;
 
-          container.append(card);
+            container.append(card);
+          }
+
+          if (sortType === "desc_rating" && item.star > 4) {
+            const card = `<div class="carousel-item ${activeClass}" id=${item.id}">
+                <a href="/hotel/${item.id}" target="_blank"  class="hotel-link" >
+                  <div class="card" >
+                    <div class="img-wrapper">
+                      <img src="" alt=${item.name}>
+                    </div>
+                    <div class="card-body">
+                      <a class="click-item" href="/hotel/${item.id}" target="_blank">
+                        <h5 class="card-title">${item.name}</h5>
+                      </a>
+                      <p class="card-text">${item.map}</p>
+                      <a href="#" class="btn btn-primary"><span class="from">From</span> VND
+                        ${formattedCost}</a>
+                    </div>
+                  </div>
+                </a>
+              </div>`;
+
+            container.append(card);
+          }
+
+          if (sortType === "desc_feedback" || 1) {
+            const card = `<div class="carousel-item ${activeClass}" id=${item.id}">
+                  <a href="/hotel/${item.id}" target="_blank"  class="hotel-link" >
+                    <div class="card" >
+                      <div class="img-wrapper">
+                        <img src="" alt=${item.name}>
+                      </div>
+                      <div class="card-body">
+                        <a class="click-item" href="/hotel/${item.id}" target="_blank">
+                          <h5 class="card-title">${item.name}</h5>
+                        </a>
+                        <p class="card-text">${item.map}</p>
+                        <a href="#" class="btn btn-primary"><span class="from">From</span> VND
+                          ${formattedCost}</a>
+                      </div>
+                    </div>
+                  </a>
+                </div>`;
+
+            container.append(card);
+          }
+
+          // console.log(message);
         });
       },
     });

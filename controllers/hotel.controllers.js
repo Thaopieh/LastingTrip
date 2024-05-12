@@ -4,38 +4,36 @@ const {
   HotelAmenities,
   Amenities,
   Reviews,
-  UrlImageHotel
+  UrlImageHotel,
 } = require("../models");
 const { Op, literal } = require("sequelize");
 // const amenities = require("../models/amenities");
 const createHotel = async (req, res) => {
-  const { name, rate, map, roomType, TypeHotel, status, cost, type, payment } = req.body;
+  const { name, star, map, TypeHotel, cost, payment, ownerId } = req.body;
 
   try {
     // Create the hotel record
     const newHotel = await Hotels.create({
       name,
-      rate,
+      star,
       map,
-      roomType,
       TypeHotel,
-      status,
       cost,
-      type,
       payment,
+      ownerId,
     });
     console.log(newHotel);
     const { files } = req;
     console.log(files);
-    // Iterate over each file and create a corresponding UrlImageHotel record
+    // Itestar over each file and create a corresponding UrlImageHotel record
     for (const file of files) {
       const imagePath = file.path.replace(/^public/, ""); // Get relative path
-      const imageUrl = `http://localhost:3000/${imagePath}`; // Construct full image URL
+      const imageUrl = `http://localhost:3030/${imagePath}`; // Construct full image URL
 
       // Create UrlImageHotel record associated with the new hotel
       const imageUrlRecord = await UrlImageHotel.create({
         url: imageUrl,
-        HotelId: newHotel.id
+        HotelId: newHotel.id,
       });
 
       console.log("Created UrlImageHotel record:", imageUrlRecord);
@@ -49,7 +47,6 @@ const createHotel = async (req, res) => {
   }
 };
 
-
 function getOrderCriteria(sortType) {
   switch (sortType) {
     case "asc_price":
@@ -57,11 +54,14 @@ function getOrderCriteria(sortType) {
     case "desc_price":
       return [["cost", "DESC"]];
     case "desc_rating":
-      return [["rate", "DESC"]];
+      return [["star", "DESC"]];
+    case "desc_feedback":
+      return [["userRating", "DESC"]];
     default:
       return []; // Default to no sorting
   }
 }
+
 const getAllHotel = async (req, res) => {
   const {
     services_hotel,
@@ -211,6 +211,12 @@ const getAllHotel = async (req, res) => {
           model: Reviews,
           as: "Reviews",
         },
+        // {
+        //   model: UrlImageHotel,
+        // },
+        {
+          model: Room, // Include thông tin về phòng của khách sạn
+        },
       ],
       order: getOrderCriteria(sortType),
     });
@@ -277,24 +283,64 @@ const getDetailHotel = async (req, res) => {
 //   }
 // };
 
-// // const deleteHotel = async (req, res) => {
-// //   const { id } = req.params;
-// //   try {
-// //     await Hotel.destroy({
-// //       where: {
-// //         id,
-// //       },
-// //     });
-// //     res.status(200).send("xoa thanh cong");
-// //   } catch (error) {
-// //     res.status(500).send(error);
-// //   }
-// // };
+const updateHotel = async (req, res) => {
+  try {
+    const hotelId = req.params.id;
+    const { name, star, map, TypeHotel, cost, payment } = req.body;
+    const detailHotel = await Hotels.findOne({
+      where: {
+        id: hotelId,
+      },
+    });
+    if (!detailHotel) {
+      res.status(400).send({
+        status: `error`,
+        message: `Hotel with id ${id}  not found`,
+      });
+    }
+    if (name) detailHotel.name = name;
+    if (star) detailHotel.star = star;
+    if (map) detailHotel.map = map;
+    if (cost) detailHotel.cost = cost;
+    if (TypeHotel) detailHotel.TypeHotel = TypeHotel;
+    if (payment) deleteHotel.payment = payment;
+
+    const updateHotel = await detailHotel.save();
+    if (!updateHotel)
+      res.status(400).send({
+        error: `error`,
+        message: `Data fail to ${id} update`,
+      });
+    res.status(200).send({ updateHotel });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const deleteHotel = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedHotel = await Hotels.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!deletedHotel) {
+      return res.status(404).send("Không tìm thấy khách sạn");
+    }
+
+    await deletedHotel.destroy({ cascade: true });
+
+    res.status(200).send("Xóa thành công");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
 module.exports = {
   createHotel,
   getAllHotel,
   getDetailHotel,
-  //   updateHotel,
-  //   deleteHotel,
+  updateHotel,
+  deleteHotel,
 };

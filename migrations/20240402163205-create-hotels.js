@@ -12,7 +12,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      rate: {
+      star: {
         type: Sequelize.INTEGER,
       },
       userRating: {
@@ -21,20 +21,10 @@ module.exports = {
       map: {
         type: Sequelize.STRING,
       },
-
-      roomType: {
-        type: Sequelize.STRING,
-      },
       TypeHotel: {
         type: Sequelize.STRING,
       },
-      status: {
-        type: Sequelize.STRING,
-      },
       cost: {
-        type: Sequelize.INTEGER,
-      },
-      type: {
         type: Sequelize.INTEGER,
       },
       payment: {
@@ -43,6 +33,14 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+      },
+      ownerId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id",
+          onDelete: "CASCADE",
+        },
       },
       updatedAt: {
         allowNull: false,

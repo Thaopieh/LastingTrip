@@ -98,15 +98,17 @@ async function updateRoomAmenity(req, res) {
 }
 
 async function deleteRoomAmenity(req, res) {
-  const RoomserviceId = req.params.id;
+  const { id } = req.params;
 
   try {
-    const RoomAmenity = await roomService.findByPk(RoomserviceId);
-
+    const RoomAmenity = await roomService.findOne({
+      where: {
+        id,
+      },
+    });
     if (!RoomAmenity) {
-      return res.status(404).json({ message: "Room amenity not found" });
+      return res.status(404).send("RoomAmen not found!");
     }
-
     await RoomAmenity.destroy();
 
     res.json({ message: "Room amenity deleted successfully" });

@@ -23,6 +23,7 @@ module.exports = {
         references: {
           model: "Hotels",
           key: "id",
+          onDelete: "CASCADE",
         },
       },
       guestid: {
@@ -30,6 +31,7 @@ module.exports = {
         references: {
           model: "Users",
           key: "id",
+          onDelete: "CASCADE",
         },
       },
       createdAt: {

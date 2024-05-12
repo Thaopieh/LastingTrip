@@ -1,8 +1,10 @@
+require("dotenv").config(); // Load các biến môi trường từ file .env
+const port = process.env.PORT || 3030;
 $(document).ready(function () {
   // Hàm để render lại trang sau khi nhận dữ liệu mới từ server
   function renderPage() {
     $.ajax({
-      url: "http://localhost:3000/api/v1/users/getAllUser",
+      url: "http://localhost:${port}/api/v1/users/getAllUser",
       method: "GET",
       success: function (data) {
         var tableHtml = "";
@@ -78,7 +80,7 @@ $(document).ready(function () {
 
     // Gửi yêu cầu xóa người dùng
     $.ajax({
-      url: `http://localhost:3000/api/v1/users/deleteUser/${id}`,
+      url: `http://localhost:${port}/api/v1/users/deleteUser/${id}`,
       method: "DELETE",
       success: function (data) {
         // Xử lý thành công
@@ -108,7 +110,7 @@ $(document).ready(function () {
 
     // Gửi yêu cầu xóa người dùng
     $.ajax({
-      url: `http://localhost:3000/api/v1/users/deleteUser/${id}`,
+      url: `http://localhost:${port}/api/v1/users/deleteUser/${id}`,
       method: "DELETE",
       success: function (data) {
         // Xử lý thành công
@@ -153,7 +155,7 @@ $(document).ready(function () {
     };
     // Gửi yêu cầu thêm người dùng
     $.ajax({
-      url: `http://localhost:3000/api/v1/users/register`,
+      url: `http://localhost:${port}/api/v1/users/register`,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -177,7 +179,7 @@ $(document).ready(function () {
     $(".popup-overlay").show();
     // Gửi yêu cầu để lấy chi tiết người dùng
     $.ajax({
-      url: `http://localhost:3000/api/v1/users/getDetailUser/${id}`,
+      url: `http://localhost:${port}/api/v1/users/getDetailUser/${id}`,
       method: "GET",
       success: function (data) {
         console.log("2");
@@ -224,7 +226,7 @@ $(document).ready(function () {
           };
 
           $.ajax({
-            url: `http://localhost:3000/api/v1/users/editUser/${id}`,
+            url: `http://localhost:${port}/api/v1/users/editUser/${id}`,
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

@@ -46,6 +46,190 @@
     <!-- Header search -->
 
     {{>searchBar}}
+                <div class="popup-overlay">
+                <div class="popup"> 
+          <span class="close-btn">&times;</span> 
+          <h2>Filter</h2> 
+ 
+          <div class="col-10" id="price">
+            <label class="form-label" for="price_range">Giá (VND)</label>
+            <input type="range" class="form-range" min="0" max="20000000" step="100000" id="price_range" value="0"
+              oninput="updateValue()">
+            <div id="value">Từ 0 VND</div>
+          </div>
+
+          <div class="col-10 type_hotel">
+            <label class="form-label" for="poperty-type">Loại hình nơi ở</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="Hotel" id="hotel">
+              <label class="form-check-label" for="hotel">Khách sạn</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="homestay" id="homestay">
+              <label class="form-check-label" for="homestay">Homestay</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="resort" id="resort">
+              <label class="form-check-label" for="resort">Resort</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="service apartment" id="service-apartment">
+              <label class="form-check-label" for="service-apartment">Căn hộ dịch vụ</label>
+            </div>
+          </div>
+
+          <div class="col-10">
+            <label class="form-label" for="bed_type">Loại giường</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="bed_type" value="Single" id="1-singlebed">
+              <label class="form-check-label" for="1-singlebed">1 giường đơn</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="bed_type" value="Double" id="1-doublebed">
+              <label class="form-check-label" for="1-doublebed">1 giường đôi</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="bed_type" value="Two Single" id="2-singbed">
+              <label class="form-check-label" for="2-singbed">2 giường đơn</label>
+            </div>
+            <span id="btn-more-bed_type-dots"></span>
+            <span class="moreContent" id="btn-more-bed_type-moreContent">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="bed_type" value="Three Single" id="3-singlebed">
+                <label class="form-check-label" for="3-singlebed">3 giường đơn</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="bed_type" value="King" id="king-bed">
+                <label class="form-check-label" for="king-bed">Giường King</label>
+              </div>
+            </span>
+            <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-bed_type')"
+              id="btn-more-bed_type">Xem thêm</button>
+          </div>
+
+          <div class="col-10 services_hotel">
+            <label class="form-label" for="property-fac-and-services">Tiện nghi và dịch vụ</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="free parking" id="free-parking">
+              <label class="form-check-label" for="free-parking">Bãi đậu xe riêng</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="pool overview" id="pool">
+              <label class="form-check-label" for="pool">Bể bơi ngoài trời</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="internet" id="internet">
+              <label class="form-check-label" for="internet">Internet</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="smoking area" id="smoking-area">
+              <label class="form-check-label" for="smoking-area">Khu vực hút thuốc</label>
+            </div>
+            <span id="btn-more-property-fac-and-services-dots"></span>
+            <span class="moreContent" id="btn-more-property-fac-and-services-moreContent">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Bar" id="bar-club">
+                <label class="form-check-label" for="bar-club">Bar</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="bath sun" id="bath-sun">
+                <label class="form-check-label" for="bath-sun">Khu vực tắm nắng</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="view city" id="view-city">
+                <label class="form-check-label" for="view-city">View thành phố</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="spa" id="spa">
+                <label class="form-check-label" for="spa">Phòng spa</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="airport check" id="airport">
+                <label class="form-check-label" for="airport">Đưa đón sân bay</label>
+              </div>
+            </span>
+            <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-property-fac-and-services')"
+              id="btn-more-property-fac-and-services">Xem thêm</button>
+          </div>
+
+          <div class="col-10">
+            <label class="form-label" for="payment">Phương thức thanh toán</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="payment" id="pay-online" value="online">
+              <label class="form-check-label" for="pay-online">Thanh toán online</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="payment" id="pay-offline" value="offline">
+              <label class="form-check-label" for="pay-offline">Thanh toán tại khách sạn</label>
+            </div>
+          </div>
+
+          <div class="col-10">
+            <label class="form-label" for="room_type">Loại phòng</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="room_type" id="family-room" value="family">
+              <label class="form-check-label" for="family-room">Phòng gia đình</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="room_type" id="suite" value="suite">
+              <label class="form-check-label" for="suite">Phòng Suite</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="room_type" id="beach-view-room" value="beach-view">
+              <label class="form-check-label" for="beach-view-room">Phòng view biển</label>
+            </div>
+            <span id="btn-more-room_type-dots"></span>
+            <span class="moreContent" id="btn-more-room_type-moreContent">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="room_type" id="projector-room" value="projector">
+                <label class="form-check-label" for="projector-room">Phòng có máy chiếu</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="room_type" id="mountain-view-room"
+                  value="mountain-view">
+                <label class="form-check-label" for="mountain-view-room">Phòng view núi</label>
+              </div>
+            </span>
+            <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-room_type')"
+              id="btn-more-room_type">Xem thêm</button>
+          </div>
+
+          <div class="col-10 services_room">
+            <label class="form-label" for="room-fac-and-services">Tiện nghi phòng ở</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="air conditioning" id="AC">
+              <label class="form-check-label" for="AC">Điều hòa</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="washing machine" id="washing-machine">
+              <label class="form-check-label" for="washing-machine">Máy giặt</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="TV" id="TV">
+              <label class="form-check-label" for="TV">TV</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="bathtub" id="bathtub">
+              <label class="form-check-label" for="bathtub">Bồn tắm</label>
+            </div>
+            <span id="btn-more-room-fac-and-services-dots"></span>
+            <span class="moreContent" id="btn-more-room-fac-and-services-moreContent">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="fridge" id="fridge">
+                <label class="form-check-label" for="fridge">Tủ lạnh</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="balcony" id="balcony">
+                <label class="form-check-label" for="balcony">Ban công</label>
+              </div>
+            </span>
+            <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-room-fac-and-services')"
+              id="btn-more-room-fac-and-services">Xem thêm</button>
+          </div>
+
+
+          </div> 
+            </div>
   </div>
 
   <SEction>
@@ -237,6 +421,14 @@
           <div class="filter_wrap">
             <div class="title_filter">
               <h3>Tìm thấy <span id="numberOfResults"></span> nơi ở phù hợp</h3>
+                            <div class="filter-head">
+                                  <button class="btn btn-sm dropdown-toggle" type="button"  
+                    data-bs-auto-close="false" aria-expanded="false" id="filter-header">
+                    <i class="fa-solid fa-sort"></i>
+                    Bộ lọc
+                  </button>
+
+              </div>
               <div class="text_filter">
                 <div class="btn-group">
                   <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -244,7 +436,7 @@
                     <i class="fa-solid fa-sort"></i>
                     Sắp xếp theo: Đề xuất
                   </button>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu" id="dropdowshown">
                     <li><a class="dropdown-item" href="#" data-value="asc_price"  onclick="changeSort('Giá tăng dần')">Giá tăng dần</a></li>
                     <li><a class="dropdown-item" href="#" data-value="desc_rating" onclick="changeSort('Xếp hạng sao')">Xếp hạng sao (từ cao đến thấp)</a></li>
                     <li><a class="dropdown-item" href="#" data-value="desc_feedback" onclick="changeSort('Đánh giá hàng đầu')">Đánh giá hàng đầu</a></li>
@@ -253,8 +445,11 @@
                     </li>
                     <li><a class="dropdown-item" href="#" data-value="desc_price" onclick="changeSort('Giá giảm dần')">Giá giảm dần</a></li>
                   </ul>
+
+
                 </div>
               </div>
+
             </div>
           </div>
 

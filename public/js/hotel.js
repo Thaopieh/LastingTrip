@@ -9,7 +9,7 @@ $(document).ready(function () {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   $.ajax({
-    url: "http://localhost:3000/api/v1/hotels/" + hotelId,
+    url: "http://localhost:3030/api/v1/hotels/" + hotelId,
     method: "GET",
 
     success: function (data) {
@@ -50,7 +50,7 @@ $(document).ready(function () {
       <p><i class="fa-solid fa-location-dot"></i> ${data.map}
         <button class="btn" data-bs-toggle="modal" onclick="redirectToMap('${data.name}')" style="color: blue">Xem bản đồ</button>
       </p>
-      <p><i class="bi bi-buildings-fill"></i>Hãy để chuyến đi của quý khách có một khởi đầu tuyệt vời khi ở lại
+      <p class="intro"><i class="bi bi-buildings-fill"></i>Hãy để chuyến đi của quý khách có một khởi đầu tuyệt vời khi ở lại
         khách sạn này, nơi có Wi-Fi miễn phí trong tất cả các phòng.
         <button class="btn" data-bs-toggle="modal" data-bs-target="#introductionModal" style="color: blue">Xem thêm</button>
       </p>
@@ -64,10 +64,6 @@ $(document).ready(function () {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.!5m2!1sen!2s"
-                width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>
@@ -107,25 +103,25 @@ $(document).ready(function () {
     </div>
     <a href="#" data-bs-toggle="modal" data-bs-target="#imgModal" onclick="showContent('hotel-upload')">
     <div id="detailed-img" class="row detailed-img">
-      <table>
+      <table id="img-carousel">
         <tr>
-          <td rowspan="2" style="width:25%">
+          <td rowspan="2" style="width:25%" class="img-active">
             <img src="/image/min_item/feature-img/feature-img-1.jpg" alt="">
           </td>
-          <td style="width:25%">
+          <td style="width:25%" class="img-active">
             <img src="/image/min_item/feature-img/feature-img-2.jpg" alt="">
           </td>
-          <td style="width:25%">
+          <td style="width:25%" class="img-active">
             <img src="/image/min_item/feature-img/feature-img-3.jpg" alt="">
           </td>
-          <td style="width:25%">
+          <td style="width:25%" class="img-active">
             <img src="/image/min_item/feature-img/feature-img-4.jpg" alt="">
           </td>
         </tr>
         <tr>
-          <td> <img src="/image/min_item/feature-img/feature-img-5.jpg" alt="">
+          <td class="img-active"> <img src="/image/min_item/feature-img/feature-img-5.jpg" alt="">
           </td>
-          <td> <img src="/image/min_item/feature-img/feature-img-6.jpg" alt="">
+          <td class="img-active"> <img src="/image/min_item/feature-img/feature-img-6.jpg" alt="">
           </td>
           <td> <img src="/image/min_item/feature-img/feature-img-7.jpg" alt="">
           </td>
@@ -349,7 +345,7 @@ $(document).ready(() => {
   var url = window.location.pathname;
   var hotelId = url.substring(url.lastIndexOf("/") + 1);
   $.ajax({
-    url: "http://localhost:3000/api/v1/reviews?hotelId=" + hotelId,
+    url: "http://localhost:3030/api/v1/reviews?hotelId=" + hotelId,
     method: "GET",
     success: (data) => {
       data.forEach((item, index) => {
@@ -393,11 +389,13 @@ $(document).ready(() => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   $.ajax({
-    url: "http://localhost:3000/api/v1/rooms?hotelId=" + hotelId,
+    url: "http://localhost:3030/api/v1/rooms?hotelId=" + hotelId,
     method: "GET",
 
     success: (data) => {
       data.forEach((item) => {
+        const paymentType = item.Hotel.payment;
+
         const breakfast = numberWithCommas((item.price * 20) / 100);
         let amenities = "";
         if (item.roomServices && item.roomServices.length > 0) {
@@ -422,18 +420,19 @@ $(document).ready(() => {
             <div style="border-bottom : none" class="col-lg-2 ">
               <div class="baseroom">
                 <div class="baseroom_img">
-                  <img src="../img/min_item/list-img/room/standard_4.webp" alt="" style="width: 100%;">
+                  <img src="/image/min_item/list-img/room/standard_4.webp" alt="" style="width: 100%;">
                 </div>
                 <div class="baseroom_img1">
                   <div class="row no-gutters">
                     <div style="margin : 0; padding : 0 3px 0 10px;" class="col-6"><img
-                        src="../img/min_item/list-img/room/standard_5.webp" alt="" style="width: 100%;">
+                        src="/image/min_item/list-img/room/standard_5.webp" alt="" style="width: 100%;">
                     </div>
                     <div style="margin : 0; padding : 0 10px 0 3px;" class="col-6"><img
-                        src="../img/min_item/list-img/room/standard_6.webp" alt="" style="width: 100%;">
+                        src="/image/min_item/list-img/room/standard_6.webp" alt="" style="width: 100%;">
                     </div>
                   </div>
                 </div>
+                
                 <div class="baseroom_bed">
                   <span class="material-symbols-outlined"> bed </span>
                   <span class="type-bed">1 giường ${item.type_bed}</span>
@@ -447,7 +446,7 @@ $(document).ready(() => {
             </div>
             <div style="padding: 0;" class="col-lg-10  ">
               <div class="container">
-                <div class="row">
+                <div class="row" id="optioon">
                   <div id="import1" style="border: none;" class="col-lg-5">Lựa chọn của bạn</div>
                   <div id="import2" style="border: none; text-align : center" class="col-lg-2">Số lượng người</div>
                   <div id="import3" style="border: none; text-align : center" class="col-lg-5">Giá phòng hôm nay</div>
@@ -466,11 +465,15 @@ $(document).ready(() => {
                       </div>
                       <div class="info"><span>Xác nhận nhanh chóng</span></div>
                       <div class="info">
-                        <span>Thanh toán online</span>
+                        <span>Thanh toán ${paymentType} </span>
                       </div>
                       <div class="info"><span>Đặt tối đa ${
                         item.quantity
                       } phòng</span></div>
+                      <div class="info" id="songuoi"><span>Có thể ở ${
+                        item.quantity_people
+                      } người trong một phòng</span></div>
+
                     </div>
                   </div>
                   <div class="col-lg-2">
@@ -506,7 +509,7 @@ $(document).ready(() => {
                           <span>Xác nhận nhanh chóng</span>
                         </div>
                         <div class="info">
-                          <span>Thanh toán online</span>
+                          <span>Thanh toán ${paymentType}</span>
                         </div>
                         <div class="info"><span>Đặt tối đa 2 phòng</span></div>
                       </div>
@@ -550,4 +553,9 @@ $(document).ready(function () {
     // Chuyển hướng đến trang khách sạn và truyền id khách sạn qua URL
     window.location.href = "/hotel/" + hotelId;
   });
+
+  const token = localStorage.getItem("token");
+  if (token) {
+    $(".send-review").show();
+  }
 });

@@ -7,8 +7,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ HotelAmenities }) {
-      this.hasMany(HotelAmenities, { foreignKey: "amenityId" });
+    static associate({ HotelAmenities, roomService }) {
+      this.hasMany(HotelAmenities, {
+        foreignKey: "amenityId",
+        onDelete: "CASCADE",
+      });
+      this.hasMany(roomService, {
+        foreignKey: "serviceId",
+        onDelete: "CASCADE",
+      });
     }
   }
   Amenities.init(
@@ -20,6 +27,21 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Amenities",
+      hooks: {
+        beforeDestroy: async (instance) => {
+          const amenityId = instance.id;
+          const HotelAmenities = sequelize.models.HotelAmenities;
+
+          // Xóa tất cả các bản ghi trong bảng UrlImageHotel có HotelId tương ứng
+          await HotelAmenities.destroy({ where: { amenityId: amenityId } });
+
+          const service = sequelize.models.roomService;
+          await service.destroy({ where: { serviceId: amenityId } });
+
+          const room = sequelize.models.Room;
+          await room.destroy({ where: { hotelId: hotelId } });
+        },
+      },
     }
   );
   return Amenities;
