@@ -1,0 +1,242 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-weight: normal;
+    /* font: 12px / 1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; */
+    font-display: swap;
+    padding: 0px;
+    margin: 0px;
+}
+ul {
+    list-style: none;
+}
+/* body  */
+/* header  */
+.toggle_btn{
+    display: none;
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+
+.navi {
+    background-color: blue;
+    /* height: 120%; */
+}
+
+.navi .nav-link, .col-lg-2 a {
+    color: white;
+}
+a
+{
+  text-decoration: none;
+  color: black;
+}
+.dropdown_menu {
+    display: none;
+    position: relative;
+    height: 240px;
+    width:100%;
+    background: #0000F5;
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .dropdown_menu li {
+    padding : 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  #dropdownshown{
+    background-color: white;
+  }
+
+@media (max-width :992px) {
+  h1{
+    margin-top: 17px;
+    margin-left: 17px;
+  }
+        .toggle_btn{
+            display: block;
+        }
+        .navbar1 ,.navi2{
+            display: none;
+        }
+        .navi .row{
+            display: flex;
+        }
+       .navi .row >*{
+        width: 33.3%;
+       }
+       table{
+        width:100%;
+    }
+
+    td{
+        display:block;
+        width:100%;
+    }
+
+    tr{
+        display:block;
+        margin-bottom:30px;
+    }
+    .seo-htl-table-info table tbody{
+        display: block !important;
+    }
+
+      #noi-dung-collapse1 .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 1em;
+        grid-row-gap: 10px;
+      }
+      #noi-dung-collapse1 .row {
+        display: grid;
+        text-align: center;
+        justify-content: center;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        font-size: 10px;
+      }
+  
+      #noi-dung-collapse1 .col {
+        width: 100%;
+      }
+      #noi-dung-collapse2 .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 1em;
+        grid-row-gap: 10px;
+      }
+      #noi-dung-collapse2 .row {
+        display: grid;
+        text-align: center;
+        justify-content: center;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        font-size: 10px;
+      }
+  
+      #noi-dung-collapse2 .col {
+        width: 100%;
+      }
+      #noi-dung-collapse3 .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 1em;
+        grid-row-gap: 10px;
+      }
+      #noi-dung-collapse3 .row {
+        display: grid;
+        text-align: center;
+        justify-content: center;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        font-size: 10px;
+      }
+  
+      #noi-dung-collapse3 .col {
+        width: 100%;
+      }
+      .recommended .btn{
+        font-size: 10px !important;
+      }
+}
+header {
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+    width: 100%;
+    border-radius: 10px;
+    /* height: 120%; */
+}
+
+.nav-item {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+.header-search-booking-btn {
+    height: 100%;
+    border: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    background-color: hsla(0, 0%, 100%, .3);
+    /* opacity: 50%; */
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+.header-register-btn {
+    height: 100%;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.header-register-btn:hover {
+    color: #3264ff;
+    transition: 0.5s;
+
+}
+
+.btn1 {
+    background-color: white;
+}
+
+.search {
+    margin: 10px;
+}
+
+strong {
+    font-size: 14px;
+}
+.btn-group1
+{
+  width: 120px;
+  padding: 4px 0;
+  margin: 0 0 0 16px;
+}
+#nav-login
+{
+  width: 160px;
+  text-align: left;
+  padding: 4px 0;
+}
+#filte-dropdown {
+  width: 100px;
+  background-color: #fff;
+  color: black;
+  border: none;
+}
+.navbar {
+  position: relative;
+  z-index: 1000; /* Đảm bảo navbar luôn nằm trên các thành phần khác */
+}
+
+.nav-item {
+  position: relative; /* Đảm bảo các nav-item có vị trí tương đối */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1010; /* Đảm bảo dropdown hiển thị trên các thành phần khác trong navbar */
+  display: none;
+  background-color: blue;
+}
+#dropdownshown{
+  width: 150px;
+}

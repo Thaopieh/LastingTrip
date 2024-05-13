@@ -1,0 +1,37 @@
+{
+  "name": "vexere",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Trinh",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@sashido/teachablemachine-node": "^1.2.2",
+    "@tensorflow/tfjs-node": "^4.18.0",
+    "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
+    "body-parse": "^0.1.0",
+    "cloudinary": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "faker": "^6.6.6",
+    "hbs": "^4.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mkdirp": "^3.0.1",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "mysql2": "^3.9.3",
+    "sequelize": "^6.37.2",
+    "sharp": "^0.33.3",
+    "vue": "^3.4.26"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "sequelize-cli": "^6.6.2"
+  }
+}

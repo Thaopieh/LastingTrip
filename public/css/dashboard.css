@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.template {
+  display: flex;
+}
+
+.menu {
+  width: 280px;
+  background: rgb(143, 206, 229);
+  box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
+  height: 100vh; /* Thiết lập chiều cao bằng với màn hình */
+}
+
+
+.menu .logo {
+  height: 60px;
+  box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.menu .logo a {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 60px;
+  text-decoration: none;
+  padding-left: 20px;
+}
+
+.menu ul {
+  list-style: none;
+  padding-top: 20px;
+}
+
+.menu li {
+  margin-top: 6px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.menu i {
+  color: #fff;
+  font-size: 20px;
+  padding-right: 8px;
+}
+
+.menu a {
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: 600px;
+}
+
+.menu li:hover {
+  border-left: 1px solid #fff;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.social_media {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.social_media i {
+  text-decoration: none;
+  padding: 0 5px;
+  color: #fff;
+  opacity: 0.6;
+  font-size: 20px;
+}
+
+.social_media i:hover {
+  opacity: 1;
+  transition: all 0.2s linear;
+  transform: scale(1.01);
+}
+
+.main_box {
+  background: url('https://anhdepfree.com/wp-content/uploads/2018/12/50-hinh-nen-mau-xanh-dep-nhat-1.jpeg') right no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* Đẩy menu về phía bên phải */
+}

@@ -1,0 +1,397 @@
+
+.nav-item .btn-group {
+    margin-right   : 50px;
+    margin-top     : 5px;
+    /* margin-left : 20px; */
+    width          : 120px;
+
+}
+
+.nav-item .btn-group button {
+    background-color: #fff;
+    color           : blue;
+}
+
+.nav-item .dropdown-menu a {
+    color: black;
+}
+
+.nav-item .dropdown-menu li:hover a {
+    color: black;
+}
+
+.body_container,
+.footer__main {
+    padding: 20px 20px 0px;
+    margin : 0 10%;
+}
+
+.body_container,
+.account-email,
+.account-pass,
+.profile-head {
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between;
+    /* align-items : center; */
+}
+
+.account-email,
+.account-pass,
+.name,
+.birth {
+    background-color: whitesmoke;
+    border-radius   : 8px;
+    width           : 50%;
+    height          : 70px;
+    margin          : 0 20px;
+    padding         : 10px;
+}
+
+.account-secu,
+.profile {
+    margin-bottom   : 30px;
+    background-color: #fff;
+    padding         : 20px;
+    border-radius   : 8px;
+}
+
+.account {
+    display          : flex;
+    /* flex-direction: ; */
+}
+
+.profile1,
+.profile2 {
+    display          : flex;
+    /* flex-direction: co; */
+    /* margin        : 20px; */
+    width            : 90%;
+    margin           : 20px 0;
+}
+
+.body_left {
+    width: 25%;
+}
+
+.list-group-item .active {
+    background-color: #fff;
+}
+
+.body_right {
+    /* border: 1px solid black; */
+    width      : 75%;
+    margin-left: 20px;
+}
+
+.member {
+    background-color: #fff;
+    height          : 50px;
+    margin-bottom   : 10px;
+    display         : flex;
+    text-align      : center;
+    justify-content : center;
+    align-items     : center;
+}
+
+.member i {
+    margin-right: 5px;
+    font-size   : 30px;
+    color       : #3264ff;
+}
+
+.member span {
+    margin: 0 10px;
+}
+
+.user-name,
+.email-acc,
+.pass-acc {
+    font-weight: 700;
+}
+
+.body_right button {
+    color           : #3264ff;
+    border          : none;
+    background-color: whitesmoke;
+}
+
+
+footer {
+    background-color: #fff;
+    margin          : 15px 0;
+}
+
+.footer__main {
+    display        : flex;
+    justify-content: space-between;
+    padding        : 0 10px;
+
+}
+
+.footer__main .footer__item {
+    text-align   : left;
+    width        : 33.33%;
+    align-items  : center;
+    align-content: center;
+}
+
+.footer__main .footer_links {
+    font-size: 14px;
+}
+
+.footer__main {
+    background-color: #ffffff;
+    padding-bottom  : 35px;
+    font-size       : 14px;
+    color           : #0f294d;
+}
+
+.footer__item a {
+    margin-bottom: 2px;
+    font-size    : 12px;
+    line-height  : 1.5;
+    margin       : 0;
+}
+
+.footer__item h3 {
+    font-size    : 16px;
+    font-weight  : 700;
+    margin-top   : 0;
+    margin-bottom: 8px;
+}
+
+.footer__main {
+    justify-content: center;
+    border-top     : 1px solid #e4e4e4;
+    border-bottom  : 1px solid #e4e4e4;
+    padding-top    : 32px;
+    padding-bottom : 35px;
+}
+
+.footer__item img {
+    width : 50px;
+    height: 50px;
+}
+
+.footer__item a {
+    margin: 10px;
+}
+
+.Copyright p {
+    text-align    : center;
+    font-size     : 12px;
+    padding-top   : 32px;
+    padding-bottom: 35px;
+
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute;
+}
+
+.main_body {
+    margin-top: 70px;
+}
+
+/* 
+.nav-item .btn-group {
+    margin-right: 50px;
+    margin-top: 5px;
+    margin-left: 20px;
+    width: 120px;
+    
+}
+
+.nav-item .btn-group button{
+    background-color: #fff;
+    color: blue;
+}
+.nav-item .dropdown-menu a{
+    color: black;
+}
+.nav-item .dropdown-menu li:hover a{
+    color: black;
+} */
+.body_container,
+.footer__main {
+    padding: 20px 20px 0px;
+    margin : 0 10%;
+}
+
+.body_container,
+.account-email,
+.account-pass,
+.profile-head {
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between;
+    /* align-items : center; */
+}
+
+.account-email,
+.account-pass,
+.name,
+.birth {
+    background-color: whitesmoke;
+    border-radius   : 8px;
+    width           : 50%;
+    height          : 70px;
+    margin          : 0 20px;
+    padding         : 10px;
+}
+
+.account-secu,
+.profile {
+    margin-bottom   : 30px;
+    background-color: #fff;
+    padding         : 20px;
+    border-radius   : 8px;
+}
+
+.account {
+    display          : flex;
+    /* flex-direction: ; */
+}
+
+.profile1,
+.profile2 {
+    display          : flex;
+    /* flex-direction: co; */
+    /* margin        : 20px; */
+    width            : 90%;
+    margin           : 20px 0;
+}
+
+.body_left {
+    width: 25%;
+}
+
+.list-group-item .active {
+    background-color: #fff;
+}
+
+.body_right {
+    /* border: 1px solid black; */
+    width      : 75%;
+    margin-left: 20px;
+}
+
+.member {
+    background-color: #fff;
+    height          : 50px;
+    margin-bottom   : 10px;
+    display         : flex;
+    text-align      : center;
+    justify-content : center;
+    align-items     : center;
+}
+
+.member i {
+    margin-right: 5px;
+    font-size   : 30px;
+    color       : #3264ff;
+}
+
+.member span {
+    margin: 0 10px;
+}
+
+.user-name,
+.email-acc,
+.pass-acc {
+    font-weight: 700;
+}
+
+.body_right button {
+    color           : #3264ff;
+    border          : none;
+    background-color: whitesmoke;
+}
+
+#footer-bg{
+    display: none;
+}
+
+@media (max-width:1237px) {}
+
+@media (max-width:1150px) {
+    .account {
+        flex-wrap: wrap;
+        gap      : 10px;
+    }
+
+    .account>div {
+        width: 100%;
+    }
+}
+
+@media (max-width:1008px) {
+    .profile-detail>div {
+        display: block;
+
+    }
+
+    .profile-detail>div>div {
+        width     : 100%;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width:720px) {
+    .body_container {
+        margin         : 0 1%;
+        justify-content: center;
+    }
+
+    .container-contentsb {
+        display: none;
+    }
+
+    .footer__main {
+        display      : grid !important;
+        grid-template: 3fr 3fr/ 3fr 3fr;
+        text-align   : center;
+    }
+
+    .footer__item {
+        width: 100% !important;
+    }
+
+    .email-acc span {
+        display      : block;
+        width        : 80px;
+        white-space  : nowrap;
+        overflow     : hidden;
+        text-overflow: ellipsis;
+    }
+
+}
+
+@media (max-width:414px) {
+    .account-secu h2 {
+        font-size: 21px;
+    }
+
+    .pass-head {
+        display    : flex;
+        align-items: center;
+        gap        : 2px;
+    }
+
+    .list-group-item {
+        width: 90px;
+    }
+
+    .body_right>div {
+        padding: 10px;
+    }
+
+    .member {
+        display: none;
+    }
+
+    .nav-item .btn-group {
+        margin-left: 0;
+    }
+}
