@@ -37,9 +37,6 @@ module.exports = (sequelize, DataTypes) => {
 
           const service = sequelize.models.roomService;
           await service.destroy({ where: { serviceId: amenityId } });
-
-          const room = sequelize.models.Room;
-          await room.destroy({ where: { hotelId: hotelId } });
         },
       },
     }

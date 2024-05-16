@@ -15,22 +15,25 @@ const createAmenity = async (req, res) => {
 };
 
 const getAllAmenity = async (req, res) => {
-  const { name } = req.query;
-  // console.log(data);
+  const { name, type } = req.query;
   try {
+    let queryOptions = {};
+
     if (name) {
-      const AmenityList = await Amenities.findAll({
-        where: {
-          name: {
-            [Op.like]: `%${name}%`,
-          },
-        },
-      });
-      res.status(200).send(AmenityList);
-    } else {
-      const AmenityList = await Amenities.findAll();
-      res.status(200).send(AmenityList);
+      queryOptions.name = {
+        [Op.like]: `%${name}%`,
+      };
     }
+
+    if (type) {
+      queryOptions.type = type;
+    }
+
+    const AmenityList = await Amenities.findAll({
+      where: queryOptions,
+    });
+
+    res.status(200).send(AmenityList);
   } catch (error) {
     res.status(500).send(error);
   }

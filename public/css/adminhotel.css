@@ -2,7 +2,6 @@
     font-family: Ubuntu, sans-serif;
   }
   /* style.css */
-#content1,
 #content2 {
   display: none;
 }
@@ -223,7 +222,8 @@
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 1001;
     }
-    .custom-popup {
+    .custom-popup,
+    .custom-popup-user {
         display: none;
         position: fixed;
         top: 50%;
@@ -249,36 +249,43 @@
     }
   
     /* CSS cho form trong popup */
-    .custom-popup h2 {
+    .custom-popup h2,.custom-popup-user h2 {
         margin-bottom: 20px;
         text-align: center;
         color: #333333;
     }
-    .custom-popup form {
+    .custom-popup form,.custom-popup-user form {
         display: flex;
         flex-direction: column;
     }
     .custom-popup input[type="text"],
     .custom-popup input[type="email"],
-    .custom-popup input[type="password"] {
+    .custom-popup input[type="password"],
+    .custom-popup-user input[type="text"],
+    .custom-popup-user input[type="email"],
+    .custom-popup-user input[type="password"]
+    {
         margin-bottom: 15px;
         padding: 10px;
         border: 1px solid #cccccc;
         border-radius: 5px;
         box-sizing: border-box;
     }
-    .custom-popup .input-group {
+    .custom-popup .input-group,
+    .custom-popup-user .input-group {
         display: flex;
         margin-bottom: 15px;
     }
-    .custom-popup .input-group input {
+    .custom-popup .input-group input,
+    .custom-popup-user .input-group input {
         flex: 2;
         margin-right: 10px;
     }
     .custom-popup .input-group input:last-child {
         margin-right: 0;
     }
-    .custom-popup input[type="submit"] {
+    .custom-popup input[type="submit"],.custom-popup-user input[type="submit"]
+     {
         padding: 12px 0;
         background-color: #007bff;
         color: #ffffff;
@@ -436,7 +443,8 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
   
-  .popup-content {
+  .popup-content-user-img {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -446,6 +454,12 @@
     max-width: 400px;
     width: 80%;
     text-align: center;
+    border-radius: 8px;
+    width: 50%;
+    max-height: 80vh;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: flex-start;
   }
   
   .close-btn {

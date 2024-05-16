@@ -4,6 +4,7 @@ const express = require("express");
 const {
   getHotelAmenities,
   addHotelAmenity,
+  getHotelAmenitiesByID,
   updateHotelAmenity,
   deleteHotelAmenity,
   getHotelHaveAmenities,
@@ -13,10 +14,10 @@ const {
 const HotelAmenityRouter = express.Router();
 
 HotelAmenityRouter.get("/:hotelId", getHotelAmenities);
-HotelAmenityRouter.get("/amenities/:amenityId", getHotelHaveAmenities);
+HotelAmenityRouter.get("/amenities/:id", getHotelAmenitiesByID);
 HotelAmenityRouter.post("/", addHotelAmenity);
-HotelAmenityRouter.put("/id", updateHotelAmenity);
-HotelAmenityRouter.delete("/id", deleteHotelAmenity);
+HotelAmenityRouter.put("/:id", updateHotelAmenity);
+HotelAmenityRouter.delete("/:id", deleteHotelAmenity);
 HotelAmenityRouter.post("/hotel/amenities", searchHotelsByAmenities);
 module.exports = {
   HotelAmenityRouter,

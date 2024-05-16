@@ -1,5 +1,7 @@
 const { UrlImageHotel } = require("../models");
 const { Op, literal } = require("express");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const createUrlImageHotel = async (req, res) => {
   try {
     const { HotelId } = req.body;
@@ -8,12 +10,13 @@ const createUrlImageHotel = async (req, res) => {
     console.log(files);
     // Iterate over each file and create a corresponding UrlImageHotel record
     for (const file of files) {
-      const imagePath = file.path.replace(/^public/, ""); // Get relative path
-      const imageUrl = `http://localhost:3030/${imagePath}`; // Construct full image URL
+      const imagePath = file.path;
+      const name = file.filename;
 
       // Create UrlImageHotel record associated with the new hotel
       const imageUrlRecord = await UrlImageHotel.create({
-        url: imageUrl,
+        url: imagePath,
+        file_name: name,
         HotelId: HotelId,
       });
     }
@@ -69,27 +72,48 @@ const updateUrlImageHotel = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 const deleteUrlImageHotel = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
 
   try {
-    // Tìm bản ghi UrlImageHotel với id và url tương ứng
-    await UrlImageHotel.destroy({
-      where: {
-        id: id,
-      },
-    });
+    // Tìm ảnh cần xóa dựa trên imageId
+    const imageToDelete = await UrlImageHotel.findByPk(id);
 
-    // Phản hồi với mã trạng thái 204 để chỉ ra xóa thành công
-    res.status(200).send("xoa thanh cong");
+    if (!imageToDelete) {
+      return res.status(404).json({ error: "Không tìm thấy ảnh để xóa" });
+    }
+
+    // Xóa ảnh từ Cloudinary
+    await cloudinary.uploader.destroy(imageToDelete.file_name);
+
+    // Xóa bản ghi ảnh từ cơ sở dữ liệu
+    await imageToDelete.destroy();
+
+    // Phản hồi với thông báo xóa thành công
+    res.status(200).send("Xóa ảnh thành công");
   } catch (error) {
-    console.error("Error deleting UrlHotel:", error);
+    console.error("Lỗi khi xóa ảnh:", error);
+    res.status(500).json({ error: "Lỗi máy chủ nội bộ" });
+  }
+};
+
+const getAllUrlImageHotel = async (req, res) => {
+  try {
+    const urlImageHotels = await UrlImageHotel.findAll();
+
+    if (!urlImageHotels || urlImageHotels.length === 0) {
+      return res.status(404).json({ error: "No UrlImageHotel records found" });
+    }
+
+    res.status(200).json(urlImageHotels);
+  } catch (error) {
+    console.error("Error fetching UrlImageHotel records:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 module.exports = {
+  getAllUrlImageHotel,
   createUrlImageHotel,
   getUrlImageHotelById,
   updateUrlImageHotel,

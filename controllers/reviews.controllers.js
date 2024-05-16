@@ -95,6 +95,15 @@ const getAllReview = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+const getFullReview = async (req, res) => {
+  try {
+    const hotelList = await Reviews.findAll();
+    res.status(200).json(hotelList);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 const getDetailReview = async (req, res) => {
   const { id } = req.params;
   try {
@@ -130,16 +139,19 @@ const updateReview = async (req, res) => {
 const deleteReview = async (req, res) => {
   const { id } = req.params;
   try {
-    Review.destroy({
+    const deletedReview = await Reviews.findOne({
       where: {
         id,
       },
     });
+    await deletedReview.destroy({ cascade: true });
+
     res.status(200).send("Successful");
   } catch (error) {
     res.status(500).send(error);
   }
 };
+
 module.exports = {
   createReview,
   deleteReview,
@@ -147,4 +159,5 @@ module.exports = {
   getDetailReview,
   getAllReview,
   uploadFile,
+  getFullReview,
 };

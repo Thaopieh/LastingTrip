@@ -2,6 +2,7 @@
 const form = document.querySelector("form");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
+const errorMessageModal = document.getElementById("errorMessageModal");
 
 // Sự kiện submit form
 form.addEventListener("submit", (e) => {
@@ -18,7 +19,6 @@ form.addEventListener("submit", (e) => {
   };
 
   // Gửi yêu cầu POST đến URL xử lý dữ liệu đăng nhập
-  // Gửi yêu cầu POST bằng Axios
   $.ajax({
     url: "http://localhost:3030/api/v1/users/login",
     type: "POST",
@@ -28,16 +28,28 @@ form.addEventListener("submit", (e) => {
       if (result.message === "successful") {
         const token = result.token; // Giả sử token được trả về là thuộc tính 'token' của đối tượng result
         localStorage.setItem("token", token);
-        const id = result.id; // Giả sử token được trả về là thuộc tính 'token' của đối tượng result
+        const userName = result.name;
+        localStorage.setItem("userName", userName);
+        const id = result.id; // Giả sử id được trả về là thuộc tính 'id' của đối tượng result
         localStorage.setItem("id", id);
-        if (result.type === "ADMIN") {
-          window.location.href = "dashboard";
-        } else {
+        const typeUser = result.type;
+        localStorage.setItem("type", typeUser);
+        if (result.type === "admin") {
+          window.location.href = "/dashboard";
+        } else if (result.type === "owner") {
           // Nếu đăng nhập thành công, chuyển hướng đến trang chủ
+          window.location.href = `agentInfo/${id}`;
+        } else {
           window.location.href = "/";
         }
-        {
-        }
+      } else if (result.message === "email_not_found") {
+        errorMessageModal.textContent =
+          "Email không tồn tại. Vui lòng kiểm tra lại.";
+        $("#errorModal").modal("show"); // Hiển thị modal khi email không tồn tại
+      } else if (result.message === "incorrect_password") {
+        errorMessageModal.textContent =
+          "Mật khẩu không chính xác. Vui lòng thử lại.";
+        $("#errorModal").modal("show"); // Hiển thị modal khi mật khẩu sai
       } else {
         errorMessageModal.textContent =
           "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.";

@@ -2,12 +2,12 @@ $(document).ready(function () {
   $(document).on("click", ".fa-image", function () {
     var imageUrl = $(this).data("image-url");
     $("#imagePreview").attr("src", imageUrl);
-    $("#imagePopupOverlay").css("display", "block");
+    $("#imagePopupOverlayUser").css("display", "block");
   });
 
   // Event listener for closing the popup
   $(document).on("click", ".close-btn", function () {
-    $("#imagePopupOverlay").css("display", "none");
+    $("#imagePopupOverlayUser").css("display", "none");
   });
 
   // Event listener for edit button
@@ -34,18 +34,17 @@ $(document).ready(function () {
           tableHtml += "<td>" + user.id + "</td>";
           tableHtml += "<td>" + user.name + "</td>";
           tableHtml += "<td>" + user.email + "</td>";
-          tableHtml += "<td>" + user.password + "</td>";
           tableHtml += "<td>" + user.numberPhone + "</td>";
           tableHtml += "<td>" + user.type + "</td>";
           tableHtml += "<td>";
           tableHtml +=
             '<button type="button" class="editUser" value="' +
             user.id +
-            '">Edit</button>';
+            '">Chỉnh sửa</button>';
           tableHtml +=
             '<button type="button" class="deleteUser" value="' +
             user.id +
-            '">Delete</button>';
+            '">Xóa</button>';
           tableHtml += "</td>";
           tableHtml += "<td><i class='fa-solid fa-image'></i></td>"; // Add icon
           tableHtml += "</tr>";
@@ -65,14 +64,14 @@ $(document).ready(function () {
 
   // Sự kiện khi click vào nút "Thêm"
   $(".users-search-create").click(function () {
-    $(".custom-popup-overlay").show();
-    $(".custom-popup").show();
+    $(".custom-popup-overlay-user").show();
+    $(".custom-popup-user").show();
   });
 
   // Sự kiện khi click vào nút "Đóng" trong popup
   $(".custom-close-btn").click(function () {
-    $(".custom-popup-overlay").hide();
-    $(".custom-popup").hide();
+    $(".custom-popup-overlay-user").hide();
+    $(".custom-popup-user").hide();
   });
 
   // Sự kiện khi click vào nút "Đóng" trong popup thông báo xóa
@@ -94,7 +93,7 @@ $(document).ready(function () {
   });
 
   // Sự kiện khi người dùng xác nhận xóa
-  $(".confirm-delete").click(function () {
+  $(".confirm-delete-user").click(function () {
     // Lấy ID người dùng từ thuộc tính data
     let id = $(".popup-delete").attr("data-id");
 
@@ -195,7 +194,9 @@ $(document).ready(function () {
   $(document).on("click", ".fa-image", function () {
     var imageUrl = $(this).data("image-url");
     $("#imagePreview").attr("src", imageUrl);
-    $("#imagePopupOverlay").css("display", "block");
+    $("#imagePopupOverlayUser").css("display", "block");
+    $(".popup-content-user-img").show();
+
     $.ajax({
       url: "http://localhost:3030/api/v1/urlImageHotel/?HotelId=48",
       method: "GET",
@@ -257,7 +258,7 @@ $(document).ready(function () {
 
   // Event listener for closing the popup
   $(document).on("click", ".close-btn", function () {
-    $("#imagePopupOverlay").css("display", "none");
+    $("#imagePopupOverlayUser").css("display", "none");
   });
 
   // Event listener for edit button
@@ -283,7 +284,7 @@ $(document).ready(function () {
         console.log("Image deleted successfully:", imageUrl);
 
         // Đóng popup overlay sau khi xóa thành công
-        $("#imagePopupOverlay").css("display", "none");
+        $("#imagePopupOverlayUser").css("display", "none");
 
         // Thực hiện render lại trang hoặc cập nhật danh sách ảnh
         renderImages(); // Giả sử có hàm renderImages() để load lại danh sách ảnh
@@ -302,7 +303,7 @@ $(document).ready(function () {
   // Sự kiện khi click vào nút "Sửa"
   $(document).on("click", ".editUser", function () {
     var id = $(this).val();
-    $(".popup-overlay").show();
+    $(".popup-overlay-update").show();
     // Gửi yêu cầu để lấy chi tiết người dùng
     $.ajax({
       url: `http://localhost:3030/api/v1/users/getDetailUser/${id}`,
@@ -310,34 +311,38 @@ $(document).ready(function () {
       success: function (data) {
         console.log("2");
         console.log(data);
-        $(".popup-overlay").html(`
+        $(".popup-overlay-update").html(`
               <div class="popup">
                 <span class="close-btn">&times;</span>
                 <h2>Cập nhật</h2>
                 <form id="updateForm">
+                <label>Tên</label>
                   <input type="text" id="name" name="name" placeholder="Name" value="${data.name}" required>
+                <label>Địa chỉ mail</label>  
                   <input type="email" id="email" name="email" placeholder="Email" value="${data.email}" required>
-                  <div class="input-group">
+              
+                <label>Số điện thoại</label>
                     <input type="text" id="numberPhone" name="numberPhone" placeholder="number phone" value="${data.numberPhone}" style="flex: 80%;">
+                <label>Loại người dùng</label>    
                     <select id="typeSelect" name="type">
                   <option value="">Chọn loại</option>
                   <option value="admin">admin</option>
-                  <option value="agent">agent</option>
+                  <option value="owner">owner</option>
                    <option value="client">client</option>
-                <!-- Thêm các tùy chọn khác nếu cần -->
               </select>
-                  </div>
+               
                   <div class="ebutton">
                     <input type="submit" value="Cập nhật">
                   </div>
                 </form>
               </div>`);
+
         $(".ebutton").click(function () {
           console.log(id);
           var name = $("#name").val(); // Lấy giá trị từ trường nhập liệu Name
           var email = $("#email").val(); // Lấy giá trị từ trường nhập liệu Email
           var numberPhone = $("#numberPhone").val();
-          var type = $("#type").val(); // Lấy giá trị từ trường nhập liệu NumberPhone
+          var type = $("#typeSelect").val(); // Lấy giá trị từ trường nhập liệu NumberPhone
           if (!name || !email || !password || !numberPhone || !type) {
             // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
             // alert("Vui lòng điền đầy đủ thông tin.");
@@ -369,7 +374,7 @@ $(document).ready(function () {
           });
         });
         $(".close-btn").click(function () {
-          $(".popup-overlay").hide();
+          $(".popup-overlay-update").hide();
         });
       },
     });

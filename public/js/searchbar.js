@@ -1,6 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Lặp qua tất cả các phần tử có class là "dropdown-item"
   console.log("Document is ready.");
+  // Lấy ngày hiện tại
+  // Lấy ngày hiện tại
+  var today = new Date();
+  var todayString = today.toISOString().split("T")[0];
+
+  // Tính toán ngày tiếp theo
+  var nextDay = new Date(today);
+  nextDay.setDate(today.getDate() + 1);
+  var nextDayString = nextDay.toISOString().split("T")[0];
+
+  // Đặt giá trị min và giá trị mặc định cho check-in là hôm nay
+  var checkInInput = document.getElementById("checkIn");
+  checkInInput.setAttribute("min", todayString);
+  checkInInput.value = todayString;
+
+  // Đặt giá trị min và giá trị mặc định cho check-out là ngày tiếp theo
+  var checkOutInput = document.getElementById("checkOut");
+  checkOutInput.setAttribute("min", nextDayString);
+  checkOutInput.value = nextDayString;
+
+  // Cập nhật giá trị min cho check-out khi thay đổi check-in
+  checkInInput.addEventListener("change", function () {
+    var checkInDate = new Date(this.value);
+    var nextDay = new Date(checkInDate);
+    nextDay.setDate(checkInDate.getDate() + 1);
+    var nextDayString = nextDay.toISOString().split("T")[0];
+    checkOutInput.setAttribute("min", nextDayString);
+    if (checkOutInput.value < nextDayString) {
+      checkOutInput.value = nextDayString;
+    }
+  });
 
   // Lấy dữ liệu từ localStorage
   const existingData = localStorage.getItem("searchData");
@@ -81,8 +112,8 @@ const collectAndSendData = () => {
     !location &&
     !checkInDate &&
     !checkOutDate &&
-    numberOfRooms === 0 &&
-    numberOfAdults === 0 &&
+    numberOfRooms === 1 &&
+    numberOfAdults === 1 &&
     numberOfChildren === 0;
 
   if (allFieldsEmpty) {
@@ -133,7 +164,7 @@ for (var i = 0; i < dropdownItems.length; i++) {
     var itemType = this.parentNode.getAttribute("data-type");
 
     var count = parseInt(this.parentNode.getAttribute("data-count")) + 1;
-    if (count <= 10 && count >= 0) {
+    if (count <= 10 && count >= 1) {
       this.parentNode.setAttribute("data-count", count);
 
       // Update count based on item type
@@ -154,7 +185,10 @@ for (var i = 0; i < dropdownItems.length; i++) {
     var itemType = this.parentNode.getAttribute("data-type");
 
     var count = parseInt(this.parentNode.getAttribute("data-count")) - 1;
-    if (count <= 10 && count >= 0) {
+    if (
+      (itemType === "children" && count >= 0) ||
+      (itemType !== "children" && count >= 1)
+    ) {
       this.parentNode.setAttribute("data-count", count);
 
       // Update count based on item type

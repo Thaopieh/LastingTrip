@@ -8,11 +8,8 @@ const { rootRouter } = require("./routers");
 const app = express();
 app.use(cors());
 
-const TeachableMachine = require("@sashido/teachablemachine-node");
-
-const model = new TeachableMachine({
-  modelUrl: "https://teachablemachine.withgoogle.com/models/r6BBk-hiN/",
-});
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded());
 
 app.get("/image/classify", async (req, res) => {
   const { url } = req.query;
@@ -67,20 +64,25 @@ app.get("/aboutUs", (req, res) => {
   res.render("User/aboutUs");
 });
 
-app.get("/userInfor", (req, res) => {
-  res.render("User/userInfor");
+app.get("/userInfo", (req, res) => {
+  res.render("User/userInfo");
 });
 app.get("/signin", (req, res) => {
   res.render("User/signin");
 });
 
-app.get("/sidebar", (req, res) => {
-  // Render the sidebar template directly (no need for separate route)
-  res.render("sidebar");
-});
 app.get("/user", (req, res) => {
   // Render the sidebar template directly (no need for separate route)
   res.render("User/user");
+});
+app.get("/payment", (req, res) => {
+  res.render("User/payment");
+});
+app.get("/paymentmethod", (req, res) => {
+  res.render("User/paymentMethod");
+});
+app.get("/result", (req, res) => {
+  res.render("User/result");
 });
 app.get("/coupons", (req, res) => {
   // Rendecouponsidebar template dir
@@ -89,23 +91,66 @@ app.get("/coupons", (req, res) => {
 app.get("/dashboard", (req, res) => {
   res.render("Admin/dashboard");
 });
-app.get("/admin", (req, res) => {
-  res.render("Admin/partials/createHotel");
+
+app.get("/agentInfo/:id", (req, res) => {
+  res.render("User/agentInfo");
+});
+app.get("/ManageRoom/:id", (req, res) => {
+  var hotelId = req.params.id;
+  res.render("Admin/partials/room", { roomId: hotelId });
+});
+app.get("/ManageHotelService/:id", (req, res) => {
+  var hotelId = req.params.id;
+  res.render("Admin/partials/HotelService", { id: hotelId });
 });
 
-app.get("/agent", (req, res) => {
-  res.render("User/agent");
+app.get("/myBooking", (req, res) => {
+  res.render("User/myBooking");
 });
-app.get("/agent/addHotel", (req, res) => {
-  res.render("User/agentForm");
-});
-app.get("/agent/room", (req, res) => {
-  res.render("User/room");
-});
-app.get("/agent/room/:id", (req, res) => {
-  const hotelId = req.params.id;
 
-  res.render("User/room", { roomId: hotelId });
+app.get("/ManageRoomService/:id", (req, res) => {
+  var roomId = req.params.id;
+  res.render("Admin/partials/RoomService", { id: roomId });
+});
+
+// app.get("/userInfo/:id", (req, res) => {
+//   var id = req.params.id;
+//   res.render("User/userInfor", { id: id });
+// });
+
+app.get("/userInfor", (req, res) => {
+  res.render("User/userInfor");
+});
+
+// app.get("/admin", (req, res) => {
+//   res.render("Admin/partials/createHotel");
+// });
+
+// app.get("/admin/hotel", (req, res) => {
+//   res.render("Admin/partials/agent");
+// });
+app.get("/admin/addHotel", (req, res) => {
+  res.render("Admin/partials/agentForm");
+});
+// app.get("/admin/Hotel/Service", (req, res) => {
+//   res.render("Admin/partials/HotelService");
+// });
+// app.get("/admin/room/service", (req, res) => {
+//   res.render("Admin/partials/RoomService");
+// });
+// app.get("/admin/room/", (req, res) => {
+//   res.render("Admin/partials/room");
+// });
+// app.get("/BookingRoom", (req, res) => {
+//   res.render("Admin/partials/Booking");
+// });
+
+app.get("/ForgotPass", (req, res) => {
+  res.render("User/forgotPass");
+});
+
+app.get("/resetpassword", (req, res) => {
+  res.render("user/resetPass");
 });
 
 // Configure Handlebars

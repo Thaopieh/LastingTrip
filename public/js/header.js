@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Kiểm tra giá trị của token
   const token = getToken(); // Thay 'getToken()' bằng hàm lấy giá trị token của bạn
+  const userName = localStorage.getItem("userName");
 
   if (token) {
     // Nếu token có giá trị khác null, thay đổi HTML của phần tử li
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     data-bs-auto-close="false" aria-expanded="false" id="filte-dropdown">
                     <i class="fa-regular fa-user"></i>
-                    User
+                    ${userName}
                 </button>
                 <ul class="dropdown-menu" id="dropdownshown">
                     <li><a class="dropdown-item" href="/userInfor">Thông tin cá nhân</a></li>
@@ -24,8 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("logout").addEventListener("click", function () {
       // Xóa token khỏi local storage
       localStorage.removeItem("token");
+      localStorage.removeItem("id");
+      localStorage.removeItem("userName");
+
       // Thực hiện chuyển hướng về trang đăng nhập
-      window.location.href = "http://localhost:3030/";
+      window.location.href = "http://localhost:3030/signin";
     });
   }
 });

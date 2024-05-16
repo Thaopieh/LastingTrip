@@ -17,7 +17,10 @@
     justify-content: space-between;
     margin-bottom: 10px;
 }
-
+#images
+{
+    margin-bottom: 10px ;
+}
 .room-quantity {
     margin-bottom: 10px;
 }
@@ -75,11 +78,12 @@
     /* Red */
 }
 
-*/ .popup-overlay {
+.popup-overlay {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -455,3 +459,138 @@
 .popup-delete button:hover {
     background-color: #0056b3;
 }
+  
+  .popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0 20px;
+    width: 50%;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%; /* Chiều rộng của phần tiêu đề */
+    background-color: #fff; /* Màu nền cho tiêu đề */
+    padding: 10px 20px; /* Padding cho tiêu đề */
+    z-index: 1; /* Đảm bảo tiêu đề luôn hiển thị trên các phần tử khác */
+    box-sizing: border-box; /* Đảm bảo padding và border được tính vào chiều rộng */
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+  }
+  
+  .image-item {
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    overflow: hidden; /* Ẩn nội dung tràn ra ngoài của container */
+    padding: 10px;
+  }
+  
+  .popup-image {
+    max-width: 80%; /* Đặt chiều rộng tối đa của hình ảnh là 100% của container cha */
+    height: 100%; /* Chiều cao của hình ảnh là 100% của container cha */
+    object-fit: contain; /* Hiển thị hình ảnh sao cho nó vừa với khu vực của nó, không bị vượt quá */
+  }
+  
+  
+  .delete-image-btn {
+    flex-shrink: 0; /* Không cho nút delete co lại khi không đủ không gian */
+    padding: 8px 16px; /* Padding cho nút delete */
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 14px; /* Kích thước chữ của nút delete */
+    background-color: #f44336; /* Màu nền của nút delete */
+    color: #fff; /* Màu chữ của nút delete */
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Độ cong góc của nút delete */
+    cursor: pointer; /* Thay đổi con trỏ chuột khi di chuột vào nút delete */
+  }
+  
+
+  
+  .btn-group {
+    display: flex;
+    gap: 10px; /* Adjust spacing between buttons */
+  }
+  
+    #addImageButton {
+      width: 45%;
+      padding: 10px 20px; /* Đặt giá trị padding cho nút */
+      font-size: 16px; /* Đặt kích thước font chữ của nút */
+      background-color: #007bff; /* Màu nền của nút */
+      color: #fff; /* Màu chữ của nút */
+      border: none; /* Loại bỏ đường viền của nút */
+      border-radius: 5px; /* Độ cong góc của nút */
+      cursor: pointer; /* Hiển thị con trỏ chuột khi di chuột vào nút */
+      margin: auto;
+    }
+    #addImageButton.small {
+      transform: scale(0.5);
+    }
+    #addImageButton:hover {
+      background-color: #0056b3; /* Màu nền của nút khi di chuột vào */
+    }
+    /* CSS cho nút đóng popup */
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #999999;
+    }
+    #imagePopupOverlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #confirm {
+        width: 45%;
+        padding: 10px 20px; /* Đặt giá trị padding cho nút */
+        font-size: 16px; /* Đặt kích thước font chữ của nút */
+        background-color: #007bff; /* Màu nền của nút */
+        color: #fff; /* Màu chữ của nút */
+        border: none; /* Loại bỏ đường viền của nút */
+        border-radius: 5px; /* Độ cong góc của nút */
+        cursor: pointer; /* Hiển thị con trỏ chuột khi di chuột vào nút */
+        margin: auto;
+      }
+      .button-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: auto; /* Sử dụng margin-top: auto để đẩy `.button-row` xuống dưới cùng */
+        padding: 20px; /* Tạo khoảng đệm cho các nút trong button-row */
+        position: sticky;
+        bottom: 0; /* Đặt `.button-row` ở phía dưới cùng của popup-content */
+        background-color: #fff; /* Tùy chỉnh màu nền của button-row nếu cần */
+    }
+    
+    #addImageButton, #confirm {
+        /* Thiết lập CSS cho các nút */
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }

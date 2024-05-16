@@ -70,34 +70,36 @@ const checkEmailExist = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  // b1 tìm user dựa trên email
-  // b2 kiểm tra mật khẩu có đúng hay không
-  const user = await User.findOne({
-    where: {
-      email,
-    },
-  });
+
+  // B1: Tìm user dựa trên email
+  const user = await User.findOne({ where: { email } });
+
   if (user) {
-    const token = jwt.sign(
-      { email: user.email, type: user.type },
-      "firewallbase64",
-      { expiresIn: 60 * 60 }
-    );
+    // B2: Kiểm tra mật khẩu có đúng hay không
     const isAuthen = bcrypt.compareSync(password, user.password);
+
     if (isAuthen) {
-      res
-        .status(200)
-        .send({ message: "successful", token, type: user.type, id: user.id });
+      const token = jwt.sign(
+        { email: user.email, type: user.type },
+        "firewallbase64",
+        { expiresIn: 60 * 60 }
+      );
+
+      res.status(200).send({
+        message: "successful",
+        token,
+        type: user.type,
+        id: user.id,
+      });
     } else {
       res
-        .status(500)
+        .status(401)
         .send({ message: "dang nhap that bai, kiem tra lai mat khau" });
     }
   } else {
     res.status(404).send({ message: "khong co nguoi dung nay" });
   }
 };
-
 const getAllUser = async (req, res) => {
   const { name } = req.query;
   // console.log(data);
@@ -120,6 +122,7 @@ const getAllUser = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
 const displayUser = async (req, res) => {
   {
     try {
@@ -162,14 +165,19 @@ const editUser = async (req, res) => {
     res.status(500).send(error);
   }
 };
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
   try {
-    const userId = req.params.id;
-    User.destroy({ where: { id: userId } });
-    return res.status(200).json({ message: "User deleted successfully" });
+    const deletedUsers = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    await deletedUsers.destroy({ cascade: true });
+
+    res.status(200).send("Successful");
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).send(error);
   }
 };
 const getDetailUser = async (req, res) => {
@@ -188,7 +196,6 @@ const getDetailUser = async (req, res) => {
 module.exports = {
   register,
   login,
-  getAllUser,
   getAllUser,
   displayUser,
   editUser,

@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-weight: normal;
+    /* font: 12px / 1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; */
+    font-display: swap;
+    padding: 0px;
+    margin: 0px;
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -9,25 +21,48 @@
 
 .template {
   display: flex;
+  flex-direction: row;
+
+}
+.body-left{
+  background-color: #2EB6F9;
+
+  width:20%;
+}
+.body-right{
+  width: 80%;
 }
 
 .menu {
-  width: 280px;
-  background: rgb(143, 206, 229);
+  /* width: 280px;
+  background: #2EB6F9;
   box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
-  height: 100vh; /* Thiết lập chiều cao bằng với màn hình */
+  height: 100vh; 
+  position: sticky; */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 5px;
 }
 
+.menu .menu-content
+{
+  position: sticky;
+  top: 0;
+  z-index: 10; /* giá trị z-index để đảm bảo hiển thị trên các phần tử khác */
+}
 
 .menu .logo {
   height: 60px;
+  position: sticky;
+
   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .menu .logo a {
   color: #fff;
   font-size: 25px;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 60px;
   text-decoration: none;
   padding-left: 20px;
@@ -53,7 +88,7 @@
 
 .menu a {
   color: #ffffff;
-  font-size: 20px;
+  font-size: 15px;
   text-decoration: none;
   font-weight: 600px;
 }
@@ -62,7 +97,10 @@
   border-left: 1px solid #fff;
   box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
-
+.active {
+  background-color: #666;
+  color: red;
+}
 .social_media {
   position: absolute;
   left: 50%;
@@ -92,5 +130,12 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: flex-end; /* Đẩy menu về phía bên phải */
+  /* justify-content: flex-end; */
+   /* Đẩy menu về phía bên phải */
+}
+
+#contentManageRoom,
+#contentBooking,
+#contentAddHotel{
+  display: none;
 }

@@ -1,5 +1,5 @@
 const { UrlImageRoom } = require("../models");
-
+const cloudinary = require("cloudinary").v2;
 const createUrlImageRoom = async (req, res) => {
   {
     try {
@@ -9,12 +9,13 @@ const createUrlImageRoom = async (req, res) => {
       console.log(files);
       // Iterate over each file and create a corresponding UrlImageHotel record
       for (const file of files) {
-        const imagePath = file.path.replace(/^public/, ""); // Get relative path
-        const imageUrl = `http://localhost:3030/${imagePath}`; // Construct full image URL
+        const imagePath = file.path;
+        const name = file.filename;
 
         // Create UrlImageHotel record associated with the new hotel
         const imageUrlRecord = await UrlImageRoom.create({
-          url: imageUrl,
+          url: imagePath,
+          file_name: name,
           IdRoom: IdRoom,
         });
       }
@@ -27,14 +28,14 @@ const createUrlImageRoom = async (req, res) => {
 };
 
 const getUrlImageRoomById = async (req, res) => {
-  const { id } = req.params;
+  const { IdRoom } = req.query;
 
   try {
-    const urlRoom = await UrlImageRoom.findByPk(id);
-    if (!urlRoom) {
+    const urls = await UrlImageRoom.findAll({ where: { IdRoom: IdRoom } });
+    if (!urls) {
       return res.status(404).json({ error: "urlRoom not found" });
     }
-    res.status(200).json(urlRoom);
+    res.status(200).json(urls);
   } catch (error) {
     console.error("Error fetching urlRoom:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -59,7 +60,7 @@ const updateUrlImageRoom = async (req, res) => {
 };
 
 const deleteUrlImageRoom = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     const urlRoom = await UrlImageRoom.findOne({
@@ -71,10 +72,26 @@ const deleteUrlImageRoom = async (req, res) => {
     if (!urlRoom) {
       return res.status(404).json({ error: "urlRoom not found" });
     }
+    await cloudinary.uploader.destroy(urlRoom.file_name);
     await urlRoom.destroy();
     res.status(204).end();
   } catch (error) {
     console.error("Error deleting urlRoom:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const getAllUrlImageRoom = async (req, res) => {
+  try {
+    const urlImageRooms = await UrlImageRoom.findAll();
+
+    if (!urlImageRooms || urlImageRooms.length === 0) {
+      return res.status(404).json({ error: "No UrlImageRoom records found" });
+    }
+
+    res.status(200).json(urlImageRooms);
+  } catch (error) {
+    console.error("Error fetching UrlImageRoom records:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -84,4 +101,5 @@ module.exports = {
   getUrlImageRoomById,
   updateUrlImageRoom,
   deleteUrlImageRoom,
+  getAllUrlImageRoom,
 };
