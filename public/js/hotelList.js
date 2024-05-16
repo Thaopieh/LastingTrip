@@ -17,30 +17,39 @@ function formatCurrency(amount) {
   return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// Event listener to call updateValue() when input changes
 document.addEventListener("DOMContentLoaded", function () {
-  const priceRange = document.getElementById("price_range");
-  const valueElement = document.getElementById("value");
+  const priceRange1 = document.getElementById("price_range1");
+  const valueElement1 = document.getElementById("value1");
+  const priceRange2 = document.getElementById("price_range2");
+  const valueElement2 = document.getElementById("value2");
 
-  if (priceRange && valueElement) {
-    // Nếu các phần tử được tìm thấy, gắn sự kiện lắng nghe và cập nhật giá trị
-    priceRange.addEventListener("input", updateValue);
-    updateValue(); // Gọi hàm updateValue() ban đầu
-  } else {
-    console.error("Không tìm thấy phần tử có id 'price_range' hoặc 'value'.");
+  if (priceRange1 && valueElement1) {
+    // Attach event listener for price_range1
+    priceRange1.addEventListener("input", () => {
+      updateValue("value1", "price_range1");
+    });
+  }
+
+  if (priceRange2 && valueElement2) {
+    // Attach event listener for price_range2
+    priceRange2.addEventListener("input", () => {
+      updateValue("value2", "price_range2");
+    });
   }
 });
 
-function updateValue() {
-  const priceRange = document.getElementById("price_range");
-  const valueElement = document.getElementById("value");
+function updateValue(valueId, rangeId) {
+  const priceRange = document.getElementById(rangeId);
+  const valueElement = document.getElementById(valueId);
 
   if (priceRange && valueElement) {
     const currentValue = priceRange.value;
     const formattedValue = numberWithCommas(currentValue) + " VND";
     valueElement.textContent = `Từ ${formattedValue}`;
   } else {
-    console.error("Không tìm thấy phần tử có id 'price_range' hoặc 'value'.");
+    console.error(
+      `Không tìm thấy phần tử có id '${rangeId}' hoặc '${valueId}'.`
+    );
   }
 }
 
@@ -84,19 +93,12 @@ $(document).ready(() => {
     let j = 1;
     let q = 1;
     data.forEach((item, index) => {
-      let imageSrc;
       const formattedCost = numberWithCommas(item.cost);
-      if (item.TypeHotel == "Hotel") {
-        imageSrc = `/image/BudgetFriendly/Hotel_${i}.webp`;
-        i++;
-      } else if (item.TypeHotel == "resort") {
-        imageSrc = `/image/TrendingGuestHouse/Hotel_${j}.webp`;
-        j++;
-      } else if (item.type == "homestay") {
-        imageSrc = `/image/TopPicks/Hotel_${q}.webp`;
-        q++;
-      }
 
+      const imgFeature = item.UrlImageHotels.map((item1) => {
+        return item1.url;
+      });
+      const imgRender = imgFeature[0];
       const reviews = item.Reviews.map((review) => ({
         rating: review.rating,
         description: review.description,
@@ -137,7 +139,7 @@ $(document).ready(() => {
           <div class="row img-adjust g-0">
             <a href="/hotel/${item.id}" class="hotel-link wrap-img">
               <div class="col-md-4">
-                <img src="${imageSrc}" alt="...">
+                <img src="${imgRender}" alt="...">
               </div>
             </a>
             <div class="col-md-8">
@@ -200,8 +202,18 @@ $(document).ready(() => {
 
     selectedFilters = {};
     // Thu thập giá trị của input range có class là 'price-range'
-    selectedFilters["price"] = $('.col-10 input[type="range"]').val();
+    $('.col-10 input[type="range"]').each(function (index) {
+      let value = $(this).val();
+      let inputId = $(this).attr("id");
+      console.log("value", value);
 
+      // Kiểm tra ID của input để xác định key tương ứng trong selectedFilters
+      if (inputId === "price_range1") {
+        if (value != 0) selectedFilters["price"] = value; // Đặt key là 'price1'
+      } else if (inputId === "price_range2") {
+        if (value != 0) selectedFilters["price"] = value; // Đặt key là 'price2'
+      }
+    });
     // Thu thập các giá trị từ các checkbox được chọn trong cùng một cột
     $('.col-10 input[type="checkbox"]:checked').each(function () {
       const parentClass = $(this).closest(".col-10").attr("class"); // Lấy class của cột cha

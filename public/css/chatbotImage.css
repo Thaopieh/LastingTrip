@@ -18,7 +18,7 @@
 body.show-chatbot .chatbot-toggler {
   transform: rotate(90deg);
 }
-.close-btn {
+.closed-btn {
   cursor: pointer;
   margin-left: auto;
   /* Thêm bất kỳ thuộc tính CSS nào khác cần thiết để đảm bảo nút "close" hiển thị đúng */

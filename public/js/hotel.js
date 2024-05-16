@@ -104,28 +104,7 @@ $(document).ready(function () {
     <a href="#" data-bs-toggle="modal" data-bs-target="#imgModal" onclick="showContent('hotel-upload')">
     <div id="detailed-img" class="row detailed-img">
       <table id="img-carousel">
-        <tr>
-          <td rowspan="2" style="width:25%" class="img-active">
-            <img src="/image/min_item/feature-img/feature-img-1.jpg" alt="">
-          </td>
-          <td style="width:25%" class="img-active">
-            <img src="/image/min_item/feature-img/feature-img-2.jpg" alt="">
-          </td>
-          <td style="width:25%" class="img-active">
-            <img src="/image/min_item/feature-img/feature-img-3.jpg" alt="">
-          </td>
-          <td style="width:25%" class="img-active">
-            <img src="/image/min_item/feature-img/feature-img-4.jpg" alt="">
-          </td>
-        </tr>
-        <tr>
-          <td class="img-active"> <img src="/image/min_item/feature-img/feature-img-5.jpg" alt="">
-          </td>
-          <td class="img-active"> <img src="/image/min_item/feature-img/feature-img-6.jpg" alt="">
-          </td>
-          <td> <img src="/image/min_item/feature-img/feature-img-7.jpg" alt="">
-          </td>
-        </tr>
+
       </table>
     </div>
   </a>
@@ -135,10 +114,6 @@ $(document).ready(function () {
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="imgModalLabel">
-            <div class="tabs">
-              <button class="btn" onclick="showContent('hotel-upload')">Khách sạn đăng tải</button>
-              <button class="btn" onclick="showContent('user-upload')">Khách hàng đăng tải</button>
-            </div>
           </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -148,187 +123,23 @@ $(document).ready(function () {
               <div class="col-4">
                 <div id="list-hotel-upload" class="list-group">
                   <a class="list-group-item list-group-item-action" href="#feature">Nổi bật</a>
-                  <a class="list-group-item list-group-item-action" href="#exterior">Ngoại thất</a>
                   <a class="list-group-item list-group-item-action" href="#room">Phòng</a>
-                  <a class="list-group-item list-group-item-action" href="#dining">Ăn uống</a>
-                  <a class="list-group-item list-group-item-action" href="#leisure">Giải trí</a>
-                  <a class="list-group-item list-group-item-action" href="#near-hotel">Gần đây</a>
-                  <a class="list-group-item list-group-item-action" href="#other">Khác</a>
                 </div>
               </div>
               <div class="col-8">
                 <div data-bs-spy="scroll" data-bs-target="#list-hotel-upload" data-bs-smooth-scroll="true"
-                  class="scrollspy-example" tabindex="0">
+                  class="scrollspy-example" tabindex="0" style="overflow-x: hidden;">
                   <p id="feature">Nổi bật</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/feature/feature-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/feature/feature-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/feature/feature-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/feature/feature-4.jpg" alt="">
-                    </div>
+                  <div class="row" id="clickHotel">
+                    
                   </div>
-                  <p id="exterior">Ngoại thất</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
+                    <p id="room">Phòng</p>
+                      <div class="row" id="clickRoom">
+
                   </div>
-                  <p id="room">Phòng</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="dining">Ăn uống</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="leisure">Giải trí</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="near-hotel">Gần đây</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="other">Khác</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
 
-          </div>
-          <div id="user-upload" class="content">
-            <div class="row">
-              <div class="col-4">
-                <div id="list-hotel-upload" class="list-group">
-                  <a class="list-group-item list-group-item-action" href="#feature">Nổi bật</a>
-                  <a class="list-group-item list-group-item-action" href="#exterior">Ngoại thất</a>
-                  <a class="list-group-item list-group-item-action" href="#room">Phòng</a>
-                  <a class="list-group-item list-group-item-action" href="#dining">Ăn uống</a>
-                  <a class="list-group-item list-group-item-action" href="#leisure">Giải trí</a>
-                  <a class="list-group-item list-group-item-action" href="#near-hotel">Gần đây</a>
-                  <a class="list-group-item list-group-item-action" href="#other">Khác</a>
-                </div>
-              </div>
-              <div class="col-8">
-                <div data-bs-spy="scroll" data-bs-target="#list-hotel-upload" data-bs-smooth-scroll="true"
-                  class="scrollspy-example" tabindex="0">
-                  <p id="feature">Nổi bật</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/feature/feature-1.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/feature/feature-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="exterior">Ngoại thất</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="room">Phòng</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="dining">Ăn uống</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="leisure">Giải trí</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="near-hotel">Gần đây</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                  <p id="other">Khác</p>
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-1.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-2.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="/image/min_item/list-img/exterior/exterior-3.jpg" alt="">
-                      <img src="/image/min_item/list-img/exterior/exterior-4.jpg" alt="">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -394,6 +205,34 @@ $(document).ready(() => {
 
     success: (data) => {
       data.forEach((item) => {
+        const imgFeature = item.UrlImageRooms.map((item1) => {
+          return item1.url;
+        });
+
+        let imgClickHTML = '<div class="col-6">\n';
+
+        let imgRoom1, imgRoom2, imgRoom3;
+        for (let i = 0; i <= 1; i++) {
+          const imageURL = imgFeature[i];
+          imgClickHTML += `  <img src="${imageURL}" alt="">\n`;
+          imgRoom1 = imgFeature[0];
+          imgRoom2 = imgFeature[1];
+          imgRoom3 = imgFeature[2];
+        }
+
+        imgClickHTML += '</div>\n<div class="col-6">\n';
+
+        for (let i = 2; i <= 3; i++) {
+          const imageURL = imgFeature[i];
+          imgClickHTML += `  <img src="${imageURL}" alt="">\n`;
+        }
+
+        imgClickHTML += "</div>\n";
+
+        console.log(imgClickHTML);
+
+        $("#clickRoom").append(imgClickHTML);
+
         const paymentType = item.Hotel.payment;
 
         const breakfast = numberWithCommas((item.price * 20) / 100);
@@ -419,16 +258,17 @@ $(document).ready(() => {
           <div class="row">
             <div style="border-bottom : none" class="col-lg-2 ">
               <div class="baseroom">
+              
                 <div class="baseroom_img">
-                  <img src="/image/min_item/list-img/room/standard_4.webp" alt="" style="width: 100%;">
+               <img src="${imgRoom1}" alt="" style="width: 100%;">
                 </div>
                 <div class="baseroom_img1">
                   <div class="row no-gutters">
                     <div style="margin : 0; padding : 0 3px 0 10px;" class="col-6"><img
-                        src="/image/min_item/list-img/room/standard_5.webp" alt="" style="width: 100%;">
+                        src="${imgRoom2}" alt="" style="width: 100% ; height: 70px;">
                     </div>
                     <div style="margin : 0; padding : 0 10px 0 3px;" class="col-6"><img
-                        src="/image/min_item/list-img/room/standard_6.webp" alt="" style="width: 100%;">
+                        src="${imgRoom3}" alt="" style="width: 100%; height: 70px;">
                     </div>
                   </div>
                 </div>
@@ -485,7 +325,9 @@ $(document).ready(() => {
                   <div class="col-lg-5">
                     <div class="room-price">
                       <p>VND ${numberWithCommas(item.price)}</p>
-                      <a href="#" class="btn btn-primary">Đặt phòng</a>
+                      <a href="#" class="btn btn-primary booking" data-room-id="${
+                        item.id
+                      }">Đặt phòng</a>
                     </div>
                   </div>
                 </div>
@@ -558,4 +400,115 @@ $(document).ready(function () {
   if (token) {
     $(".send-review").show();
   }
+
+  var url = window.location.pathname;
+  var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  $.ajax({
+    url: "http://localhost:3030/api/v1/hotels/" + hotelId,
+    method: "GET",
+
+    success: function (data) {
+      const rating = $("#RatingVal");
+      rating.text(data.userRating);
+      // Kiểm tra nếu không có dữ liệu hoặc không có hình ảnh
+      if (!data || !data.UrlImageHotels || data.UrlImageHotels.length === 0) {
+        console.log("Không có dữ liệu hoặc không có hình ảnh.");
+        return;
+      }
+
+      const imgFeature = data.UrlImageHotels.map((item) => {
+        return item.url;
+      });
+
+      let imgHTML = "<tr>";
+
+      // Lặp qua tối đa 7 ảnh đầu tiên
+      for (let i = 0; i < Math.min(4, imgFeature.length); i++) {
+        const imageURL = imgFeature[i];
+        imgHTML += `
+            <td style="width:25%" ${
+              i === 0 ? 'rowspan="2" ' : 'class="img-active"'
+            }>
+                <img src="${imageURL}" alt="">
+            </td>
+        `;
+      }
+
+      imgHTML += "</tr><tr>";
+
+      // Lặp qua các ảnh còn lại
+      for (let i = 4; i < Math.min(7, imgFeature.length); i++) {
+        const imageURL = imgFeature[i];
+        imgHTML += `
+            <td style="width:25%" class="img-active">
+                <img src="${imageURL}" alt="">
+            </td>
+        `;
+      }
+
+      imgHTML += "</tr>";
+
+      // console.log(imgHTML);
+
+      // Thêm HTML vào bảng
+      $("#img-carousel").append(imgHTML);
+
+      let imgClickHTML = '<div class="col-6">\n';
+
+      for (let i = 1; i <= 3; i++) {
+        const imageURL = imgFeature[i];
+        imgClickHTML += `  <img src="${imageURL}" alt="">\n`;
+      }
+
+      imgClickHTML += '</div>\n<div class="col-6">\n';
+
+      for (let i = 4; i <= 6; i++) {
+        const imageURL = imgFeature[i];
+        imgClickHTML += `  <img src="${imageURL}" alt="">\n`;
+      }
+
+      imgClickHTML += "</div>\n";
+
+      // console.log(imgClickHTML);
+
+      $("#clickHotel").append(imgClickHTML);
+    },
+
+    error: function (xhr, status, error) {
+      console.log("Lỗi khi gửi yêu cầu AJAX:", status, error);
+    },
+  });
+});
+
+$(document).on("click", ".booking", function () {
+  var roomId = $(this).data("room-id");
+  var url = window.location.pathname;
+  var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  window.location.href = `http://localhost:3030/payment?hotelId=${hotelId}&roomId=${roomId}`;
+});
+
+const findhotel = () => {
+  // Lấy giá trị của ô input có id là "hotel-destination"
+  var location = $("#hotel-destination").val();
+
+  // Gửi yêu cầu Axios tới API để tìm khách sạn với địa điểm đã nhập
+  $.ajax({
+    url: `http://localhost:3030/api/v1/hotels?map=${encodeURIComponent(
+      location
+    )}`,
+    method: "GET",
+    success: function (data) {
+      // Cập nhật nội dung trang khách sạn
+      localStorage.setItem("hotelData", JSON.stringify(data));
+      window.location.href = `http://localhost:3030/hotelList?map=${encodeURIComponent(
+        location
+      )}`;
+    },
+  });
+};
+// Gắn sự kiện click cho nút có id là "search-btn"
+$("#search-hotel").on("click", function () {
+  console.log("successfull");
+  // Gọi hàm findhotel() khi nút được nhấp
+  findhotel();
 });

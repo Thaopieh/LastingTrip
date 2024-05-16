@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>LastingTrip.com</title>
 
   <!-- icon  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -417,29 +417,30 @@
         <div class="seo-htl-table-info pc ">
           <h2 class="title">Thông tin khách sạn</h2>
           <table>
+            {{!-- render main page  --}}
             <tbody>
               <tr>
                 <th>Số lượng khách sạn</th>
                 <td>
-                  <span>1,121</span>
+                  <span id="numberHotelCount"></span>
                 </td>
               </tr>
               <tr>
                 <th>Số lượng đánh giá</th>
                 <td>
-                  <span>123,456</span>
+                  <span id="numberRating"></span>
                 </td>
               </tr>
               <tr>
                 <th>Mức giá thấp nhất</th>
                 <td>
-                  <span>VND 111,000</span>
+                  <span id="lowestPrice"> </span> <span>VND</span>
                 </td>
               </tr>
               <tr>
                 <th>Mức giá cao nhất</th>
                 <td>
-                  <span>VND 17,102,173</span>
+                  <span id="highestPrice"> </span> <span>VND</span>
                 </td>
               </tr>
             </tbody>
@@ -453,7 +454,7 @@
               <div class="content-title">Khách sạn phù hợp với tất cả mọi người</div>
               <div class="content-content">
                 Chúng ta đều biết, khách sạn có thể quyết định một kỳ nghỉ. Đó là lý do tại sao, tại LastingTrip.com,
-                bạn có thể tìm thấy các khách sạn phù hợp với nhu cầu của mình. Với sự lựa chọn của hơn 1.000 khách sạn,
+                bạn có thể tìm thấy các khách sạn phù hợp với nhu cầu của mình. Với sự lựa chọn của hơn 30 khách sạn,
                 cho dù bạn đang bay hay ở gần nhà hơn, việc tìm chỗ ở chưa bao giờ dễ dàng hơn thế. Từ khách sạn đến nhà
                 nghỉ, homestay, luôn luôn có chỗ ở cho tất cả mọi người tại LastingTrip.com. Cho dù bạn đang tìm kiếm ở
                 chi phí thấp, sang trọng hay thứ gì đó ở giữa, bạn có thể tìm thấy mọi thứ từ kỳ nghỉ 5 sao xứng đáng
@@ -475,6 +476,7 @@
         </div>
       </div>
 
+
       <div class="recommended">
         <div class="thetitle">
           <h2>Gợi ý</h2>
@@ -489,233 +491,132 @@
                 <!-- Other buttons -->
                 <button style="border:none;" class="btn btn-outline-info" type="button"
                   onclick="toggleCollapse(2)">Khách sạn phổ biến</button>
-                <button style="border:none;" class="btn btn-outline-info" type="button" onclick="toggleCollapse(3)">Khám
-                  phá nhiều hơn</button>
               </div>
 
               <!-- Collapsible content -->
               <div class="collapse show" id="noi-dung-collapse1">
-                <div class="container">
+                <div class="container HotelLocate">
                   <div class="row">
                     <div class="col">
-                      <a href="#">Khách sạn ở Thành phố Hồ Chí Minh</a>
+                      <a href="" id="hcm">Khách sạn ở Thành phố Hồ Chí Minh</a>
                     </div>
                     <div class="col">
-                      <a href="#">Khách sạn ở Đà Nẵng</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace">Đà Nẵng</span></a>
                     </div>
                     <div class="col">
-                      <a href="#">Khách sạn ở Hà Nội</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Hà Nội</span></a>
                     </div>
                     <div class="col">
-                      <a href="#">Khách sạn ở Phú Quốc</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Phú Quốc</span></a>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <a href="#">Khách sạn ở Bà Rịa - Vũng Tàu</a>
+                      <a href="">Khách sạn ở Bà Rịa <span class="hotelPlace"> Vũng Tàu</span></a>
                     </div>
                     <div class="col">
-                      <a href="#">Khách sạn ở Hội An</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Đà Lạt</span></a>
                     </div>
                     <div class="col">
-                      <a href="#">Khách sạn ở Ninh Bình</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Kiên Giang</span></a>
                     </div>
                     <div class="col">
-                      <a href="#">Khách sạn ở Nha Trang</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Nha Trang</span></a>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <a href="#">HANZ Lagoon Sunset Boutique Hotel</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Quận 1</span></a>
                     </div>
                     <div class="col">
-                      <a href="#">Hong Bin Bungalow</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Quận 7</span></a>
                     </div>
                     <div class="col">
-                      <a href="#">Hampton by Hilton Gullin Lingui</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Bắc Giang</span></a>
                     </div>
                     <div class="col">
-                      <a href="#">Yutianlou Ou Yue International</a>
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Huế </span></a>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col">
-                      <a href="#">Khách sạn có quầy bar</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn gần biển</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn có suối nước nóng</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn 5 sao</a>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <a href="#">Palm Bay Resort</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn gần sân bay</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn gần trung tâm</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Resort</a>
-                    </div>
-                  </div>
+
+
                 </div>
               </div>
               <div class="collapse" id="noi-dung-collapse2">
                 <div class="container">
                   <div class="row">
                     <div class="col">
-                      <a href="#">Rex Hotel Saigon</a>
+                      <a href="#" class="hotelName">New World Phu Quoc Resort</a>
                     </div>
                     <div class="col">
-                      <a href="#">Caravelle Saigon Hotel</a>
+                      <a href="#" class="hotelName">Oakwood Hạ Long</a>
                     </div>
                     <div class="col">
-                      <a href="#">Tan Son Nhat Saigon Hotel</a>
+                      <a href="#" class="hotelName">Tan Son Nhat Saigon Hotel</a>
                     </div>
                     <div class="col">
-                      <a href="#">8h-hostel</a>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <a href="#">New World Hotel</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Bin BIn Mimosa Hotel</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Old Quarter Hotel 1961</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Holiday Lakeview Hotel</a>
+                      <a href="#" class="hotelName">Du thuyền Scarlet Pearl Cruises</a>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <a href="#">Thang Long Hotel</a>
+                      <a href="#" class="hotelName">Ehome Saigon </a>
                     </div>
                     <div class="col">
-                      <a href="#">ConMeoNho Hotel</a>
+                      <a href="#" class="hotelName">California Hotel</a>
                     </div>
                     <div class="col">
-                      <a href="#">Grand Cititel Hotel</a>
+                      <a href="#" class="hotelName">Old Quarter Hotel 1961</a>
                     </div>
                     <div class="col">
-                      <a href="#">Adaline Hotel</a>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <a href="#">Hanami Hotel</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Dana Marina Boutique Hotel</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">New Orient Da Nang Hotel</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Lavender Riverside Hotel</a>
+                      <a href="#" class="hotelName">Alma Resort Cam Ranh</a>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <a href="#">Luxury The Song Hotel</a>
+                      <a href="#" class="hotelName">Vinpearl Resort, Spa Phú Quốc</a>
                     </div>
                     <div class="col">
-                      <a href="#">Cen Hotel</a>
+                      <a href="#" class="hotelName">ConMeoNho Hotel</a>
                     </div>
                     <div class="col">
-                      <a href="#">BOBO Boutique Hotel</a>
+                      <a href="#" class="hotelName">New World Phu Quoc Resort</a>
                     </div>
                     <div class="col">
-                      <a href="#">Malibu Hotel</a>
+                      <a href="#" class="hotelName">Du thuyền Scarlet Pearl Cruises</a>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <a href="#">Annata Beach Hotel</a>
+                      <a href="#" class="hotelName">Adina Hotel</a>
                     </div>
                     <div class="col">
-                      <a href="#">Hai Duong Vung Tau Hotel</a>
+                      <a href="#" class="hotelName">InterContinental Phu Quoc Long Beach Resort</a>
                     </div>
                     <div class="col">
-                      <a href="#">Bali Motel</a>
+                      <a href="#" class="hotelName">New Orient Da Nang Hotel</a>
                     </div>
                     <div class="col">
-                      <a href="#">V Boutique Hotel</a>
+                      <a href="#" class="hotelName">Lavender Riverside Hotel</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <a href="#" class="hotelName">Senna Hue Hotel</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Xoài Homestay Vũng Tàu - The Sóng Apartment</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Grand Ocean Luxury Boutique</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Hoang Sa Hotel</a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="collapse" id="noi-dung-collapse3">
-                <div class="container">
-                  <div class="row">
-                    <div class="col">
-                      <a href="#">Mã khuyến mãi của LastingTrip.com</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn giá rẻ đêm nay</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Cách để đặt giá rẻ</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Du lịch Hà Nội</a>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <a href="#">Gần biển</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn gần trung tâm</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Romantic Getaways in Florida</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Kì nghỉ Hội An</a>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <a href="#">Khách sạn cho thú cưng</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn sang trọng ở Hà Nội</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn gần biển</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Khách sạn sang trọng ở Đà Nẵng</a>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <a href="#">Căn hội</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Nhà nghỉ</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Homestay</a>
-                    </div>
-                    <div class="col">
-                      <a href="#">Villas</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
     </section>

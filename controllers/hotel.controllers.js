@@ -7,6 +7,8 @@ const {
   UrlImageHotel,
 } = require("../models");
 const { Op, literal } = require("sequelize");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 // const amenities = require("../models/amenities");
 const createHotel = async (req, res) => {
   const { name, star, map, TypeHotel, cost, payment, ownerId } = req.body;
@@ -25,17 +27,17 @@ const createHotel = async (req, res) => {
     console.log(newHotel);
     const { files } = req;
     console.log(files);
-    // Itestar over each file and create a corresponding UrlImageHotel record
+    // Iterate over each file and create a corresponding UrlImageHotel record
     for (const file of files) {
-      const imagePath = file.path.replace(/^public/, ""); // Get relative path
-      const imageUrl = `http://localhost:3030/${imagePath}`; // Construct full image URL
+      const imagePath = file.path;
+      const name = file.filename;
 
       // Create UrlImageHotel record associated with the new hotel
       const imageUrlRecord = await UrlImageHotel.create({
-        url: imageUrl,
+        url: imagePath,
+        file_name: name,
         HotelId: newHotel.id,
       });
-
       console.log("Created UrlImageHotel record:", imageUrlRecord);
     }
 
@@ -211,11 +213,12 @@ const getAllHotel = async (req, res) => {
           model: Reviews,
           as: "Reviews",
         },
-        // {
-        //   model: UrlImageHotel,
-        // },
         {
-          model: Room, // Include thông tin về phòng của khách sạn
+          model: Room,
+        },
+        {
+          model: UrlImageHotel,
+          as: "UrlImageHotels",
         },
       ],
       order: getOrderCriteria(sortType),
@@ -226,10 +229,6 @@ const getAllHotel = async (req, res) => {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
-};
-
-module.exports = {
-  getAllHotel,
 };
 
 const getDetailHotel = async (req, res) => {
@@ -255,6 +254,10 @@ const getDetailHotel = async (req, res) => {
         {
           model: Reviews, // Include thông tin về đánh giá của khách sạn
           as: "Reviews", // Optional alias for the included reviews
+        },
+        {
+          model: UrlImageHotel,
+          as: "UrlImageHotels",
         },
       ],
     });
@@ -286,7 +289,7 @@ const getDetailHotel = async (req, res) => {
 const updateHotel = async (req, res) => {
   try {
     const hotelId = req.params.id;
-    const { name, star, map, TypeHotel, cost, payment } = req.body;
+    const { name, star, map, TypeHotel, cost, payment, ownerId } = req.body;
     const detailHotel = await Hotels.findOne({
       where: {
         id: hotelId,
@@ -303,7 +306,8 @@ const updateHotel = async (req, res) => {
     if (map) detailHotel.map = map;
     if (cost) detailHotel.cost = cost;
     if (TypeHotel) detailHotel.TypeHotel = TypeHotel;
-    if (payment) deleteHotel.payment = payment;
+    if (payment) detailHotel.payment = payment;
+    if (ownerId) detailHotel.ownerId = ownerId;
 
     const updateHotel = await detailHotel.save();
     if (!updateHotel)
@@ -319,21 +323,71 @@ const updateHotel = async (req, res) => {
 
 const deleteHotel = async (req, res) => {
   const { id } = req.params;
+  console.log(req.params);
   try {
+    // Tìm khách sạn cần xóa
     const deletedHotel = await Hotels.findOne({
       where: {
         id,
       },
     });
+
     if (!deletedHotel) {
       return res.status(404).send("Không tìm thấy khách sạn");
     }
 
+    // Tìm tất cả các hình ảnh liên quan đến khách sạn này
+    const imagesToDelete = await UrlImageHotel.findAll({
+      where: {
+        HotelId: id,
+      },
+    });
+
+    // Xóa các hình ảnh từ Cloudinary và cơ sở dữ liệu
+    const deleteImagePromises = imagesToDelete.map(async (image) => {
+      // Xóa hình ảnh từ Cloudinary bằng public_id hoặc
+      console.log(image.file_name);
+      const results = await cloudinary.uploader.destroy(image.file_name);
+      console.log(results);
+      // Xóa bản ghi hình ảnh từ cơ sở dữ liệu
+      await image.destroy();
+    });
+
+    // Chờ cho tất cả các hành động xóa hình ảnh hoàn tất
+    await Promise.all(deleteImagePromises);
+
+    // Sau khi đã xóa hết các hình ảnh liên quan, tiến hành xóa khách sạn
     await deletedHotel.destroy({ cascade: true });
 
-    res.status(200).send("Xóa thành công");
+    // Phản hồi thành công sau khi xóa khách sạn và hình ảnh
+    res.status(200).send("Xóa khách sạn và các hình ảnh liên quan thành công");
   } catch (error) {
-    res.status(500).send(error);
+    console.error("Lỗi khi xóa khách sạn và hình ảnh:", error);
+    res.status(500).send("Lỗi máy chủ nội bộ");
+  }
+};
+
+const searchIdHotelByName = async (req, res) => {
+  const { hotelName } = req.body; // Lấy tên khách sạn từ body của yêu cầu
+
+  try {
+    // Tìm khách sạn dựa trên tên
+    const hotel = await Hotels.findOne({
+      where: {
+        name: hotelName,
+      },
+    });
+
+    // Kiểm tra xem khách sạn có tồn tại không
+    if (!hotel) {
+      return res.status(404).json({ message: "Không tìm thấy khách sạn" });
+    }
+
+    // Gửi hotelId của khách sạn tìm được
+    res.status(200).json({ hotelId: hotel.id });
+  } catch (error) {
+    console.error("Lỗi khi tìm kiếm khách sạn:", error);
+    res.status(500).json({ message: "Lỗi máy chủ nội bộ" });
   }
 };
 
@@ -343,4 +397,5 @@ module.exports = {
   getDetailHotel,
   updateHotel,
   deleteHotel,
+  searchIdHotelByName,
 };

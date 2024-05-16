@@ -21,8 +21,10 @@ module.exports = {
         references: {
           model: "Hotels",
           key: "id",
-          onDelete: "CASCADE",
         },
+      },
+      file_name: {
+        type: Sequelize.STRING,
       },
       updatedAt: {
         allowNull: false,

@@ -298,6 +298,15 @@ footer {
 }
 
 /* modal button */
+.modal-header{
+    padding: 25px;
+    ;
+}
+
+.modal-content{
+    margin-top: 20px;
+}
+
 .left-sumary .btn {
     color               : #2953d6;
     text-decoration-line: underline;
@@ -349,8 +358,7 @@ footer {
 }
 
 .scrollspy-example img {
-    width        : 100;
-    border-radius: 10%;
+    width        : 95%;
     margin       : 5%
 }
 
@@ -780,10 +788,20 @@ strong {
     display: none;
 }
 
+.img-wrapper img{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px 8px 0 0;
+   }
+   
+
 /* reponsive max 990 nhé */
 @media (max-width: 990px) {
 
 
+    .baseroom_img1 {
+        display: none;
+    }
     .card {
         width: 100%;
     }
@@ -1252,7 +1270,6 @@ footer {
 
 .scrollspy-example img {
     width        : 100;
-    border-radius: 10%;
     margin       : 5%
 }
 

@@ -1,0 +1,90 @@
+.online-empty-container {
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    height          : 200px;
+    /* Adjusted height */
+    background-color: white;
+    display         : none;
+}
+
+.body_right {
+    margin-top: 50px;
+}
+
+.empty-image-con {
+    width              : 360px;
+    height             : 150px;
+    background-image   : url("https://ak-d.tripcdn.com/images/05E6w12000cqchxs29CAB.gif");
+    background-repeat  : no-repeat;
+    background-position: center;
+    background-size    : cover;
+
+    margin-right: 50px;
+}
+
+
+
+.empty-title {
+    font-size    : 16px;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #3399ff;
+    color           : white;
+    padding         : 10px 20px;
+    border          : none;
+    border-radius   : 5px;
+    cursor          : pointer;
+}
+
+.wrap-img {
+    width: 33%;
+}
+
+.card-body {
+    flex   : 1 1 auto;
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    color  : var(--bs-card-color);
+}
+
+.room-type-price {
+    display         : flex;
+    justify-content : space-between;
+    background-color: #f4f4f4;
+    background-image: linear-gradient(to right, #f4f4f4, white);
+    margin          : 1% 0;
+}
+
+.content {
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 0;
+}
+
+.room-price {
+    text-align : right;
+    font-size  : x-large;
+    font-weight: bold;
+}
+
+.fa-solid,
+.fas {
+    font-weight: 900;
+}
+
+#filter-header,
+#broadcast {
+    display: none;
+}
+
+@media(max-width:1161px) {
+    .empty-image-con {
+        display: none
+    }
+
+    ;
+}

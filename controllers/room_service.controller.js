@@ -18,6 +18,23 @@ async function getroomService(req, res) {
   }
 }
 
+async function getService(req, res) {
+  const {id} = req.params;
+
+  try {
+    // Tìm khách sạn dựa trên roomId
+    const RoomService = await roomService.findAll({
+      where: { id : id },
+      
+    });
+
+    res.json(RoomService);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
 async function getRoomHaveAmenities(req, res) {
   const serviceId = req.params.serviceId;
 
@@ -98,17 +115,15 @@ async function updateRoomAmenity(req, res) {
 }
 
 async function deleteRoomAmenity(req, res) {
-  const { id } = req.params;
+  const RoomserviceId = req.params.id;
 
   try {
-    const RoomAmenity = await roomService.findOne({
-      where: {
-        id,
-      },
-    });
+    const RoomAmenity = await roomService.findByPk(RoomserviceId);
+
     if (!RoomAmenity) {
-      return res.status(404).send("RoomAmen not found!");
+      return res.status(404).json({ message: "Room amenity not found" });
     }
+
     await RoomAmenity.destroy();
 
     res.json({ message: "Room amenity deleted successfully" });
@@ -120,6 +135,7 @@ async function deleteRoomAmenity(req, res) {
 
 module.exports = {
   getroomService,
+  getService,
   getRoomHaveAmenities,
   addRoomAmenity,
   updateRoomAmenity,

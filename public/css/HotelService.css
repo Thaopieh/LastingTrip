@@ -1,0 +1,620 @@
+* {
+    font-family: Ubuntu, sans-serif;
+}
+
+.layout {
+    display: flex;
+}
+
+.room-container {
+    flex: 1;
+    padding: 20px;
+}
+
+.room-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+#images
+{
+    margin-bottom: 10px ;
+}
+.room-quantity {
+    margin-bottom: 10px;
+}
+
+.room-table {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.room-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.room-table th,
+.room-table td {
+    padding: 8px;
+    text-align: center;
+}
+
+.room-table th {
+    background-color: #f2f2f2;
+}
+
+.room-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.room-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.room-table button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.room-table button.editHotel {
+    background-color: #008CBA;
+    /* Blue */
+}
+
+.room-table button.deleteHotel {
+    background-color: #f44336;
+    /* Red */
+}
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 400px;
+    /* Kích thước tối thiểu */
+    min-height: 300px;
+    /* Kích thước tối thiểu */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Màu nhạt cho nền */
+    display: flex;
+    flex-direction: column;
+}
+
+/* CSS cho nút đóng popup */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+}
+
+/* CSS cho form trong popup */
+.popup h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333333;
+}
+
+.popup form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup input[type="text"],
+.popup input[type="email"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.popup .input-group {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.popup .input-group input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.popup .input-group input:last-child {
+    margin-right: 0;
+}
+
+.popup input[type="submit"] {
+    padding: 12px 50px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* CSS cho button mở popup */
+.custom-openPopup {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+.room-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.room-search p {
+    margin: 0;
+    /* Loại bỏ margin mặc định của thẻ p */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.room-search-btn {
+    display: flex;
+    align-items: center;
+}
+
+.room-search-create {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.room-search-create:hover {
+    background-color: #45a049;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup form {
+    width: 100%;
+}
+
+.popup .input-group {
+    display: flex;
+}
+
+.popup .input-group input {
+    flex: 1;
+}
+
+.popup .ebutton {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    /* Điều chỉnh khoảng cách giữa nút và các input */
+}
+
+/* CSS cho popup và overlay */
+.custom-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.custom-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 400px;
+    /* Kích thước tối thiểu */
+    min-height: 300px;
+    /* Kích thước tối thiểu */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 1002;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Màu nhạt cho nền */
+}
+
+/* CSS cho nút đóng popup */
+.custom-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+}
+
+/* CSS cho form trong popup */
+.custom-popup h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333333;
+}
+
+.custom-popup form {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-popup input[type="text"],
+.custom-popup input[type="email"],
+.custom-popup input[type="password"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.custom-popup .input-group {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.custom-popup .input-group input {
+    flex: 2;
+    margin-right: 10px;
+}
+
+.custom-popup .input-group input:last-child {
+    margin-right: 0;
+}
+
+.custom-popup input[type="submit"] {
+    padding: 12px 0;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-popup input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.custom-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.custom-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 400px;
+    min-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.custom-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+}
+
+.custom-popup h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333333;
+}
+
+.custom-popup form {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-popup input[type="text"],
+.custom-popup input[type="email"],
+.custom-popup input[type="password"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.custom-popup .input-group {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.custom-popup .input-group input {
+    flex: 2;
+    margin-right: 10px;
+}
+
+.custom-popup .input-group input:last-child {
+    margin-right: 0;
+}
+
+.custom-popup input[type="submit"] {
+    margin-top:10px;
+    padding: 12px 0;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-popup input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+.popup-overlay-delete {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.popup-delete {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1002;
+}
+
+.popup-delete h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    text-align: center;
+}
+
+.popup-delete p {
+    margin-bottom: 20px;
+    color: #666666;
+    text-align: center;
+}
+
+.popup-delete button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 55px;
+}
+
+.popup-delete button:hover {
+    background-color: #0056b3;
+}
+  
+  .popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0 20px;
+    width: 50%;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%; /* Chiều rộng của phần tiêu đề */
+    background-color: #fff; /* Màu nền cho tiêu đề */
+    padding: 10px 20px; /* Padding cho tiêu đề */
+    z-index: 1; /* Đảm bảo tiêu đề luôn hiển thị trên các phần tử khác */
+    box-sizing: border-box; /* Đảm bảo padding và border được tính vào chiều rộng */
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+  }
+  
+  .image-item {
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    overflow: hidden; /* Ẩn nội dung tràn ra ngoài của container */
+    padding: 10px;
+  }
+  
+  .popup-image {
+    max-width: 80%; /* Đặt chiều rộng tối đa của hình ảnh là 100% của container cha */
+    height: 100%; /* Chiều cao của hình ảnh là 100% của container cha */
+    object-fit: contain; /* Hiển thị hình ảnh sao cho nó vừa với khu vực của nó, không bị vượt quá */
+  }
+  
+  
+  .delete-image-btn {
+    flex-shrink: 0; /* Không cho nút delete co lại khi không đủ không gian */
+    padding: 8px 16px; /* Padding cho nút delete */
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 14px; /* Kích thước chữ của nút delete */
+    background-color: #f44336; /* Màu nền của nút delete */
+    color: #fff; /* Màu chữ của nút delete */
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Độ cong góc của nút delete */
+    cursor: pointer; /* Thay đổi con trỏ chuột khi di chuột vào nút delete */
+  }
+  
+
+  
+  .btn-group {
+    display: flex;
+    gap: 10px; /* Adjust spacing between buttons */
+  }
+  
+    #addImageButton {
+      width: 45%;
+      padding: 10px 20px; /* Đặt giá trị padding cho nút */
+      font-size: 16px; /* Đặt kích thước font chữ của nút */
+      background-color: #007bff; /* Màu nền của nút */
+      color: #fff; /* Màu chữ của nút */
+      border: none; /* Loại bỏ đường viền của nút */
+      border-radius: 5px; /* Độ cong góc của nút */
+      cursor: pointer; /* Hiển thị con trỏ chuột khi di chuột vào nút */
+      margin: auto;
+    }
+    #addImageButton.small {
+      transform: scale(0.5);
+    }
+    #addImageButton:hover {
+      background-color: #0056b3; /* Màu nền của nút khi di chuột vào */
+    }
+    /* CSS cho nút đóng popup */
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #999999;
+    }
+    #imagePopupOverlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    #serviceDropdown {
+        --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+        display: block;
+        width: 100%;
+        padding: .375rem 2.25rem .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: var(--bs-body-color);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: var(--bs-body-bg);
+        background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+        background-repeat: no-repeat;
+        background-position: right .75rem center;
+        background-size: 16px 12px;
+        border: var(--bs-border-width) solid var(--bs-border-color);
+        border-radius: var(--bs-border-radius);
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+    #confirm {
+        width: 45%;
+        padding: 10px 20px; /* Đặt giá trị padding cho nút */
+        font-size: 16px; /* Đặt kích thước font chữ của nút */
+        background-color: #007bff; /* Màu nền của nút */
+        color: #fff; /* Màu chữ của nút */
+        border: none; /* Loại bỏ đường viền của nút */
+        border-radius: 5px; /* Độ cong góc của nút */
+        cursor: pointer; /* Hiển thị con trỏ chuột khi di chuột vào nút */
+        margin: auto;
+      }
+      .button-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: auto; /* Sử dụng margin-top: auto để đẩy `.button-row` xuống dưới cùng */
+        padding: 20px; /* Tạo khoảng đệm cho các nút trong button-row */
+        position: sticky;
+        bottom: 0; /* Đặt `.button-row` ở phía dưới cùng của popup-content */
+        background-color: #fff; /* Tùy chỉnh màu nền của button-row nếu cần */
+    }
+    
+    #addImageButton, #confirm {
+        /* Thiết lập CSS cho các nút */
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    #confirm {
+        display: none;
+    }

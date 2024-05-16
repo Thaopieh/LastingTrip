@@ -6,6 +6,8 @@ const {
   register,
   login,
   getAllUser,
+  getAllUsers,
+
   displayUser,
   editUser,
   deleteUser,
@@ -13,6 +15,8 @@ const {
   checkEmailExist,
 } = require("../controllers/user.controllers");
 const { checkExist } = require("../middlewares/validations/checkExist");
+const { authenticate } = require("../middlewares/authen/authenticate");
+const { authorize } = require("../middlewares/authen/authorize");
 
 const userRouter = express.Router();
 
@@ -25,6 +29,7 @@ userRouter.post("/login", login);
 userRouter.get("/getAllUser", getAllUser);
 userRouter.get("/getDetailUser/:id", getDetailUser);
 userRouter.get("/manageUsers", displayUser);
+
 userRouter.put("/editUser/:id", editUser);
 userRouter.delete("/deleteUser/:id", deleteUser);
 userRouter.post("/checkEmailPhoneExists", checkEmailExist);

@@ -24,7 +24,7 @@
 </head>
 
 <body>
-{{>header}}
+    {{>header}}
 
     <section>
         <div class="main_body">
@@ -35,18 +35,17 @@
                     </div>
                     <div class="booking-detail">
                         <ul class="list-group">
-                            <li class="list-group-item "><a href="../html/BookingList.html">My bookings</a></li>
-                            <li class="list-group-item"><a href="#">Xem gần đây</a></li>
-                            <li class="list-group-item"><a href="#">Thẻ quà tặng</a></li>
-                            <li class="list-group-item list-group-item-primary"><a href="#">Thông tin cá nhân</a></li>
-                            <li class="list-group-item"><a href="#">Đăng xuất</a></li>
-                          </ul>
+                            <li class="list-group-item personal-info-item">Thông tin cá nhân</a></li>
+                            {{!-- <li class="list-group-item"><a href="#">Xem gần đây</a></li> --}}
+                            {{!-- <li class="list-group-item"><a href="#">Thẻ quà tặng</a></li> --}}
+                            <li class="list-group-item"><a href="#">My Booking</a></li>
+                            <li class="list-group-item" id="logout-btn"><a href="#">Đăng xuất</a></li>
+                        </ul>
                     </div>
+                </div> {{!-- end of body body_left --}}
 
-                </div>
                 <div class="body_right">
-                    <div class="account-secu">
-                       
+                    {{!-- <div class="account-secure">
                         <h2>Bảo mật tài khoản</h2>
                         <div class="account">
                             <div class="account-email ">
@@ -59,11 +58,19 @@
                                         <span>2252****@gm.uit.edu.vn</span>
                                     </div>
                                 </div>
-                                <div class="update-email">
-                                    <button>Update</button>
-                                </div>
                             </div>
-    
+                            <div class="account-numberPhone ">
+                                <div class="numberPhone-info ">
+                                    <div class="numberPhone-head">
+                                        <i class="fa-regular fa-envelope"></i>
+                                        <span>Số điện thoại</span>
+                                    </div>
+                                    <div class="email-acc">
+                                        <span>2252****@gm.uit.edu.vn</span>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="account-pass">
                                 <div class="pass-info">
                                     <div class="pass-head">
@@ -74,23 +81,11 @@
                                         <span>*********</span>
                                     </div>
                                 </div>
-                                <div class="update-pass">
-                                    <button>Update</button>
-                                </div>
                             </div>
                         </div>
-                     
                     </div>
-
                     <div class="profile">
-                        <div class="profile-head">
-                            <h2>Profile</h2>
-                            <div class="edit-button">
-                                <button><i class="fa-solid fa-pen-to-square"></i><span>Edit</span></button>
-                            </div>
-                            
-                        </div>
-                        
+                        <h2>Thông tin cá nhân</h2>
                         <div class="profile-detail ">
                             <div class="profile1">
                                 <div class="name col-6">
@@ -102,52 +97,74 @@
                                         Trinh Thao
                                     </div>
                                 </div>
+                                <div class="name col-6">
+                                    <div class="title-name">
+                                        <i class="fa-regular fa-user"></i>
+                                        <span>Ngày sinh</span>
+                                    </div>
+                                    <div class="user-name">
+                                        Trinh Thao
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile2">
                                 <div class="birth col-6">
                                     <div class="title-name">
-                                        <i class="fa-regular fa-calendar"></i>                                    
-                                        <span>Ngày sinh</span>
+                                        <i class="fa-regular fa-calendar"></i>
+                                        <span>Giới tính</span>
                                     </div>
                                     <div class="user-name">
                                         01/12/2004
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <div class="profile2">
                                 <div class="birth col-6">
                                     <div class="title-name">
-                                        <i class="fa-solid fa-venus-mars"></i>                                 
-                                        <span>Giới tính</span>
+                                        <i class="fa-solid fa-venus-mars"></i>
+                                        <span>Loại người dùng</span>
                                     </div>
                                     <div class="user-name">
                                         Nữ
                                     </div>
                                 </div>
-                                <div class="birth col-6">
-                                    <div class="title-name">
-                                        <i class="fa-solid fa-venus-mars"></i>                                 
-                                        <span>Địa chỉ</span>
-                                    </div>
-                                    <div class="user-name">
-                                        Việt Nam
-                                    </div>
-                                </div>
-
                             </div>
-                            
-
                         </div>
+                    </div> --}}
 
-                    </div>
+                    {{!-- end of profile --}}
 
+                </div> {{!-- end of body Right --}}
+
+                <div class="popup-overlay-updateInfo">
+                    {{!-- //update info form render here --}}
                 </div>
+                <div class="popup-overlay-delete">
+                    <div class="popup-delete">
+                        <h2>Xác nhận xóa</h2>
+                        <p>Bạn có chắc chắn muốn xóa tài khoản này không?</p>
+                        <div class="btn-group">
+                            <button class="confirm-delete">Xác nhận</button>
+                            <button class="cancel-delete">Hủy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="popup-overlay-confirm-pass">
+                    <div class="popup-confirm-pass">
+                        <h2>Nhập mật khẩu của bạn</h2>
+                        <input type="text" id="confirm-password">
+                        <div class="btn-group">
+                            <button class="confirm-password">Xác nhận</button>
+                            <button class="cancel-confirm-password">Hủy</button>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </section>
 
-      <!-- footer  -->
-{{>footer}}
+    <!-- footer  -->
+    {{>footer}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -156,7 +173,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="../js/index.js"></script>
+    <script src="../js/userInfo.js"></script>
 </body>
 
 </html>

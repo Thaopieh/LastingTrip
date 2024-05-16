@@ -17,8 +17,10 @@ module.exports = {
         references: {
           model: "Rooms",
           key: "id",
-          onDelete: "CASCADE",
         },
+      },
+      file_name: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

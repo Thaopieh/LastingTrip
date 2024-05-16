@@ -1,10 +1,8 @@
-require("dotenv").config(); // Load các biến môi trường từ file .env
-const port = process.env.PORT || 3030;
 $(document).ready(function () {
   // Hàm để render lại trang sau khi nhận dữ liệu mới từ server
   function renderPage() {
     $.ajax({
-      url: "http://localhost:${port}/api/v1/users/getAllUser",
+      url: "http://localhost:3030/api/v1/users/getAllUser",
       method: "GET",
       success: function (data) {
         var tableHtml = "";
@@ -44,10 +42,10 @@ $(document).ready(function () {
   renderPage();
 
   // Sự kiện khi click vào nút "Thêm"
-  $(".users-search-create").click(function () {
-    $(".custom-popup-overlay").show();
-    $(".custom-popup").show();
-  });
+  // $(".users-search-create").click(function () {
+  //   $(".custom-popup-overlay").show();
+  //   $(".custom-popup").show();
+  // });
 
   // Sự kiện khi click vào nút "Đóng" trong popup
   $(".custom-close-btn").click(function () {
@@ -174,78 +172,79 @@ $(document).ready(function () {
   });
 
   // Sự kiện khi click vào nút "Sửa"
-  $(document).on("click", ".editUser", function () {
-    var id = $(this).val();
-    $(".popup-overlay").show();
-    // Gửi yêu cầu để lấy chi tiết người dùng
-    $.ajax({
-      url: `http://localhost:${port}/api/v1/users/getDetailUser/${id}`,
-      method: "GET",
-      success: function (data) {
-        console.log("2");
-        console.log(data);
-        $(".popup-overlay").html(`
-            <div class="popup">
-              <span class="close-btn">&times;</span>
-              <h2>Cập nhật</h2>
-              <form id="updateForm">
-                <input type="text" id="name" name="name" placeholder="Name" value="${data.name}" required>
-                <input type="email" id="email" name="email" placeholder="Email" value="${data.email}" required>
-                <div class="input-group">
-                  <input type="text" id="numberPhone" name="numberPhone" placeholder="number phone" value="${data.numberPhone}" style="flex: 80%;">
-                  <select id="typeSelect" name="type">
-                <option value="">Chọn loại</option>
-                <option value="admin">admin</option>
-                <option value="agent">agent</option>
-                 <option value="client">client</option>
-              <!-- Thêm các tùy chọn khác nếu cần -->
-            </select>
-                </div>
-                <div class="ebutton">
-                  <input type="submit" value="Cập nhật">
-                </div>
-              </form>
-            </div>`);
-        $(".ebutton").click(function () {
-          console.log(id);
-          var name = $("#name").val(); // Lấy giá trị từ trường nhập liệu Name
-          var email = $("#email").val(); // Lấy giá trị từ trường nhập liệu Email
-          var numberPhone = $("#numberPhone").val();
-          var type = $("#type").val(); // Lấy giá trị từ trường nhập liệu NumberPhone
-          if (!name || !email || !password || !numberPhone || !type) {
-            // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
-            // alert("Vui lòng điền đầy đủ thông tin.");
-            return; // Dừng lại nếu có trường không được nhập
-          }
+  // $(document).on("click", ".editUser", function () {
+  //   var id = $(this).val();
+  //   $(".popup-overlay").show();
+  //   // Gửi yêu cầu để lấy chi tiết người dùng
+  //   $.ajax({
+  //     url: `http://localhost:${port}/api/v1/users/getDetailUser/${id}`,
+  //     method: "GET",
+  //     success: function (data) {
+  //       console.log("2");
+  //       console.log(data);
+  //       $(".popup-overlay").html(`
+  //           <div class="popup">
+  //             <span class="close-btn">&times;</span>
+  //             <h2>Cập nhật</h2>
+  //             <p>admin</p>
+  //             <form id="updateForm">
+  //               <input type="text" id="name" name="name" placeholder="Name" value="${data.name}" required>
+  //               <input type="email" id="email" name="email" placeholder="Email" value="${data.email}" required>
+  //               <div class="input-group">
+  //                 <input type="text" id="numberPhone" name="numberPhone" placeholder="number phone" value="${data.numberPhone}" style="flex: 80%;">
+  //                 <select id="typeSelect" name="type">
+  //               <option value="">Chọn loại</option>
+  //               <option value="admin">admin</option>
+  //               <option value="agent">agent</option>
+  //                <option value="client">client</option>
+  //             <!-- Thêm các tùy chọn khác nếu cần -->
+  //           </select>
+  //               </div>
+  //               <div class="ebutton">
+  //                 <input type="submit" value="Cập nhật">
+  //               </div>
+  //             </form>
+  //           </div>`);
+  //       $(".ebutton").click(function () {
+  //         console.log(id);
+  //         var name = $("#name").val(); // Lấy giá trị từ trường nhập liệu Name
+  //         var email = $("#email").val(); // Lấy giá trị từ trường nhập liệu Email
+  //         var numberPhone = $("#numberPhone").val();
+  //         var type = $("#type").val(); // Lấy giá trị từ trường nhập liệu NumberPhone
+  //         if (!name || !email || !password || !numberPhone || !type) {
+  //           // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
+  //           // alert("Vui lòng điền đầy đủ thông tin.");
+  //           return; // Dừng lại nếu có trường không được nhập
+  //         }
 
-          var dataT = {
-            name: name,
-            email: email,
-            numberPhone: numberPhone,
-            type: type,
-          };
+  //         var dataT = {
+  //           name: name,
+  //           email: email,
+  //           numberPhone: numberPhone,
+  //           type: type,
+  //         };
 
-          $.ajax({
-            url: `http://localhost:${port}/api/v1/users/editUser/${id}`,
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            data: JSON.stringify(dataT),
-            success: function (data) {
-              // Xử lý thành công, sau khi sửa, gọi lại hàm renderPage để cập nhật trang
-              renderPage();
-              console.log("Người dùng đã được sửa.");
-            },
-            error: function (error) {
-              console.log("Đã xảy ra lỗi khi sửa người dùng:", error);
-            },
-          });
-        });
-        $(".close-btn").click(function () {
-          $(".popup-overlay").hide();
-        });
-      },
-    });
-  });
+  //         $.ajax({
+  //           url: `http://localhost:${port}/api/v1/users/editUser/${id}`,
+  //           method: "PUT",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           data: JSON.stringify(dataT),
+  //           success: function (data) {
+  //             // Xử lý thành công, sau khi sửa, gọi lại hàm renderPage để cập nhật trang
+  //             renderPage();
+  //             console.log("Người dùng đã được sửa.");
+  //           },
+  //           error: function (error) {
+  //             console.log("Đã xảy ra lỗi khi sửa người dùng:", error);
+  //           },
+  //         });
+  //       });
+  //       $(".close-btn").click(function () {
+  //         $(".popup-overlay").hide();
+  //       });
+  //     },
+  //   });
+  // });
 });

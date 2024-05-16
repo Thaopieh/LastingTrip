@@ -1,0 +1,1221 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-weight: normal;
+    /* font: 12px / 1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; */
+    font-display: swap;
+    padding: 0px;
+    margin: 0px;
+    background-color: whitesmoke;
+}
+
+ul {
+    list-style: none;
+}
+
+/* * body  */
+*/
+
+/* header  */
+header {
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+    width: 100%;
+    border-radius: 10px;
+    /* height: 120%; */
+}
+
+a {
+    text-decoration: none;
+}
+
+.navi {
+    background-color: rgb(48, 93, 209);
+    /* height: 120%; */
+}
+
+.navi a {
+    color: white;
+}
+
+.nav-item {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+
+
+.header-search-booking-btn {
+    height: 100%;
+    border: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    background-color: hsla(0, 0%, 100%, .3);
+    /* opacity: 50%; */
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+.header-register-btn {
+    height: 100%;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.header-register-btn:hover {
+    color: #3264ff;
+    transition: 0.5s;
+
+}
+
+.btn1 {
+    background-color: white;
+}
+
+.search {
+    margin: 10px;
+}
+
+strong {
+    font-size: 14px;
+}
+
+.nav-item .btn-group {
+    margin-right: 50px;
+    margin-top: 5px;
+    margin-left: 20px;
+    width: 120px;
+
+}
+
+.nav-item .btn-group button {
+    background-color: #fff;
+    color: blue;
+}
+
+.nav-item .dropdown-menu a {
+    color: black;
+}
+
+.nav-item .dropdown-menu li:hover a {
+    color: black;
+}
+
+.body_container,
+.footer__main {
+    /* padding: 20px 20px 0px; */
+    margin: 0 10%;
+}
+
+.body_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+
+
+.body_left {
+    width: 25%;
+}
+
+.list-group-item .active {
+    background-color: #fff;
+}
+
+.list-group-item:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+.list-group-item:active {
+    background-color: #fff;
+}
+
+.body_right {
+    /* border: 1px solid black; */
+    width: 75%;
+    margin-left: 20px;
+}
+
+.member {
+    background-color: #fff;
+    height: 50px;
+    margin-bottom: 10px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.member i {
+    margin-right: 5px;
+    font-size: 30px;
+    color: #3264ff;
+}
+
+.member span {
+    margin: 0 10px;
+}
+
+.body_right button {
+    color: #3264ff;
+    border: none;
+    background-color: whitesmoke;
+}
+
+.main_body {
+    margin-top: 50px;
+}
+
+.room-list,
+.log-out {
+    display: none;
+}
+
+.personal-info,
+.my-hotel {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2%;
+    margin: 2%;
+}
+
+.personal-info p,
+.my-hotel p {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.personal-info-body .row,
+.my-hotel-body .row {
+    padding: 2%;
+    /* margin: 2%; */
+}
+
+.personal-info-body .col-5,
+.my-hotel-body .col-3,
+.my-hotel-body .col-4,
+.my-hotel-body .col-5,
+.my-hotel-body .col-6,
+.my-hotel-body .col-2 {
+    background-color: whitesmoke;
+    margin: 1%;
+    padding: 2%;
+    border-radius: 8px;
+}
+
+.fa-star-yellow {
+    color: rgb(255, 208, 0);
+}
+
+.title-name {
+    font-size: larger;
+    font-weight: bold;
+}
+
+
+
+
+
+/* footer  */
+footer img {
+    width: 1176px;
+    height: 499px;
+    display: none;
+}
+
+.footer__main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__main .footer__item {
+    text-align: left;
+    width: 33.33%;
+    align-items: center;
+    align-content: center;
+}
+
+.footer__main .footer_links {
+    font-size: 14px;
+}
+
+.footer__main {
+    background-color: #ffffff;
+    padding-bottom: 35px;
+    font-size: 14px;
+    color: #0f294d;
+}
+
+.footer__item img {
+    width: 50px;
+    height: 50px;
+}
+
+.footer__item a {
+    margin-bottom: 2px;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.footer__item h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.footer__main {
+    justify-content: center;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    padding-top: 32px;
+    padding-bottom: 35px;
+}
+
+.Copyright p {
+    text-align: center;
+    font-size: 12px;
+    padding-top: 32px;
+    padding-bottom: 35px;
+
+}
+
+
+/* item ben phải  */
+#mid {
+    margin-right: 3px;
+}
+
+#service-chat {
+    position: fixed;
+    bottom: 338px;
+    right: 20px;
+    /* display: none; */
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    background-color: blue;
+    border: 1px solid blue;
+}
+
+
+#chatbot {
+    position: fixed;
+    bottom: 275px;
+    right: 20px;
+    /* display: none; */
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    background-color: blue;
+    border: 1px solid blue;
+}
+
+#btn-back-to-top {
+    position: fixed;
+    bottom: 400px;
+    right: 20px;
+    display: none;
+    width: 60px;
+    height: 60px;
+    background-color: blue;
+    border: 1px solid blue;
+}
+
+/* Dropdown */
+@media (max-width :992px) {
+    .toggle_btn {
+        display: block;
+    }
+
+    .navbar1,
+    .navi2 {
+        display: none;
+    }
+
+    .navi .row {
+        display: flex;
+    }
+
+    .navi .row>* {
+        width: 33.3%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    tr {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .seo-htl-table-info table tbody {
+        display: block !important;
+    }
+
+    #noi-dung-collapse1 .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 1em;
+        grid-row-gap: 10px;
+    }
+
+    #noi-dung-collapse1 .row {
+        display: grid;
+        text-align: center;
+        justify-content: center;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        font-size: 10px;
+    }
+
+    #noi-dung-collapse1 .col {
+        width: 100%;
+    }
+
+    #noi-dung-collapse2 .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 1em;
+        grid-row-gap: 10px;
+    }
+
+    #noi-dung-collapse2 .row {
+        display: grid;
+        text-align: center;
+        justify-content: center;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        font-size: 10px;
+    }
+
+    #noi-dung-collapse2 .col {
+        width: 100%;
+    }
+
+    #noi-dung-collapse3 .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 1em;
+        grid-row-gap: 10px;
+    }
+
+    #noi-dung-collapse3 .row {
+        display: grid;
+        text-align: center;
+        justify-content: center;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        font-size: 10px;
+    }
+
+    #noi-dung-collapse3 .col {
+        width: 100%;
+    }
+
+    .recommended .btn {
+        font-size: 10px !important;
+    }
+
+    .footer__main {
+        display: grid;
+        grid-template: 3fr 3fr/ 3fr 3fr;
+        text-align: center;
+
+    }
+
+    .footer__main .footer__item {
+        width: 90%;
+    }
+
+
+}
+
+
+
+* {
+    font-family: Ubuntu, sans-serif;
+}
+
+.layout {
+    display: flex;
+}
+
+.agent-container {
+    flex: 1;
+    padding: 20px;
+}
+
+.agent-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.agent-quantity {
+    margin-bottom: 10px;
+}
+
+.my-hotel,
+.my-hotel-header,
+.room-list table {
+    border: 1px solid #000000;
+    border-radius: 5px;
+    /* overflow: hidden; */
+    overflow: auto;
+    background-color: white;
+}
+
+.my-hotel table,
+.my-hotel-header table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.my-hotel th,
+.room-list th,
+.my-hotel td,
+.my-hotel-header td {
+    padding: 10px;
+    text-align: center;
+}
+
+.my-hotel th,
+.my-hotel-header th {
+    background-color: #f2f2f2;
+}
+
+/* 
+.my-hotel .col1,
+.my-hotel-header .col1 {
+    width: 10px;
+    color: #82ac19;
+}
+
+.my-hotel .col2,
+.my-hotel-header .col2 {
+    width: 30px;
+    color: red;
+} */
+
+.my-hotel tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.my-hotel tbody tr:hover {
+    background-color: #ddd;
+}
+
+.my-hotel button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.my-hotel button.editHotel {
+    background-color: #008CBA;
+    /* Blue */
+}
+
+.my-hotel button.deleteHotel {
+    background-color: #f44336;
+    /* Red */
+}
+
+
+
+/* Rooommm */
+
+.room-container {
+    flex: 1;
+    padding: 20px;
+}
+
+.room-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.room-quantity {
+    margin-bottom: 10px;
+}
+
+.room-table {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.room-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.room-table th,
+.room-table td {
+    padding: 8px;
+    text-align: center;
+}
+
+.room-table th {
+    background-color: #f2f2f2;
+}
+
+.room-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.room-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.room-table button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.room-table button.editHotel {
+    background-color: #008CBA;
+    /* Blue */
+}
+
+.room-table button.deleteHotel {
+    background-color: #f44336;
+    /* Red */
+}
+
+
+.room-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.room-search p {
+    margin: 0;
+    /* Loại bỏ margin mặc định của thẻ p */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.room-search-btn {
+    display: flex;
+    align-items: center;
+}
+
+.room-search-create {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.room-search-create:hover {
+    background-color: #45a049;
+}
+
+
+*/ .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 400px;
+    /* Kích thước tối thiểu */
+    min-height: 300px;
+    /* Kích thước tối thiểu */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Màu nhạt cho nền */
+    display: flex;
+    flex-direction: column;
+}
+
+/* CSS cho nút đóng popup */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+}
+
+/* CSS cho form trong popup */
+.popup h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333333;
+}
+
+.popup form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup input[type="text"],
+.popup input[type="email"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.popup .input-group {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.popup .input-group input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.popup .input-group input:last-child {
+    margin-right: 0;
+}
+
+.popup input[type="submit"] {
+    padding: 12px 50px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* CSS cho button mở popup */
+.custom-openPopup {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+.agent-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.agent-search p {
+    margin: 0;
+    /* Loại bỏ margin mặc định của thẻ p */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.agent-search-btn {
+    display: flex;
+    align-items: center;
+}
+
+.agent-search-create {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.agent-search-create:hover {
+    background-color: #45a049;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup form {
+    width: 100%;
+}
+
+.popup .input-group {
+    display: flex;
+}
+
+.popup .input-group input {
+    flex: 1;
+}
+
+.popup .ebutton {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    /* Điều chỉnh khoảng cách giữa nút và các input */
+}
+
+/* CSS cho popup và overlay */
+.custom-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.custom-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 400px;
+    min-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 1002;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.custom-popup label {
+    font-size: small;
+    font-weight: bold;
+}
+
+/* CSS cho nút đóng popup */
+.custom-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+}
+
+/* CSS cho form trong popup */
+.custom-popup h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    /* color: #333333; */
+    color: red;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.custom-popup form {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.custom-popup input[type="text"],
+.custom-popup input[type="email"],
+.custom-popup input[type="password"] {
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.custom-popup .input-group {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.custom-popup .input-group input {
+    flex: 2;
+    margin-right: 10px;
+}
+
+.custom-popup .input-group input:last-child {
+    margin-right: 0;
+}
+
+.custom-popup input[type="submit"] {
+    padding: 12px 0;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-popup input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.custom-popup-overlay {
+    /* display: none; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.custom-popup .input-group input {
+    flex: 2;
+    margin-right: 10px;
+}
+
+.custom-popup .input-group input:last-child {
+    margin-right: 0;
+}
+
+.custom-popup input[type="submit"] {
+    padding: 12px 0;
+    margin-top: 5px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-popup input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+.popup-overlay-delete {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.popup-delete {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1002;
+}
+
+.popup-delete h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    text-align: center;
+}
+
+.popup-delete p {
+    margin-bottom: 20px;
+    color: #666666;
+    text-align: center;
+}
+
+.popup-delete button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 55px;
+}
+
+.popup-delete button:hover {
+    background-color: #0056b3;
+}
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    max-width: 400px;
+    width: 80%;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.image-container {
+    margin-bottom: 20px;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 400px;
+}
+
+.image-actions button {
+    margin: 0 5px;
+}
+
+.add-hotel-amenties {
+    display: none;
+}
+
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 400px; /* Kích thước tối thiểu */
+    min-height: 300px; /* Kích thước tối thiểu */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    padding: 20px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9); /* Màu nhạt cho nền */
+    display: flex;
+    flex-direction: column;
+}
+#addImageButton {
+  width: 45%;
+  padding: 10px 20px; /* Đặt giá trị padding cho nút */
+  font-size: 16px; /* Đặt kích thước font chữ của nút */
+  background-color: #007bff; /* Màu nền của nút */
+  color: #fff; /* Màu chữ của nút */
+  border: none; /* Loại bỏ đường viền của nút */
+  border-radius: 5px; /* Độ cong góc của nút */
+  cursor: pointer; /* Hiển thị con trỏ chuột khi di chuột vào nút */
+  margin: auto;
+}
+#addImageButton.small {
+  transform: scale(0.5);
+}
+#addImageButton:hover {
+  background-color: #0056b3; /* Màu nền của nút khi di chuột vào */
+}
+#confirm {
+    width: 45%;
+    padding: 10px 20px; /* Đặt giá trị padding cho nút */
+    font-size: 16px; /* Đặt kích thước font chữ của nút */
+    background-color: #007bff; /* Màu nền của nút */
+    color: #fff; /* Màu chữ của nút */
+    border: none; /* Loại bỏ đường viền của nút */
+    border-radius: 5px; /* Độ cong góc của nút */
+    cursor: pointer; /* Hiển thị con trỏ chuột khi di chuột vào nút */
+    margin: auto;
+  }
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: auto; /* Sử dụng margin-top: auto để đẩy `.button-row` xuống dưới cùng */
+    padding: 20px; /* Tạo khoảng đệm cho các nút trong button-row */
+    position: sticky;
+    bottom: 0; /* Đặt `.button-row` ở phía dưới cùng của popup-content-hotel-img */
+    background-color: #fff; /* Tùy chỉnh màu nền của button-row nếu cần */
+}
+#addImageButton, #confirm {
+    /* Thiết lập CSS cho các nút */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+/* CSS cho nút đóng popup */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+}
+
+.popup-overlay-hotel-img,
+.popup-overlay-hotel-img-updateHotel
+ {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#imagePopupOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content-hotel-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    max-width: 400px;
+    width: 80%;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.image-actions button {
+    margin: 0 5px;
+}
+.popup-content-hotel-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0 20px;
+    width: 50%;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%; /* Chiều rộng của phần tiêu đề */
+    background-color: #fff; /* Màu nền cho tiêu đề */
+    padding: 10px 20px; /* Padding cho tiêu đề */
+    z-index: 1; /* Đảm bảo tiêu đề luôn hiển thị trên các phần tử khác */
+    box-sizing: border-box; /* Đảm bảo padding và border được tính vào chiều rộng */
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+  }
+  
+  .image-item {
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    overflow: hidden; /* Ẩn nội dung tràn ra ngoài của container */
+    padding: 10px;
+  }
+  
+  .popup-image {
+    max-width: 70%; /* Đặt chiều rộng tối đa của hình ảnh là 100% của container cha */
+    height: 100%; /* Chiều cao của hình ảnh là 100% của container cha */
+    object-fit: contain; /* Hiển thị hình ảnh sao cho nó vừa với khu vực của nó, không bị vượt quá */
+  }
+  
+  
+  .delete-image-btn {
+    flex-shrink: 0; /* Không cho nút delete co lại khi không đủ không gian */
+    padding: 8px 16px; /* Padding cho nút delete */
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 14px; /* Kích thước chữ của nút delete */
+    background-color: #f44336; /* Màu nền của nút delete */
+    color: #fff; /* Màu chữ của nút delete */
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Độ cong góc của nút delete */
+    cursor: pointer; /* Thay đổi con trỏ chuột khi di chuột vào nút delete */
+  }
+  
+
+  
+  .btn-group {
+    display: flex;
+    gap: 10px; /* Adjust spacing between buttons */
+  }

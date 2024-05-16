@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "HotelId",
         onDelete: "CASCADE",
       });
-      this.belongsTo(User, { foreignKey: "ownerId" });
+      this.belongsTo(User, { foreignKey: "ownerId", onDelete: "CASCADE" });
     }
   }
 
@@ -49,6 +49,17 @@ module.exports = (sequelize, DataTypes) => {
               },
             },
           });
+          const imgRoom = sequelize.models.UrlImageRoom;
+          await imgRoom.destroy({
+            where: {
+              IdRoom: {
+                [Op.in]: sequelize.literal(
+                  `(SELECT id FROM Rooms WHERE hotelId = ${hotelId})`
+                ),
+              },
+            },
+          });
+
           const Room = sequelize.models.Room;
           await Room.destroy({ where: { hotelId: hotelId } });
 
@@ -66,13 +77,16 @@ module.exports = (sequelize, DataTypes) => {
           if (Array.isArray(hotels)) {
             for (const hotel of hotels) {
               await hotel.updateAverageUserRating();
+              await hotel.updateMinPriceHotel();
             }
           } else {
             await hotels.updateAverageUserRating();
+            await hotels.updateMinPriceHotel();
           }
         },
         afterCreate: async (hotel) => {
           await hotel.updateAverageUserRating();
+          await hotel.updateMinPriceHotel();
         },
       },
     }
@@ -82,15 +96,34 @@ module.exports = (sequelize, DataTypes) => {
   Hotels.prototype.updateAverageUserRating = async function () {
     const { Reviews } = sequelize.models;
     const hotelId = this.id;
+
     const [result] = await sequelize.query(`
       UPDATE Hotels AS h
-      SET userRating = (
+      SET userRating = COALESCE((
         SELECT AVG(rating)
         FROM Reviews AS r
         WHERE r.hotelId = ${hotelId}
-      )
+      ), 0)
       WHERE h.id = ${hotelId}
     `);
+
+    return result;
+  };
+
+  Hotels.prototype.updateMinPriceHotel = async function () {
+    const { Rooms } = sequelize.models;
+    const hotelId = this.id;
+
+    const [result] = await sequelize.query(`
+      UPDATE Hotels AS h
+      SET cost = COALESCE((
+        SELECT MIN(price)
+        FROM Rooms AS r
+        WHERE r.hotelId = ${hotelId}
+      ))
+      WHERE h.id = ${hotelId}
+    `);
+
     return result;
   };
 
