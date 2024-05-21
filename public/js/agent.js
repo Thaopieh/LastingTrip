@@ -101,7 +101,7 @@ $(document).ready(function () {
   });
 
   // Sự kiện khi click vào nút "Đóng" trong popup
-  $(".close-btn").click(function () {});
+  $(".close-btn").click(function () { });
 
   // Sự kiện khi click vào nút "Đóng" trong popup thông báo xóa
   $(".close-btn1").click(function () {
@@ -276,54 +276,49 @@ $(document).ready(function () {
             <label>Số sao</label>
             <select class="form-select" name="Hotelstar" id="Hotelstar">
             ${[1, 2, 3, 4, 5]
-              .map(
-                (optionValue) =>
-                  `                <option value="${optionValue}" ${
-                    optionValue.toString() === data.star.toString()
-                      ? "selected"
-                      : ""
-                  }>${optionValue}</option>            `
-              )
-              .join("")}
+            .map(
+              (optionValue) =>
+                `                <option value="${optionValue}" ${optionValue.toString() === data.star.toString()
+                  ? "selected"
+                  : ""
+                }>${optionValue}</option>            `
+            )
+            .join("")}
               </select>
             <label>Địa chỉ</label>
-            <input type="text" id="Hotelmap" name="map" placeholder="Địa chỉ *" value="${
-              data.map
-            }"required />
+            <input type="text" id="Hotelmap" name="map" placeholder="Địa chỉ *" value="${data.map
+          }"required />
 
             <label>Loại khách sạn</label>
             <select class="form-select" name="HotelTypeHotel" id="HotelTypeHotel">
             ${["hotel", "resort", "homestay", "service apartment"]
-              .map(
-                (optionValue) => `
-                <option value="${optionValue}" ${
-                  optionValue.toString() === data.TypeHotel.toString()
-                    ? "selected"
-                    : ""
+            .map(
+              (optionValue) => `
+                <option value="${optionValue}" ${optionValue.toString() === data.TypeHotel.toString()
+                  ? "selected"
+                  : ""
                 }>${optionValue}</option>
             `
-              )
-              .join("")}
+            )
+            .join("")}
             </select>
 
             <label>Hình thức thanh toán</label>
             <select class="form-select" name="payment" id="Hotelpayment">
             ${["offline", "online"]
-              .map(
-                (optionValue1) => `
-                <option value="${optionValue1}" ${
-                  optionValue1.toString() === data.payment.toString()
-                    ? "selected"
-                    : ""
+            .map(
+              (optionValue1) => `
+                <option value="${optionValue1}" ${optionValue1.toString() === data.payment.toString()
+                  ? "selected"
+                  : ""
                 }>${optionValue1}</option>
             `
-              )
-              .join("")}
+            )
+            .join("")}
             </select>
                 <label>Chủ sở hữu</label>
-                <input type="text" id="HotelOwnerId"  placeholder="Chủ sở hữu *" value="${
-                  data.ownerId
-                }"required />                <div class="ebutton">
+                <input type="text" id="HotelOwnerId"  placeholder="Chủ sở hữu *" value="${data.ownerId
+          }"required />                <div class="ebutton">
                     <input type="submit" value="Cập nhật">
                 </div>
             </form>

@@ -19,6 +19,11 @@
     color: black;
 }
 
+body {
+    background-color: whitesmoke;
+}
+
+
 .body_container,
 .footer__main {
     padding: 20px 20px 0px;
@@ -26,13 +31,16 @@
 }
 
 .body_container,
-.account-email,
-.account-pass,
 .profile-head {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    /* flex-direction: row;
+    justify-content: space-between; */
     /* align-items : center; */
+}
+
+.my-booking,
+.personal-info {
+    display: none;
 }
 
 .account-email,
@@ -50,10 +58,10 @@
 
 .account-secure,
 .profile {
-    /* margin-bottom: 30px; */
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
+    margin-top: 10px;
 }
 
 .account {
@@ -106,15 +114,29 @@
     font-weight: 700;
 }
 
-.body_right button {
+.update-pass-btn {
+    color: #3264ff;
+    text-decoration: underline;
+    text-align: right;
+    cursor: pointer;
+    margin-left: 10px;
+    border: none;
+    background-color: whitesmoke;
+
+}
+
+.updateInfo,
+.deleteUser {
     color: #3264ff;
     border: none;
     background-color: whitesmoke;
     border-radius: 8px;
     padding: 10px;
+    margin: 0 20px;
 }
 
-.body_right button:hover {
+.updateInfo:hover,
+.deleteUser:hover {
     background-color: #3264ff;
     color: whitesmoke;
 }
@@ -222,8 +244,6 @@ footer {
 }
 
 .body_container,
-.account-email,
-.account-pass,
 .profile-head {
     display: flex;
     flex-direction: row;
@@ -231,17 +251,6 @@ footer {
     /* align-items : center; */
 }
 
-.account-email,
-.account-pass,
-.name,
-.birth {
-    background-color: whitesmoke;
-    border-radius: 8px;
-    width: 50%;
-    height: 70px;
-    margin: 0 20px;
-    padding: 10px;
-}
 
 .account-secure,
 .profile {
@@ -273,6 +282,12 @@ footer {
     background-color: #fff;
 }
 
+.user-info-item:hover,
+.my-booking-item:hover,
+.log-out-item:hover {
+    cursor: pointer;
+}
+
 .body_right {
     /* border: 1px solid black; */
     width: 75%;
@@ -299,17 +314,6 @@ footer {
     margin: 0 10px;
 }
 
-.user-name,
-.email-acc,
-.pass-acc {
-    font-weight: 700;
-}
-
-.body_right button {
-    color: #3264ff;
-    border: none;
-    background-color: whitesmoke;
-}
 
 #footer-bg {
     display: none;
@@ -398,7 +402,8 @@ footer {
     }
 }
 
-*/ .popup-overlay-updateInfo {
+*/ .popup-overlay-updateInfo,
+.popup-overlay-update-pass {
     display: none;
     position: fixed;
     top: 0;
@@ -409,7 +414,8 @@ footer {
     z-index: 999;
 }
 
-.popup-overlay-updateInfo {
+.popup-overlay-updateInfo,
+.popup-overlay-update-pass {
     display: none;
     position: fixed;
     top: 0;
@@ -462,7 +468,16 @@ footer {
 }
 
 .popup-updateInfo input[type="text"],
-.popup-updateInfo input[type="email"] {
+.popup-updateInfo input[type="email"],
+.popup-updateInfo select {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.popup-updateInfo .col-6 input[type="text"] {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #cccccc;
@@ -531,4 +546,36 @@ footer {
 .popup-delete button:hover,
 .popup-confirm-pass button:hover {
     background-color: #0056b3;
+}
+
+.my-booking,
+.my-booking-header {
+    border: 1px solid #000000;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.my-booking table,
+.my-booking-header table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.my-booking th,
+
+.my-booking td,
+.my-booking-header td {
+    padding: 10px;
+    text-align: center;
+}
+
+.my-booking th,
+.my-booking-header th {
+    background-color: #f2f2f2;
+}
+
+.my-booking p {
+    padding: 10%;
+    text-align: justify;
+    font-size: medium;
 }

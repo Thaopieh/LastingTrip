@@ -1,7 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Kiểm tra giá trị của token
   const token = getToken(); // Thay 'getToken()' bằng hàm lấy giá trị token của bạn
-  const userName = localStorage.getItem("userName");
+
+  const userId = localStorage.getItem("id");
+
+  fetch("http://localhost:3030/api/v1/users/getDetailUser/" + userId)
+    .then(response => response.json())
+    .then(data => {
+      // Xử lý dữ liệu trả về từ API
+      console.log(data); // In thông tin người dùng ra console
+      // Thực hiện các hành động khác với thông tin người dùng
+      const username = localStorage.setItem("userName", data.name);
+
+    })
+    .catch(error => {
+      // Xử lý lỗi nếu có
+      console.error('Error:', error);
+    });
 
   if (token) {
     // Nếu token có giá trị khác null, thay đổi HTML của phần tử li
@@ -13,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     data-bs-auto-close="false" aria-expanded="false" id="filte-dropdown">
                     <i class="fa-regular fa-user"></i>
-                    ${userName}
+                    ${localStorage.getItem("userName")}
                 </button>
                 <ul class="dropdown-menu" id="dropdownshown">
                     <li><a class="dropdown-item" href="/userInfor">Thông tin cá nhân</a></li>

@@ -28,10 +28,10 @@ $(document).ready(function () {
       method: "GET",
       success: function (data) {
         var tableHtml = "";
-        data.forEach(function (user) {
+        data.forEach(function (user, index) {
           // Tạo HTML cho từng hàng trong bảng
           tableHtml += "<tr>";
-          tableHtml += "<td>" + user.id + "</td>";
+          tableHtml += "<td>" + (index + 1) + "</td>";
           tableHtml += "<td>" + user.name + "</td>";
           tableHtml += "<td>" + user.email + "</td>";
           tableHtml += "<td>" + user.numberPhone + "</td>";
@@ -339,15 +339,15 @@ $(document).ready(function () {
 
         $(".ebutton").click(function () {
           console.log(id);
-          var name = $("#name").val(); // Lấy giá trị từ trường nhập liệu Name
-          var email = $("#email").val(); // Lấy giá trị từ trường nhập liệu Email
+          var name = $("#name").val();
+          var email = $("#email").val();
           var numberPhone = $("#numberPhone").val();
-          var type = $("#typeSelect").val(); // Lấy giá trị từ trường nhập liệu NumberPhone
-          if (!name || !email || !password || !numberPhone || !type) {
-            // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
-            // alert("Vui lòng điền đầy đủ thông tin.");
-            return; // Dừng lại nếu có trường không được nhập
-          }
+          var type = $("#typeSelect").val();
+          // if (!name || !email || !password || !numberPhone || !type) {
+          //   // Kiểm tra xem các trường đã được điền đầy đủ hay chưa
+          //   // alert("Vui lòng điền đầy đủ thông tin.");
+          //   return; // Dừng lại nếu có trường không được nhập
+          // }
 
           var dataT = {
             name: name,

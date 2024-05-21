@@ -2,9 +2,9 @@ $(document).ready(function () {
   // Hàm ánh xạ ID của mục menu tới tên partial tương ứng
   const type = localStorage.getItem("type");
   console.log(type);
-  if (type !== "admin") {
-    $(".template").hide();
-  }
+  // if (type != "admin") {
+  //   $(".template").hide();
+  // }
   /* script.js */
   // Lắng nghe sự kiện nhấp vào nút tương ứng
   document.getElementById("button1").addEventListener("click", function () {

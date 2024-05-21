@@ -138,7 +138,7 @@ const editUser = async (req, res) => {
   console.log("10");
   try {
     const userId = req.params.id;
-    const { name, email, numberPhone, type } = req.body;
+    const { name, email, password, numberPhone, birthDate, gender, type, cccd, address } = req.body;
     const detailUser = await User.findOne({
       where: {
         id: userId,
@@ -151,9 +151,15 @@ const editUser = async (req, res) => {
       });
     }
     if (name) detailUser.name = name;
-    if (email) detailUser.email = email; // Chỉnh sửa tại đây
+    if (email) detailUser.email = email;
+    if (password) detailUser.password = password;
     if (numberPhone) detailUser.numberPhone = numberPhone;
+    if (birthDate) detailUser.birthDate = birthDate;
+    if (gender) detailUser.gender = gender;
     if (type) detailUser.type = type;
+    if (cccd) detailUser.cccd = cccd;
+    if (address) detailUser.address = address;
+
     const updateUser = await detailUser.save();
     if (!updateUser)
       res.status(400).send({
