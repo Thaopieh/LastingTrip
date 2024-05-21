@@ -19,6 +19,28 @@ $(document).ready(() => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/đ/gi, 'd');
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    slug = slug.trim();
+    return slug;
+  }
+
   // Gọi API và hiển thị dữ liệu cho mỗi container
   // Gọi API và hiển thị dữ liệu cho mỗi container
   Object.values(containerData).forEach((containerConfig) => {
@@ -40,15 +62,15 @@ $(document).ready(() => {
             let activeClass = index == 0 ? "active" : "";
 
             const formattedCost = numberWithCommas(item.cost);
-
+            const slug = ChangeToSlug(item.name);
             const card = `<div class="carousel-item ${activeClass}" id=${item.id}">
-            <a href="/hotel/${item.id}" target="_blank"  class="hotel-link" >
+            <a href="/hotel/${slug}" target="_blank"  class="hotel-link" >
               <div class="card" >
                 <div class="img-wrapper">
                   <img src="${imgRender}" alt=${item.name}>
                 </div>
                 <div class="card-body">
-                  <a class="click-item" href="/hotel/${item.id}" target="_blank">
+                  <a class="click-item" href="/hotel/${slug}" target="_blank">
                     <h5 class="card-title">${item.name}</h5>
                   </a>
                   <p class="card-text">${item.map}</p>

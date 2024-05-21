@@ -1,13 +1,57 @@
 // hotel.js
 
-$(document).ready(function () {
+$(document).ready(async function () {
   // Lấy id khách sạn từ URL
   var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  var slug = url.substring(url.lastIndexOf("/") + 1);
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/đ/gi, 'd');
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    slug = slug.trim();
+    return slug;
+  }
+
+  function findHotelBySlug(slug) {
+    return fetch('http://localhost:3030/api/v1/hotels/')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Lỗi khi gọi API');
+        }
+        return response.json();
+      })
+      .then(hotels => {
+        // Tìm khách sạn với slug tương ứng trong danh sách
+        const hotel = hotels.find(hotel => ChangeToSlug(hotel.name) == slug);
+        return hotel;
+      })
+      .catch(error => {
+        console.error('Lỗi khi gọi API:', error);
+        throw error;
+      });
+  }
+  var hotel = await findHotelBySlug(slug);
+  var hotelId = hotel.id;
+  $("title").text(hotel.name);
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
   $.ajax({
     url: "http://localhost:3030/api/v1/hotels/" + hotelId,
     method: "GET",
@@ -152,9 +196,53 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(() => {
+$(document).ready(async function () {
+
   var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  var slug = url.substring(url.lastIndexOf("/") + 1);
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/đ/gi, 'd');
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    slug = slug.trim();
+    return slug;
+  }
+
+  function findHotelBySlug(slug) {
+    return fetch('http://localhost:3030/api/v1/hotels/')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Lỗi khi gọi API');
+        }
+        return response.json();
+      })
+      .then(hotels => {
+        // Tìm khách sạn với slug tương ứng trong danh sách
+        const hotel = hotels.find(hotel => ChangeToSlug(hotel.name) == slug);
+        return hotel;
+      })
+      .catch(error => {
+        console.error('Lỗi khi gọi API:', error);
+        throw error;
+      });
+  }
+  var hotel = await findHotelBySlug(slug);
+  var hotelId = hotel.id;
+
   $.ajax({
     url: "http://localhost:3030/api/v1/reviews?hotelId=" + hotelId,
     method: "GET",
@@ -193,9 +281,52 @@ $(document).ready(() => {
   });
 });
 
-$(document).ready(() => {
+$(document).ready(async function () {
+
   var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  var slug = url.substring(url.lastIndexOf("/") + 1);
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/đ/gi, 'd');
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    slug = slug.trim();
+    return slug;
+  }
+
+  function findHotelBySlug(slug) {
+    return fetch('http://localhost:3030/api/v1/hotels/')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Lỗi khi gọi API');
+        }
+        return response.json();
+      })
+      .then(hotels => {
+        // Tìm khách sạn với slug tương ứng trong danh sách
+        const hotel = hotels.find(hotel => ChangeToSlug(hotel.name) == slug);
+        return hotel;
+      })
+      .catch(error => {
+        console.error('Lỗi khi gọi API:', error);
+        throw error;
+      });
+  }
+  var hotel = await findHotelBySlug(slug);
+  var hotelId = hotel.id;
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -307,12 +438,10 @@ $(document).ready(() => {
                       <div class="info">
                         <span>Thanh toán ${paymentType} </span>
                       </div>
-                      <div class="info"><span>Đặt tối đa ${
-                        item.quantity
-                      } phòng</span></div>
-                      <div class="info" id="songuoi"><span>Có thể ở ${
-                        item.quantity_people
-                      } người trong một phòng</span></div>
+                      <div class="info"><span>Đặt tối đa ${item.quantity
+          } phòng</span></div>
+                      <div class="info" id="songuoi"><span>Có thể ở ${item.quantity_people
+          } người trong một phòng</span></div>
 
                     </div>
                   </div>
@@ -325,9 +454,8 @@ $(document).ready(() => {
                   <div class="col-lg-5">
                     <div class="room-price">
                       <p>VND ${numberWithCommas(item.price)}</p>
-                      <a href="#" class="btn btn-primary booking" data-room-id="${
-                        item.id
-                      }">Đặt phòng</a>
+                      <a href="#" class="btn btn-primary booking" data-room-id="${item.id
+          }">Đặt phòng</a>
                     </div>
                   </div>
                 </div>
@@ -381,7 +509,7 @@ $(document).ready(() => {
   });
 });
 
-$(document).ready(function () {
+$(document).ready(async function () {
   // Xử lý sự kiện khi người dùng nhấp vào một liên kết khách sạn
   $(".hotel-link").click(function (event) {
     event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
@@ -393,7 +521,7 @@ $(document).ready(function () {
     var hotelId = href.split("/").pop();
 
     // Chuyển hướng đến trang khách sạn và truyền id khách sạn qua URL
-    window.location.href = "/hotel/" + hotelId;
+    window.location.href = "/";
   });
 
   const token = localStorage.getItem("token");
@@ -402,7 +530,49 @@ $(document).ready(function () {
   }
 
   var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  var slug = url.substring(url.lastIndexOf("/") + 1);
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/đ/gi, 'd');
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    slug = slug.trim();
+    return slug;
+  }
+
+  function findHotelBySlug(slug) {
+    return fetch('http://localhost:3030/api/v1/hotels/')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Lỗi khi gọi API');
+        }
+        return response.json();
+      })
+      .then(hotels => {
+        // Tìm khách sạn với slug tương ứng trong danh sách
+        const hotel = hotels.find(hotel => ChangeToSlug(hotel.name) == slug);
+        return hotel;
+      })
+      .catch(error => {
+        console.error('Lỗi khi gọi API:', error);
+        throw error;
+      });
+  }
+  var hotel = await findHotelBySlug(slug);
+  var hotelId = hotel.id;
   $.ajax({
     url: "http://localhost:3030/api/v1/hotels/" + hotelId,
     method: "GET",
@@ -426,9 +596,8 @@ $(document).ready(function () {
       for (let i = 0; i < Math.min(4, imgFeature.length); i++) {
         const imageURL = imgFeature[i];
         imgHTML += `
-            <td style="width:25%" ${
-              i === 0 ? 'rowspan="2" ' : 'class="img-active"'
-            }>
+            <td style="width:25%" ${i === 0 ? 'rowspan="2" ' : 'class="img-active"'
+          }>
                 <img src="${imageURL}" alt="">
             </td>
         `;

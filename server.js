@@ -113,6 +113,61 @@ app.get("/ManageRoomService/:id", (req, res) => {
   res.render("Admin/partials/RoomService", { id: roomId });
 });
 
+function ChangeToSlug(title) {
+  var slug;
+  slug = title.toLowerCase();
+  slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+  slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+  slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+  slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+  slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+  slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+  slug = slug.replace(/đ/gi, 'd');
+  slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+  slug = slug.replace(/ /gi, "-");
+  slug = slug.replace(/\-\-\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-\-/gi, '-');
+  slug = slug.replace(/\-\-/gi, '-');
+  slug = '@' + slug + '@';
+  slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+  slug = slug.trim();
+  return slug;
+}
+
+
+function findHotelBySlug(slug) {
+  return fetch('http://localhost:3030/api/v1/hotels/')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Lỗi khi gọi API');
+      }
+      return response.json();
+    })
+    .then(hotels => {
+      // Tìm khách sạn với slug tương ứng trong danh sách
+      const hotel = hotels.find(hotel => ChangeToSlug(hotel.name) == slug);
+      return hotel;
+    })
+    .catch(error => {
+      console.error('Lỗi khi gọi API:', error);
+      throw error;
+    });
+}
+
+app.get("/hotel/:slug", (req, res) => {
+  var slug = req.params.slug;
+  var hotel = findHotelBySlug(slug);
+
+  if (hotel) {
+    var hotelId = hotel.id;
+    console.log(hotelId);
+    res.render("User/hotel");
+  } else {
+    alert("loi");
+  }
+});
+
 // app.get("/userInfo/:id", (req, res) => {
 //   var id = req.params.id;
 //   res.render("User/userInfor", { id: id });
@@ -168,21 +223,23 @@ app.set("view engine", "hbs");
 
 const port = process.env.PORT || 3030; // Sử dụng port mặc định là 3030 nếu không có biến môi trường PORT
 
-app.get("/hotel/:id", (req, res) => {
-  const hotelId = req.params.id;
+// app.get("/hotel/:id", (req, res) => {
+//   const hotelId = req.params.id;
 
-  // Call API to get hotel information
-  fetch(`http://localhost:${port}/api/v1/hotels?id=${hotelId}`)
-    .then((response) => response.json())
-    .then((data) => {
-      // Render Handlebars template and pass data into it
-      res.render("User/hotel", { hotel: data });
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      res.status(500).send("Internal Server Error");
-    });
-});
+//   // Call API to get hotel information
+//   fetch(`http://localhost:${port}/api/v1/hotels?id=${hotelId}`)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       // Render Handlebars template and pass data into it
+//       res.render("User/hotel", { hotel: data });
+//     })
+//     .catch((error) => {
+//       console.error("Error:", error);
+//       res.status(500).send("Internal Server Error");
+//     });
+// });
+
+
 // Listen for connection events
 app.listen(port, async () => {
   console.log("App listening on http://localhost:3030");
