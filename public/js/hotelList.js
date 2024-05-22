@@ -1,9 +1,9 @@
-$(document).on("click", ".hotel-link", function (event) {
-  event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
-  var href = $(this).attr("href");
-  var hotelId = href.split("/").pop();
-  window.location.href = "/hotel/" + hotelId;
-});
+// $(document).on("click", ".hotel-link", function (event) {
+//   event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+//   var href = $(this).attr("href");
+//   var hotelId = href.split("/").pop();
+//   window.location.href = "/hotel/" + hotelId;
+// });
 function clearSelection() {
   var radios = document.getElementsByName("option");
   radios.forEach(function (radio) {
@@ -61,6 +61,27 @@ $(document).ready(() => {
   const token = localStorage.getItem("token");
   if (token) {
     $("#broadcast").show();
+  }
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/đ/gi, 'd');
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    slug = slug.trim();
+    return slug;
   }
 
   $("#registerTime").on("click", function () {
@@ -133,11 +154,14 @@ $(document).ready(() => {
         roomWithMaxPrice.numPeople
       );
 
+      const slug = ChangeToSlug(item.name);
+
+
       const stars = `<i class="fas fa-star"></i>`.repeat(item.star);
       const card = `
         <div class="card mb-3">
           <div class="row img-adjust g-0">
-            <a href="/hotel/${item.id}" class="hotel-link wrap-img">
+            <a href="/hotel/${slug}" class="hotel-link wrap-img">
               <div class="col-md-4">
                 <img src="${imgRender}" alt="...">
               </div>
@@ -146,7 +170,7 @@ $(document).ready(() => {
               <div class="card-body">
                 <div class="head-title">
                   <h5 class="card-title">
-                    <a href="/hotel/${item.id}" class="hotel-link">${item.name}</a>
+                    <a href="/hotel/${slug}" class="hotel-link">${item.name}</a>
                     ${stars}
                   </h5>
                   <div class="card-describle">

@@ -171,6 +171,35 @@ const editUser = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+const updatePassword = async (req, res) => {
+  const { userId, currentPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // So sánh mật khẩu hiện tại với mật khẩu đã được băm trong cơ sở dữ liệu
+    const isPasswordValid = bcrypt.compareSync(currentPassword, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid current password' });
+    }
+
+    // Băm mật khẩu mới
+    const salt = bcrypt.genSaltSync(10);
+    const hashedNewPassword = bcrypt.hashSync(newPassword, salt);
+    // Cập nhật mật khẩu mới
+    await user.update({ password: hashedNewPassword });
+
+    return res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error('Error updating password:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -208,4 +237,5 @@ module.exports = {
   deleteUser,
   getDetailUser,
   checkEmailExist,
+  updatePassword,
 };

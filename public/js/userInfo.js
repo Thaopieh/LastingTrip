@@ -144,11 +144,6 @@ $(document).ready(function () {
             '<button class= "updateInfo" value ="' +
             user.id +
             '">Chỉnh sửa thông tin</button>';
-          tableHtml +=
-            '<button class= "deleteUser" value ="' +
-            user.id +
-            '">Xóa tài khoản</button>';
-
           tableHtml += "    </div>";
           tableHtml += "</div>";
           $(".body_right .user-info").html(tableHtml);
@@ -165,7 +160,24 @@ $(document).ready(function () {
   } // end of renderPage()
 
   renderPage();
-
+  function findRoomById(roomId) {
+    return fetch('http://localhost:3030/api/v1/rooms/')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Lỗi khi gọi API');
+        }
+        return response.json();
+      })
+      .then(rooms => {
+        // Tìm khách sạn với slug tương ứng trong danh sách
+        const room = rooms.find(room => room.id = roomId);
+        return room.name;
+      })
+      .catch(error => {
+        console.error('Lỗi khi gọi API:', error);
+        throw error;
+      });
+  }
   //Render boooking lisst off usser
   function renderBookingList() {
     $.ajax({
@@ -174,7 +186,7 @@ $(document).ready(function () {
       success: function (data) {
         console.log(data);
         var tableHtml = "";
-        if (data.length == 0) {
+        if (data.length == 0) { //Trường hợp không có booking
           tableHtml += '<div class=row>';
           tableHtml += '<div class="col-5">';
           tableHtml += '    <img src="https://ak-d.tripcdn.com/images/05E6w12000cqchxs29CAB.gif">';
@@ -182,40 +194,30 @@ $(document).ready(function () {
           tableHtml += '<div class="col-7">';
           tableHtml += "<p>Bạn không có bất kỳ đặt chỗ nào hoặc chúng tôi không thể truy cập          các đặt chỗ của bạn vào lúc này.Bạn có thể tìm kiếm các đặt phòng bạn đã thực hiện với          tư cách là khách trong năm qua bằng địa chỉ email của mình.</p>";
           tableHtml += '</div>';
-
           $(".my-booking table").hide();
           $(".my-booking").html(tableHtml);
 
         }
         else {
-          data.forEach(function (booking, index) {
+          data.forEach(async function (booking, index) {
             // Tạo HTML cho từng hàng trong bảng
 
             tableHtml += "<tr>";
-            tableHtml += '<td class="col1">' + booking.id + "</td>";
-            tableHtml += '<td class="col2">' + booking.room_id + "</td>";
+            tableHtml += '<td class="col1">' + (index + 1) + "</td>";
+            // tableHtml += '<td class="col2">' + booking.us  er_id + "</td>";
             tableHtml += '<td class="col1">' + booking.full_name + "</td>";
-            tableHtml += '<td class="col2">' + booking.user_id + "</td>";
+            const roomName = await findRoomById(booking.room_id);
+            tableHtml += '<td class="col2">' + roomName + "</td>";
+            tableHtml += '<td class="col1">' + booking.check_in_date.slice(0, 10) + "</td>";
+            tableHtml += '<td class="col1">' + booking.check_out_date.slice(0, 10) + "</td>";
             tableHtml += '<td class="col2">' + booking.total_price + "</td>";
-            tableHtml += '<td class="col1">' + booking.status + "</td>";
-            tableHtml += '<td class="col1">' + booking.check_in_date + "</td>";
-            tableHtml += '<td class="col1">' + booking.check_out_date + "</td>";
+            if (booking.status)
+              tableHtml += '<td class="col1">' + "Đã thanh toán" + "</td>";
+            else
+              tableHtml += '<td class="col1">' + "Chưa thanh toán" + "</td>";
+
             tableHtml += '<td class="col1">' + booking.special_requests + "</td>";
-            tableHtml += "<td>";
 
-            // Thêm button Chỉnh sửa
-            tableHtml +=
-              '<button type="button" class="updatehotel" value="' +
-              booking.id +
-              '">Chỉnh sửa</button>';
-
-            // Thêm button Xóa và lưu ID của khách sạn trong thuộc tính data-id của icon
-            tableHtml +=
-              '<button type="button" class="deleteHotel" value="' +
-              booking.id +
-              '">Xóa</button>';
-
-            tableHtml += "</td>";
             tableHtml += "</tr>";
             $(".my-booking table tbody").html(tableHtml);
 
@@ -328,61 +330,11 @@ $(document).ready(function () {
     });
   }); //   end of update user info
 
-  $(document).on("click", ".deleteUser", function () {
-    let id = $(this).val();
-    console.log(id);
-    // Gửi yêu cầu xóa người dùng
-    $(".popup-overlay-delete").show();
-    $(".popup-delete").show();
-    $(".popup-delete").attr("data-id", id);
-  }); // end of click delete user
-
-  $(".confirm-password").click(function () {
-    // Lấy ID người dùng từ thuộc tính data
-    let id = $(".popup-delete").attr("data-id");
-    // var password = $(#confirm - password).val();
-
-    if (password == user.password) {
-      $.ajax({
-        url: `http://localhost:3030/api/v1/users/deleteUser/${id}`,
-        method: "DELETE",
-        success: function (data) {
-          // Xử lý thành công
-          $(".popup-overlay-delete").hide();
-          $(".popup-delete").hide();
-          renderPage();
-        },
-        error: function (error) {
-          console.log("Lỗi khi xóa người dùng", error);
-        },
-      });
-    } else {
-      alert("Mật khẩu không đúng, vui lòng thử lại sau!");
-    }
-  });
-  $(document).on("click", ".confirm-delete", function () {
-    let id = $(".popup-delete").attr("data-id");
-
-    // Gửi yêu cầu xóa người dùng
-    $(".popup-overlay-confirm-pass").show();
-    $(".popup-confirm-pass").show();
-  });
-
-  $(document).on("click", ".cancel-delete", function () {
-    $(".popup-overlay-delete").hide();
-    $(".popup-delete").hide();
-  });
-  $(document).on("click", ".cancel-confirm-password", function () {
-    alert("hi");
-    $(".popup-overlay-confirm-pass").hide();
-    $(".popup-confirm-pass").hide();
-  });
 
   //Thay đổi mật khẩu
   $(document).on("click", ".update-pass-btn", function () {
     var id = $(this).val();
     $(".popup-overlay-update-pass").show();
-
     $(".popup-overlay-update-pass").html(`
       <div class="popup-updateInfo"> 
         <span class="close-btn">&times;</span> 
@@ -390,6 +342,7 @@ $(document).ready(function () {
         <form id="updateForm"> 
           <label>Mật khẩu cũ</label>    
           <input type="text" id="old-pass" name="" placeholder="Nhập mật khẩu cũ" required />
+          <p class="wrong-pass" style="color:red; font-style:italic; display:none">*Mật khẩu không đúng</p>
           <label>Mật khẩu mới</label>    
           <input type="text" id="new-pass" name="" placeholder="Nhập mật khẩu mới" required />        
           <div class="ebutton" id="update-pass"> 
@@ -400,41 +353,25 @@ $(document).ready(function () {
     );
 
     $(".ebutton").click(function (e) {
-
       const oldPass = $("#old-pass").val();
       const newPass = $("#new-pass").val();
 
       // Gửi yêu cầu kiểm tra mật khẩu cũ
       $.ajax({
-        url: `http://localhost:3030/api/v1/users/getDetailUser/${id}`,
-        method: "GET",
+        url: `http://localhost:3030/api/v1/users/updatePassword`,
+        method: "PUT",
+        data: {
+          userId: id,
+          currentPassword: oldPass,
+          newPassword: newPass
+        },
         success: function (data) {
-          const isAuthen = bcrypt.compareSync(oldPass, data.password);
-
-          if (isAuthen) {
-            // Mật khẩu cũ đúng, tiến hành cập nhật mật khẩu mới
-            const salt = bcrypt.genSaltSync(10);
-            const hashPassword = bcrypt.hashSync(newPass, salt);
-
-            // Gửi yêu cầu cập nhật mật khẩu
-            $.ajax({
-              url: `http://localhost:3030/api/v1/users/editUser/${id}`,
-              method: "PUT",
-              data: { password: hashPassword },
-              success: function (data) {
-                renderPage();
-                console.log("Cập nhật mật khẩu thành công");
-              },
-              error: function (error) {
-                console.log("Lỗi khi cập nhật mật khẩu", error);
-              }
-            });
-          } else {
-            alert("Mật khẩu cũ không chính xác");
-          }
+          renderPage();
+          console.log("Cập nhật mật khẩu thành công");
         },
         error: function (error) {
-          console.log("Lỗi khi lấy chi tiết người dùng", error);
+          console.log("Lỗi khi cập nhật mật khẩu", error);
+          alert("Mật khẩu không đúng! Xin vui lòng thử lại sau.");
         }
       });
     });

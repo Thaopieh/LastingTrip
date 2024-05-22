@@ -13,6 +13,7 @@ const {
   deleteUser,
   getDetailUser,
   checkEmailExist,
+  updatePassword,
 } = require("../controllers/user.controllers");
 const { checkExist } = require("../middlewares/validations/checkExist");
 const { authenticate } = require("../middlewares/authen/authenticate");
@@ -31,6 +32,8 @@ userRouter.get("/getDetailUser/:id", getDetailUser);
 userRouter.get("/manageUsers", displayUser);
 
 userRouter.put("/editUser/:id", editUser);
+userRouter.put("/updatePassword", updatePassword);
+
 userRouter.delete("/deleteUser/:id", deleteUser);
 userRouter.post("/checkEmailPhoneExists", checkEmailExist);
 
@@ -41,4 +44,5 @@ module.exports = {
   editUser,
   deleteUser,
   getDetailUser,
+  updatePassword
 };

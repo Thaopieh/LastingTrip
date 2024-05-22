@@ -548,34 +548,31 @@ footer {
     background-color: #0056b3;
 }
 
-.my-booking,
-.my-booking-header {
-    border: 1px solid #000000;
+.my-booking {
+    border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
 }
 
-.my-booking table,
-.my-booking-header table {
+.my-booking table {
     width: 100%;
     border-collapse: collapse;
 }
 
 .my-booking th,
-
-.my-booking td,
-.my-booking-header td {
-    padding: 10px;
+.my-booking td {
+    padding: 8px;
     text-align: center;
 }
 
-.my-booking th,
-.my-booking-header th {
+.my-booking th {
+    background-color: white;
+}
+
+.my-booking tbody tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-.my-booking p {
-    padding: 10%;
-    text-align: justify;
-    font-size: medium;
+.my-booking tbody tr:hover {
+    background-color: #ddd;
 }
