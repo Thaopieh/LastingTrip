@@ -1,0 +1,323 @@
+html,
+body {
+    width           : 100%;
+    height          : 100%;
+    font-weight     : normal;
+    /* font         : 12px / 1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; */
+    font-display    : swap;
+    padding         : 0px;
+    margin          : 0px;
+    background-color: white;
+}
+
+.main_body {
+    margin-top: 60px;
+}
+
+
+/* * body  */
+*/
+
+/* header  */
+header {
+    position     : fixed;
+    top          : 0;
+    z-index      : 99999;
+    width        : 100%;
+    border-radius: 10px;
+    /* height    : 120%; */
+}
+
+a {
+    text-decoration: none;
+}
+
+.navi {
+    background-color: rgb(48, 93, 209);
+    /* height       : 120%; */
+}
+
+/* .navi a { */
+/* color: white; */
+/* } */
+
+.nav-item {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+/* .navi li:hover a { */
+/* color        : white; */
+/* border-bottom: 2px solid white; */
+/* } */
+
+.header-search-booking-btn {
+    height          : 100%;
+    border          : none;
+    margin-right    : 10px;
+    margin-left     : 10px;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-weight     : 500;
+    background-color: hsla(0, 0%, 100%, .3);
+    /* opacity      : 50%; */
+    color           : #ffffff;
+    border-radius   : 4px;
+}
+
+.header-register-btn {
+    height       : 100%;
+    border       : none;
+    font-family  : Arial, Helvetica, sans-serif;
+    font-weight  : 500;
+    border-radius: 4px;
+}
+
+.header-register-btn:hover {
+    color     : #3264ff;
+    transition: 0.5s;
+
+}
+
+.btn1 {
+    background-color: white;
+}
+
+.search {
+    margin: 10px;
+}
+
+strong {
+    font-size: 14px;
+}
+
+.nav-item .btn-group {
+    margin-right: 50px;
+    margin-top  : 5px;
+    margin-left : 20px;
+    width       : 120px;
+
+}
+
+.nav-item .btn-group button {
+    background-color: #fff;
+    color           : blue;
+}
+
+.footer__main {
+    padding: 20px 20px 0px;
+    margin : 0 10%;
+}
+
+#filte-dropdown {
+    width           : 100px;
+    background-color: #fff;
+    color           : black;
+    border          : none;
+}
+
+.cover-img {
+    background-image          : url('https://elitetour.com.vn/files/images/DulichDaNang/cau-vang-danang.jpg');
+    padding                   : 1%;
+    justify-content           : center;
+    border-bottom-left-radius : 20%;
+    border-bottom-right-radius: 20%;
+    background-repeat         : no-repeat;
+    display                   : flex;
+}
+
+.cover-img p {
+    text-align : center;
+    font-size  : 300%;
+    color      : #ffffff;
+    font-weight: bold;
+}
+
+.cover-img span {
+    text-align : center;
+    font-size  : 200%;
+    color      : #ffffff;
+    font-weight: bold;
+}
+
+.intro,
+.news {
+    background-color: white;
+    padding         : 5%;
+    border-radius   : 5%;
+}
+
+.intro h2,
+.news h2 {
+    text-align: center;
+}
+
+.intro p,
+.news p {
+    text-align: justify;
+    font-size : 120%;
+}
+
+.row1,
+.news {
+    padding: 1%;
+}
+
+.news h1 {
+    text-align: center;
+    /* Căn giữa ngang */
+    margin-top: 0;
+    /* Loại bỏ khoảng trống trên cùng */
+}
+
+.card {
+    margin: 1%;
+}
+
+.card-body p {
+    font-size: 70%;
+    color    : gray;
+}
+
+.modal-body p {
+    font-size: 100%;
+}
+
+.modal-body-img {
+    width  : 70%;
+    display: block;
+    margin : 0 auto;
+}
+
+/* Footer */
+footer {
+    background-color: #fff;
+    margin          : 15px 0;
+}
+
+.footer__main {
+    display        : flex;
+    justify-content: space-between;
+    padding        : 0 10px;
+
+}
+
+.footer__main .footer__item {
+    text-align   : left;
+    width        : 33.33%;
+    align-items  : center;
+    align-content: start;
+}
+
+.footer__main .footer_links {
+    font-size: 14px;
+}
+
+.footer__main {
+    background-color: #ffffff;
+    padding-bottom  : 35px;
+    font-size       : 14px;
+    color           : #0f294d;
+}
+
+.footer__item a {
+    margin-bottom: 2px;
+    font-size    : 12px;
+    line-height  : 1.5;
+    margin       : 0;
+}
+
+.footer__item h3 {
+    font-size    : 16px;
+    font-weight  : 700;
+    margin-top   : 0;
+    margin-bottom: 8px;
+}
+
+.footer__main {
+    /* justify-content: center; */
+    border-top    : 1px solid #e4e4e4;
+    border-bottom : 1px solid #e4e4e4;
+    padding-top   : 32px;
+    padding-bottom: 35px;
+}
+
+.footer__item img {
+    width : 50px;
+    height: 50px;
+}
+
+.footer__item a {
+    margin: 10px;
+}
+
+.nav-item .dropdown-menu a {
+    color: black;
+}
+
+
+.Copyright p {
+    text-align    : center;
+    font-size     : 12px;
+    padding-top   : 32px;
+    padding-bottom: 35px;
+
+}
+
+#footer-bg{
+    display: none;
+}
+
+@media (max-width:1130px) {
+    .article {
+        display              : grid !important;
+        grid-column-gap      : 30px;
+        gap                  : 30px;
+        grid-template-columns: auto auto;
+        justify-content      : center;
+    }
+
+    .intro p {
+        font-size: 100%;
+    }
+
+    .cover-img {
+        display: none !important;
+    }
+
+}
+
+@media (max-width:694px) {
+    .article {
+        display              : grid !important;
+        grid-column-gap      : 30px;
+        gap                  : 30px;
+        grid-template-columns: auto;
+        justify-content      : center;
+    }
+
+    .footer__main {
+        display      : grid !important;
+        grid-template: 3fr 3fr/ 3fr 3fr;
+        text-align   : center;
+    }
+
+    .footer__item {
+        width: 100% !important;
+    }
+
+    .cover-img {
+        display: none !important;
+    }
+}
+
+@media (max-width:344px) {
+    .footer__main {
+        display      : grid !important;
+        grid-template: 3fr 3fr/ 3fr 3fr;
+        text-align   : center;
+    }
+
+    .footer__item {
+        width: 100% !important;
+    }
+}

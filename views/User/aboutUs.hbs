@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <!-- < !-- icon  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bt  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/aboutUs.css">
+</head>
+
+<body>
+  {{>header}}
+
+
+  <section>
+    <div class="main_body">
+      <div class="container">
+        <div class="row cover-img">
+          <p>LastingTrip</p>
+          <span>Người bạn đồng hành đáng tin cậy</span>
+        </div>
+
+        <div class="intro">
+          <h2>Giới thiệu về chúng tôi</h2>
+          <p>
+            Xin chào tất cả mọi người! <br>
+            Chúng em là Nhóm 11 đến từ lớp NT208.O22.ANTT, trường Đại học Công nghệ Thông Tin - ĐHQG TPHCM.<br>
+            Nhóm chúng em gồm 5 thành viên:<br>
+            - 22521376 - Trịnh Thị Bích Thảo (Nhóm trưởng)<br>
+            - 22521541 - Thái Ngọc Diễm Trinh<br>
+            - 22521444 - Huỳnh Trung Thuận<br>
+            - 22521446 - Lê Hiệp Thuận<br>
+            - 22521202 - Nguyễn Đình Quang<br>
+          
+          </p>
+        </div>
+
+        <div class="news">
+          <h2>Tin tức</h2>
+          <div class="row article news">
+            <div class="col-3">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#news1Modal">
+                <div class="card" style="width: 18rem;">
+                  <img src="https://dimg04.c-ctrip.com/images/0AF3y12000dfv0s6r06F8.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Đây là bài báo số 1</h5>
+                    <p class="card-text">Nhấn vào để đọc thêm...</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-3">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#news1Modal">
+                <div class="card" style="width: 18rem;">
+                  <img src="https://dimg04.c-ctrip.com/images/0AF3y12000dfv0s6r06F8.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Đây là bài báo số 2</h5>
+                    <p class="card-text">Nhấn vào để đọc thêm...</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-3">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#news1Modal">
+                <div class="card" style="width: 18rem;">
+                  <img src="https://dimg04.c-ctrip.com/images/0AF3y12000dfv0s6r06F8.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Đây là bài báo số 3</h5>
+                    <p class="card-text">Nhấn vào để đọc thêm...</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-3">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#news1Modal">
+                <div class="card" style="width: 18rem;">
+                  <img src="https://dimg04.c-ctrip.com/images/0AF3y12000dfv0s6r06F8.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Đây là bài báo số 4</h5>
+                    <p class="card-text">Nhấn vào để đọc thêm...</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Modal của news -->
+          <div class="modal fade" id="news1Modal" tabindex="-1" aria-labelledby="news1ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="news1ModalLabel">Bài báo số 1</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Bài báo số 1</p>
+                  <img src="https://dimg04.c-ctrip.com/images/0AF3y12000dfv0s6r06F8.jpg" alt="..."
+                    class="modal-body-img">
+                  <p>Rất nhiều chữ ở đây</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer  -->
+{{>footer}}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="../js/aboutUs.js"></script>
+</body>
+
+</html>

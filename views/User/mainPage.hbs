@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LastingTrip.com</title>
+
+  <!-- icon  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bt  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <!-- main  -->
+  <link rel="stylesheet" href="/css/mainPage.css">
+
+
+
+</head>
+
+<body>
+ <!-- Quang -->
+ {{!-- <header>
+  <div class=" container-fluid navi">
+    <div class="row">
+      <div class="col-lg-2">
+        <h1 style="color: white;"><a href="../html/index.html" target="_blank">LastingTrip</a></h1>
+      </div>
+      <div class="col-lg-5">
+        <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm justify-content-start">
+          <div class="navbar1">
+            <ul class="navi navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/hotelList" >Khách sạn</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Xem gần đây</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Danh sách đặt phòng</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/supplier" target="_blank">Trở thành nhà cung cấp</a>
+              </li>
+              <li class="nav-item">
+                <!-- <a class="nav-link" href="#"><strong>...</strong></a> -->
+              </li>
+            </ul>
+          </div>
+         
+
+        </nav>
+
+      </div>
+
+      <div class="col-lg-5">
+        <nav class="navi2 navbar navbar-expand-lg navbar-expand-md navbar-expand-sm justify-content-end">
+          <div class="navbar1"><ul class="navi navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Hỗ trợ khách hàng</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Trợ giúp</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/aboutUs">About Us</a>
+            </li>
+            <li class="nav-item ">
+              <button type="button" class="header-search-booking-btn">Search</button>
+            </li>
+            <li class="nav-item ">
+              <a href="/register"><button type="button" class="header-register-btn">Sign in/ Sign up</button>
+</a>
+            </li>
+          </ul></div>
+          
+    
+        </nav>
+        <div class="toggle_btn"> <i class="fa fa-bars"></i></div>
+      </div>
+    </div>
+    <div class="dropdown_menu">
+      <li><a class="nav-link" href="../html/item.html" target="_blank">Khách sạn</a></li>
+      <li><a class="nav-link" href="#">Xem gần đây</a></li>
+      <li><a class="nav-link" href="#">Danh sách đặt phòng</a></li>
+      <li><a class="nav-link" href="../html/becomesupplier.html" target="_blank">Trở thành nhà cung cấp</a></li>
+      <li><a class="nav-link" href="#">Hỗ trợ khách hàng</a></li>
+      <li><a class="nav-link" href="#">Trợ giúp</a></li>
+      <li><button type="button" class="header-register-btn">Sign in/ Sign up</button></li>
+    
+    </div>
+  </div>
+
+</header> --}}
+  {{> header}}
+
+  <!-- Header search -->
+  {{!-- <section id="hotel_container">
+    <section>
+      <article>
+        <div class="hotel-list-page">
+          <div class="searchBox">
+            <!-- search bar, Thảo, Thuận -->
+            <div class="hotel-searchBox hide-on-mobile">
+              <div class="flex">
+                <ul class="ul-search">
+                  <li class="list-item list-destination">
+                    <div class="search-container">
+                      <label for="hotel-destination" id="hotel-destination-label">Địa điểm</label>
+                      <div></div>
+                      <input type="text" id="hotel-destination" value=""
+                        placeholder="Thành phố, địa điểm">
+                      <div></div>
+                    </div>
+                  </li>
+
+                  <li class="list-item list-calendar">
+                    <div class="calendar-container">
+                      <div class="in">
+                        <label class="text" for="checkIn">Check-in</label>
+                        <input type="date" id="checkIN" placeholder="Chọn ngày">
+                      </div>
+                      <div id="time_booking"> </div>
+                      <div class="out">
+                        <label class="text" for="checkOut">Check-out</label>
+
+                        <input type="date" id="checkOut" placeholder="Chọn ngày">
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class=" list-item rooms-and-guests">
+                    <div class="room-guest-container">
+                      <label class="label1" for="rooms-and-guests">Số lượng phòng và khách</label>
+                      <div class="dropdown">
+                        <button id="dropbtn" class="dropbtn"><span class="room-item-count" id="room-count">0</span>
+                          Phòng,
+                          <span class="adults-item-count" id="adults-count">0</span> Người lớn, <span
+                            class="children-item-count" id="children-count">0</span> Trẻ em </button>
+                        <div id="myDropdown" class="dropdown-content">
+                          <a href="#" class="dropdown-item" data-count="0" data-type="room">
+                            <span>Phòng</span>
+                            <span class="room-item-count" id="room-item-count">0</span>
+                            <button class="add-btn" data-type="room">+</button>
+                          </a>
+                          <a href="#" class="dropdown-item" data-count="0" data-type="adults">
+                            <span>Người lớn</span>
+                            <span class="adults-item-count" id="adults-item-count">0</span>
+                            <button class="add-btn" data-type="adults">+</button>
+                          </a>
+                          <a href="#" class="dropdown-item" data-count="0" data-type="children">
+                            <span>Trẻ em</span>
+                            <span class="children-item-count" id="children-item-count">0</span>
+                            <button class="add-btn" data-type="children">+</button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-item button">
+                    <div class="search-button-container">
+                      <button class="search-button">
+                        <i type="search" class="fa fa-search"></i>
+                        <span>Search</span>
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- </div> -->
+              <div class="add-on-container">
+                <div class="is-travel-working">
+                  <input type="checkbox" id="travel-for-work">
+                  <label for="travel-for-work" class="is-travel-working-text">Tôi đang đi công tác</label>
+                  <span class="is-travel-working-icon"><i class="fa-solid fa-circle-info"></i></span>
+                  <div class="is-travel-working-status">
+                    Nếu bạn chọn lựa chọn này, chúng tôi sẽ ưu tiên những khách sạn phù hợp với doanh nhân.
+                  </div>
+                </div>
+
+                <div class="star-rating">
+                  <label class="star-rating-text">Xếp hạng sao</label>
+                  <!-- <div class="star-rating-icon"> -->
+                  <span class="star-rating-icon">
+                    <em>2</em>
+                    <i class="fa-regular fa-star"></i>
+                  </span>
+                  <span class="star-rating-icon">
+                    <em>3</em>
+                    <i class="fa-regular fa-star"></i>
+                  </span>
+                  <span class="star-rating-icon">
+                    <em>4</em>
+                    <i class="fa-regular fa-star"></i>
+                  </span>
+                  <span class="star-rating-icon">
+                    <em>5</em>
+                    <i class="fa-regular fa-star"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </section> --}}
+{{> searchBar}}
+
+  <!-- item  -->
+  <section class="body">
+    <section class="inner">
+
+      <div class="topPick">
+        <div id="carouselExampleControls1" class="carousel">
+          <h2>Lựa chọn hàng đầu về khách sạn 5 sao sang trọng</h2>
+          <div class="carousel-inner" id="carousel_topPick">
+
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="budget-friendly">
+        <div id="carouselExampleControls2" class="carousel">
+          <h2>Khách sạn phù hợp túi tiền</h2>
+          <div class="carousel-inner" id="carousel_budgetFriendly">
+
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls2"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls2"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+
+      <div class="trending">
+        <div id="carouselExampleControls3" class="carousel">
+          <h2>Nhà khách thịnh hành</h2>
+          <div class="carousel-inner" id="carousel_Trending">
+
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls3"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls3"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="faq-hotel">
+        <div class="faq-title">
+          <h2 class="title">FAQ</h2>
+        </div>
+        <div class="faq-content">
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+            <!-- Accordion Item #1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                  aria-controls="panelsStayOpen-collapseOne" style="background-color: white; ">
+                  Làm cách nào để tôi có thể đặt phòng trên LastingTrip.com? </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                  Để đặt phòng khách sạn trên LastingTrip.com, bạn chỉ cần nhập điểm đến, ngày đi, ngày về và số lượng
+                  khách. Sau
+                  đó, dạo xem các khách sạn có sẵn và chọn khách sạn bạn muốn đặt. Thực hiện từng bướcnhập thông tin
+                  thanh toán của bạn và hoàn tất việc đặt phòng.
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item #2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseTwo" style="background-color: white;">
+                  Làm thế nào để có được khách sạn giá rẻ trên LastingTrip.com? </button>
+              </h2>
+              <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  Có nhiều cách để tìm được các khách sạn giá cả phải chăng trên LastingTrip.com. Bạn có thể thu hẹp
+                  phạm vi tìm kiếm của mình bằng cách lọc khách sạn theo mức giá phù hợp, hoặc bạn có thể sắp xếp
+                  kết quả theo giá để xem các tùy chọn ít giá rẻ trước tiên.
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item #3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseThree" style="background-color: white;">
+                  Tôi có thể tìm những ưu đãi khách sạn ở đâu trên LastingTrip.com? </button>
+              </h2>
+              <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  LastingTrip.com cung cấp nhiều ưu đãi và khuyến mãi khách sạn có sẵn trong suốt cả năm. Bạn có thể
+                  dễ dàng tìm thấy những ưu đãi đặc biệt này trên trang ưu đãi của chúng tôi. Hơn nữa, nếu bạn là thành
+                  viên của chương trình khách hàng thân thiết của chúng tôi, bạn có thể đăng nhập vào tài khoản của mình
+                  và khám phá mức giá chiết khấu độc quyền tại các trang danh sách khách sạn.
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item #4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseFour" style="background-color: white;">
+                  Cách để có được giá thấp hơn khi đặt phòng là gì?</button>
+              </h2>
+              <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  Đôi khi đặt phòng khách sạn vào giữa tuần rẻ hơn, nhưng nó cũng phụ thuộc vào mùa. </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item #5 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseFive" style="background-color: white;">
+                  Có bao nhiêu khách sạn trên LastingTrip.com vậy? </button>
+              </h2>
+              <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  There are over 5,000,000 Khách sạn ở more than 230 countries or regions on Trip.com. Don't know which
+                  hotel to book? Browse the site to get ideas!
+                  Có hơn 1000 khách sạn trên LastingTrip.com. Bạn không biết nên đặt khách sạn nào? Hãy dạo xem một vòng
+                  nhé!
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item #6 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseSix" style="background-color: white;">
+                  Tôi có thể hủy hoặc thay đổi phòng trên LastingTrip.com không? </button>
+              </h2>
+              <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  Điều này phụ thuộc vào chính sách khách sạn và thời gian hủy. Bạn hãy kiểm tra phần chính sách của
+                  khách sạn liên quan. Để hủy hoặc thay đổi đặt phòng của bạn, hãy đăng nhập vào tài khoản
+                  LastingTrip.com của bạn, đi tới "Đặt chỗ của tôi" và làm theo hướng dẫn.
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Item #7 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false"
+                  aria-controls="panelsStayOpen-collapseSeven" style="background-color: white;">
+                  Làm sao để liên hệ với dịch vụ chăm sóc khách hàng của LastingTrip.com? </button>
+              </h2>
+              <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  Bạn có thể liên hệ với chúng tôi 24/7 bằng cách truy cập trung tâm trợ giúp LastingTrip.com
+                  và gửi yêu cầu hỗ trợ. Bạn cũng có thể liên hệ qua điện thoại hoặc trò chuyện, tùy thuộc vào vị
+                  trí của bạn.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-hotel">
+        <div class="seo-htl-table-info pc ">
+          <h2 class="title">Thông tin khách sạn</h2>
+          <table>
+            {{!-- render main page  --}}
+            <tbody>
+              <tr>
+                <th>Số lượng khách sạn</th>
+                <td>
+                  <span id="numberHotelCount"></span>
+                </td>
+              </tr>
+              <tr>
+                <th>Số lượng đánh giá</th>
+                <td>
+                  <span id="numberRating"></span>
+                </td>
+              </tr>
+              <tr>
+                <th>Mức giá thấp nhất</th>
+                <td>
+                  <span id="lowestPrice"> </span> <span>VND</span>
+                </td>
+              </tr>
+              <tr>
+                <th>Mức giá cao nhất</th>
+                <td>
+                  <span id="highestPrice"> </span> <span>VND</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="hotel-guide  ">
+          <h2 class="title">Khách sạn trên LastingTrip.com </h2>
+          <section id="guide_nav_v8">
+            <div class="hotel-guide-detail">
+              <div class="content-title">Khách sạn phù hợp với tất cả mọi người</div>
+              <div class="content-content">
+                Chúng ta đều biết, khách sạn có thể quyết định một kỳ nghỉ. Đó là lý do tại sao, tại LastingTrip.com,
+                bạn có thể tìm thấy các khách sạn phù hợp với nhu cầu của mình. Với sự lựa chọn của hơn 30 khách sạn,
+                cho dù bạn đang bay hay ở gần nhà hơn, việc tìm chỗ ở chưa bao giờ dễ dàng hơn thế. Từ khách sạn đến nhà
+                nghỉ, homestay, luôn luôn có chỗ ở cho tất cả mọi người tại LastingTrip.com. Cho dù bạn đang tìm kiếm ở
+                chi phí thấp, sang trọng hay thứ gì đó ở giữa, bạn có thể tìm thấy mọi thứ từ kỳ nghỉ 5 sao xứng đáng
+                với tuần trăng mật đến các nhà nghỉ thân thiện với du khách bình dân. Chỉ cần lọc, tìm kiếm và
+                sẵn sàng đặt chỗ. thôi nào.</div>
+              <div class="content-title">Đảm bảo mức giá tốt nhất</div>
+              <div class="content-content">Không cần phải tìm kiếm trên một số trang web khác để tìm giá tốt nhất, với
+                LastingTrip.com, bạn có thể chắc chắn rằng bạn đang nhận deal tốt nhất có thể. Nếu cuối
+                cùng bạn tìm thấy một lựa chọn rẻ hơn ở nơi khác, chúng tôi thậm chí sẽ hoàn lại khoản chênh lệch. Tham
+                gia chương trình khách hàng thân thiết LastingTrip.com cũng là một cách tuyệt vời để tiết kiệm tiền.
+                Ngoài việc mở khóa giảm giá độc quyền chỉ dành cho thành viên, bạn có thể kiếm được xu chuyến đi mỗi khi
+                đặt chỗ, có thể được sử dụng ngay lập tức để tiết kiệm tiền cho chuyến đi tiếp theo của bạn. Thêm vào
+                đó, tư cách thành viên là miễn phí và kéo dài suốt đời. Nếu bạn cần bất kỳ trợ giúp nào trên đường đi,
+                bộ phận hỗ trợ khách hàng 24/7 từng đoạt giải thưởng của chúng tôi sẽ cung cấp tất cả các hỗ trợ bạn
+                cần.
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+
+      <div class="recommended">
+        <div class="thetitle">
+          <h2>Gợi ý</h2>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="inforall">
+                <!-- Set initial button styles for the first button -->
+                <button class="btn btn-outline-info" type="button" onclick="toggleCollapse(1)"
+                  style="border:none; color: #fff; background-color: #10294D;">Thành phố nổi tiếng</button>
+                <!-- Other buttons -->
+                <button style="border:none;" class="btn btn-outline-info" type="button"
+                  onclick="toggleCollapse(2)">Khách sạn phổ biến</button>
+              </div>
+
+              <!-- Collapsible content -->
+              <div class="collapse show" id="noi-dung-collapse1">
+                <div class="container HotelLocate">
+                  <div class="row">
+                    <div class="col">
+                      <a href="" id="hcm">Khách sạn ở Thành phố Hồ Chí Minh</a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace">Đà Nẵng</span></a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Hà Nội</span></a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Phú Quốc</span></a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <a href="">Khách sạn ở Bà Rịa <span class="hotelPlace"> Vũng Tàu</span></a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Đà Lạt</span></a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Kiên Giang</span></a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Nha Trang</span></a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Quận 1</span></a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Quận 7</span></a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Bắc Giang</span></a>
+                    </div>
+                    <div class="col">
+                      <a href="">Khách sạn ở <span class="hotelPlace"> Huế </span></a>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="collapse" id="noi-dung-collapse2">
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <a href="#" class="hotelName">New World Phu Quoc Resort</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Oakwood Hạ Long</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Tan Son Nhat Saigon Hotel</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Du thuyền Scarlet Pearl Cruises</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <a href="#" class="hotelName">Ehome Saigon </a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">California Hotel</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Old Quarter Hotel 1961</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Alma Resort Cam Ranh</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <a href="#" class="hotelName">Vinpearl Resort, Spa Phú Quốc</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">ConMeoNho Hotel</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">New World Phu Quoc Resort</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Du thuyền Scarlet Pearl Cruises</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <a href="#" class="hotelName">Adina Hotel</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">InterContinental Phu Quoc Long Beach Resort</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">New Orient Da Nang Hotel</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Lavender Riverside Hotel</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <a href="#" class="hotelName">Senna Hue Hotel</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Xoài Homestay Vũng Tàu - The Sóng Apartment</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Grand Ocean Luxury Boutique</a>
+                    </div>
+                    <div class="col">
+                      <a href="#" class="hotelName">Hoang Sa Hotel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+    </section>
+  </section>
+
+  <!-- Hiep Thuan -->
+
+  {{> footer}}
+
+  {{>backToTop}}
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <script src="/js/backToTop.js"></script>
+        <script src="/js/carouselClick.js"></script>
+    <script src="/js/carouselHotel.js"></script>
+  <script src="/js/mainPage.js"></script>
+
+  <!-- css -->
+</body>
+
+</html>

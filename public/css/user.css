@@ -1,0 +1,423 @@
+*{
+  font-family: Ubuntu, sans-serif;
+}
+.layout {
+  display: flex;
+}
+
+.users-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.users-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.users-quantity {
+  margin-bottom: 10px;
+}
+
+.users-table {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.users-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table th, .users-table td {
+  padding: 8px;
+  text-align: center;
+}
+
+.users-table th {
+  background-color: #f2f2f2;
+}
+
+.users-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.users-table tbody tr:hover {
+  background-color: #ddd;
+}
+
+.users-table button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 2px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.users-table button.editUser {
+  background-color: #008CBA; /* Blue */
+}
+
+.users-table button.deleteUser {
+  background-color: #f44336; /* Red */
+}*/
+.popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+}
+.popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 400px; /* Kích thước tối thiểu */
+      min-height: 300px; /* Kích thước tối thiểu */
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+      padding: 20px;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.9); /* Màu nhạt cho nền */
+      display: flex;
+      flex-direction: column;
+  }
+
+  /* CSS cho nút đóng popup */
+  .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #999999;
+  }
+
+  /* CSS cho form trong popup */
+  .popup h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333333;
+  }
+  .popup form {
+      display: flex;
+      flex-direction: column;
+  }
+  .popup input[type="text"],
+  .popup input[type="email"] {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+  }
+  .popup .input-group {
+      display: flex;
+      margin-bottom: 15px;
+  }
+  .popup .input-group input {
+      flex: 1;
+      margin-right: 10px;
+  }
+  .popup .input-group input:last-child {
+      margin-right: 0;
+  }
+  .popup input[type="submit"] {
+      padding: 12px 50px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  }
+  .popup input[type="submit"]:hover {
+      background-color: #0056b3;
+  }
+     /* CSS cho button mở popup */
+     .custom-openPopup {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+  }
+  .users-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .users-search p {
+    margin: 0; /* Loại bỏ margin mặc định của thẻ p */
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .users-search-btn {
+    display: flex;
+    align-items: center;
+  }
+  
+  .users-search-create {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .users-search-create:hover {
+    background-color: #45a049;
+  }
+  .popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .popup form {
+    width: 100%;
+  }
+  
+  .popup .input-group {
+    display: flex;
+  }
+  
+  .popup .input-group input {
+    flex: 1;
+  }
+  
+  .popup .ebutton {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Điều chỉnh khoảng cách giữa nút và các input */
+  }
+  /* CSS cho popup và overlay */
+  .custom-popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1001;
+  }
+  .custom-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 400px; /* Kích thước tối thiểu */
+      min-height: 300px; /* Kích thước tối thiểu */
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+      padding: 20px;
+      z-index: 1002;
+      background-color: rgba(255, 255, 255, 0.9); /* Màu nhạt cho nền */
+  }
+
+  /* CSS cho nút đóng popup */
+  .custom-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #999999;
+  }
+
+  /* CSS cho form trong popup */
+  .custom-popup h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333333;
+  }
+  .custom-popup form {
+      display: flex;
+      flex-direction: column;
+  }
+  .custom-popup input[type="text"],
+  .custom-popup input[type="email"],
+  .custom-popup input[type="password"] {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+  }
+  .custom-popup .input-group {
+      display: flex;
+      margin-bottom: 15px;
+  }
+  .custom-popup .input-group input {
+      flex: 2;
+      margin-right: 10px;
+  }
+  .custom-popup .input-group input:last-child {
+      margin-right: 0;
+  }
+  .custom-popup input[type="submit"] {
+      padding: 12px 0;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  }
+  .custom-popup input[type="submit"]:hover {
+      background-color: #0056b3;
+  }
+  .custom-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+  }
+  
+  .custom-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 400px;
+    min-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    padding: 20px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .custom-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999999;
+  }
+  
+  .custom-popup h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333333;
+  }
+  
+  .custom-popup form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .custom-popup input[type="text"],
+select,
+  .custom-popup input[type="email"],
+  .custom-popup input[type="password"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .custom-popup .input-group {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  
+  .custom-popup .input-group input {
+    flex: 2;
+    margin-right: 10px;
+  }
+  
+  .custom-popup .input-group input:last-child {
+    margin-right: 0;
+  }
+  
+  .custom-popup input[type="submit"] {
+    padding: 12px 0;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-popup input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+
+  .popup-overlay-delete {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.popup-delete {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1002;
+}
+
+.popup-delete h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    text-align: center;
+}
+
+.popup-delete p {
+    margin-bottom: 20px;
+    color: #666666;
+    text-align: center;
+}
+
+.popup-delete button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 55px;
+}
+
+.popup-delete button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,98 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/user.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="/css/adminhotel.css" />
+  <title>User</title>
+</head>
+
+<body>
+  <div class="layout">
+    <div class="users-container">
+      <div class="users-search">
+        <p>Vailoz luon</p>
+        <div class="users-search-btn">
+          <div class="users-search-create">+ Create</div>
+        </div>
+      </div>
+      <div class="users-quantity"> in total</div>
+      <div class="users-table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>PASSWORD</th>
+              <th>SDT</th>
+              <th>TYPE</th>
+              <th>ACTION</th>
+              <th>Image</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Các dòng dữ liệu sẽ được render ở đây -->
+          </tbody>
+        </table>
+
+      </div>
+      <div class="popup-overlay">
+
+      </div>
+      <div class="custom-popup-overlay">
+        <div class="custom-popup">
+          <span class="custom-close-btn">&times;</span>
+          <h2>Add new user</h2>
+          <form id="signupForm">
+            <input type="text" id="name" name="name" placeholder="Name" autocomplete="current-password" required />
+            <input type="email" id="email" name="email" placeholder="Email" autocomplete="current-password" required />
+            <input type="password" id="password" name="password" placeholder="Password" autocomplete="current-password"
+              required />
+            <div class="input-group">
+              <input type="text" id="numberPhone" name="numberPhone" placeholder="Number Phone" required />
+              <select id="typeSelect" name="type">
+                <option value="">Chọn loại</option>
+                <option value="admin">admin</option>
+                <option value="agent">agent</option>
+                <option value="client">client</option>
+                <!-- Thêm các tùy chọn khác nếu cần -->
+              </select>
+
+            </div>
+            <input type="submit" class="dkbutton" value="Add" />
+          </form>
+        </div>
+      </div>
+      <div class="popup-overlay-delete">
+        <div class="popup-delete">
+          <h2>Xác nhận xóa</h2>
+          <p>Bạn có chắc chắn muốn xóa người dùng này không?</p>
+          <div class="btn-group">
+            <button class="confirm-delete">Xác nhận</button>
+            <button class="cancel-delete">Hủy</button>
+          </div>
+        </div>
+      </div>
+      <div class="popup-overlay" id="imagePopupOverlay">
+        <div class="popup-content">
+          <span class="close-btn">&times;</span>
+          <h2>Image Details</h2>
+          <div class="image-container">
+            <!-- Danh sách ảnh sẽ được tạo và thêm vào đây bằng JavaScript -->
+          </div>
+          <button id="addImageButton">Add Image</button>
+        </div>
+      </div>
+    </div>
+
+</body>
+
+<script src="/js/AdminHotel.js"></script>
+
+</html>

@@ -1,0 +1,175 @@
+
+.chatbot-toggler {
+  position: fixed;
+  bottom: 337.5px;
+  right: 20px;
+  outline: none;
+  border: none;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  background: blue;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+body.show-chatbot .chatbot-toggler {
+  transform: rotate(90deg);
+}
+.closed-btn {
+  cursor: pointer;
+  margin-left: auto;
+  /* Thêm bất kỳ thuộc tính CSS nào khác cần thiết để đảm bảo nút "close" hiển thị đúng */
+}
+
+.chatbot-toggler span {
+  color: #fff;
+  position: absolute;
+}
+.chatbot-toggler span:last-child,
+body.show-chatbot .chatbot-toggler span:first-child  {
+  opacity: 0;
+}
+body.show-chatbot .chatbot-toggler span:last-child {
+  opacity: 1;
+}
+.chatbot1 {
+  position: fixed;
+  right: 35px;
+  bottom: 90px;
+  width: 420px;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+  transform-origin: bottom right;
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+              0 32px 64px -48px rgba(0,0,0,0.5);
+  transition: all 0.1s ease;
+}
+body.show-chatbot .chatbot1 {
+  opacity: 1;
+  z-index: 1000;
+  pointer-events: auto;
+  transform: scale(1);
+}
+.chatbot1 header {
+  padding: 16px 0;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  background: blue;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.chatbot1 header span {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  color: white;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+header h2 {
+  font-size: 1.4rem;
+}
+.chatbot1 .chatbox {
+  overflow-y: auto;
+  height: 410px;
+  padding: 30px 20px 100px;
+}
+.chatbot1 :where(.chatbox)::-webkit-scrollbar {
+  width: 6px;
+}
+.chatbot1 :where(.chatbox)::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 25px;
+}
+.chatbot1 :where(.chatbox)::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 25px;
+}
+.chatbox .chat {
+  display: flex;
+  list-style: none;
+}
+.chatbox .outgoing {
+  margin: 20px 0;
+  justify-content: flex-end;
+}
+.chatbox .incoming span {
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  cursor: default;
+  text-align: center;
+  line-height: 32px;
+  align-self: flex-end;
+  background: blue;
+  border-radius: 4px;
+  margin: 0 10px 7px 0;
+}
+.chatbox .chat p {
+  white-space: pre-wrap;
+  padding: 12px 16px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 75%;
+  color: #fff;
+  font-size: 0.95rem;
+  background: #724ae8;
+}
+.chatbox .incoming p {
+  border-radius: 10px 10px 10px 0;
+}
+.chatbox .chat p.error {
+  color: #721c24;
+  background: #f8d7da;
+}
+.chatbox .incoming p {
+  color: #000;
+  background: #f2f2f2;
+}
+.chatbot1 .chat-input {
+  display: flex;
+  gap: 80px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  padding: 3px 20px;
+  border-top: 1px solid #ddd;
+}
+.chat-input span {
+  align-self: flex-end;
+  color: #724ae8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.35rem;
+}
+#send-btn {
+  display: none;
+}
+
+@media (max-width: 490px) {
+  .chatbot1 {
+    right: 0;
+    bottom: 0;
+    height: 92%;
+    border-radius: 0;
+    width: 100%;
+  }
+  .chatbot1 .chatbox {
+    height: 90%;
+    padding: 25px 15px 100px;
+  }
+  .chatbot1 .chat-input {
+    padding: 5px 15px;
+  }
+  .chatbot1 header span {
+    display: block;
+  }
+}

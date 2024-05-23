@@ -1,0 +1,92 @@
+<section id="hotel_container">
+  <section>
+    <article>
+      <div class="hotel-list-page">
+        <div class="searchBox">
+          <!-- search bar, Thảo, Thuận -->
+          <div class="hotel-searchBox hide-on-mobile">
+            <div class="flex">
+              <ul class="ul-search">
+                <li class="list-item list-destination">
+                  <div class="search-container">
+                    <label for="hotel-destination" id="hotel-destination-label">Địa điểm</label>
+                    <div></div>
+                    <input type="text" id="hotel-destination" value="" placeholder="Thành phố, địa điểm" />
+                    <div></div>
+                  </div>
+                </li>
+
+                <li class="list-item list-calendar">
+                  <div class="calendar-container">
+                    <div class="in">
+                      <label class="text" for="checkIn">Check-in</label>
+                      <input type="date" id="checkIn" placeholder="Chọn ngày" min="" />
+                    </div>
+                    <div id="time_booking"></div>
+                    <div class="out">
+                      <label class="text" for="checkOut">Check-out</label>
+                      <input type="date" id="checkOut" placeholder="Chọn ngày" min="" />
+                    </div>
+                  </div>
+                </li>
+
+                <li class="list-item rooms-and-guests">
+                  <div class="room-guest-container">
+                    <label class="label1" for="rooms-and-guests">Số lượng phòng
+                      và khách</label>
+                    <div class="dropdown">
+                      <button id="drop-all" class="drop-btn"><span class="room-item-count" id="room-count">1</span>
+                        Phòng,
+                        <span class="adults-item-count" id="adults-count">1</span>
+                        Người lớn,
+                        <span class="children-item-count" id="children-count">0</span>
+                        Trẻ em
+                      </button>
+                      <div id="myDropdown" class="dropdown-content">
+                        <a href="#" class="dropdown-item" data-count="1" data-type="room">
+                          <div class="first"> <span>Phòng</span></div>
+
+
+                          <button class="subtract-btn" data-type="children">-</button>
+                          <span class="room-item-count" id="room-item-count">1</span>
+                          <button class="add-btn" data-type="room">+</button>
+                        </a>
+                        <a href="#" class="dropdown-item" data-count="1" data-type="adults">
+
+                          <div class="first"> <span>Người lớn</span></div>
+                          <button class="subtract-btn" data-type="children">-</button>
+                          <span class="adults-item-count" id="adults-item-count">1</span>
+                          <button class="add-btn" data-type="adults">+</button>
+                        </a>
+                        <a href="#" class="dropdown-item" data-count="0" data-type="children">
+
+
+                          <div class="first"> <span>Trẻ em</span></div>
+                          <button class="subtract-btn" data-type="children">-</button>
+                          <span class="children-item-count" id="children-item-count">0</span>
+                          <button class="add-btn" data-type="children">+</button>
+
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="list-item button">
+                  <div class="search-button-container" id="search-hotel">
+                    <button class="search-button">
+                      <i type="search" class="fa fa-search"></i>
+                      <span>Search</span>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+    </article>
+  </section>
+</section>
+<script src="../js/searchbar.js"></script>
+<link rel="stylesheet" href="/css/searchbar.css">

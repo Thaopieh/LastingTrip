@@ -1,0 +1,176 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/agent.css" />
+    <title>Agent Zone</title>
+  </head>
+
+  <body>
+
+    <div class="layout">
+      <div class="agent-container">
+        <div class="agent-search">
+          <p>QUẢN LÝ KHÁCH SẠN</p>
+          <div class="agent-search-btn">
+            <div class="agent-search-create">Thêm khách sạn</div>
+          </div>
+        </div>
+        <div class="agent-table-header">
+          <table>
+            <tr>
+              {{! <th class="col1">2</th>
+                        <th class="col2">Khách sạn con mèo</th>
+                        <th class="col1">Đánh giá</th>
+                        <th class="col1">Người dùng đánh giá</th>
+                        <th class="col2">Địa chỉ</th>
+                        <th class="col2">Link map</th>
+                        <th class="col2">Loại phòng</th>
+                        <th class="col2">Trạng thái</th>
+                        <th class="col2">Giá</th>
+                        <th class="col1">Loại</th>
+                        <th class="col2">Map nhúng</th>
+                        <th class="col2">Sửa/Xóa</th> }}
+
+              {{! <td class="col1">2</td>
+                        <td class="col2">Khách sạn con mèo</td>
+                        <td class="col1">Đánh giá</td>
+                        <td class="col1">Người dùng đánh giá</td>
+                        <td class="col2">Địa chỉ</td>
+                        <td class="col2">Link map</td>
+                        <td class="col2">Loại phòng</td>
+                        <td class="col2">Trạng tdái</td>
+                        <td class="col2">Giá</td>
+                        <td class="col1">Loại</td>
+                        <td class="col2">Map nhúng</td>
+                        <td class="col2">Sửa/Xóa</td> }}
+            </tr>
+          </table>
+        </div>
+        <div class="agent-table">
+          <table>
+            <tr>
+              {{! <th>ID</th>
+                        <th>TÊN</th>
+                        <th>Đánh giá</th>
+                        <th>Người dùng đánh giá</th>
+                        <th>Địa chỉ</th>
+                        <th>Link map</th>
+                        <th>Loại phòng</th>
+                        <th>Trạng thái</th>
+                        <th>Giá</th>
+                        <th>Loại</th>
+                        <th>Map nhúng</th>
+                        <th>Sửa/Xóa</th> }}
+            </tr>
+            {{#each datatable}}
+              <tr>
+                <td class="col1">{{this.id}}</td>
+                <td class="col2">{{this.name}}</td>
+                <td class="col1">{{this.star}}</td>
+                <td class="col1">{{this.userRating}}</td>
+                <td class="col2">{{this.map}}</td>
+                <td class="col2">{{this.TypeHotel}}</td>
+                <td class="col2">{{this.cost}}</td>
+                <td class="col2">{{this.payment}}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="updateHotel"
+                    value={{this.id}}
+                  >Chỉnh sửa</button>
+                  <button
+                    type="button"
+                    class="deleteHotel"
+                    value={{this.id}}
+                  >Xóa</button>
+                  <button type="button" class="addRoom" value={{this.id}}>Thêm
+                    phòng</button>
+                </td>
+                <td><i class="fa-solid fa-image"></i></td>
+
+              </tr>
+
+            {{/each}}
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="popup-overlay">
+      {{! <div class="popup"> }}
+      {{! <span class="close-btn">&times;</span> }}
+      {{! <h2>Chỉnh sửa</h2> }}
+      {{! <form id="updateForm"> }}
+      {{! <input type="text" id="name" name="name" placeholder="Tên khách sạn" value="${data.name}" required>
+                }}
+      {{! <input type="text" id="star" name="star" placeholder="Đánh giá" value="${data.star}" required> }}
+      {{! <input type="text" id="userRating" name="userRating" placeholder="Người dùng đánh giá"
+                    value="${data.userRating}" required> }}
+      {{! <input type="text" id="map" name="map" placeholder="Địa chỉ" value="${data.map}" required> }}
+      {{! <input type="text" id="linkMap" name="linkMap" placeholder="Link địa chỉ" value="${data.linkMap}"
+                    required> }}
+      {{! <input type="text" id="roomType" name="roomType" placeholder="Loại phòng" value="${data.roomType}"
+                    required> }}
+      {{! <input type="text" id="status" name="status" placeholder="Trạng thái" value="${data.status}"
+                    required> }}
+      {{! <input type="text" id="cost" name="cost" placeholder="Giá" value="${data.cost}" required> }}
+      {{! <input type="text" id="type" name="type" placeholder="Loại" value="${data.type}" required> }}
+      {{! <input type="text" id="embedMap" name="embedMap" placeholder="Map nhúng" value="${data.embedMap}"
+                    required> }}
+      {{! <div class="ebutton"> }}
+      {{! <input type="submit" value="Cập nhật"> }}
+      {{! </div> }}
+      {{! </form> }}
+      {{! </div> }}
+    </div>
+
+    {{! <div class="popup-overlay-delete">
+        <div class="popup-delete">
+            <h2>Thông báo</h2>
+            <p>Đã xóa khách sạn thành công</p>
+            <button class="close-btn1">Đóng</button>
+        </div>
+    </div> }}
+
+    <div class="popup-overlay-delete">
+      <div class="popup-delete">
+        <h2>Xác nhận xóa</h2>
+        <p>Bạn có chắc chắn muốn xóa khách sạn này không?</p>
+        <div class="btn-group">
+          <button class="confirm-delete">Xác nhận</button>
+          <button class="cancel-delete">Hủy</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-overlay" id="imagePopupOverlay">
+      <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <h2>Image Details</h2>
+        <div class="image-container">
+          <!-- Danh sách ảnh sẽ được tạo và thêm vào đây bằng JavaScript -->
+        </div>
+        <button id="addImageButton">Add Image</button>
+      </div>
+    </div>
+
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="/js/agent.js"></script>
+
+</html>

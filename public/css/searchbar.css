@@ -1,0 +1,559 @@
+
+/* searcg bar  */
+.hotel-list-page {
+  /* background-image: url("https://th.bing.com/th/id/R.a58d3f96c719a0e290df215fb32c20df?rik=o7vA8jsQSTNLxA&pid=ImgRaw&r=0"); */
+  background-color: blue;
+  height: 100px;
+  position: relative;
+  width: 100%;
+}
+
+.searchBox .hotel-searchBox {
+  width: 77.4%;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0px 8px 20px 0px rgba(15, 41, 77, 0.12);
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 4px 8px;
+  position: absolute;
+  top: 50%;
+  left: 11.4%;
+}
+
+.add-on-container{
+  display: none;
+}
+
+.searchBox .list-item {
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  border-radius: 4px;
+  height: 56px;
+
+}
+
+.calendar-container {
+  border-radius: 4px;
+  width: 100%;
+
+}
+
+.searchBox .list-destination,
+.searchBox .rooms-and-guests,
+.calendar-container {
+  border: 1px solid #DADFE6;
+}
+
+#hotel-destination-label {
+  margin: 0;
+  padding-left: 6px;
+  width: 130px;
+}
+
+.search-container:hover {
+  transition: 0.5s;
+  border-bottom: 3px solid blue;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.ul-search {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 0.7fr;
+  grid-gap: 10px;
+  height: 70px;
+  align-items: center;
+  margin-left: -25px;
+  padding-top: 20px;
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 4px;
+
+}
+
+
+
+
+.calendar-container:hover {
+  transition: 0.5s;
+  border-bottom: 3px solid blue;
+}
+
+.in .text {
+  padding-left: 6px;
+}
+
+.out .text {
+  padding-right: 6px;
+
+}
+
+.in {
+
+  width: 110px;
+
+}
+
+.text {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 0px;
+}
+
+#hotel-destination {
+  border: none;
+  outline: none;
+  padding-bottom: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  padding-left: 6px;
+
+  /* margin-bottom:10px ; */
+}
+
+#room-guest-text {
+  margin: 0;
+  font-weight: 500;
+  padding-top: 5px;
+  font-size: 12px;
+  padding-left: 0px;
+}
+
+#hotel-destination-label {
+  font-size: 12px;
+  color: gray;
+}
+
+#checkIn {
+  border: 0px;
+  outline: none;
+  font-size: 14px;
+  color: black;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+
+
+}
+
+.label1 {
+  margin-top: 7px;
+  font-size: 12px;
+  color: gray;
+}
+
+.room-guest-container {
+  height: 56px;
+  min-width: 218px;
+}
+
+.room-guest-container:hover {
+  padding-bottom: 5px;
+  border-bottom: 3px solid blue;
+  transition: 0.5s;
+}
+
+#time_booking {
+  font-size: 12px;
+  color: gray;
+  margin: 0px 16px;
+
+}
+
+.out {
+  text-align: end;
+  width: 110px;
+  height: 100%;
+
+}
+
+#checkOut {
+  display: block;
+  border: 0px;
+  outline: none;
+  font-size: 14px;
+  color: black;
+  /* text-align: end; */
+  font-weight: 600;
+  width: 100%;
+}
+
+
+.room-guest-container {
+  padding: 0 6px;
+}
+
+.rooms-and-guests-text {
+  font-weight: 600;
+  padding-bottom: 1px;
+  margin-bottom: 0;
+}
+
+.rooms-and-guests-container:hover {
+  border-bottom: 3px solid blue;
+  padding-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+/* Nút dropdown */
+.drop-btn {
+  background-color: white;
+  padding: 0;
+  font-weight: 500;
+  color: #0f294d;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mũi tên đi xuống */
+.dropdown .drop-btn::after {
+  content: "\25BE";
+  /* Mã Unicode của mũi tên đi xuống */
+  margin-left: 5px;
+}
+
+/* Dropdown content (ẩn đi mặc định) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  z-index: 1;
+}
+
+
+/* Định dạng các phần tử trong dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Thay đổi màu khi hover */
+.dropdown-content a:hover {
+  background-color: white;
+}
+
+/* Định dạng cho nút dropdown khi hover */
+.dropdown:hover .drop-btn {
+  background-color: white;
+}
+
+/* Số lượng */
+.item-count {
+  margin-left: 10px;
+}
+
+/* Nút cộng */
+.add-btn {
+  background-color: white;
+  color: blue;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  border-radius: 50%;
+  border: 2px solid blue;
+  cursor: pointer;
+}
+.subtract-btn {
+  background-color: white;
+  color: blue;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  border-radius: 50%;
+  border: 2px solid blue;
+  cursor: pointer;
+}
+
+.search-button {
+  font-size: 18px;
+  font-weight: 700;
+  height: 56px;
+  color: #ffffff;
+  line-height: 24px;
+  padding: 16px;
+  background-color: #3264ff;
+  border-radius: 4px;
+  border: 0px;
+  width: 100%;
+}
+
+.search-button span{
+  color: white;
+}
+
+.search-button:hover {
+  background-color: #2953d6;
+}
+
+
+.main-body,
+.footer__main {
+  padding: 64px 20px 0px;
+  margin: 0 10%;
+}
+
+.gride.pc tbody {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#myDropdown .first
+{
+  width: 40%;
+}
+
+
+@media only screen and (max-width:1300px) {
+  .searchBox .hotel-searchBox {
+    top          : 26%;
+    left         : 13%;
+  }
+  .hotel-list-page{
+    height: 500px;
+  }
+  .ul-search {
+    grid-template-columns: 1fr;
+  }
+
+
+  .hotel-searchBox {
+    height  : 300px;
+    /* width: 30%; */
+    width   : 10%;
+
+
+  }
+
+  .flex {
+    flex-direction: column;
+    /* flex-shrink: calc(4); */
+    /* width      : 0px; */
+
+  }
+
+  .searchBox .list-destination,
+  .searchBox .rooms-and-guests,
+  .calendar-container {
+    width: 100%;
+  }
+
+  .search-container {
+    width: 20%;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .is-travel-working,
+  .star-rating {
+    display: none;
+  }
+}
+
+@media (max-width: 990px) {
+
+  .is-travel-working,
+  .star-rating,
+  .navbar,
+  .body_left {
+    display: none;
+  }
+
+  .body_right {
+    width: 100%;
+  }
+
+
+  .title_filter h3 {
+    display: none;
+  }
+
+  .title_filter .btn-group {
+    width : 100%;
+    margin: 10px 0;
+  }
+
+  /* .ul-search, */
+  /* .hotel-searchBox { */
+  /* display: none; */
+  /* } */
+
+  .footer__main {
+    display      : grid;
+    grid-template: 3fr 3fr/ 3fr 3fr;
+    text-align   : center;
+
+  }
+
+  .footer__main .footer__item {
+    width: 90%;
+  }
+}
+
+
+.toggle_btn {
+  display     : none;
+  font-size   : 30px;
+  color       : white;
+  float       : right;
+  line-height : 80px;
+  margin-right: 40px;
+  cursor      : pointer;
+}
+
+.navi {
+  background-color: blue;
+  /* height       : 120%; */
+}
+
+
+.nav-item {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+
+@media (max-width :992px) {
+  .toggle_btn {
+    display: block;
+  }
+
+  .navbar1,
+  .navi2 {
+    display: none;
+  }
+
+  .navi .row {
+    display: flex;
+  }
+
+  .navi .row>* {
+    width: 33.3%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td {
+    display: block;
+    width  : 100%;
+  }
+
+  tr {
+    display      : block;
+    margin-bottom: 30px;
+  }
+
+  .seo-htl-table-info table tbody {
+    display: block !important;
+  }
+
+  #noi-dung-collapse1 .container {
+    display              : grid;
+    grid-template-columns: 1fr;
+    padding              : 1em;
+    grid-row-gap         : 10px;
+  }
+
+  #noi-dung-collapse1 .row {
+    display              : grid;
+    text-align           : center;
+    justify-content      : center;
+    grid-template-columns: 1fr;
+    grid-gap             : 10px;
+    font-size            : 10px;
+  }
+
+  #noi-dung-collapse1 .col {
+    width: 100%;
+  }
+
+  #noi-dung-collapse2 .container {
+    display              : grid;
+    grid-template-columns: 1fr;
+    padding              : 1em;
+    grid-row-gap         : 10px;
+  }
+
+  #noi-dung-collapse2 .row {
+    display              : grid;
+    text-align           : center;
+    justify-content      : center;
+    grid-template-columns: 1fr;
+    grid-gap             : 10px;
+    font-size            : 10px;
+  }
+
+  #noi-dung-collapse2 .col {
+    width: 100%;
+  }
+
+  #noi-dung-collapse3 .container {
+    display              : grid;
+    grid-template-columns: 1fr;
+    padding              : 1em;
+    grid-row-gap         : 10px;
+  }
+
+  #noi-dung-collapse3 .row {
+    display              : grid;
+    text-align           : center;
+    justify-content      : center;
+    grid-template-columns: 1fr;
+    grid-gap             : 10px;
+    font-size            : 10px;
+  }
+
+  #noi-dung-collapse3 .col {
+    width: 100%;
+  }
+
+  .recommended .btn {
+    font-size: 10px !important;
+  }
+}
+
+/* body  */
+h3 {
+  font-size: 16px;
+}
+
+#myDropdown .first {
+  width: 40%;
+}

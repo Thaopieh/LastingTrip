@@ -1,0 +1,127 @@
+<form name="reviewForm" id="reviewForm" method="post" action="">
+  <table style="border-collapse: collapse;">
+    <tr>
+      <td style="padding: 5px 10px;">Đánh giá số sao</td>
+      <td style="padding: 5px 10px;">
+         {{>starRating}} 
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 10px;">Nội dung</td>
+      <td style="padding: 5px 10px;">
+        <textarea style="border: solid 1px #ddd; padding: 5px 20px; width: 80%;" cols="30" rows="10" name="content"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 10px;">Tệp tin</td>
+      <td style="padding: 5px 10px;">
+        <input type="file" name="file" id="fileInput" onchange="previewImage()" />
+        <br>
+        <img id="preview" src="#" alt="Hình ảnh xem trước" style="max-width: 200px; display: none;">
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 10px;"></td>
+      <td style="padding: 5px 10px;">
+        <input type="submit" style="width: auto; background: red; color: #fff; border: none; padding: 5px 20px;" value="Gửi feedback" onclick="resetPreview()" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+<script>
+  function previewImage() {
+    var fileInput = document.getElementById('fileInput');
+    var preview = document.getElementById('preview');
+
+    // Kiểm tra xem người dùng đã chọn tệp tin hay chưa
+    if (fileInput.files && fileInput.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      }
+
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  }
+
+  function resetPreview() {
+    var preview = document.getElementById('preview');
+    preview.src = '';
+    preview.style.display = 'none';
+  }
+</script>
+
+<script>
+document.querySelector("#reviewForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var ratingValue = document.querySelector("input[name='rating']:checked").value;
+    var rating = parseInt(ratingValue, 10);
+    var content = document.querySelector("textarea[name='content']").value;
+    var hotelId = window.location.pathname.split('/').pop();
+    hotelId = parseInt(hotelId, 10);
+    var guestId = localStorage.getItem("id");
+    guestId = parseInt(guestId, 10);
+
+    if (!guestId || !hotelId || rating === undefined || !content) {
+        console.log("Invalid input data");
+        return;
+    }
+
+    // Lấy dữ liệu tệp từ mẫu
+    var fileInput = document.querySelector("input[type='file']");
+    var file = fileInput.files[0];
+    const token = localStorage.getItem('token');
+
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('rating', rating);
+    formData.append('description', content);
+    formData.append('hotelId', hotelId);
+    formData.append('guestId', guestId);
+    // Gửi dữ liệu đến máy chủ
+    fetch('http://localhost:3030/api/v1/reviews/create', {
+    method: 'POST',
+    body: formData,
+    headers: {token},
+})
+.then(response => {
+    if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error('Unauthorized: Please log in to submit a review.');
+        } else {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+    }
+    return response.json();
+})
+.then(data => {
+    console.log("Review submitted successfully:", data);
+
+    // Xóa thông tin trên biểu mẫu
+    document.querySelector("input[name='rating']:checked").checked = false;
+    document.querySelector("textarea[name='content']").value = '';
+    document.querySelector("input[type='file']").value = '';
+
+    // Hiển thị hộp thoại thông báo
+    alert("Review submitted successfully!");
+})
+.catch(error => {
+    console.error('Error:', error);
+
+    // Kiểm tra nếu là lỗi Unauthorized (401)
+    if (error.message === 'Unauthorized: Please log in to submit a review.') {
+        // Hiển thị thông báo yêu cầu đăng nhập
+        alert('Bạn vui lòng đăng nhập để thực hiện đánh giá.');
+    } else {
+        // Xử lý các lỗi khác
+        // Ví dụ: hiển thị một thông báo lỗi chung
+        alert('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+    }
+});
+});
+
+</script>

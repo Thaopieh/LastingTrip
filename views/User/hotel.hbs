@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+
+  <!-- icon  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bt  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- main  -->
+  <link rel="stylesheet" href="/css/hotel.css">
+
+
+
+</head>
+<body>
+
+
+  {{>header}}
+
+  <div class="item_body">
+    <!-- Header search -->
+
+    {{>searchBar}}
+  </div>
+
+  <section class="main-body">
+    <div class="hotel-main">
+
+      <div class="hotel-summary">
+        <!-- TRINH LÀM  -->
+      
+
+
+        <div class="row top" id="hotel-details-container">
+
+        </div>
+
+
+
+        <div class="row bottom">
+          <div class="col-6 amenties">
+            <a href="#" data-bs-toggle="offcanvas" data-bs-target="#amenties-policiesOffcanvas"
+              onclick="showContent('amenties')">
+              <p>Tiện nghi</p>
+              <table class="table-sum" >
+                {{!-- <tr>
+                  <td><i class="fa-solid fa-umbrella"></i><span>Khu vực tắm nắng</span></td>
+                  <td><i class="fa-solid fa-water-ladder"></i><span>Bể bơi ngoài trời</span></td>
+                </tr> --}}
+                {{!-- <tr>
+                  <td><i class="fa-solid fa-dumbbell"></i><span>Phòng gym</span></td>
+                  <td><i class="fa-solid fa-spa"></i><span>Spa</span></td>
+                </tr> --}}
+                {{!-- <tr>
+                  <td><i class="fa-solid fa-kitchen-set"></i><span>Khu vực ăn uống</span></td>
+                  <td> <a href="#" data-bs-toggle="offcanvas" data-bs-target="#amenties-policiesOffcanvas"
+                      onclick="showContent('amenties')" style="color: blue;"><i
+                        class="fa-solid fa-magnifying-glass"></i><span>Xem thêm </span></a>
+                  </td>
+                </tr> --}}
+              </table>
+            </a>
+          </div>
+
+          <div class="col-6 policies">
+            <a href="#" data-bs-toggle="offcanvas" data-bs-target="#amenties-policiesOffcanvas"
+              onclick="showContent('policies')">
+              <p>Chính sách</p>
+              <table class="table-sum">
+                <tr>
+                  <td><i class="fa-solid fa-clock"></i><span>Thời gian nhận/trả phòng</span></td>
+                  <td><i class="fa-solid fa-children"></i><span>Chính sách trẻ em</span></td>
+                </tr>
+                <tr>
+                  <td><i class="fa-solid fa-bed"></i><span>Nôi và giường phụ</span></td>
+                  <td><i class="fa-solid fa-utensils"></i><span>Bữa ăn sáng</span></td>
+                </tr>
+                <tr>
+                  <td><i class="fa-solid fa-cat"></i><span>Thú cưng</span></td>
+                  <td><a href="#" data-bs-toggle="offcanvas" data-bs-target="#amenties-policiesOffcanvas"
+                      onclick="showContent('policies')" style="color: blue;"><i
+                        class="fa-solid fa-magnifying-glass"></i><span>Xem thêm </span></a>
+                  </td>
+                </tr>
+              </table>
+            </a>
+          </div>
+        </div>
+
+        <div class="offcanvas offcanvas-start offcanvas-size-xl" data-bs-scroll="true" tabindex="-1"
+          id="amenties-policiesOffcanvas" aria-labelledby="amenties-policiesOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="amenties-policiesOffcanvasLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <button class="btn" onclick="showContent('amenties')">Tiện nghi</button>
+            <button class="btn" onclick="showContent('policies')">Chính sách</button>
+            <div id="amenties" class="content">
+              <div class="amenties-item amen">
+                <p><i class="fa-solid fa-fire" style="margin:0 10px"></i>Tiện nghi phổ biến</p>
+                <table class="table-sum">
+
+                </table>
+              </div>
+
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-wifi" style="margin: 0 10px;"></i>Wifi</p>
+                <td><i class="fa-solid fa-check" style="margin: 0 10px;"></i>Wifi công cộng</td>
+              </div>
+
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-water-ladder" style="margin:0 10px"></i>Bể bơi ngoài trời</p>
+                <table class="table-sum">
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Bể bơi view đẹp</td>
+                    <td><i class="fa-solid fa-check"></i>Có quầy bar</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Hồ nước mặn</td>
+                    <td><i class="fa-solid fa-check"></i>Đồ chơi</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Dù che</td>
+                    <td><i class="fa-solid fa-check"></i>Thời gian mở cửa</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-car" style="margin:0 10px"></i>Khu vực đỗ xe</p>
+                <p style="font-size: small;"><i>Chỗ đỗ xe có sẵn. Khách hàng không cần đặt trước.</i></p>
+                <table class="table-sum">
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Bãi đỗ xe riêng</td>
+                    <td><i class="fa-solid fa-check"></i>Bãi đổ xe cho nhân viên</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-truck-plane" style="margin:0 10px"></i>Hỗ trợ đi lại</p>
+                <table class="table-sum">
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Dịch vụ đưa đón tại sân bay</td>
+                    <td><i class="fa-solid fa-check"></i>Cho thuê xe</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Dịch vụ đưa đón xe bus</td>
+                    <td><i class="fa-solid fa-check"></i>Dịch vụ xe trợ giúp đặc biệt</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-person"></i>Dịch vụ lễ tân</p>
+                <table class="table-sum">
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Dịch vụ check-in VIP</td>
+                    <td><i class="fa-solid fa-check"></i>Lễ tân 24 giờ</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Giữ hành lý</td>
+                    <td><i class="fa-solid fa-check"></i>Chuyển đổi tiền tệ</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-utensils" style="margin:0 10px"></i>Khu vực ăn uống</p>
+                <table class="table-sum">
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Quầy bar bán đồ ăn nhanh</td>
+                    <td><i class="fa-solid fa-check"></i>Cửa hàng tiện lợi</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Phục vụ tận phòng</td>
+                    <td><i class="fa-solid fa-check"></i>Cafe</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-dumbbell"></i>Phòng tập</p>
+                <table class="table-sum">
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Phòng gym</td>
+                    <td><i class="fa-solid fa-check"></i>Sân tennis</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Spa</td>
+                    <td><i class="fa-solid fa-check"></i>Xông hơi</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-shield-halved" style="margin:0 10px"></i>An toàn</p>
+                <table class="table-sum">
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Dịch vụ sơ cứu</td>
+                    <td><i class="fa-solid fa-check"></i>Phòng cháy chữa cháy</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Hệ thống kiểm soát ra vào</td>
+                    <td><i class="fa-solid fa-check"></i>Máy lọc nước</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="amenties-item">
+                <p><i class="fa-solid fa-earth-asia" style="margin:0 10px"></i>Ngôn ngữ giao tiếp</p>
+                <table class="table-sum">
+                  <tr>
+                    <td><i class="fa-solid fa-check"></i>Tiếng Việt</td>
+                    <td><i class="fa-solid fa-check"></i>Tiếng Anh</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+            <div id="policies" class="content">
+              <div class="policies-item">
+                <table class="table-sum">
+                  <tr>
+                    <th style="font-weight: bold; width: 30%;">Thời gian nhận và trả phòng</th>
+                    <td>Nhận phòng: sau 15h00<br>Trả phòng: trước 12h00<br>Giờ làm việc của lễ tân: 24/7 </td>
+                  </tr>
+                  <tr>
+                    <th>Chính sách trẻ em</th>
+                    <td>Trẻ em ở mọi lứa tuổi đều được chào đón tại khách sạn này.</td>
+                  </tr>
+                  <tr>
+                    <th>Nôi và giường phụ</th>
+                    <td>Chính sách nôi và giường phụ cho trẻ em có thể thay đổi tùy theo loại phòng . Vui lòng tham
+                      khảo chi tiết loại phòng để biết thêm thông tin chi tiết</td>
+                  </tr>
+                  <tr>
+                    <th>Bữa ăn sáng</th>
+                    <td>Buffet miễn phí
+                      <br>
+                      <b>Giờ mở cửa:</b> [Thứ Hai - Chủ Nhật] 6h30 - 10h30
+                      <br>
+                      <table>
+                        <tr>
+                          <td style="width: 60%;">Tuổi</td>
+                          <td style="width: 40%;">Phí</td>
+                        </tr>
+                        <tr>
+                          <td>Trẻ em dưới 4 tuổi</td>
+                          <td>Miễn phí</td>
+                        </tr>
+                        <tr>
+                          <td>Trẻ em từ 5 - 11 tuổi</td>
+                          <td>300k/người</td>
+                        </tr>
+                        <tr>
+                          <td>Trẻ em từ 12 đến 17 tuổi</td>
+                          <td>600k/người</td>
+                        </tr>
+                        <tr>
+                          <td>Người lớn</td>
+                          <td>800k/người</td>
+                        </tr>
+                      </table>
+                      Phí bữa sáng bổ sung không được bao gồm trong tổng tiền và phải được thah toán tại chỗ.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>Thú cưng</th>
+                    <td>Không cho phép mang thú cưng.</td>
+                  </tr>
+                  <tr>
+                    <th>Yêu cầu về độ tuổi</th>
+                    <td>Khách nhận phòng chính phải từ 18 tuổi trở lên</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class=" login-banner">
+        <!-- TRINH LÀM  -->
+        <div class="get-lower-price">
+          <a href="#"><i class="fa-solid fa-gift"></i>
+            <span style="color: blue; text-decoration: underline;"></i>Đăng nhập</span> hoặc
+            <span style="color: blue; text-decoration: underline;">đăng kí</span>
+            để nhận lên tới
+            <span style="color: orange; font-weight: bold;">534 xu LastingTrip (khoảng 121,000 VND)</span>
+            sau khi trả phòng
+          </a>
+        </div>
+      </div>
+
+      <div class="tab-nav">
+        <!-- TRINH LÀM  -->
+        <div class="row">
+          <div class="col-2">
+            <a href="#room-id">
+              <h2>Phòng</h2>
+            </a>
+          </div>
+          <div class="col-2">
+            <a href="#review-id">
+              <h2>Đánh giá</h2>
+            </a>
+          </div>
+          <div class="col-2">
+            <a href="#policies-id">
+              <h2>Chính sách</h2>
+            </a>
+          </div>
+          <div class="col-2">
+            <a href="#amenties-id">
+              <h2>Tiện nghi</h2>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+<div class="room-booking"></div>
+      <div class="select-hotel">
+        {{!-- <div class="container-fluid" id="room-id">
+          <h2>Phòng tổng thống</h2>
+          <div class="row">
+            <div style="border-bottom : none" class="col-lg-2 ">
+              <div class="baseroom">
+                <div class="baseroom_img">
+                  <img src="../img/min_item/list-img/room/standard_4.webp" alt="" style="width: 100%;">
+                </div>
+                <div class="baseroom_img1">
+                  <div class="row no-gutters">
+                    <div style="margin : 0; padding : 0 3px 0 10px;" class="col-6"><img
+                        src="../img/min_item/list-img/room/standard_5.webp" alt="" style="width: 100%;">
+                    </div>
+                    <div style="margin : 0; padding : 0 10px 0 3px;" class="col-6"><img
+                        src="../img/min_item/list-img/room/standard_6.webp" alt="" style="width: 100%;">
+                    </div>
+                  </div>
+                </div>
+                <div class="baseroom_bed">
+                  <span class="material-symbols-outlined"> bed </span>
+                  <span class="type-bed">1 giường King</span>
+                </div>
+                <div class="baseroom_item">
+                  <div class="item">
+                    <span class="material-symbols-outlined"> location_city </span>
+                    <span class="baseRoom_baseRoom-facility_title__4PawP">View thành phố</span>
+                  </div>
+                  <div class="item">
+                    <span class="material-symbols-outlined"> smoke_free </span>
+                    <span class="baseRoom_baseRoom-facility_title__4PawP">Không hút thuốc</span>
+                  </div>
+                  <div class="item">
+                    <span class="material-symbols-outlined"> night_shelter </span>
+                    <span class="baseRoom_baseRoom-facility_title__4PawP">30m<sup>2</sup> | Tầng 3-4</span>
+                  </div>
+                  <div class="item">
+                    <span class="material-symbols-outlined"> wifi </span>
+                    <span class="baseRoom_baseRoom-facility_title__4PawP">Wifi miễn phí</span>
+                  </div>
+                  <div class="item">
+                    <span class="material-symbols-outlined"> heat_pump </span>
+                    <span class="baseRoom_baseRoom-facility_title__4PawP">Điều hòa</span>
+                  </div>
+                  <div class="item">
+                    <span class="material-symbols-outlined"> shower </span>
+                    <span class="baseRoom_baseRoom-facility_title__4PawP" style="font-size: 14px;">Phòng tắm riêng
+                      tư</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0;" class="col-lg-10  ">
+              <div class="container">
+                <div class="row">
+                  <div id="import1" style="border: none;" class="col-lg-5">Lựa chọn của bạn</div>
+                  <div id="import2" style="border: none; text-align : center" class="col-lg-2">Số lượng người</div>
+                  <div id="import3" style="border: none; text-align : center" class="col-lg-5">Giá phòng hôm nay</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-5">
+                    <div class="hotel_room">
+                      <div class="saleRoom_saleRoomItemBox-reservationNotesInfo_minPriceInfo__GkoVL">Giá tốt nhất ngày!
+                      </div>
+                      <div class="info">
+                        <span>Bữa sáng: VND 500,000</span>
+                      </div>
+                      <div class="info">
+                        <span>Không hoàn tiền</span>
+                      </div>
+                      <div class="info"><span>Xác nhận nhanh chóng</span></div>
+                      <div class="info">
+                        <span>Thanh toán online</span>
+                      </div>
+                      <div class="info"><span>Đặt tối đa 10 phòng</span></div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <div class="people">
+                      <i class="fa-solid fa-user"></i>
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="room-price">
+                      <p>VND 5,234,753</p>
+                      <a href="#" class="btn btn-primary">Đặt phòng</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-5">
+                    <div class="hotel_room">
+                      <div class="saleRoom_saleRoomItemBox-reservationNotesInfo_premiumInfo__80Cez">Giá tốt nhất bao gồm
+                        <span class="saleRoomItemBox-reservationNotesInfo_premiumTitle" style="font-weight: bold;">
+                          bữa sáng
+                        </span>
+                      </div>
+                      <div class="hotel_info">
+                        <div class="info">
+                          <span>Bao gồm 2 bữa sáng</span>
+                        </div>
+                        <div class="info">
+                          <span>Không hoàn tiền</span>
+                        </div>
+                        <div class="info">
+                          <span>Xác nhận nhanh chóng</span>
+                        </div>
+                        <div class="info">
+                          <span>Thanh toán online</span>
+                        </div>
+                        <div class="info"><span>Đặt tối đa 2 phòng</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <div class="people">
+                      <i class="fa-solid fa-user"></i>
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="room-price">
+                      <p>VND 6,256,742</p>
+                      <a href="#" class="btn btn-primary">Đặt phòng</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+
+    {{!-- <div class="select-hotel">
+      <div class="container-fluid" id="room-id">
+        <h2>Phòng Superior Giường đôi</h2>
+        <div class="row">
+          <div style="border-bottom : none" class="col-lg-2 ">
+            <div class="baseroom">
+              <div class="baseroom_img">
+                <img src="../img/min_item/list-img/room/220ff1955b7df723ae6c.jpg" alt="" style="width: 100%;">
+              </div>
+              <div class="baseroom_img1">
+                <div class="row no-gutters">
+                  <div style="margin : 0; padding : 0 3px 0 10px;" class="col-6"><img
+                      src="../img/min_item/list-img/room/27fbfe4f56a7faf9a3b6.jpg" alt="" style="width: 100%;">
+                  </div>
+                  <div style="margin : 0; padding : 0 10px 0 3px;" class="col-6"><img
+                      src="../img/min_item/list-img/room/4b04677bcd9361cd3882.jpg" alt="" style="width: 100%;">
+                  </div>
+                </div>
+              </div>
+              <div class="baseroom_bed">
+                <span class="material-symbols-outlined"> bed </span>
+                <span class="type-bed">1 giường Queen</span>
+              </div>
+              <div class="baseroom_item">
+                <div class="item">
+                  <span class="material-symbols-outlined"> location_city </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">View thành phố</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> smoke_free </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">Không hút thuốc</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> night_shelter </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">16m<sup>2</sup> | Tầng 3-4</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> wifi </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">Wifi miễn phí</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> heat_pump </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">Điều hòa</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> shower </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP" style="font-size: 14px;">Phòng tắm riêng
+                    tư</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 0;" class="col-lg-10  ">
+            <div class="container">
+              <div class="row">
+                <div id="import1" style="border: none;" class="col-lg-5">Lựa chọn của bạn</div>
+                <div id="import2" style="border: none; text-align : center" class="col-lg-2">Số lượng người</div>
+                <div id="import3" style="border: none; text-align : center" class="col-lg-5">Giá phòng hôm nay</div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  <div class="hotel_room">
+                    <div class="saleRoom_saleRoomItemBox-reservationNotesInfo_minPriceInfo__GkoVL">Giá tốt nhất ngày!
+                    </div>
+                    <div class="info">
+                      <span>Bữa sáng: VND 417,178</span>
+                    </div>
+                    <div class="info">
+                      <span>Không hoàn tiền</span>
+                    </div>
+                    <div class="info"><span>Xác nhận nhanh chóng</span></div>
+                    <div class="info">
+                      <span>Thanh toán online</span>
+                    </div>
+                    <div class="info"><span>Đặt tối đa 10 phòng</span></div>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="people">
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="room-price">
+                    <p>VND 3,498,605</p>
+                    <a href="#" class="btn btn-primary">Đặt phòng</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  <div class="hotel_room">
+                    <div class="saleRoom_saleRoomItemBox-reservationNotesInfo_premiumInfo__80Cez">Giá tốt nhất bao gồm
+                      <span class="saleRoomItemBox-reservationNotesInfo_premiumTitle" style="font-weight: bold;">
+                        bữa sáng
+                      </span>
+                    </div>
+                    <div class="hotel_info">
+                      <div class="info">
+                        <span>Bao gồm 2 bữa sáng</span>
+                      </div>
+                      <div class="info">
+                        <span>Không hoàn tiền</span>
+                      </div>
+                      <div class="info">
+                        <span>Xác nhận nhanh chóng</span>
+                      </div>
+                      <div class="info">
+                        <span>Thanh toán online</span>
+                      </div>
+                      <div class="info"><span>Đặt tối đa 2 phòng</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="people">
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="room-price">
+                    <p>VND 4,247,266</p>
+                    <a href="#" class="btn btn-primary">Đặt phòng</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="select-hotel">
+      <div class="container-fluid" id="room-id">
+        <h2>Phòng tiêu chuẩn</h2>
+        <div class="row">
+          <div style="border-bottom : none" class="col-lg-2 ">
+            <div class="baseroom">
+              <div class="baseroom_img">
+                <img src="../img/min_item/list-img/room/standard_1.webp" alt="" style="width: 100%;">
+              </div>
+              <div class="baseroom_img1">
+                <div class="row no-gutters">
+                  <div style="margin : 0; padding : 0 3px 0 10px;" class="col-6"><img
+                      src="../img/min_item/list-img/room/standard_2.webp" alt="" style="width: 100%;">
+                  </div>
+                  <div style="margin : 0; padding : 0 10px 0 3px;" class="col-6"><img
+                      src="../img/min_item/list-img/room/standard_3.webp" alt="" style="width: 100%;">
+                  </div>
+                </div>
+              </div>
+              <div class="baseroom_bed">
+                <span class="material-symbols-outlined"> bed </span>
+                <span class="type-bed">1 giường đơn</span>
+              </div>
+              <div class="baseroom_item">
+                <div class="item">
+                  <span class="material-symbols-outlined"> smoke_free </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">Không hút thuốc</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> night_shelter </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">10m<sup>2</sup> | Tầng 5-6</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> wifi </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">Wifi miễn phí</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> heat_pump </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP">Điều hòa</span>
+                </div>
+                <div class="item">
+                  <span class="material-symbols-outlined"> shower </span>
+                  <span class="baseRoom_baseRoom-facility_title__4PawP" style="font-size: 14px;">Phòng tắm riêng
+                    tư</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 0;" class="col-lg-10  ">
+            <div class="container">
+              <div class="row">
+                <div id="import1" style="border: none;" class="col-lg-5">Lựa chọn của bạn</div>
+                <div id="import2" style="border: none; text-align : center" class="col-lg-2">Số lượng người</div>
+                <div id="import3" style="border: none; text-align : center" class="col-lg-5">Giá phòng hôm nay</div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  <div class="hotel_room">
+                    <div class="saleRoom_saleRoomItemBox-reservationNotesInfo_minPriceInfo__GkoVL">Giá tốt nhất ngày!
+                    </div>
+                    <div class="info">
+                      <span>Bữa sáng:r VND 325,896</span>
+                    </div>
+                    <div class="info">
+                      <span>Không hoàn tiền</span>
+                    </div>
+                    <div class="info"><span>Xác nhận nhanh chóng</span></div>
+                    <div class="info">
+                      <span>Thanh toán online</span>
+                    </div>
+                    <div class="info"><span>Đặt tối đa 10 phòng</span></div>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="people">
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="room-price">
+                    <p>VND 2,363,000</p>
+                    <a href="#" class="btn btn-primary">Đặt phòng</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  <div class="hotel_room">
+                    <div class="saleRoom_saleRoomItemBox-reservationNotesInfo_premiumInfo__80Cez">Giá tốt nhất bao gồm
+                      <span class="saleRoomItemBox-reservationNotesInfo_premiumTitle" style="font-weight: bold;">
+                        bữa sáng
+                      </span>
+                    </div>
+                    <div class="hotel_info">
+                      <div class="info">
+                        <span>Bao gồm 2 bữa sáng</span>
+                      </div>
+                      <div class="info">
+                        <span>Không hoàn tiền</span>
+                      </div>
+                      <div class="info">
+                        <span>Xác nhận nhanh chóng</span>
+                      </div>
+                      <div class="info">
+                        <span>Thanh toán online</span>
+                      </div>
+                      <div class="info"><span>Đặt tối đa 2 phòng</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="people">
+                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="room-price">
+                    <p>VND 2,999,521</p>
+                    <a href="#" class="btn btn-primary">Đặt phòng</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> --}}
+
+    </div>
+    <div class="review" id="review-id">
+      <div class="guest-review">
+        <h2>Đánh giá của khách hàng</h2>
+        <div class="review-wrap">
+          <div class="review-score">
+            <div class="score">
+              <strong id="RatingVal"> </strong><span>/5</span>
+            </div>
+            <div class="review-rank">Rất tốt</div>
+
+          </div>
+          <div class="review-category">
+            <div class="container">
+              <div class="row row-cols-2">
+                <div class="col">
+                  <div class="review-title">
+                    <span>Vệ sinh</span> <span>4</span>
+                  </div>
+                  <div class="review-bar">
+                    <div class="inner-bar"></div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="review-title">
+                    <span>Tiện nghi</span> <span>4.5</span>
+                  </div>
+                  <div class="review-bar">
+                    <div class="inner-bar"></div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="review-title">
+                    <span>Vị trí</span> <span>4.1</span>
+                  </div>
+                  <div class="review-bar">
+                    <div class="inner-bar"></div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="review-title">
+                    <span>Dịch vụ</span> <span>4.5</span>
+                  </div>
+                  <div class="review-bar">
+                    <div class="inner-bar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="review-tag">
+          <div class="d-flex flex-wrap">
+            <div class="review-tag-item"><button>Tất cả đánh giá</button></div>
+            <div class="review-tag-item"><button>Đánh giá tích cực</button></div>
+            <div class="review-tag-item"><button>Đánh giá có hình ảnh/ video</button></div>
+            <div class="review-tag-item"><button>Vị trí thuận lợi</button></div>
+            <div class="review-tag-item"><button>Dễ dàng di chuyển</button></div>
+            <div class="review-tag-item"><button>Gần sân bay</button></div>
+            <div class="review-tag-item"><button>Phù hợp với trẻ nhỏ</button></div>
+            <div class="review-tag-item"><button>Phòng tắm lớn</button></div>
+            <div class="review-tag-item"><button>Đồ ăn ngon</button></div>
+            <div class="review-tag-item"><button>Đánh giá tiêu cực</button></div>
+          </div>
+        </div>
+
+
+        <div class="guest-comment">
+          <div id="carouselExampleControls5" class="carousel">
+            <!-- <h2>Có thể bạn cũng thích</h2> -->
+            <div class="carousel-inner" id="carousel-comment">
+              
+            </div>
+
+<div style="display: none;" id="carousel-controls">
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls5" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls5" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="send-review">
+        {{!-- {{>starRating}} --}}
+        {{>commentForm}}
+      </div>
+    </div>
+
+
+    <div class="policies-room" id="policies-id">
+      <div class="policy-title">
+        <h2>Chính sách</h2>
+      </div>
+      <div class="policy-inner">
+        <div class="row g-0 ">
+          <div class="col-6 col-md-4">
+            <p>Thời gian nhận và trả phòng</p>
+          </div>
+          <div class="col-sm-6 col-md-8">
+            <div class="policy-item"><span>Nhận phòng: </span><i> sau 15h00</i></div>
+            <div class="policy-item"><span>Trả phòng: </span> <i> trước 12h00</i> </div>
+            <div class="policy-item"><span>Giờ làm việc của lễ tân: 24/7 </span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row g-0 ">
+          <div class="col-6 col-md-4">
+            <p>Chính sách trẻ em </p>
+          </div>
+          <div class="col-sm-6 col-md-8">
+            <div class="policy-item"><span>Trẻ em ở mọi lứa tuổi đều được chào đón tại khách sạn này.</span></div>
+          </div>
+
+        </div>
+
+        <div class="row g-0 ">
+          <div class="col-6 col-md-4">
+            <p>Nôi và giường phụ </p>
+          </div>
+          <div class="col-sm-6 col-md-8">
+            <div class="policy-item">
+              <span>
+                Chính sách nôi và giườ ng phụ cho trẻ em có thể thay đổi tùy theo loại phòng . Vui lòng tham khảo chi
+                tiết loại phòng để biết thêm thông tin chi tiết.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-0 ">
+          <div class="col-6 col-md-4">
+            <p>Bữa ăn sáng</p>
+          </div>
+          <div class="col-sm-6 col-md-8">
+            <div class="policy-item"><span>Kiểu: </span><i>Buffet</i></div>
+            <hr>
+            <div class="hour-open">
+              <span>Giờ mở cửa:</span> <i>[Thứ Hai - Chủ Nhật] 6h30 - 10h30</i>
+            </div>
+            <div class="hour-table">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Tuổi</th>
+                    <th scope="col">Phí</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Trẻ em dưới 4 tuổi</th>
+                    <td>Miễn phí</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Trẻ em từ 5 - 11 tuổi</th>
+                    <td>300k/người</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Trẻ em từ 12 đến 17 tuổi</th>
+                    <td>600k/người</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Người lớn</th>
+                    <td>800k/người</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="policy-des">
+              <span>Phí bữa sáng bổ sung không được bao gồm trong tổng tiền và phải được thah toán tại chỗ.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="service-room" id="amenties-id">
+      <h2>Tiện nghi</h2>
+      <h3>Tiện nghi phổ biến</h3>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="item">
+              <span class="material-symbols-outlined"> sports_bar </span>
+              <p>Bar</p>
+            </div>
+            <div class="item">
+              <span class="material-symbols-outlined"> restaurant </span>
+              <p>Khu vực ăn uống</p>
+            </div>
+            <div class="item">
+              <span class="material-symbols-outlined"> meeting_room </span>
+              <p>Phòng đa chức năng</p>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="item">
+              <span class="material-symbols-outlined"> timer </span>
+              <p>Lễ tân 24/7</p>
+            </div>
+            <div class="item">
+              <span class="material-symbols-outlined"> pool </span>
+              <p>Bể bơi ngoài trời</p>
+            </div>
+            <div class="item">
+              <span class="material-symbols-outlined"> local_cafe </span>
+              <p>Café</p>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="item">
+              <span class="material-symbols-outlined"> save </span>
+              <p>Giữ hành lý</p>
+            </div>
+            <div class="item">
+              <span class="material-symbols-outlined"> wifi </span>
+              <p>Wifi công cộng</p>
+            </div>
+            <div class="item">
+              <span class="material-symbols-outlined"> fitness_center </span>
+              <p>Phòng gym</p>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="item">
+              <span class="material-symbols-outlined"> groups </span>
+              <p>Phòng họp</p>
+            </div>
+            <div class="item">
+              <span class="material-symbols-outlined"> ring_volume </span>
+              <p>Báo thức</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="recommend-other">
+
+        <div id="carouselExampleControls1" class="carousel">
+          <h2>Có thể bạn sẽ thích</h2>
+          <div class="carousel-inner" id="carousel_topPick">
+
+          </div>
+          
+        
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+    <div class="faq-hotel">
+      <div class="faq-title">
+        <h2 class="title">FAQ</h2>
+      </div>
+      <div class="faq-content">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+          <!-- Accordion Item #1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseOne" style="background-color: white; ">
+                Làm cách nào để tôi có thể đặt phòng trên LastingTrip.com? </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+              <div class="accordion-body">
+                Để đặt phòng khách sạn trên LastingTrip.com, bạn chỉ cần nhập điểm đến, ngày đi, ngày về và
+                số
+                lượng
+                khách. Sau
+                đó, dạo xem các khách sạn có sẵn và chọn khách sạn bạn muốn đặt. Thực hiện từng bướcnhập
+                thông
+                tin
+                thanh toán của bạn và hoàn tất việc đặt phòng.
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item #2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseTwo" style="background-color: white;">
+                Làm thế nào để có được khách sạn giá rẻ trên LastingTrip.com? </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Có nhiều cách để tìm được các khách sạn giá cả phải chăng trên LastingTrip.com. Bạn có thể
+                thu
+                hẹp
+                phạm vi tìm kiếm của mình bằng cách lọc khách sạn theo mức giá phù hợp, hoặc bạn có thể sắp
+                xếp
+                kết quả theo giá để xem các tùy chọn ít giá rẻ trước tiên.
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item #3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseThree" style="background-color: white;">
+                Tôi có thể tìm những ưu đãi khách sạn ở đâu trên LastingTrip.com? </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                LastingTrip.com cung cấp nhiều ưu đãi và khuyến mãi khách sạn có sẵn trong suốt cả năm. Bạn
+                có
+                thể
+                dễ dàng tìm thấy những ưu đãi đặc biệt này trên trang ưu đãi của chúng tôi. Hơn nữa, nếu bạn
+                là
+                thành
+                viên của chương trình khách hàng thân thiết của chúng tôi, bạn có thể đăng nhập vào tài
+                khoản
+                của
+                mình
+                và khám phá mức giá chiết khấu độc quyền tại các trang danh sách khách sạn.
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item #4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseFour" style="background-color: white;">
+                Cách để có được giá thấp hơn khi đặt phòng là gì?</button>
+            </h2>
+            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Đôi khi đặt phòng khách sạn vào giữa tuần rẻ hơn, nhưng nó cũng phụ thuộc vào mùa. </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item #5 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseFive" style="background-color: white;">
+                Có bao nhiêu khách sạn trên LastingTrip.com vậy? </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                There are over 5,000,000 Khách sạn ở more than 230 countries or regions on Trip.com. Don't
+                know
+                which
+                hotel to book? Browse the site to get ideas!
+                Có hơn 1000 khách sạn trên LastingTrip.com. Bạn không biết nên đặt khách sạn nào? Hãy dạo
+                xem
+                một
+                vòng
+                nhé!
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item #6 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseSix" style="background-color: white;">
+                Tôi có thể hủy hoặc thay đổi phòng trên LastingTrip.com không? </button>
+            </h2>
+            <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Điều này phụ thuộc vào chính sách khách sạn và thời gian hủy. Bạn hãy kiểm tra phần chính
+                sách
+                của
+                khách sạn liên quan. Để hủy hoặc thay đổi đặt phòng của bạn, hãy đăng nhập vào tài khoản
+                LastingTrip.com của bạn, đi tới "Đặt chỗ của tôi" và làm theo hướng dẫn.
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item #7 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseSeven" style="background-color: white;">
+                Làm sao để liên hệ với dịch vụ chăm sóc khách hàng của LastingTrip.com? </button>
+            </h2>
+            <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Bạn có thể liên hệ với chúng tôi 24/7 bằng cách truy cập trung tâm trợ giúp LastingTrip.com
+                và gửi yêu cầu hỗ trợ. Bạn cũng có thể liên hệ qua điện thoại hoặc trò chuyện, tùy thuộc vào
+                vị
+                trí của bạn.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    </div>
+
+
+    <div class="get-lower-price">
+      <a href="#"><i class="fa-solid fa-gift"></i>
+        <span style="color: blue; text-decoration: underline;"></i>Đăng nhập</span> hoặc
+        <span style="color: blue; text-decoration: underline;">đăng kí</span>
+        để nhận lên tới
+        <span style="color: orange; font-weight: bold;">534 xu LastingTrip (khoảng 121,000 VND)</span>
+        sau khi trả phòng
+      </a>
+    </div>
+  </section>
+
+
+  <!-- footer  -->
+  {{>footer}}
+
+{{>backToTop}}
+  <!-- thu vien ho tro -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+        <script>
+          function redirectToMap(hotelName) {
+    window.location.href =
+    "https://www.bing.com/maps?q=" +
+    encodeURIComponent(hotelName);
+    }
+    </script>
+        <script src="/js/backToTop.js"></script>
+    <script src="/js/carouselClick.js"></script>
+    <script src="/js/carouselHotel.js"></script>
+  <script src="/js/hotel.js"></script>
+</body>
+
+</html>

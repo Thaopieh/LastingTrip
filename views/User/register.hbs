@@ -1,0 +1,70 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/register.css" />
+
+  </head>
+
+  <body>
+    <div class="container-register">
+      <div class="wrapper">
+        <form action="">
+          <h1>Sign Up</h1>
+          <div class="input-box">
+            <input type="text" placeholder="Email" required id="email" />
+            <i class="bx bxl-gmail"></i>
+            <span id="email-error" class="error-message"></span>
+          </div>
+          <div class="input-box">
+            <input type="text" placeholder="Username" required id="name" />
+            <i class="bx bxs-user"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              id="password"
+            />
+            <i class="bx bxs-lock-alt"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="password"
+              placeholder="Confirm password"
+              required
+              id="re-password"
+            />
+            <i class="bx bxs-lock-alt"></i>
+            <span id="re-password-error" class="error-message"></span>
+          </div>
+          <div class="input-box">
+            <input
+              type="tel"
+              placeholder="Phone number"
+              required
+              id="numberPhone"
+            />
+            <i class="bx bxs-phone-call"></i>
+          </div>
+          <button type="submit" class="btn" id="registerButton">Sign Up</button>
+          <div class="sign_in">
+            <a href="/signin"> Sign In </a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/register.js"></script>
+  </body>
+
+</html>
