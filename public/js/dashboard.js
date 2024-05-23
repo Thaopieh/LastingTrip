@@ -32,9 +32,7 @@ $(document).ready(function () {
   });
 
   document.getElementById("button6").addEventListener("click", () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("type");
+    localStorage.clear();
     window.location.href = "/signin";
   });
 

@@ -1,9 +1,9 @@
 $(document).ready(function () {
   var hotelId1 = localStorage.getItem("hotelId");
-
+  console.log(hotelId1);
   function renderPage() {
     $.ajax({
-      url: "http://localhost:3030/api/v1/rooms/",
+      url: `http://localhost:3030/api/v1/rooms?hotelId=${hotelId1}`,
       method: "GET",
       data: { hotelId: hotelId1 },
       success: function (data) {
@@ -12,7 +12,7 @@ $(document).ready(function () {
         data.forEach(function (room, index) {
           // Tạo HTML cho từng hàng trong bảng
           tableHtml += "<tr>";
-          tableHtml += "<td>" + room.id + "</td>";
+          tableHtml += "<td>" + (index + 1) + "</td>";
           tableHtml += "<td>" + room.name + "</td>";
           if (room.status == "1") {
             tableHtml += "<td>" + "Còn phòng" + "</td>";
@@ -23,7 +23,8 @@ $(document).ready(function () {
           tableHtml += "<td>" + room.quantity + "</td>";
           tableHtml += "<td>" + room.quantity_people + "</td>";
           tableHtml += "<td>" + room.type_bed + "</td>";
-          tableHtml += `<td><i class='fa-solid fa-image' data-id='${room.id}'></i></td>`; // Add icon with data-id attribute
+          tableHtml += "<td>" + room.hotelId + "</td>";
+
           tableHtml += "<td>";
           tableHtml +=
             '<button type="button" class="updateRoom" value="' +
@@ -37,6 +38,8 @@ $(document).ready(function () {
             '<button type="button" class="ManageRoomService" value="' +
             room.id +
             '">Quản Lý Dịch Vụ</button>';
+          tableHtml += `<td><i class='fa-solid fa-image' data-id='${room.id}'></i></td>`; // Add icon with data-id attribute
+
           tableHtml += "</td>";
           tableHtml += "</tr>";
         });
@@ -54,14 +57,14 @@ $(document).ready(function () {
 
   // Sự kiện khi click vào nút "Thêm"
   $(".room-search-create").click(function () {
-    $(".custom-popup-overlay").show();
-    $(".custom-popup").show();
+    $(".popup-overlay-addRoom").show();
+    $(".popup-addRoom").show();
   });
 
   // Sự kiện khi click vào nút "Đóng" trong popup
   $(".custom-close-btn").click(function () {
-    $(".custom-popup-overlay").hide();
-    $(".custom-popup").hide();
+    $(".popup-overlay-addRoom").hide();
+    $(".popup-addRoom").hide();
   });
   $(document).on("click", ".deleteRoom", function () {
     // Hiển thị overlay và popup
@@ -101,9 +104,7 @@ $(document).ready(function () {
     });
   });
 
-  $(".dkbutton").click(function () {
-    event.preventDefault(); // Prevent default form submission
-
+  $(".addRoombtn").click(function () {
     var formData = new FormData();
     var name = $("#name").val();
     var status = $("#status").val();
@@ -113,14 +114,14 @@ $(document).ready(function () {
     var type_bed = $("#type_bed").val();
     var hotelId = localStorage.getItem("hotelId");
 
-    var fileInput = document.getElementById("ImageRoom");
-    if (fileInput.files.length === 0) {
-      console.log(fileInput.files.length);
-      alert("sai");
-    }
-    for (var i = 0; i < fileInput.files.length; i++) {
-      formData.append("room", fileInput.files[i]); // Use 'files[]' to send as an array
-    }
+    // var fileInput = document.getElementById("ImageRoom");
+    // if (fileInput.files.length === 0) {
+    //   console.log(fileInput.files.length);
+    //   alert("sai");
+    // }
+    // for (var i = 0; i < fileInput.files.length; i++) {
+    //   formData.append("room", fileInput.files[i]); // Use 'files[]' to send as an array
+    // }
 
     // Create FormData object and append form data
 
@@ -141,8 +142,8 @@ $(document).ready(function () {
       processData: false, // Important for FormData
       success: function (data) {
         renderPage();
-        $(".custom-popup-overlay").hide();
-        $(".custom-popup").hide();
+        $(".popup-overlay-addRoom").hide();
+        $(".popup-addRoom").hide();
         console.log("Room created:", data);
       },
       error: function (error) {
@@ -154,7 +155,7 @@ $(document).ready(function () {
   // Sự kiện khi click vào nút "Sửa"
   $(document).on("click", ".updateRoom", function () {
     var id = $(this).val();
-    $(".popup-overlay").show();
+    $(".popup-overlay-addRoom").show();
     // Gửi yêu cầu để lấy chi tiết người dùng
     $.ajax({
       url: `http://localhost:3030/api/v1/rooms/${id}`,
@@ -162,8 +163,8 @@ $(document).ready(function () {
       success: function (data) {
         console.log(data);
         const hotelId = localStorage.getItem("hotelId");
-        $(".popup-overlay").html(`
-          <div class="popup"> 
+        $(".popup-overlay-addRoom").html(`
+          <div class="popup-addRoom"> 
           <span class="close-btn">&times;</span> 
           <h2>Chỉnh sửa</h2> 
           <form id="updateForm"> 
@@ -184,10 +185,9 @@ $(document).ready(function () {
           ]
             .map(
               (optionValue) =>
-                `<option value="${optionValue}" ${
-                  optionValue.toString() === data.name.toString()
-                    ? "selected"
-                    : ""
+                `<option value="${optionValue}" ${optionValue.toString() === data.name.toString()
+                  ? "selected"
+                  : ""
                 }>${optionValue}</option>            `
             )
             .join("")}
@@ -203,8 +203,7 @@ $(document).ready(function () {
           <option value="0">Hết phòng</option>
         </select>
             <label>Giá phòng</label>
-          <input type="text" id="price" name="price" placeholder="Giá" value="${
-            data.price
+          <input type="text" id="price" name="price" placeholder="Giá" value="${data.price
           }" required> 
           <label>Số lượng phòng</label>
           <select
@@ -287,7 +286,7 @@ $(document).ready(function () {
           });
         });
         $(".close-btn").click(function () {
-          $(".popup-overlay").hide();
+          $(".popup-overlay-addRoom").hide();
         });
       },
     });
@@ -300,6 +299,7 @@ $(document).ready(function () {
 
   $(document).on("click", ".fa-image", function () {
     var IdRoom = $(this).data("id");
+    console.log(IdRoom);
     var hotelId = localStorage.getItem("hotelId");
     localStorage.setItem("IdRoom", IdRoom);
     $("#imagePopupOverlay").css("display", "block");

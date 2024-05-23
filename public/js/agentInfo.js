@@ -7,7 +7,8 @@ $(document).ready(function () {
   }
 
   const token = getToken();
-  const ownerId = getUserId(); // Lấy ownerId từ hàm getUserId() của bạn
+  const ownerId = getUserId();
+  console.log(ownerId);
   let hotelId;
 
   if (token) {
@@ -17,14 +18,152 @@ $(document).ready(function () {
     // Chuyển hướng đến trang login
     window.location.href = "/signin";
   }
+  function renderPersonalInfo() {
+    $.ajax({
+      url: "http://localhost:3030/api/v1/users/getAllUser",
+      method: "GET",
+      success: function (data) {
+        const user = data.find(function (h) {
+          return h.id == ownerId;
+        });
 
-  var url = window.location.pathname;
-  var testId = url.substring(url.lastIndexOf("/") + 1);
-  if (testId != ownerId) {
-    alert("Bạn không có quyền truy cập!");
-    window.location.href = `/agentInfo/${ownerId}`;
-  }
+        if (user) {
+          var tableHtml = "";
+          tableHtml += '<div class="account-secure">';
+          tableHtml += "    <h2>Bảo mật tài khoản</h2>";
+          tableHtml += '    <div class="account">';
+          tableHtml += '        <div class="account-email ">';
+          tableHtml += '            <div class="email-info ">';
+          tableHtml += '                <div class="email-head">';
+          tableHtml +=
+            '                    <i class="fa-regular fa-envelope"></i>';
+          tableHtml += "                    <span>Email</span>";
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="email-acc">';
+          tableHtml += "                    <span>" + user.email + "</span>";
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += "        </div>";
+          tableHtml += '        <div class="account-numberPhone ">';
+          tableHtml += '            <div class="numberPhone-info ">';
+          tableHtml += '                <div class="numberPhone-head">';
+          tableHtml += '                    <i class="fa fa-phone"></i>';
+          tableHtml += "                    <span>Số điện thoại</span>";
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="email-acc">';
+          tableHtml +=
+            "                    <span>" + user.numberPhone + "</span>";
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += "        </div>";
+          tableHtml += '        <div class="account-pass">';
+          tableHtml += '            <div class="pass-info">';
+          tableHtml += '                <div class="pass-head">';
+          tableHtml += '                    <i class="fa-solid fa-lock"></i>';
+          tableHtml += "                    <span>Password</span>";
+          tableHtml +=
+            '<button class= "update-pass-btn" value ="' +
+            user.id +
+            '">Cập nhật</button>';
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="pass-acc">';
+          tableHtml += "                    <span>" + "******" + "</span>";
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += "        </div>";
+          tableHtml += "    </div>";
+          tableHtml += "</div>";
+          tableHtml += '<div class="profile">';
+          tableHtml += "    <h2>Thông tin cá nhân</h2>";
+          tableHtml += '    <div class="profile-detail ">';
+          tableHtml += '        <div class="profile1">';
+          tableHtml += '            <div class="name col-6">';
+          tableHtml += '                <div class="title-name">';
+          tableHtml += '                    <i class="fa-regular fa-user"></i>';
+          tableHtml += "                    <span>Tên</span>";
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="user-name">';
+          tableHtml += user.name;
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += '            <div class="name col-6">';
+          tableHtml += '                <div class="title-name">';
+          tableHtml +=
+            '                    <i class="fa-regular fa-calendar"></i>';
+          tableHtml += "                    <span>Ngày sinh</span>";
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="user-name">';
+          tableHtml += user.birthDate;
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += "        </div>";
+          tableHtml += '        <div class="profile2">';
+          tableHtml += '            <div class="birth col-6">';
+          tableHtml += '                <div class="title-name">';
+          tableHtml += '                    <i class="fa fa-venus-mars"></i>';
+          tableHtml += "                    <span>Giới tính</span>";
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="user-name">';
+          if (user.gender)
+            tableHtml += "Nam";
+          else tableHtml += "Nữ";
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += '            <div class="birth col-6">';
+          tableHtml += '                <div class="title-name">';
+          tableHtml += '                    <i class="fa-solid fa-users"></i>';
+          tableHtml += "                    <span>Loại người dùng</span>";
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="user-name">';
+          tableHtml += user.type;
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += "        </div>";
 
+          tableHtml += '        <div class="profile2">';
+          tableHtml += '            <div class="birth col-6">';
+          tableHtml += '                <div class="title-name">';
+          tableHtml += '                    <i class="fa-solid fa-id-card"></i>';
+          tableHtml += "                    <span>CCCD</span>";
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="user-name">';
+          tableHtml += user.cccd;
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += '            <div class="birth col-6">';
+          tableHtml += '                <div class="title-name">';
+          tableHtml += '                    <i class="fa-solid fa-map"></i>';
+          tableHtml += "                    <span>Địa chỉ</span>";
+          tableHtml += "                </div>";
+          tableHtml += '                <div class="user-name">';
+          tableHtml += user.address;
+          tableHtml += "                </div>";
+          tableHtml += "            </div>";
+          tableHtml += "        </div>";
+
+
+          tableHtml +=
+            '<button class= "updateInfo" value ="' +
+            user.id +
+            '">Chỉnh sửa thông tin</button>';
+          tableHtml += "    </div>";
+          tableHtml += "</div>";
+          $(".body_right .personal-info").html(tableHtml);
+          console.log("Đang render page");
+        } else {
+          console.log("Lỗi render user");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+        console.log("Lỗi khi render page agent");
+      },
+    });
+  } // end of renderPage()
+
+  renderPersonalInfo();
+
+  //render hotel information
   function renderPage() {
     $.ajax({
       url: "http://localhost:3030/api/v1/hotels",
@@ -39,6 +178,7 @@ $(document).ready(function () {
           localStorage.setItem("hotelId", hotel.id);
 
           tableHtml += '<div class="my-hotel-body">';
+          tableHtml += '<h2>Quản lý khách sạn</h2>'
           tableHtml += '    <div class="row">';
           tableHtml += '        <div class="col-4">';
           tableHtml += '            <div class="title-name">';
@@ -104,14 +244,14 @@ $(document).ready(function () {
           tableHtml += '                <i class="fa-regular fa-user"></i>';
           tableHtml += "                <span>Hình ảnh</span>";
           tableHtml += "            </div>";
-          tableHtml += "<td><i class='fa-solid fa-image'></i></td>"; // Add icon
+          tableHtml += "<td><i class='fa-solid fa-image hotel-img-icon'></i></td>"; // Add icon
           tableHtml += "        </div>";
           tableHtml += '        <div class="col-6">';
           tableHtml += '            <div class="title-name">';
           tableHtml += '                <i class="fa-regular fa-map"></i>';
           tableHtml += "                <span>Tiện nghi</span>";
           tableHtml += "            </div>";
-          tableHtml += "<td><i class='fa-solid fa-home'></i></td>";
+          tableHtml += "<td><i class='fa-solid fa-home ManageHotelService'></i></td>";
           tableHtml += "        </div>";
           tableHtml += "    </div>";
 
@@ -119,10 +259,10 @@ $(document).ready(function () {
             '<button type="button" class="updateHotel" value="' +
             hotel.id +
             '">Chỉnh sửa</button>';
-          tableHtml +=
-            '<button type="button" class="deleteHotel" value="' +
-            hotel.id +
-            '">Xóa</button>';
+          // tableHtml +=
+          //   '<button type="button" class="deleteHotel" value="' +
+          //   hotel.id +
+          //   '">Xóa</button>';
           tableHtml +=
             '<button type="button" class="addRoom" value="' +
             hotel.id +
@@ -131,10 +271,13 @@ $(document).ready(function () {
 
           // Render dữ liệu vào bảng
           // $(".agent-table table tbody").html(tableHtml);
-          $(".mytable").html(tableHtml);
+          $(".my-hotel").html(tableHtml);
           console.log("Đang render page");
         } else {
-          console.log("Không tìm thấy khách sạn có id là 4");
+          var tableHtml = "";
+          tableHtml += "<span>Bạn chưa có khách sạn.</span><br>";
+          tableHtml += '<span>Nhấn vào <span class="addHotel">đây</span> để đăng kí!</span>';
+          $(".my-hotel").html(tableHtml);
         }
       },
       error: function (xhr, status, error) {
@@ -146,8 +289,11 @@ $(document).ready(function () {
   renderPage();
 
   // Sự kiện khi click vào nút "Thêm"
-  $(".agent-search-create").click(function () {
-    window.location.href = `/agent/addHotel`;
+  $(document).on("click", ".addHotel", function () {
+    alert("ê");
+    window.open('/agent/addHotel', '_blank');
+
+
   });
 
   // Sự kiện khi click vào nút "Đóng" trong popup
@@ -160,6 +306,11 @@ $(document).ready(function () {
   $(".close-btn1").click(function () {
     $(".popup-overlay-delete").hide();
     $(".popup-delete").hide();
+  });
+
+  $(".close-btn-img").click(function () {
+    $(".popup-overlay-hotel-img").hide();
+    $(".popup-content-hotel-img").hide();
   });
 
   // Sự kiện khi click vào nút "Xóa"
@@ -284,16 +435,16 @@ $(document).ready(function () {
   $(document).on("click", ".updateHotel", function () {
     alert("hehe");
     var id = $(this).val();
+    console.log(id);
     $(".popup-overlay-updateHotel").show();
     // Gửi yêu cầu để lấy chi tiết người dùng
     $.ajax({
       url: `http://localhost:3030/api/v1/hotels/${id}`,
       method: "GET",
       success: function (data) {
-        console.log("2");
         console.log(data);
         $(".popup-overlay-updateHotel").html(`
-          <div class="popup">
+          <div class="popup-updateHotel">
           <span class="close-btn">&times;</span>
           <h2>Chỉnh sửa</h2>
           <form id="updateForm">
@@ -304,49 +455,45 @@ $(document).ready(function () {
             <label>Số sao</label>
             <select class="form-select" name="Hotelstar" id="Hotelstar">
             ${[1, 2, 3, 4, 5]
-              .map(
-                (optionValue) =>
-                  `                <option value="${optionValue}" ${
-                    optionValue.toString() === data.star.toString()
-                      ? "selected"
-                      : ""
-                  }>${optionValue}</option>            `
-              )
-              .join("")}
+            .map(
+              (optionValue) =>
+                `                <option value="${optionValue}" ${optionValue.toString() === data.star.toString()
+                  ? "selected"
+                  : ""
+                }>${optionValue}</option>            `
+            )
+            .join("")}
               </select>
             <label>Địa chỉ</label>
-            <input type="text" id="Hotelmap" name="map" placeholder="Địa chỉ *" value="${
-              data.map
-            }"required />
+            <input type="text" id="Hotelmap" name="map" placeholder="Địa chỉ *" value="${data.map
+          }"required />
 
             <label>Loại khách sạn</label>
             <select class="form-select" name="HotelTypeHotel" id="HotelTypeHotel">
             ${["hotel", "resort", "homestay", "service apartment"]
-              .map(
-                (optionValue) => `
-                <option value="${optionValue}" ${
-                  optionValue.toString() === data.TypeHotel.toString()
-                    ? "selected"
-                    : ""
+            .map(
+              (optionValue) => `
+                <option value="${optionValue}" ${optionValue.toString() === data.TypeHotel.toString()
+                  ? "selected"
+                  : ""
                 }>${optionValue}</option>
             `
-              )
-              .join("")}
+            )
+            .join("")}
             </select>
 
             <label>Hình thức thanh toán</label>
             <select class="form-select" name="payment" id="Hotelpayment">
             ${["offline", "online"]
-              .map(
-                (optionValue1) => `
-                <option value="${optionValue1}" ${
-                  optionValue1.toString() === data.payment.toString()
-                    ? "selected"
-                    : ""
+            .map(
+              (optionValue1) => `
+                <option value="${optionValue1}" ${optionValue1.toString() === data.payment.toString()
+                  ? "selected"
+                  : ""
                 }>${optionValue1}</option>
             `
-              )
-              .join("")}
+            )
+            .join("")}
             </select>
 
                 <div class="ebutton">
@@ -391,9 +538,173 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", ".fa-image", function () {
-    var hotelId = $(this).data("id");
-    localStorage.setItem("hotelId", hotelId);
+
+
+  // Hàm hiển thị xem trước các tệp đã chọn
+
+  // Sự kiện click cho nút "Confirm"
+
+
+  $(document).on("click", ".updateInfo", function () {
+    var id = $(this).val();
+    $(".popup-overlay-updateInfo").show();
+    // Gửi yêu cầu để lấy chi tiết người dùng
+    $.ajax({
+      url: `http://localhost:3030/api/v1/users/getDetailUser/${id}`, //getDetailHotel
+      method: "GET",
+      success: function (data) {
+        $(".popup-overlay-updateInfo").html(`
+          <div class="popup-updateInfo"> 
+          <span class="close-btn">&times;</span> 
+          <h2>Chỉnh sửa thông tin người dùng</h2> 
+          <form id="updateForm"> 
+          <label>Tên người dùng</label>    
+          <input type="text" id="name-user" name="name" placeholder="Tên người dùng *" value="${data.name}" required />
+          <label>Ngày sinh</label>
+          <input type="text" id="birthDate-user" name="birthDate" placeholder="Ngày sinh *" value="${data.birthDate}"required />
+          <div class="row">
+          <div class="col-6">
+          <label>Số điện thoại</label>
+          <input type="text" id="numberPhone-user" name="numberPhone" placeholder="Số điện thoại *" value="${data.numberPhone}"required />
+          </div>
+          <div class="col-6">
+          <label>Email</label><br>
+          <input type="text" id="email-user" name="email" placeholder="Email *" value="${data.email}"required />
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col-6">
+          <label>CCCD</label><br>
+          <input type="text" id="cccd-user" name="CCCD" placeholder="CCCD *" value="${data.cccd}"required />
+          </div>
+          <div class="col-6">
+          <label>Địa chỉ</label><br>
+          <input type="text" id="address-user" name="address" placeholder="address *" value="${data.address}"required />
+          </div>
+          </div>
+
+          <label>Giới tính</label>
+          <select class="form-select" name="gender-user" id="gender-user">
+          <option value="">Chọn giới tính</option>
+          <option value="1">Nam</option>
+          <option value="0">Nữ</option>
+          </select>
+
+                   
+              <div class="ebutton"> 
+                  <input type="submit" value="Cập nhật"> 
+              </div> 
+          </form> 
+          </div> `);
+
+        $(".ebutton").click(function () {
+          console.log(id);
+          const name = $("#name-user").val();
+          const numberPhone = $("#numberPhone-user").val();
+          const email = $("#email-user").val();
+          const birthDate = $("#birthDate-user").val();
+          const gender = $("#gender-user").val();
+          const cccd = $("#cccd-user").val();
+          const address = $("#address-user").val();
+
+
+          $.ajax({
+            url: `http://localhost:3030/api/v1/users/editUser/${id}`,
+            method: "PUT",
+            data: {
+              name: name,
+              numberPhone: numberPhone,
+              email: email,
+              birthDate: birthDate,
+              gender: gender,
+              cccd: cccd,
+              address: address,
+            },
+            success: function (data) {
+              renderPage();
+              console.log("Chỉnh sửa thông tin người dùng thành công");
+            },
+            error: function (error) {
+              console.log("Lỗi khi chỉnh sửa thông tin người dùng", error);
+            },
+          });
+        });
+
+        $(".close-btn").click(function () {
+          $(".popup-overlay-updateInfo").hide();
+        });
+      },
+    });
+  }); //   end of update user info
+
+  //Booking list section
+  function renderBookingList() {
+    var ownerId = localStorage.getItem("id");
+    $.ajax({
+      url: `http://localhost:3030/api/v1/booking?user_id=${ownerId}`,
+      method: "GET",
+      success: function (data) {
+        console.log(data);
+        var tableHtml = "";
+        if (data.length == 0) {
+          tableHtml += '<div class=row>';
+          tableHtml += '<div class="col-5">';
+          tableHtml += '    <img src="https://ak-d.tripcdn.com/images/05E6w12000cqchxs29CAB.gif">';
+          tableHtml += '</div>';
+          tableHtml += '<div class="col-7">';
+          tableHtml += "<span>Bạn chưa có đơn đặt hàng nào!</span>";
+          tableHtml += '</div>';
+          $(".booking-table table").hide();
+          $(".booking-table").html(tableHtml);
+        } else {
+          data.forEach(function (booking, index) {
+            // Tạo HTML cho từng hàng trong bảng
+            tableHtml += "<tr>";
+            tableHtml += '<td class="col1">' + (index + 1) + "</td>";
+            tableHtml += '<td class="col2">' + booking.room_id + "</td>";
+            tableHtml += '<td class="col1">' + booking.full_name + "</td>";
+            tableHtml += '<td class="col2">' + booking.user_id + "</td>";
+            tableHtml += '<td class="col2">' + booking.total_price + "</td>";
+            tableHtml += '<td class="col1">' + booking.status + "</td>";
+            tableHtml += '<td class="col1">' + booking.check_in_date + "</td>";
+            tableHtml += '<td class="col1">' + booking.check_out_date + "</td>";
+            tableHtml += '<td class="col1">' + booking.special_requests + "</td>";
+            tableHtml += "<td>";
+
+            // Thêm button Chỉnh sửa
+            tableHtml +=
+              '<button type="button" class="updatehotel" value="' +
+              booking.id +
+              '">Chỉnh sửa</button>';
+
+            // Thêm button Xóa và lưu ID của khách sạn trong thuộc tính data-id của icon
+            tableHtml +=
+              '<button type="button" class="deleteHotel" value="' +
+              booking.id +
+              '">Xóa</button>';
+
+            tableHtml += "</td>";
+            tableHtml += "</tr>";
+            $(".booking-table table tbody").html(tableHtml);
+
+          });
+        }
+
+        // Render dữ liệu vào bảng
+        console.log("Đang render page");
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+        console.log("Lỗi khi render page booking");
+      },
+    });
+  }
+
+  renderBookingList();
+
+  $(document).on("click", ".hotel-img-icon", function () {
+    var hotelId = localStorage.getItem("hotelId");
     console.log(hotelId);
     $("#imagePopupOverlayHotel").css("display", "block");
     $.ajax({
@@ -436,9 +747,6 @@ $(document).ready(function () {
       },
     });
   });
-  $(".close-btn").click(function () {
-    $("#imagePopupOverlayHotel").hide();
-  });
 
   $(document).on("click", ".delete-image-btn", function () {
     var hotelId1 = localStorage.getItem("hotelId"); // Lấy hotelId từ localStorage
@@ -450,7 +758,7 @@ $(document).ready(function () {
       contentType: "application/json",
       data: JSON.stringify({ url: url }),
       success: function (response) {
-        console.log(response); // In ra thông báo từ máy chủ
+        // console.log(response); // In ra thông báo từ máy chủ
         alert("Delete Successful");
         renderPage();
         $.ajax({
@@ -458,7 +766,7 @@ $(document).ready(function () {
             "http://localhost:3030/api/v1/urlImageHotel/?HotelId=" + hotelId1,
           method: "GET",
           success: function (data) {
-            console.log(data);
+            // console.log(data);
             // Xử lý khi nhận được danh sách các ảnh từ server
             if (data && data.length > 0) {
               // Xóa bất kỳ nội dung HTML cũ nào trong phần hiển thị ảnh
@@ -543,8 +851,8 @@ $(document).ready(function () {
       formData.append("hotel", file[i]); // Thêm từng tệp vào FormData
     }
     formData.append("HotelId", storedHotelId);
-    console.log(storedHotelId);
-    console.log(formData);
+    // console.log(storedHotelId);
+    // console.log(formData);
     // Gửi yêu cầu AJAX POST lên server
     $.ajax({
       url: "http://localhost:3030/api/v1/urlImageHotel",
@@ -566,28 +874,38 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", ".fa-home", function () {
-    var url = window.location.pathname;
-    var id = url.substring(url.lastIndexOf("/") + 1);
-    localStorage.setItem("hotelId", id);
+  $(document).on("click", ".ManageHotelService", function () {
+    let id = localStorage.getItem("hotelId");
     window.location.href = `/ManageHotelService/${id}`;
   });
 
-  // Khi người dùng nhấn vào nút "add-amenties"
 
   $(".personal-info-item").click(function () {
     $(".personal-info").show();
     $(".my-hotel").hide();
     $(".room-list").hide();
+    $(".booking-list").hide();
   });
   $(".my-hotel-item").click(function () {
     $(".personal-info").hide();
     $(".my-hotel").show();
     $(".room-list").hide();
+    $(".booking-list").hide();
   });
   $(".room-list-item").click(function () {
     $(".personal-info").hide();
     $(".my-hotel").hide();
     $(".room-list").show();
+    $(".booking-list").hide();
+  });
+  $(".booking-list-item").click(function () {
+    $(".personal-info").hide();
+    $(".my-hotel").hide();
+    $(".room-list").hide();
+    $(".booking-list").show();
+  });
+  document.getElementById("logout-btn").addEventListener("click", () => {
+    localStorage.clear();
+    window.location.href = "/signin";
   });
 });

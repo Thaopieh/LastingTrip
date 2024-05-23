@@ -46,7 +46,7 @@ $(document).ready(function () {
             user.id +
             '">Xóa</button>';
           tableHtml += "</td>";
-          tableHtml += "<td><i class='fa-solid fa-image'></i></td>"; // Add icon
+          // tableHtml += "<td><i class='fa-solid fa-image'></i></td>";
           tableHtml += "</tr>";
         });
         // Render dữ liệu vào bảng

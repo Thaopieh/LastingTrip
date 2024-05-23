@@ -39,7 +39,7 @@ form.addEventListener("submit", (e) => {
           window.location.href = "/dashboard";
         } else if (result.type === "owner") {
           // Nếu đăng nhập thành công, chuyển hướng đến trang chủ
-          window.location.href = `agentInfo/${id}`;
+          window.location.href = "/agentInfo";
         } else {
           window.location.href = "/";
         }

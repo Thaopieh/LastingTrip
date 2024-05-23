@@ -39,9 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     document.getElementById("logout").addEventListener("click", function () {
       // Xóa token khỏi local storage
-      localStorage.removeItem("token");
-      localStorage.removeItem("id");
-      localStorage.removeItem("userName");
+      localStorage.clear();
+
 
       // Thực hiện chuyển hướng về trang đăng nhập
       window.location.href = "http://localhost:3030/signin";

@@ -10,10 +10,13 @@ $(document).ready(function () {
   const token = getToken();
   const userId = getUserId(); // Lấy ownerId từ hàm getUserId() của bạn
   if (token) {
-
   } else {
     alert("Vui lòng đăng nhập để xem thông tin người dùng!");
     window.location.href = "/signin";
+  }
+  if (localStorage.getItem("type") == "owner") {
+    alert("Bạn không có quyền xem trang này!");
+    window.location.href = "/agentInfo";
   }
 
   function renderPage() {
@@ -401,9 +404,7 @@ $(document).ready(function () {
 
 
   document.getElementById("logout-btn").addEventListener("click", () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("type");
+    localStorage.clear();
     window.location.href = "/signin";
   });
 });

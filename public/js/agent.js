@@ -13,7 +13,7 @@ $(document).ready(function () {
           tableHtml += '<td class="col2" >' + hotel.name + "</td>";
           tableHtml += '<td class="col1">' + hotel.star + "</td>";
           // tableHtml += '<td class="col2">' + hotel.map + "</td>";
-
+          console.log(hotel.map);
           var text = hotel.map;
           const cityList = [
             "Đà Nẵng",
@@ -29,12 +29,9 @@ $(document).ready(function () {
           ];
 
           cityList.forEach((tu) => {
-            if (text.includes(tu)) {
+            if (text && text.includes(tu)) {
               text = tu;
               tableHtml += '<td class="col2">' + text + "</td>";
-
-              console.log(text);
-            } else {
             }
           });
 
@@ -214,8 +211,10 @@ $(document).ready(function () {
     var star = $("#star").val();
     var map = $("#map").val();
     var TypeHotel = $("#TypeHotel").val();
-    var cost = $("#cost").val();
+    // var cost = $("#cost").val();
+    var ownerId = localStorage.getItem("id");
     var payment = $("#payment").val();
+
     var fileInput = document.querySelector("input[type='file']");
     var files = fileInput.files; // Danh sách các file đã chọn
 
@@ -224,7 +223,8 @@ $(document).ready(function () {
     formData.append("star", star);
     formData.append("map", map);
     formData.append("TypeHotel", TypeHotel);
-    formData.append("cost", cost);
+    // formData.append("cost", cost);
+    formData.append("ownerId", ownerId);
     formData.append("payment", payment);
 
     // Lặp qua từng file đã chọn và thêm vào formData
@@ -235,7 +235,7 @@ $(document).ready(function () {
 
     // Gửi yêu cầu thêm khách sạn với các files ảnh
     $.ajax({
-      url: `http://localhost:3030/api/v1/hotels`,
+      url: `http://localhost:3030/api/v1/hotels/`,
       method: "POST",
       processData: false, // Ngăn jQuery xử lý dữ liệu
       contentType: false, // Ngăn jQuery đặt loại nội dung
@@ -244,7 +244,7 @@ $(document).ready(function () {
         renderPage();
         console.log("Khách sạn đã được tạo.");
         alert("Thành công!");
-        window.location.href = `/agent`;
+        window.location.href = `/agentInfo`;
       },
       error: function (error) {
         // Xử lý lỗi
@@ -365,6 +365,7 @@ $(document).ready(function () {
   $(".close-btn").click(function () {
     $("#imagePopupOverlayHotel").hide();
   });
+
   $(document).on("click", ".fa-image", function () {
     var hotelId = $(this).data("id");
     localStorage.setItem("hotelId", hotelId);

@@ -92,7 +92,7 @@ app.get("/dashboard", (req, res) => {
   res.render("Admin/dashboard");
 });
 
-app.get("/agentInfo/:id", (req, res) => {
+app.get("/agentInfo", (req, res) => {
   res.render("User/agentInfo");
 });
 app.get("/ManageRoom/:id", (req, res) => {
@@ -134,7 +134,6 @@ function ChangeToSlug(title) {
   slug = slug.trim();
   return slug;
 }
-
 
 function findHotelBySlug(slug) {
   return fetch('http://localhost:3030/api/v1/hotels/')
@@ -185,6 +184,9 @@ app.get("/userInfor", (req, res) => {
 //   res.render("Admin/partials/agent");
 // });
 app.get("/admin/addHotel", (req, res) => {
+  res.render("Admin/partials/agentForm");
+});
+app.get("/agent/addHotel", (req, res) => {
   res.render("Admin/partials/agentForm");
 });
 // app.get("/admin/Hotel/Service", (req, res) => {
