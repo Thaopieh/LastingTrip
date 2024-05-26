@@ -94,7 +94,7 @@ $(document).ready(function () {
           tableHtml += "                    <span>Ngày sinh</span>";
           tableHtml += "                </div>";
           tableHtml += '                <div class="user-name">';
-          tableHtml += user.birthDate.slice(0, 10);
+          tableHtml += user.birthDate;
           tableHtml += "                </div>";
           tableHtml += "            </div>";
           tableHtml += "        </div>";
@@ -190,12 +190,12 @@ $(document).ready(function () {
         console.log(data);
         var tableHtml = "";
         if (data.length == 0) { //Trường hợp không có booking
-          tableHtml += '<div class=row>';
+          tableHtml += '<div class="row empty-booking">';
           tableHtml += '<div class="col-5">';
           tableHtml += '    <img src="https://ak-d.tripcdn.com/images/05E6w12000cqchxs29CAB.gif">';
           tableHtml += '</div>';
           tableHtml += '<div class="col-7">';
-          tableHtml += "<p>Bạn không có bất kỳ đặt chỗ nào hoặc chúng tôi không thể truy cập          các đặt chỗ của bạn vào lúc này.Bạn có thể tìm kiếm các đặt phòng bạn đã thực hiện với          tư cách là khách trong năm qua bằng địa chỉ email của mình.</p>";
+          tableHtml += "<p>Bạn không có bất kỳ đặt chỗ nào hoặc chúng tôi không thể truy cập các đặt chỗ của bạn vào lúc này. Bạn có thể tìm kiếm các đặt phòng bạn đã thực hiện với tư cách là khách trong năm qua bằng địa chỉ email của mình.</p>";
           tableHtml += '</div>';
           $(".my-booking table").hide();
           $(".my-booking").html(tableHtml);
@@ -401,7 +401,6 @@ $(document).ready(function () {
     $(".my-booking").hide();
     $(".log-out").show();
   });
-
 
   document.getElementById("logout-btn").addEventListener("click", () => {
     localStorage.clear();

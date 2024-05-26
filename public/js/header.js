@@ -21,7 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (token) {
     // Nếu token có giá trị khác null, thay đổi HTML của phần tử li
     const signInSignUpLi = document.querySelector("#nav-login"); // Chọn phần tử li cần thay đổi
-
+    var href_val;
+    if (localStorage.getItem("type") == "client") {
+      var href_val = "/userInfor";
+    } else if (localStorage.getItem("type") == "owner") {
+      var href_val = "/agentInfo";
+    }
     // HTML mới cho phần tử li nếu có token
     signInSignUpLi.innerHTML = `
             <div class="btn-group1">
@@ -31,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     ${localStorage.getItem("userName")}
                 </button>
                 <ul class="dropdown-menu" id="dropdownshown">
-                    <li><a class="dropdown-item" href="/userInfor">Thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item" href="${href_val}">Thông tin cá nhân</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li id="logout"><a class="dropdown-item" href="/">Đăng xuất</a></li>
                 </ul>
@@ -102,14 +107,17 @@ toggleBtn.addEventListener("click", function () {
 
 document.addEventListener("DOMContentLoaded", () => {
   const token = getToken(); // Lấy token
-
   // Sự kiện click vào class toUserInfo
   document.querySelector(".toUserInfo").addEventListener("click", function () {
     // Kiểm tra nếu có token
-    if (token) {
+    if (localStorage.getItem("type") == "client") {
       // Di chuyển đến trang userInfor
       window.location.href = "/userInfor";
-    } else {
+    } else if (localStorage.getItem("type") == "owner") {
+      // Di chuyển đến trang userInfor
+      window.location.href = "/agentInfo";
+    }
+    else {
       // Hiển thị thông báo yêu cầu đăng nhập
       alert("Vui lòng đăng nhập để xem thông tin cá nhân.");
       // Chuyển hướng đến trang login

@@ -5,7 +5,6 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const createUrlImageHotel = async (req, res) => {
   try {
     const { HotelId } = req.body;
-
     const { files } = req;
     console.log(files);
     // Iterate over each file and create a corresponding UrlImageHotel record

@@ -288,6 +288,15 @@ footer {
     cursor: pointer;
 }
 
+.empty-booking {
+    background-color: white;
+}
+
+.empty-booking .col-7 {
+    padding: 20px;
+}
+
+
 .body_right {
     /* border: 1px solid black; */
     width: 75%;
