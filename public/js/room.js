@@ -122,6 +122,8 @@ $(document).ready(function () {
     // for (var i = 0; i < fileInput.files.length; i++) {
     //   formData.append("room", fileInput.files[i]); // Use 'files[]' to send as an array
     // }
+    var fileInput = document.querySelector("input[type='file']");
+    var files = fileInput.files; // Danh sách các file đã chọn
 
     // Create FormData object and append form data
 
@@ -133,6 +135,12 @@ $(document).ready(function () {
     formData.append("type_bed", type_bed);
     formData.append("hotelId", hotelId);
 
+    // Lặp qua từng file đã chọn và thêm vào formData
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      formData.append("room", file); // Sử dụng '[]' để gửi dưới dạng mảng trên máy chủ
+    }
+
     // Make AJAX request
     $.ajax({
       url: "http://localhost:3030/api/v1/rooms/",
@@ -142,6 +150,7 @@ $(document).ready(function () {
       processData: false, // Important for FormData
       success: function (data) {
         renderPage();
+        alert("Thêm phòng thành công!");
         $(".popup-overlay-addRoom").hide();
         $(".popup-addRoom").hide();
         console.log("Room created:", data);
