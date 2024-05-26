@@ -479,12 +479,38 @@ $(document).ready(function () {
     },
   });
 });
+const token = localStorage.getItem("token");
 
 $(document).on("click", ".booking", function () {
-  var roomId = $(this).data("room-id");
-  var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
-  window.location.href = `http://localhost:3030/payment?hotelId=${hotelId}&roomId=${roomId}`;
+  if (token) {
+    var roomId = $(this).data("room-id");
+    var url = window.location.pathname;
+    var hotelId = url.substring(url.lastIndexOf("/") + 1);
+    const Sdata = localStorage.getItem("searchData");
+    var hotelData = JSON.parse(Sdata);
+    console.log(hotelData.checkInDate);
+    //Send AJAX request to check availability
+    $.ajax({
+      url: `http://localhost:3030/api/v1/booking/checkAvailability?checkInDate=${hotelData.checkInDate}&checkOutDate=${hotelData.checkOutDate}&roomId=${roomId}&quantity=${hotelData.numberOfRooms}`,
+      type: "GET",
+      success: data => {
+        console.log(data);
+        if (data) {
+          // If available rooms exist, redirect to payment page
+          window.location.href = `http://localhost:3030/payment?hotelId=${hotelId}&roomId=${roomId}`;
+        } else {
+          // If no available rooms, show a message
+          alert("Không có phòng trống cho ngày đã chọn");
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error checking availability:", errorThrown);
+        alert("Có lỗi xảy ra khi kiểm tra phòng trống. Vui lòng thử lại sau.");
+      }
+    });
+  } else {
+    alert("Bạn cần đăng nhập để thực hiện đặt phòng");
+  }
 });
 
 const findhotel = () => {

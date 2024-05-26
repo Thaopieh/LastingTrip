@@ -118,7 +118,7 @@ $(document).ready(function () {
 
   $("#Order").click(function () {
     // Validate all required fields before sending the request
-    if (!roomId || !userID || !hotelData.checkInDate || !hotelData.checkOutDate || !newTotalPrice) {
+    if ($("#fname").val() === "" || $("#phoneNumber").val() === "" || $("#emailAddress").val() === ""|| $("#yearOfBirth").val() === "" || $("#cccd").val() === ""|| $("#address").val() === "" || !roomId || !userID || !hotelData.checkInDate || !hotelData.checkOutDate || !newTotalPrice ) {
       alert("Vui lòng điền đầy đủ thông tin.");
       return;
     }

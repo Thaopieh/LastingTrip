@@ -5,11 +5,33 @@ document.addEventListener("DOMContentLoaded", function () {
   // Lấy ngày hiện tại
   var today = new Date();
   var todayString = today.toISOString().split("T")[0];
-
+  
   // Tính toán ngày tiếp theo
   var nextDay = new Date(today);
   nextDay.setDate(today.getDate() + 1);
   var nextDayString = nextDay.toISOString().split("T")[0];
+
+  function setDefaultLocalStorageData() {
+    const defaultData = {
+      location: "",
+      checkInDate: todayString,
+      checkOutDate: nextDayString,
+      numberOfRooms: 1,
+      numberOfAdults: 1,
+      numberOfChildren: 0,
+    };
+
+    // Kiểm tra xem đã có dữ liệu trong localStorage chưa
+    const existingData = localStorage.getItem("searchData");
+    if (!existingData) {
+      // Nếu không có, thiết lập dữ liệu mặc định
+      localStorage.setItem("searchData", JSON.stringify(defaultData));
+      console.log("Default search data set in localStorage.");
+    }
+  }
+
+  // Gọi hàm setDefaultLocalStorageData khi tài liệu đã tải xong
+  setDefaultLocalStorageData();
 
   // Đặt giá trị min và giá trị mặc định cho check-in là hôm nay
   var checkInInput = document.getElementById("checkIn");

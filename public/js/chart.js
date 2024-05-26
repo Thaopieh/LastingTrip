@@ -6,7 +6,7 @@ var hotelCounts = [];
 var hotelLabels = []; // Array to hold hotel names
 
 // Function to fetch data using AJAX
-function getDummyData() {
+function getDummyData(selectedYearMonth) {
     return $.ajax({
         type: "GET",
         url: "http://localhost:3030/api/v1/booking/",
@@ -17,33 +17,39 @@ function getDummyData() {
             data.forEach(booking => {
                 // Extract profit by date
                 let date = booking.createdAt.split('T')[0]; // Extract only the date part
+                let yearMonth = date.slice(0, 7); // Extract year and month part (e.g., 2023-01)
                 let totalPrice = booking.total_price;
                 let calculatedProfit = totalPrice * 0.05; // 5% of total_price
-                console.log(totalPrice, calculatedProfit);
-                if (profitByDate[date]) {
-                    profitByDate[date] += calculatedProfit;
-                } else {
-                    profitByDate[date] = calculatedProfit;
-                }
-
-                // Count bookings by hotel
-                if (booking.Hotel && booking.Hotel.name) {
-                    let hotelName = booking.Hotel.name;
-                    if (hotelBookingCounts[hotelName]) {
-                        hotelBookingCounts[hotelName] += 1;
+                if (yearMonth === selectedYearMonth) {
+                    if (profitByDate[date]) {
+                        profitByDate[date] += calculatedProfit;
                     } else {
-                        hotelBookingCounts[hotelName] = 1;
+                        profitByDate[date] = calculatedProfit;
+                    }
+
+                    // Count bookings by hotel
+                    if (booking.Hotel && booking.Hotel.name) {
+                        let hotelName = booking.Hotel.name;
+                        if (hotelBookingCounts[hotelName]) {
+                            hotelBookingCounts[hotelName] += 1;
+                        } else {
+                            hotelBookingCounts[hotelName] = 1;
+                        }
                     }
                 }
             });
 
             // Populate profit data
+            profit = [];
+            profitLabels = [];
             for (let date in profitByDate) {
                 profitLabels.push(date);
                 profit.push(profitByDate[date]);
             }
 
             // Populate hotel booking count data
+            hotelCounts = [];
+            hotelLabels = [];
             for (let hotel in hotelBookingCounts) {
                 hotelLabels.push(hotel);
                 hotelCounts.push(hotelBookingCounts[hotel]);
@@ -56,12 +62,10 @@ function getDummyData() {
 }
 
 // Function to create the profit chart
-async function dummyChart() {
-    await getDummyData();
-
+function createProfitChart() {
     const ctx = document.getElementById('myChart').getContext('2d');
 
-    const chart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'line', // The type of chart we want to create
         data: {
             labels: profitLabels,
@@ -101,59 +105,86 @@ async function dummyChart() {
     });
 }
 
-// Function to create the hotel booking count chart
-async function hotelBookingChart() {
-    await getDummyData();
-
+// Function to create the hotel booking count chart as a pie chart
+function createHotelBookingChart() {
     const ctx = document.getElementById('hotelChart').getContext('2d');
 
-    const chart = new Chart(ctx, {
-        type: 'bar', // The type of chart we want to create
+    new Chart(ctx, {
+        type: 'pie', // Change the type of chart to 'pie'
         data: {
             labels: hotelLabels,
             datasets: [
                 {
                     label: 'Number of Bookings',
-                    backgroundColor: 'rgba(0, 255, 0, 0.2)',
-                    borderColor: 'green',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
                     data: hotelCounts,
-                    fill: false
+                    borderWidth: 1
                 }
             ]
         },
         options: {
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Hotel'
-                    }
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
                 },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Number of Bookings'
-                    },
-                    min: 0, // Ensure y-axis begins at 0
-                    stepSize: 1, // Ensure y-axis only displays integers
-                    ticks: {
-                        callback: function(value) {
-                            if (Number.isInteger(value)) {
-                                return value;
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
                             }
-                            return null;
-                        },
-                        maxTicksLimit: 10 // Limit the number of ticks on y-axis
+                            if (context.parsed !== null) {
+                                label += context.parsed;
+                            }
+                            return label;
+                        }
                     }
                 }
-            },
-            tooltips: {
-                mode: 'index'
             }
         }
     });
 }
 
-// Call the functions to create the charts
-dummyChart();
-hotelBookingChart();
+// Function to initialize charts
+async function initializeCharts() {
+    const selectedYearMonth = document.getElementById('monthPicker').value;
+    await getDummyData(selectedYearMonth);
+    createProfitChart();
+    createHotelBookingChart();
+}
+
+// Function to set the default value of the month picker to the current month
+function setDefaultMonth() {
+    const monthPicker = document.getElementById('monthPicker');
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so add 1 and pad with zero
+    monthPicker.value = `${year}-${month}`;
+}
+
+// Set the default month and initialize the charts when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    setDefaultMonth();
+    initializeCharts();
+});
+
+// Event listener for the month picker
+document.getElementById('monthPicker').addEventListener('change', initializeCharts);

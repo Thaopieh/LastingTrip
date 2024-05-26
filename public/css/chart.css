@@ -1,3 +1,8 @@
-body {
-    background-color: purple
-  }
+input[type="month"] {
+  /* Your styles here */
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

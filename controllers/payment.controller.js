@@ -162,28 +162,32 @@ const getAllBooking = async (req, res) => {
   };
 
   const getAvailability = async (req, res) => {
-    const { checkInDate, checkOutDate, roomIds, quantity } = req.query;
-
+    const { checkInDate, checkOutDate, roomId, quantity } = req.query;
+  
     try {
-      const availableRooms = await Room.findAll({
+      // Fetch the room details
+      const room = await Room.findOne({ where: { id: roomId } });
+      if (!room) {
+        return res.status(400).send({ message: "Room not found" });
+      }
+  
+      // Calculate the total quantity of rooms already booked for the given date range
+      const bookedQuantity = await Booking.sum("quantity", {
         where: {
-          id: {
-            [Op.in]: roomIds,
-            [Op.notIn]: sequelize.literal(`
-              SELECT room_id FROM Bookings
-              WHERE (check_in_date < '${checkOutDate}' AND check_out_date > '${checkInDate}')
-            `),
-          },
+          room_id: roomId,
+          check_in_date: { [Op.lt]: checkOutDate },
+          check_out_date: { [Op.gt]: checkInDate },
         },
       });
-
-      if (availableRooms.length < quantity) {
-        return res
-          .status(400)
-          .send({ message: "Not enough rooms available for the selected dates" });
+  
+      // Calculate available quantity
+      const availableQuantity = room.quantity - (bookedQuantity || 0);
+  
+      if (availableQuantity < quantity) {
+        return res.status(400).send({ message: "Not enough rooms available for the selected dates" });
       }
-
-      res.status(200).send(availableRooms);
+      else
+      res.status(200).send({ availableQuantity });
     } catch (error) {
       console.error("Error checking room availability:", error);
       res.status(500).send({ message: "Internal server error" });
