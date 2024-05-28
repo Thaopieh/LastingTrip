@@ -12,7 +12,7 @@ const {
 const BookingRouter = express.Router();
 BookingRouter.post("/", createBooking);
 BookingRouter.get("/", getAllBooking);
-BookingRouter.get("/:id", getDetailBooking);
+BookingRouter.get("/getDetail/:id", getDetailBooking);
 BookingRouter.get("/checkAvailability", getAvailability);
 
 BookingRouter.delete("/:id", checkExist(Booking), deleteBooking);

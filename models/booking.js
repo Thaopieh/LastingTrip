@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.Room,{foreignKey: "room_id"});
-      this.belongsTo(models.User,{foreignKey:"user_id"})
+      this.belongsTo(models.User,{foreignKey:"user_id"});
+      this.belongsTo(models.Hotels,{foreignKey:"hotel_id"});
     }
   }
   Booking.init({
@@ -25,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.BOOLEAN,
     special_requests: DataTypes.TEXT,
     full_name: DataTypes.STRING,
-    quantity: DataTypes.INTEGER
+    quantity: DataTypes.INTEGER,
+    hotel_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Booking',

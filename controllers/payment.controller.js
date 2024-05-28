@@ -12,6 +12,7 @@
       special_requests,
       quantity,
       full_name,
+      hotel_id,
     } = req.body;
 
     try {
@@ -46,6 +47,7 @@
         special_requests,
         quantity,
         full_name,
+        hotel_id,
       });
 
       res.status(201).send(newBooking);
@@ -55,40 +57,56 @@
     }
   };
 
-  const getAllBooking = async (req, res) => {
-    const {
-      room_id,
-      user_id,
-      check_in_date,
-      check_out_date,
-      total_price,
-      status,
-      special_requests,
-      full_name,
-    } = req.query;
-    let whereClause = {};
+const getAllBooking = async (req, res) => {
+  const {
+    room_id,
+    user_id,
+    check_in_date,
+    check_out_date,
+    total_price,
+    status,
+    special_requests,
+    full_name,
+  } = req.query;
+  let whereClause = {};
 
-    // Tạo điều kiện tìm kiếm dựa trên các query parameter được cung cấp
-    if (room_id) whereClause.room_id = room_id;
-    if (user_id) whereClause.user_id = user_id;
-    if (total_price) whereClause.total_price = total_price;
-    if (status) whereClause.status = status;
-    if (special_requests) whereClause.special_requests = special_requests;
-    if (full_name) whereClause.full_name = full_name;
-    if (check_in_date) whereClause.check_in_date = { [Op.gte]: check_in_date };
-    if (check_out_date) whereClause.check_out_date = { [Op.lte]: check_out_date };
+  // Tạo điều kiện tìm kiếm dựa trên các query parameter được cung cấp
+  if (room_id) whereClause.room_id = room_id;
+  if (user_id) whereClause.user_id = user_id;
+  if (total_price) whereClause.total_price = total_price;
+  if (status) whereClause.status = status;
+  if (special_requests) whereClause.special_requests = special_requests;
+  if (full_name) whereClause.full_name = full_name;
+  if (check_in_date) whereClause.check_in_date = { [Op.gte]: check_in_date };
+  if (check_out_date) whereClause.check_out_date = { [Op.lte]: check_out_date };
 
-    try {
-      // Tìm kiếm các booking dựa trên điều kiện đã được xác định
-      const bookings = await Booking.findAll({
+  try {
+    let bookings;
+
+    // Kiểm tra xem whereClause có bất kỳ điều kiện nào không
+    if (Object.keys(whereClause).length === 0) {
+      // Nếu không có điều kiện nào, tìm tất cả các booking
+      bookings = await Booking.findAll({
+        include: [
+          {
+            model: Hotels,
+            attributes: ["id", "name"],
+          }
+        ],
+      });
+    } else {
+      // Nếu có điều kiện, tìm các booking dựa trên điều kiện đã được xác định
+      bookings = await Booking.findAll({
         where: whereClause,
       });
-      res.status(200).send(bookings);
-    } catch (error) {
-      console.error("Error fetching bookings:", error);
-      res.status(500).send(error);
     }
-  };
+
+    res.status(200).send(bookings);
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).send(error);
+  }
+};
 
   const getDetailBooking = async (req, res) => {
     const { id } = req.params;
@@ -144,28 +162,32 @@
   };
 
   const getAvailability = async (req, res) => {
-    const { checkInDate, checkOutDate, roomIds, quantity } = req.query;
-
+    const { checkInDate, checkOutDate, roomId, quantity } = req.query;
+  
     try {
-      const availableRooms = await Room.findAll({
+      // Fetch the room details
+      const room = await Room.findOne({ where: { id: roomId } });
+      if (!room) {
+        return res.status(400).send({ message: "Room not found" });
+      }
+  
+      // Calculate the total quantity of rooms already booked for the given date range
+      const bookedQuantity = await Booking.sum("quantity", {
         where: {
-          id: {
-            [Op.in]: roomIds,
-            [Op.notIn]: sequelize.literal(`
-              SELECT room_id FROM Bookings
-              WHERE (check_in_date < '${checkOutDate}' AND check_out_date > '${checkInDate}')
-            `),
-          },
+          room_id: roomId,
+          check_in_date: { [Op.lt]: checkOutDate },
+          check_out_date: { [Op.gt]: checkInDate },
         },
       });
-
-      if (availableRooms.length < quantity) {
-        return res
-          .status(400)
-          .send({ message: "Not enough rooms available for the selected dates" });
+  
+      // Calculate available quantity
+      const availableQuantity = room.quantity - (bookedQuantity || 0);
+  
+      if (availableQuantity < quantity) {
+        return res.status(400).send({ message: "Not enough rooms available for the selected dates" });
       }
-
-      res.status(200).send(availableRooms);
+      else
+      res.status(200).send({ availableQuantity });
     } catch (error) {
       console.error("Error checking room availability:", error);
       res.status(500).send({ message: "Internal server error" });

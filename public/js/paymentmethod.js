@@ -22,7 +22,7 @@ $(document).ready(function () {
   let hotelName;
   // Helper function to extract a query parameter
   $.ajax({
-    url: "http://localhost:3030/api/v1/booking/" + bookingID,
+    url: "http://localhost:3030/api/v1/booking/getDetail/" + bookingID,
     method: "GET",
     success: (data) => {
       $("#RoomName").html("Loại phòng" + "<br>" + data.Room.name);

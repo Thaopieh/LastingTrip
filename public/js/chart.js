@@ -60,6 +60,8 @@ function getDummyData(selectedYearMonth) {
         }
     });
 }
+console.log(profit);
+console.log(profitLabels);
 
 // Function to create the profit chart
 function createProfitChart() {
