@@ -3,7 +3,7 @@
 $(document).ready(async function () {
   // Lấy id khách sạn từ URL
   var url = window.location.pathname;
-  var slug = url.substring(url.lastIndexOf("/") + 1);
+  let slug = url.split('/')[2];
   function ChangeToSlug(title) {
     var slug;
     slug = title.toLowerCase();
@@ -45,6 +45,7 @@ $(document).ready(async function () {
       });
   }
   var hotel = await findHotelBySlug(slug);
+  console.log(hotel);
   var hotelId = hotel.id;
   $("title").text(hotel.name);
 
@@ -199,7 +200,7 @@ $(document).ready(async function () {
 $(document).ready(async function () {
 
   var url = window.location.pathname;
-  var slug = url.substring(url.lastIndexOf("/") + 1);
+  let slug = url.split('/')[2];
   function ChangeToSlug(title) {
     var slug;
     slug = title.toLowerCase();
@@ -284,7 +285,7 @@ $(document).ready(async function () {
 $(document).ready(async function () {
 
   var url = window.location.pathname;
-  var slug = url.substring(url.lastIndexOf("/") + 1);
+  let slug = url.split('/')[2];
   function ChangeToSlug(title) {
     var slug;
     slug = title.toLowerCase();
@@ -530,7 +531,7 @@ $(document).ready(async function () {
   }
 
   var url = window.location.pathname;
-  var slug = url.substring(url.lastIndexOf("/") + 1);
+  let slug = url.split('/')[2];
   function ChangeToSlug(title) {
     var slug;
     slug = title.toLowerCase();

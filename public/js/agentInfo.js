@@ -658,7 +658,7 @@ $(document).ready(function () {
     //   });
 
     $.ajax({
-      url: `http://localhost:3030/api/v1/booking?room_id=${hotelId}`,
+      url: `http://localhost:3030/api/v1/booking?hotel_id=${hotelId}`,
       method: "GET",
       success: function (data) {
         console.log(data);

@@ -161,7 +161,7 @@ $(document).ready(() => {
       const card = `
         <div class="card mb-3">
           <div class="row img-adjust g-0">
-            <a href="/hotel/${slug}" class="hotel-link wrap-img">
+            <a href="/hotel/${slug}/${item.id}" class="hotel-link wrap-img">
               <div class="col-md-4">
                 <img src="${imgRender}" alt="...">
               </div>
@@ -170,7 +170,7 @@ $(document).ready(() => {
               <div class="card-body">
                 <div class="head-title">
                   <h5 class="card-title">
-                    <a href="/hotel/${slug}" class="hotel-link">${item.name}</a>
+                    <a href="/hotel/${slug}/${item.id}" class="hotel-link">${item.name}</a>
                     ${stars}
                   </h5>
                   <div class="card-describle">

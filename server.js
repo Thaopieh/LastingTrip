@@ -154,7 +154,7 @@ function findHotelBySlug(slug) {
     });
 }
 
-app.get("/hotel/:slug", (req, res) => {
+app.get("/hotel/:slug/:id", (req, res) => {
   var slug = req.params.slug;
   var hotel = findHotelBySlug(slug);
 

@@ -64,13 +64,13 @@ $(document).ready(() => {
             const formattedCost = numberWithCommas(item.cost);
             const slug = ChangeToSlug(item.name);
             const card = `<div class="carousel-item ${activeClass}" id=${item.id}">
-            <a href="/hotel/${slug}" target="_blank"  class="hotel-link" >
+            <a href="/hotel/${slug}/${item.id}" target="_blank"  class="hotel-link" >
               <div class="card" >
                 <div class="img-wrapper">
                   <img src="${imgRender}" alt=${item.name}>
                 </div>
                 <div class="card-body">
-                  <a class="click-item" href="/hotel/${slug}" target="_blank">
+                  <a class="click-item" href="/hotel/${slug}/${item.id}" target="_blank">
                     <h5 class="card-title">${item.name}</h5>
                   </a>
                   <p class="card-text">${item.map}</p>

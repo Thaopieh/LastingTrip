@@ -81,19 +81,20 @@ $(document).ready(function () {
   }
   $("button").click(function () {
     var data = {
-        room_id: roomId,
-        user_id: userID,
-        check_in_date: hotelData.checkInDate,
-        check_out_date: hotelData.checkOutDate,
-        total_price: totalPrice,
-        full_name: $("#fname").val(),
-        special_requests: $('#specialRequest').val(),
-        quantity: numberOfRooms,
-        status: false,
+      room_id: roomId,
+      user_id: userID,
+      hotel_id: hotelId,
+      check_in_date: hotelData.checkInDate,
+      check_out_date: hotelData.checkOutDate,
+      total_price: totalPrice,
+      full_name: $("#fname").val(),
+      special_requests: $('#specialRequest').val(),
+      quantity: numberOfRooms,
+      status: false,
     };
     console.log(data);
     console.log(totalPrice);
-    
+
     $.ajax({
       url: "http://localhost:3030/api/v1/booking/", // Đường dẫn đến route trên máy chủ để xử lý dữ liệu
       method: "POST",
@@ -106,14 +107,14 @@ $(document).ready(function () {
 
         //Kiểm tra lựa chọn của người dùng và điều hướng tới trang tương ứng
         if (paymentMethod === "dbt") {
-            // Nếu người dùng chọn thanh toán qua ngân hàng
-            window.location.href = `http://localhost:3030/paymentmethod?bookingId=${bookingId}` // Thay đổi URL thành URL của trang thanh toán qua ngân hàng
+          // Nếu người dùng chọn thanh toán qua ngân hàng
+          window.location.href = `http://localhost:3030/paymentmethod?bookingId=${bookingId}` // Thay đổi URL thành URL của trang thanh toán qua ngân hàng
         } else if (paymentMethod === "cd") {
-            // Nếu người dùng chọn thanh toán trực tiếp
-            window.location.href = "http://localhost:3030/paymentmethod" // Thay đổi URL thành URL của trang thanh toán trực tiếp
+          // Nếu người dùng chọn thanh toán trực tiếp
+          window.location.href = "http://localhost:3030/paymentmethod" // Thay đổi URL thành URL của trang thanh toán trực tiếp
         } else {
-            // Nếu không có lựa chọn nào được chọn
-            alert("Vui lòng chọn phương thức thanh toán!");
+          // Nếu không có lựa chọn nào được chọn
+          alert("Vui lòng chọn phương thức thanh toán!");
         }
       },
       error: function (err) {
