@@ -93,7 +93,9 @@ $(document).ready(function () {
           tableHtml += "                    <span>Ngày sinh</span>";
           tableHtml += "                </div>";
           tableHtml += '                <div class="user-name">';
-          tableHtml += user.birthDate;
+          if (user.birthDate == null)
+            tableHtml += user.birthDate;
+          else tableHtml += user.birthDate.slice(0, 10);
           tableHtml += "                </div>";
           tableHtml += "            </div>";
           tableHtml += "        </div>";
@@ -561,7 +563,7 @@ $(document).ready(function () {
           <label>Tên người dùng</label>    
           <input type="text" id="name-user" name="name" placeholder="Tên người dùng *" value="${data.name}" required />
           <label>Ngày sinh</label>
-          <input type="text" id="birthDate-user" name="birthDate" placeholder="Ngày sinh *" value="${data.birthDate}"required />
+          <input type="date" id="birthDate-user" name="birthDate" placeholder="Ngày sinh *" value="${data.birthDate}"required />
           <div class="row">
           <div class="col-6">
           <label>Số điện thoại</label>
@@ -638,11 +640,25 @@ $(document).ready(function () {
     });
   }); //   end of update user info
 
+
   //Booking list section
   function renderBookingList() {
-    var ownerId = localStorage.getItem("id");
+    var hotelId = localStorage.getItem("hotelId");
+    // let roomIds = [];
+    // fetch(`http://localhost:3030/api/v1/rooms?hotelId=${localStorage.getItem("hotelId")}`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     data.forEach(room => {
+    //       roomIds.push(room.id);
+    //     });
+    //     console.log(roomIds);
+    //   })
+    //   .catch(error => {
+    //     console.error('Lỗi khi lấy danh sách các room:', error);
+    //   });
+
     $.ajax({
-      url: `http://localhost:3030/api/v1/booking?user_id=${ownerId}`,
+      url: `http://localhost:3030/api/v1/booking?room_id=${hotelId}`,
       method: "GET",
       success: function (data) {
         console.log(data);
@@ -699,6 +715,7 @@ $(document).ready(function () {
         console.log("Lỗi khi render page booking");
       },
     });
+
   }
 
   renderBookingList();
@@ -878,7 +895,73 @@ $(document).ready(function () {
     let id = localStorage.getItem("hotelId");
     window.location.href = `/ManageHotelService/${id}`;
   });
+  $(document).on("click", ".update-pass-btn", function () {
+    var id = $(this).val();
+    $(".popup-overlay-update-pass").show();
+    $(".popup-overlay-update-pass").html(`
+      <div class="popup-updateInfo"> 
+        <span class="close-btn">&times;</span> 
+        <h2>Thay đổi mật khẩu</h2> 
+        <form id="updateForm"> 
+          <label>Mật khẩu cũ</label>    
+          <input type="password" id="old-pass" name="" placeholder="Nhập mật khẩu cũ" required />
+          <p class="wrong-pass1" style="color:red; font-style:italic; display:none">* Mật khẩu không đúng</p>
+          <label>Mật khẩu mới</label>    
+          <input type="password" id="new-pass" name="" placeholder="Nhập mật khẩu mới" required /> 
+          <label>Nhập lại mật khẩu mới</label>    
+          <input type="password" id="confirm-new-pass" name="" placeholder="Nhập lại mật khẩu mới" required />  
+          <p class="wrong-pass2" style="color:red; font-style:italic; display:none">* Mật khẩu không trùng khớp</p>
+      
+          <div class="ebutton" id="update-pass"> 
+            <input type="submit" value="Cập nhật"> 
+          </div> 
+        </form> 
+      </div>`
+    );
 
+    $(".ebutton").click(function (e) {
+      e.preventDefault(); // Ngăn không cho form submit
+
+      const oldPass = $("#old-pass").val();
+      const newPass = $("#new-pass").val();
+      const confirmNewPass = $("#confirm-new-pass").val();
+
+      if (newPass === confirmNewPass) {
+        $.ajax({
+          url: `http://localhost:3030/api/v1/users/updatePassword`,
+          method: "PUT",
+          data: {
+            userId: id,
+            currentPassword: oldPass,
+            newPassword: newPass
+          },
+          success: function (data) {
+            isUpdatePasswordSuccess = true;
+            renderPage();
+            console.log("Cập nhật mật khẩu thành công");
+          },
+          error: function (error) {
+            isUpdatePasswordSuccess = false;
+            $(".wrong-pass1").show();
+          }
+        });
+      } else {
+        isUpdatePasswordSuccess = false;
+        $(".wrong-pass2").show();
+      }
+
+      if (!isUpdatePasswordSuccess) {
+        // Popup vẫn hiển thị khi cập nhật mật khẩu không thành công
+        return;
+      } else {
+        $(".popup-overlay-update-pass").hide();
+      }
+    });
+
+    $(".close-btn").click(function () {
+      $(".popup-overlay-update-pass").hide();
+    });
+  });
 
   $(".personal-info-item").click(function () {
     $(".personal-info").show();

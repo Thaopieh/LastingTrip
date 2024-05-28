@@ -195,6 +195,10 @@ body {
 
 .title-name {
     font-size: larger;
+    /* font-weight: bold; */
+}
+
+.data {
     font-weight: bold;
 }
 
@@ -360,7 +364,7 @@ footer {
 .booking-list-item:hover,
 .log-out-item:hover {
     cursor: pointer;
-    /* background-color:; */
+    background-color: #cccccc;
 }
 
 .body_right {
@@ -702,12 +706,14 @@ footer {
 
 .popup-updateInfo input[type="text"],
 .popup-updateInfo input[type="email"],
+.popup-updateInfo input[type="date"],
 .popup-updateInfo select,
 .popup-updateHotel input[type="text"],
 .popup-updateHotel input[type="email"],
 .popup-updateHotel select,
 .popup-addRoom input[type="text"],
 .popup-addRoom input[type="email"],
+.popup-overlay-update-pass input[type="password"],
 .popup-addRoom select {
     margin-bottom: 15px;
     padding: 10px;

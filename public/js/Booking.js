@@ -15,9 +15,13 @@ $(document).ready(function () {
           tableHtml += '<td class="col1">' + booking.full_name + "</td>";
           tableHtml += '<td class="col2">' + booking.user_id + "</td>";
           tableHtml += '<td class="col2">' + booking.total_price + "</td>";
-          tableHtml += '<td class="col1">' + booking.status + "</td>";
-          tableHtml += '<td class="col1">' + booking.check_in_date + "</td>";
-          tableHtml += '<td class="col1">' + booking.check_out_date + "</td>";
+          if (booking.status)
+            tableHtml += '<td class="col1">' + "Đã thanh toán" + "</td>";
+          else
+            tableHtml += '<td class="col1">' + "Chưa thanh toán" + "</td>";
+
+          tableHtml += '<td class="col1">' + booking.check_in_date.slice(0, 10) + "</td>";
+          tableHtml += '<td class="col1">' + booking.check_out_date.slice(0, 10) + "</td>";
           tableHtml += '<td class="col1">' + booking.special_requests + "</td>";
           tableHtml += "<td>";
 

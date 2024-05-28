@@ -94,7 +94,9 @@ $(document).ready(function () {
           tableHtml += "                    <span>Ngày sinh</span>";
           tableHtml += "                </div>";
           tableHtml += '                <div class="user-name">';
-          tableHtml += user.birthDate;
+          if (user.birthDate == null)
+            tableHtml += user.birthDate;
+          else tableHtml += user.birthDate.slice(0, 10);
           tableHtml += "                </div>";
           tableHtml += "            </div>";
           tableHtml += "        </div>";
@@ -256,7 +258,7 @@ $(document).ready(function () {
           <label>Tên người dùng</label>    
           <input type="text" id="name-user" name="name" placeholder="Tên người dùng *" value="${data.name}" required />
           <label>Ngày sinh</label>
-          <input type="text" id="birthDate-user" name="birthDate" placeholder="Ngày sinh *" value="${data.birthDate}"required />
+          <input type="date" id="birthDate-user" name="birthDate" placeholder="Ngày sinh *" value="${data.birthDate}"required />
           <div class="row">
           <div class="col-6">
           <label>Số điện thoại</label>
@@ -344,10 +346,14 @@ $(document).ready(function () {
         <h2>Thay đổi mật khẩu</h2> 
         <form id="updateForm"> 
           <label>Mật khẩu cũ</label>    
-          <input type="text" id="old-pass" name="" placeholder="Nhập mật khẩu cũ" required />
-          <p class="wrong-pass" style="color:red; font-style:italic; display:none">*Mật khẩu không đúng</p>
+          <input type="password" id="old-pass" name="" placeholder="Nhập mật khẩu cũ" required />
+          <p class="wrong-pass1" style="color:red; font-style:italic; display:none">* Mật khẩu không đúng</p>
           <label>Mật khẩu mới</label>    
-          <input type="text" id="new-pass" name="" placeholder="Nhập mật khẩu mới" required />        
+          <input type="password" id="new-pass" name="" placeholder="Nhập mật khẩu mới" required /> 
+          <label>Nhập lại mật khẩu mới</label>    
+          <input type="password" id="confirm-new-pass" name="" placeholder="Nhập lại mật khẩu mới" required />  
+          <p class="wrong-pass2" style="color:red; font-style:italic; display:none">* Mật khẩu không trùng khớp</p>
+      
           <div class="ebutton" id="update-pass"> 
             <input type="submit" value="Cập nhật"> 
           </div> 
@@ -356,27 +362,42 @@ $(document).ready(function () {
     );
 
     $(".ebutton").click(function (e) {
+      e.preventDefault(); // Ngăn không cho form submit
+
       const oldPass = $("#old-pass").val();
       const newPass = $("#new-pass").val();
+      const confirmNewPass = $("#confirm-new-pass").val();
 
-      // Gửi yêu cầu kiểm tra mật khẩu cũ
-      $.ajax({
-        url: `http://localhost:3030/api/v1/users/updatePassword`,
-        method: "PUT",
-        data: {
-          userId: id,
-          currentPassword: oldPass,
-          newPassword: newPass
-        },
-        success: function (data) {
-          renderPage();
-          console.log("Cập nhật mật khẩu thành công");
-        },
-        error: function (error) {
-          console.log("Lỗi khi cập nhật mật khẩu", error);
-          alert("Mật khẩu không đúng! Xin vui lòng thử lại sau.");
-        }
-      });
+      if (newPass === confirmNewPass) {
+        $.ajax({
+          url: `http://localhost:3030/api/v1/users/updatePassword`,
+          method: "PUT",
+          data: {
+            userId: id,
+            currentPassword: oldPass,
+            newPassword: newPass
+          },
+          success: function (data) {
+            isUpdatePasswordSuccess = true;
+            renderPage();
+            console.log("Cập nhật mật khẩu thành công");
+          },
+          error: function (error) {
+            isUpdatePasswordSuccess = false;
+            $(".wrong-pass1").show();
+          }
+        });
+      } else {
+        isUpdatePasswordSuccess = false;
+        $(".wrong-pass2").show();
+      }
+
+      if (!isUpdatePasswordSuccess) {
+        // Popup vẫn hiển thị khi cập nhật mật khẩu không thành công
+        return;
+      } else {
+        $(".popup-overlay-update-pass").hide();
+      }
     });
 
     $(".close-btn").click(function () {

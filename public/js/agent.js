@@ -13,7 +13,7 @@ $(document).ready(function () {
           tableHtml += '<td class="col2" >' + hotel.name + "</td>";
           tableHtml += '<td class="col1">' + hotel.star + "</td>";
           // tableHtml += '<td class="col2">' + hotel.map + "</td>";
-          console.log(hotel.map);
+          // console.log(hotel.map);
           var text = hotel.map;
           const cityList = [
             "Đà Nẵng",

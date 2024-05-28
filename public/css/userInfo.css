@@ -141,16 +141,18 @@ body {
     color: whitesmoke;
 }
 
-footer {
-    background-color: #fff;
-    margin: 15px 0;
+/* footer  */
+footer img {
+    width: 1176px;
+    height: 499px;
 }
 
 .footer__main {
+    min-width: 50%;
+    padding: 64px 20px 0px;
+    margin: 0 10%;
     display: flex;
     justify-content: space-between;
-    padding: 0 10px;
-
 }
 
 .footer__main .footer__item {
@@ -169,6 +171,11 @@ footer {
     padding-bottom: 35px;
     font-size: 14px;
     color: #0f294d;
+}
+
+.footer__item img {
+    width: 50px;
+    height: 50px;
 }
 
 .footer__item a {
@@ -191,15 +198,6 @@ footer {
     border-bottom: 1px solid #e4e4e4;
     padding-top: 32px;
     padding-bottom: 35px;
-}
-
-.footer__item img {
-    width: 50px;
-    height: 50px;
-}
-
-.footer__item a {
-    margin: 10px;
 }
 
 .Copyright p {
@@ -237,8 +235,7 @@ footer {
 .nav-item .dropdown-menu li:hover a{
     color: black;
 } */
-.body_container,
-.footer__main {
+.body_container {
     padding: 20px 20px 0px;
     margin: 0 10%;
 }
@@ -286,6 +283,7 @@ footer {
 .my-booking-item:hover,
 .log-out-item:hover {
     cursor: pointer;
+    background-color: #cccccc;
 }
 
 .empty-booking {
@@ -478,6 +476,8 @@ footer {
 
 .popup-updateInfo input[type="text"],
 .popup-updateInfo input[type="email"],
+.popup-updateInfo input[type="date"],
+.popup-overlay-update-pass input[type="password"],
 .popup-updateInfo select {
     margin-bottom: 15px;
     padding: 10px;

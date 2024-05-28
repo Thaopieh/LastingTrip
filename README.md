@@ -15,16 +15,14 @@
         <li><a href="#các-chức-năng-cơ-bản">Các chức năng cơ bản</a></li>
         <ul>
           <li><a href="#admin">Admin</a></li>
-          <li><a href="#user">User</a></li>
-          <li><a href="#owner_user">Owner_User</a></li>
+          <li><a href="#client-user">Client User</a></li>
+          <li><a href="#owner-user">Owner User</a></li>
         </ul>
         <li><a href="#ngôn-ngữ-công-nghệ-ứng-dụng">Ngôn ngữ, công nghệ ứng dụng</a></li>
       </ul>
     </li>
   </ol>
 </details>
-
-
 
 <!-- Giới thiệu đồ án -->
 # Giới thiệu nhóm
@@ -47,15 +45,13 @@ Bên cạnh đó, xây dựng một trang web đặt phòng khách sạn sẽ gi
 
 ### Admin
 * Quản lý người dùng
-* Quản lý khách sạn
-* Quản lý tin tức
-* Quản lý khuyến mãi
-* Quản lý chính sách, điều khoản
+* Quản lý khách sạn, phòng khách sạn
+* Quản lý đơn đặt hàng
+* Thống kê doanh thu
 
-### User
+### Client User
 * Quản lý khách sạn
     * Tìm kiếm khách sạn (filter, lân cận,...)
-    * Quản lý khách sạn yêu thích
     * Đánh giá khách sạn
 * Quản lý giao dịch
     * Quản lý giỏ hàng
@@ -67,12 +63,11 @@ Bên cạnh đó, xây dựng một trang web đặt phòng khách sạn sẽ gi
     * Đăng kí
     * Đăng nhập
     * Đăng ký
-
-### Owner_User
+  
+### Owner User
 * Quản lý khách sạn
     * Quản lý khách sạn (thêm, xóa, sửa)
     * Quản lý phòng
-    * Promotion
     * Danh sách đặt phòng
 
 ## Ngôn ngữ, công nghệ ứng dụng
@@ -81,8 +76,19 @@ Bên cạnh đó, xây dựng một trang web đặt phòng khách sạn sẽ gi
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+
 
 ### Back-end
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+
+### ORM
+![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+
+### Chat bot
+![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
+
+### Other
+![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)
+![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD)
