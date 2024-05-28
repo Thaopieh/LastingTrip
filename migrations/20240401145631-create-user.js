@@ -37,6 +37,12 @@ module.exports = {
         allowNull: false,
         defaultValue: "client",
       },
+      url: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue:
+          "https://phongreviews.com/wp-content/uploads/2022/11/avatar-facebook-mac-dinh-19.jpg",
+      },
       cccd: {
         type: Sequelize.STRING,
       },

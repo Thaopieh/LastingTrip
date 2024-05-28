@@ -13,6 +13,8 @@ $(document).ready(function () {
     document.getElementById("content2").style.display = "none";
     document.getElementById("contentManageRoom").style.display = "none";
     document.getElementById("contentAddHotel").style.display = "none";
+    document.getElementById("chart").style.display = "none";
+    document.getElementById("contentBooking").style.display = "none";
   });
 
   document.getElementById("button2").addEventListener("click", function () {
@@ -21,6 +23,8 @@ $(document).ready(function () {
     document.getElementById("content1").style.display = "none";
     document.getElementById("contentBooking").style.display = "none";
     document.getElementById("contentAddHotel").style.display = "none";
+    document.getElementById("chart").style.display = "none";
+    document.getElementById("contentBooking").style.display = "none";
   });
 
   document.getElementById("button3").addEventListener("click", function () {
@@ -29,6 +33,15 @@ $(document).ready(function () {
     document.getElementById("content1").style.display = "none";
     document.getElementById("contentBooking").style.display = "block";
     document.getElementById("contentAddHotel").style.display = "none";
+    document.getElementById("chart").style.display = "none";
+  });
+
+  document.getElementById("button4").addEventListener("click", () => {
+    document.getElementById("content2").style.display = "none";
+    document.getElementById("content1").style.display = "none";
+    document.getElementById("chart").style.display = "block";
+    document.getElementById("contentAddHotel").style.display = "none";
+    document.getElementById("contentBooking").style.display = "none";
   });
 
   document.getElementById("button6").addEventListener("click", () => {

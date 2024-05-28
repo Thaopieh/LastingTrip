@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       cccd: DataTypes.STRING,
       address: DataTypes.TEXT,
+      url: DataTypes.STRING,
     },
     {
       sequelize,
