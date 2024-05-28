@@ -124,7 +124,52 @@ $(document).ready(function () {
           tableHtml += "    </div>";
           tableHtml += "</div>";
           $(".body_right").html(tableHtml);
+          var tableHtml1 = "";
+          tableHtml1 += '<div class="avatar-container">';
+          tableHtml1 +=
+            '<img src="' + user.url + '" alt="Avatar" class="avatar">';
+          tableHtml1 +=
+            ' <button id="updateAvatarButton" class="edit-button">✎</button>';
+          tableHtml1 += "</div>";
+          tableHtml1 +=
+            '<input type="file" name="user" id="avatarInput" accept="image/*" style="display: none;">';
+          tableHtml1 +=
+            '<button id="confirmAvatarButton" style="display: none;">Confirm</button>';
+          $(".member").html(tableHtml1);
           console.log("Đang render page");
+          $("#updateAvatarButton").on("click", function () {
+            // Trigger the file input when the edit button is clicked
+            $("#avatarInput").click();
+          });
+
+          // Event listener for the confirmAvatarButton
+          $("#avatarInput").on("change", function (e) {
+            var file = e.target.files[0]; // Lấy file ảnh được chọn
+            if (file) {
+              var formData = new FormData();
+              formData.append("user", file);
+
+              // Gửi ajax request lên server
+              $.ajax({
+                url:
+                  "http://localhost:3030/api/v1/users/updateImage/" + user.id, // Thay YOUR_USER_ID bằng ID thực của người dùng
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                  console.log("Upload thành công:", response);
+                  // Cập nhật ảnh mới vào avatar
+                  $(".avatar").attr("src", URL.createObjectURL(file));
+                },
+                error: function (xhr, status, error) {
+                  console.error("Lỗi khi upload ảnh:", error);
+                },
+              });
+            } else {
+              console.error("Không có file nào được chọn.");
+            }
+          });
         } else {
           console.log("Không tìm thấy khách sạn có id là 4");
         }

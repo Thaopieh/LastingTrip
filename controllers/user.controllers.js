@@ -2,25 +2,20 @@ const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Op } = require("sequelize");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const register = async (req, res) => {
   const { name, email, password, numberPhone, type } = req.body;
 
   try {
     // Kiểm tra xem email hoặc số điện thoại đã tồn tại hay chưa
-    const checkExistsResponse = await fetch(
-      "http://localhost:3030/api/v1/users/checkEmailPhoneExists",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, numberPhone }),
-      }
-    );
+    const existingUser = await User.findOne({
+      where: {
+        [Op.or]: [{ email }, { numberPhone }],
+      },
+    });
 
-    const checkExistsResult = await checkExistsResponse.json();
-
-    if (checkExistsResult.exists) {
+    if (existingUser) {
       // Nếu email hoặc số điện thoại đã tồn tại
       return res
         .status(400)
@@ -44,30 +39,6 @@ const register = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-const checkEmailExist = async (req, res) => {
-  const { email, numberPhone } = req.body;
-
-  try {
-    const existingUser = await User.findOne({
-      where: {
-        [Op.or]: [{ email }, { numberPhone }],
-      },
-    });
-
-    if (existingUser) {
-      // Nếu email hoặc số điện thoại đã tồn tại trong cơ sở dữ liệu
-      return res.status(200).json({ exists: true });
-    }
-
-    // Nếu không tồn tại
-    return res.status(200).json({ exists: false });
-  } catch (error) {
-    console.error("Error checking email and phone:", error);
-    return res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -180,6 +151,38 @@ const deleteUser = async (req, res) => {
     res.status(500).send(error);
   }
 };
+const updateImage = async (req, res) => {
+  const { id } = req.params;
+  console.log("id", id);
+  try {
+    const updateHotel = await User.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!updateHotel) {
+      return res.status(404).send("User not found");
+    }
+
+    const { file } = req;
+
+    if (!file) {
+      return res.status(400).send("No file uploaded");
+    }
+
+    console.log(file);
+    const imagePath = file.path;
+    console.log(imagePath);
+
+    updateHotel.url = imagePath;
+    await updateHotel.save(); // Sửa từ updateUser thành updateHotel
+    res.status(200).send("Successful");
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 const getDetailUser = async (req, res) => {
   console.log("3");
   try {
@@ -200,6 +203,6 @@ module.exports = {
   displayUser,
   editUser,
   deleteUser,
+  updateImage,
   getDetailUser,
-  checkEmailExist,
 };

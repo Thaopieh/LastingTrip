@@ -1,13 +1,13 @@
 const { User } = require("../models");
 // const { checkExist } = require("../middlewares/validations/checkExist");
-
+const uploadCloud = require("../middlewares/upload/cloudinary.config");
 const express = require("express");
 const {
   register,
   login,
   getAllUser,
   getAllUsers,
-
+  updateImage,
   displayUser,
   editUser,
   deleteUser,
@@ -29,10 +29,10 @@ userRouter.post("/login", login);
 userRouter.get("/getAllUser", getAllUser);
 userRouter.get("/getDetailUser/:id", getDetailUser);
 userRouter.get("/manageUsers", displayUser);
+userRouter.post("/updateImage/:id", uploadCloud.single("user"), updateImage);
 
 userRouter.put("/editUser/:id", editUser);
 userRouter.delete("/deleteUser/:id", deleteUser);
-userRouter.post("/checkEmailPhoneExists", checkEmailExist);
 
 module.exports = {
   userRouter,
