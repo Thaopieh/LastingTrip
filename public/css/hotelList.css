@@ -318,6 +318,15 @@ footer {
         width: 100%;
     }
 
+    .listPage li {
+        display: inline ;
+        margin: 0 5px;
+        cursor: pointer;
+        padding: 5px 5px !important;
+        border: 1px solid #ccc;
+        border-radius: 3px !important;
+        background-color: white;
+    }
 
     /* .title_filter h3{
         display: none;
@@ -387,7 +396,10 @@ footer {
     color           : black;
     border          : none;
 }
+#filter-header{
+    background-color: white;
 
+}
 .dropdown_menu li {
     padding        : 0.7rem;
     display        : flex;
@@ -683,7 +695,7 @@ footer {
 }
 
 .listPage{
-    padding:10px;
+    padding: 10px 0;
     text-align: center;
     list-style: none;
 }
@@ -694,6 +706,7 @@ footer {
     padding: 5px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: white;
 }
 .listPage .active{
     background-color: blue;

@@ -10,11 +10,13 @@ const {
   updateHotel,
   deleteHotel,
   searchIdHotelByName,
+  getAllMaps,
 } = require("../controllers/hotel.controllers.js");
 
 const HotelRouter = express.Router();
 HotelRouter.post("/", uploadCloud.array("hotel", 10), createHotel);
 // HotelRouter.post("/", createHotel);
+HotelRouter.get("/getAllMap", getAllMaps);
 HotelRouter.get("/", getAllHotel);
 HotelRouter.get("/:id", getDetailHotel);
 

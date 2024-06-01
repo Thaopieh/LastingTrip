@@ -7,6 +7,7 @@ const {
   UrlImageHotel,
 } = require("../models");
 const { Op, literal } = require("sequelize");
+const { sequelize } = require("../models");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 // const amenities = require("../models/amenities");
@@ -389,6 +390,30 @@ const searchIdHotelByName = async (req, res) => {
     res.status(500).json({ message: "Lỗi máy chủ nội bộ" });
   }
 };
+const getAllMaps = async (req, res) => {
+  try {
+    // Lấy tất cả các địa chỉ từ bảng Hotels
+    const [hotels] = await sequelize.query("SELECT map FROM Hotels");
+
+    // Tách các quận từ các địa chỉ này
+    const districts = new Set();
+    hotels.forEach((hotel) => {
+      const maps = hotel.map.split(","); // Giả sử các quận ngăn cách bằng dấu phẩy
+      maps.forEach((map) => {
+        districts.add(map.trim());
+      });
+    });
+
+    // Chuyển Set sang Array để dễ xử lý
+    const districtArray = Array.from(districts);
+
+    // Trả về danh sách các quận
+    res.status(200).json(districtArray);
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách địa chỉ khách sạn:", error);
+    res.status(500).json({ message: "Lỗi máy chủ nội bộ" });
+  }
+};
 
 module.exports = {
   createHotel,
@@ -397,4 +422,5 @@ module.exports = {
   updateHotel,
   deleteHotel,
   searchIdHotelByName,
+  getAllMaps,
 };

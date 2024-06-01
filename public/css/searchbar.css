@@ -8,6 +8,7 @@
   width: 100%;
 }
 
+
 .searchBox .hotel-searchBox {
   width: 77.4%;
   margin: 0 auto;
@@ -116,7 +117,7 @@
   font-weight: 600;
   font-size: 13px;
   padding-left: 6px;
-
+width: 100%;
   /* margin-bottom:10px ; */
 }
 

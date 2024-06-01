@@ -179,10 +179,15 @@ $(document).ready(function () {
           // Event listener for the confirmAvatarButton
           $("#avatarInput").on("change", function (e) {
             var file = e.target.files[0]; // Lấy file ảnh được chọn
+            console.log(file);
             if (file) {
               var formData = new FormData();
-              formData.append("user", file);
+              console.log(file);
 
+              formData.append("user", file);
+              console.log(file);
+
+              console.log(formData, "đ có form");
               // Gửi ajax request lên server
               $.ajax({
                 url:
