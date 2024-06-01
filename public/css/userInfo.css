@@ -433,9 +433,6 @@ footer img {
         padding: 10px;
     }
 
-    .member {
-        display: none;
-    }
 
     .nav-item .btn-group {
         margin-left: 0;
@@ -622,6 +619,7 @@ footer img {
 
 .avatar-container {
     position: relative;
+    margin-top: 100px;
 }
 
 .avatar {
@@ -633,7 +631,7 @@ footer img {
 }
 
 .booking-detail {
-    margin-top: 40px;
+    margin-top: 100px;
 }
 
 .edit-button {

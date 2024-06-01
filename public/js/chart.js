@@ -192,3 +192,16 @@ document.addEventListener("DOMContentLoaded", () => {
 document
   .getElementById("monthPicker")
   .addEventListener("change", initializeCharts);
+
+var canvas = document.querySelector("#hotelChart");
+var heightRatio = 1.5;
+
+function adjustCanvasHeight() {
+  canvas.height = canvas.width * heightRatio;
+}
+
+// Initial adjustment
+adjustCanvasHeight();
+
+// Adjust canvas height on window resize
+window.addEventListener("resize", adjustCanvasHeight);

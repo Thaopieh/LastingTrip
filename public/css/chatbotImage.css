@@ -154,7 +154,7 @@ header h2 {
 
 .chatbot1 .chat-input {
   display   : flex;
-  gap       : 80px;
+  gap       : 15%;
   position  : absolute;
   bottom    : 0;
   width     : 100%;
@@ -164,7 +164,7 @@ header h2 {
 }
 
 .chat-input span {
-  align-self : flex-end;
+  align-self :flex-end;
   color      : #724ae8;
   cursor     : pointer;
   display    : flex;

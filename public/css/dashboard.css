@@ -147,7 +147,7 @@ body {
 #contentManageRoom,
 #contentBooking,
 #contentAddHotel,
-#chart {
+#chart,#manageCoupon {
   display: none;
 }
 
