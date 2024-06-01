@@ -13,7 +13,7 @@ $(document).ready(function () {
           tableHtml += '<td class="col2" >' + hotel.name + "</td>";
           tableHtml += '<td class="col1">' + hotel.star + "</td>";
           // tableHtml += '<td class="col2">' + hotel.map + "</td>";
-
+          // console.log(hotel.map);
           var text = hotel.map;
           const cityList = [
             "Đà Nẵng",
@@ -29,12 +29,9 @@ $(document).ready(function () {
           ];
 
           cityList.forEach((tu) => {
-            if (text.includes(tu)) {
+            if (text && text.includes(tu)) {
               text = tu;
               tableHtml += '<td class="col2">' + text + "</td>";
-
-              console.log(text);
-            } else {
             }
           });
 
@@ -110,24 +107,6 @@ $(document).ready(function () {
   });
 
   // Sự kiện khi click vào nút "Xóa"
-  // $(document).on("click", ".deleteHotel", function () {
-  //     let id = $(this).val();
-  //     // Gửi yêu cầu xóa người dùng
-  //     $.ajax({
-  //         url: `http://localhost:3030/api/v1/hotels/deleteHotel/${id}`,
-  //         method: "DELETE",
-  //         success: function (data) {
-  //             renderPage();
-  //             $(".popup-overlay-delete").show();
-  //             $(".popup-delete").show();
-  //         },
-  //         error: function (error) {
-  //             console.log("Lỗi khi xóa người dùng", error);
-  //         },
-  //     });
-  // });
-
-  // Sự kiện khi click vào nút "Xóa"
   $(document).on("click", ".deleteHotel", function () {
     let id = $(this).val();
     console.log("hotel id" + id);
@@ -171,36 +150,6 @@ $(document).ready(function () {
   });
 
   // Sự kiện khi người dùng xác nhận xóa
-  $(".confirm-btn").click(function () {
-    // Lấy ID người dùng từ thuộc tính data
-    let id = $(".popup-confirm").attr("data-id");
-    $("#contentManageRoom").show();
-
-    // Gửi yêu cầu xóa người dùng
-    $.ajax({
-      url: `http://localhost:3030/api/v1/hotels/deleteHotel/${id}`,
-      method: "DELETE",
-
-      success: function (data) {
-        // Xử lý thành công
-        $(".popup-overlay-confirm").hide();
-        $(".popup-confirm").hide();
-
-        // Gọi lại hàm renderPage để cập nhật trang
-        renderPage();
-      },
-      error: function (error) {
-        // Xử lý lỗi
-        console.log("Đã xảy ra lỗi khi xóa khách sạn:", error);
-      },
-    });
-  });
-
-  // Sự kiện khi người dùng hủy bỏ việc xóa
-  $(".cancel-btn").click(function () {
-    $(".popup-overlay-confirm").hide();
-    $(".popup-confirm").hide();
-  });
 
   $(document).on("click", ".addRoom", function () {
     let id = $(this).val();
@@ -214,8 +163,10 @@ $(document).ready(function () {
     var star = $("#star").val();
     var map = $("#map").val();
     var TypeHotel = $("#TypeHotel").val();
-    var cost = $("#cost").val();
+    // var cost = $("#cost").val();
+    var ownerId = localStorage.getItem("id");
     var payment = $("#payment").val();
+
     var fileInput = document.querySelector("input[type='file']");
     var files = fileInput.files; // Danh sách các file đã chọn
 
@@ -224,7 +175,8 @@ $(document).ready(function () {
     formData.append("star", star);
     formData.append("map", map);
     formData.append("TypeHotel", TypeHotel);
-    formData.append("cost", cost);
+    // formData.append("cost", cost);
+    formData.append("ownerId", ownerId);
     formData.append("payment", payment);
 
     // Lặp qua từng file đã chọn và thêm vào formData
@@ -235,7 +187,7 @@ $(document).ready(function () {
 
     // Gửi yêu cầu thêm khách sạn với các files ảnh
     $.ajax({
-      url: `http://localhost:3030/api/v1/hotels`,
+      url: `http://localhost:3030/api/v1/hotels/`,
       method: "POST",
       processData: false, // Ngăn jQuery xử lý dữ liệu
       contentType: false, // Ngăn jQuery đặt loại nội dung
@@ -244,7 +196,7 @@ $(document).ready(function () {
         renderPage();
         console.log("Khách sạn đã được tạo.");
         alert("Thành công!");
-        window.location.href = `/agent`;
+        window.location.href = `/agentInfo`;
       },
       error: function (error) {
         // Xử lý lỗi
@@ -370,6 +322,7 @@ $(document).ready(function () {
   $(".close-btn").click(function () {
     $("#imagePopupOverlayHotel").hide();
   });
+
   $(document).on("click", ".fa-image", function () {
     var hotelId = $(this).data("id");
     localStorage.setItem("hotelId", hotelId);
@@ -475,7 +428,7 @@ $(document).ready(function () {
       },
     });
   });
-  $("#addImageButton").on("click", function () {
+  $("#addImageButton1").on("click", function () {
     // Khi người dùng nhấp vào nút "Add Image", kích hoạt sự kiện click cho input[type=file] ẩn
     $("#imageInput").click();
   });
@@ -500,7 +453,7 @@ $(document).ready(function () {
   // Hàm hiển thị xem trước các tệp đã chọn
 
   // Sự kiện click cho nút "Confirm"
-  $("#confirm").on("click", function () {
+  $("#confirm1").on("click", function () {
     var fileInput = document.querySelector("input[type='file']");
     var file = fileInput.files;
     console.log("file", file);

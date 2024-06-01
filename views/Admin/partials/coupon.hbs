@@ -1,0 +1,85 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+  crossorigin="anonymous"
+/>
+<link rel="stylesheet" href="/css/coupons.css" />
+
+<div class="layout">
+  <div class="coupon-container">
+    <div class="coupon-search">
+      <p>QUẢN LÝ MÃ GIẢM GIÁ</p>
+      <div class="coupon-search-btn">
+        <div class="coupon-search-create">Thêm mã giảm giá</div>
+      </div>
+    </div>
+
+    <div class="coupon-table">
+
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>CODE </th>
+            <th>PHẦN TRĂM</th>
+            <th>NGÀY BẮT ĐẦU</th>
+            <th>NGÀY KẾT THÚC</th>
+            <th>Chỉnh sửa/Xóa</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="coupon-popup-overlay">
+  <div class="coupon-popup">
+    <span class="custom-close-btn" id="close-add-coupon">&times;</span>
+    <form id="formAddCoupon">
+      <h2>Thêm mã giảm giá</h2>
+      <label>Code </label>
+      <input type="text" id="code" required />
+      <label>Phần trăm </label>
+      <input type="text" id="percent" required />
+      <label>Ngày bắt đầu</label>
+      <input type="date" id="begin" required />
+      <label>Ngày kết thúc </label>
+      <input type="date" id="end" required />
+      <input type="submit" class="addCouponbtn" value="Add" />
+    </form>
+
+  </div>
+</div>
+
+<div class="popup-overlay-update">
+</div>
+
+<div class="popup-overlay-delete">
+  <div class="popup-delete">
+    <h2>Xác nhận xóa</h2>
+    <p>Bạn có chắc chắn muốn xóa mã giảm giá này không?</p>
+    <div class="btn-group">
+      <button class="confirm-delete-coupon">Xác nhận</button>
+      <button class="cancel-delete">Hủy</button>
+    </div>
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+></script>
+<script src="/js/coupon.js"></script>

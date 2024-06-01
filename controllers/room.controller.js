@@ -11,7 +11,6 @@ const createRoom = async (req, res) => {
   const { name, status, price, quantity, quantity_people, hotelId, type_bed } =
     req.body;
   console.log(req.body);
-
   try {
     // Create a new room record in the database
     const newRoom = await Room.create({

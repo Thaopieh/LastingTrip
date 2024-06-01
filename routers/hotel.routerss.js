@@ -14,6 +14,7 @@ const {
 
 const HotelRouter = express.Router();
 HotelRouter.post("/", uploadCloud.array("hotel", 10), createHotel);
+// HotelRouter.post("/", createHotel);
 HotelRouter.get("/", getAllHotel);
 HotelRouter.get("/:id", getDetailHotel);
 

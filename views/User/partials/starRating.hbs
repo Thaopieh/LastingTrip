@@ -18,7 +18,7 @@
 </div>
 
 <script>
-  function calcRate(r) { const f = ~~r,//Tương tự Math.floor(r) id = 'star' + f
-  + (r % f ? 'half' : '') id && (document.getElementById(id).checked = !0) }
-
+  function calcRate(r) { const f = Math.floor(r); const half = (r % f) ? 'half'
+  : ''; const id = 'star' + f + half; if (document.getElementById(id)) {
+  document.getElementById(id).checked = true; } }
 </script>

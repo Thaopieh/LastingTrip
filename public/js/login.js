@@ -4,10 +4,20 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const errorMessageModal = document.getElementById("errorMessageModal");
 
+var typpp = localStorage.getItem("type");
+if (typpp == "owner") {
+  $(".google-login-btn").hide();
+}
+
+let timeoutId = setTimeout(() => {
+  localStorage.removeItem("type");
+  console.log("Type removed from localStorage due to inactivity.");
+}, 120000);
+
 // Sự kiện submit form
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // Ngăn chặn hành vi gửi form mặc định
-
+  clearTimeout(timeoutId);
   // Lấy giá trị từ các trường đầu vào
   const email = emailInput.value;
   const password = passwordInput.value;
@@ -28,17 +38,17 @@ form.addEventListener("submit", (e) => {
       if (result.message === "successful") {
         const token = result.token; // Giả sử token được trả về là thuộc tính 'token' của đối tượng result
         localStorage.setItem("token", token);
-        const userName = result.name;
-        localStorage.setItem("userName", userName);
+        const name = result.name; //trả về undefined???
+        localStorage.setItem("userName", name);
         const id = result.id; // Giả sử id được trả về là thuộc tính 'id' của đối tượng result
         localStorage.setItem("id", id);
-        const typeUser = result.type;
-        localStorage.setItem("type", typeUser);
+        const type = result.type;
+        localStorage.setItem("type", type);
         if (result.type === "admin") {
           window.location.href = "/dashboard";
         } else if (result.type === "owner") {
           // Nếu đăng nhập thành công, chuyển hướng đến trang chủ
-          window.location.href = `agentInfo/${id}`;
+          window.location.href = "/agentInfo";
         } else {
           window.location.href = "/";
         }

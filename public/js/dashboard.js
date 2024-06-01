@@ -2,8 +2,9 @@ $(document).ready(function () {
   // Hàm ánh xạ ID của mục menu tới tên partial tương ứng
   const type = localStorage.getItem("type");
   console.log(type);
-  if (type !== "admin") {
+  if (type != "admin") {
     $(".template").hide();
+    window.location.href = "/";
   }
   /* script.js */
   // Lắng nghe sự kiện nhấp vào nút tương ứng
@@ -15,6 +16,7 @@ $(document).ready(function () {
     document.getElementById("contentAddHotel").style.display = "none";
     document.getElementById("chart").style.display = "none";
     document.getElementById("contentBooking").style.display = "none";
+    document.getElementById("manageCoupon").style.display = "none";
   });
 
   document.getElementById("button2").addEventListener("click", function () {
@@ -25,6 +27,7 @@ $(document).ready(function () {
     document.getElementById("contentAddHotel").style.display = "none";
     document.getElementById("chart").style.display = "none";
     document.getElementById("contentBooking").style.display = "none";
+    document.getElementById("manageCoupon").style.display = "none";
   });
 
   document.getElementById("button3").addEventListener("click", function () {
@@ -34,6 +37,7 @@ $(document).ready(function () {
     document.getElementById("contentBooking").style.display = "block";
     document.getElementById("contentAddHotel").style.display = "none";
     document.getElementById("chart").style.display = "none";
+    document.getElementById("manageCoupon").style.display = "none";
   });
 
   document.getElementById("button4").addEventListener("click", () => {
@@ -42,12 +46,20 @@ $(document).ready(function () {
     document.getElementById("chart").style.display = "block";
     document.getElementById("contentAddHotel").style.display = "none";
     document.getElementById("contentBooking").style.display = "none";
+    document.getElementById("manageCoupon").style.display = "none";
+  });
+
+  document.getElementById("button5").addEventListener("click", () => {
+    document.getElementById("content2").style.display = "none";
+    document.getElementById("content1").style.display = "none";
+    document.getElementById("chart").style.display = "none";
+    document.getElementById("contentAddHotel").style.display = "none";
+    document.getElementById("contentBooking").style.display = "none";
+    document.getElementById("manageCoupon").style.display = "block";
   });
 
   document.getElementById("button6").addEventListener("click", () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("type");
+    localStorage.clear();
     window.location.href = "/signin";
   });
 
@@ -60,4 +72,13 @@ $(document).ready(function () {
       this.className += " active";
     });
   }
+  const bodyLeft = document.querySelector(".body-left");
+  const btnShow = bodyLeft.querySelector(".fa-bars");
+  const btnHidden = bodyLeft.querySelector(".fa-xmark");
+  btnShow.addEventListener("click", () => {
+    bodyLeft.classList.add("show-menu");
+  });
+  btnHidden.addEventListener("click", () => {
+    bodyLeft.classList.remove("show-menu");
+  });
 });

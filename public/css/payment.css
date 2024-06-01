@@ -12,6 +12,7 @@ body{
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  height: fit-content;
 }
 @media (min-width: 1200px)
 {
@@ -25,6 +26,7 @@ body{
   background: #f6f6f6;
   border-radius: 0 0 5px 5px;
   padding: 25px;
+  height:fit-content ;
 }
 form{
   flex: 4;
@@ -72,7 +74,7 @@ select{
 }
 .Yorder{
   margin-top: 15px;
-  height: 600px;
+  height: fit-content;
   padding: 20px;
   border: 1px solid #dadada;
 }
@@ -122,6 +124,109 @@ button:hover{
   cursor: pointer;
   background: #428a7d;
 }
-.return{
-    margin-top: 13px;
+
+.return {
+  margin-top: 13px;
+}
+
+.vnpay-info,  .confirm  {
+  display: none;
+}
+
+.cash-info {
+  display: none;
+}
+
+.place-order1 {
+  display: none;
+}
+
+@media (max-width:992px) {
+  p {
+    padding-left: 40% !important;
+  }
+
+  .vnpay-info {
+    display   : block;
+    margin-top: 80px;
+  }
+
+  .place-order1 {
+    display: block;
+  }
+
+  .cash-info {
+    display   : block;
+    margin-top: 10px;
+  }
+
+  .confirm {
+    display      : block;
+    margin-top   : 10px;
+    padding      : 10px;
+    border       : none;
+    border-radius: 30px;
+    background   : linear-gradient(to right, #112D60, #DD83E0);
+    color        : #fff;
+    font-size    : 15px;
+    font-weight  : bold;
+  }
+
+  form {
+    display: none;
+  }
+
+  .cash {
+    display: none;
+  }
+
+  .vnpay {
+    display: none;
+  }
+
+  .place-order {
+    display: none;
+  }
+
+  .d-flex {
+    display       : flex;
+    flex-direction: row;
+    background    : #f6f6f6;
+    border-radius : 0 0 5px 5px;
+    padding       : 25px;
+    height        : 139%;
+  }
+
+
+}
+
+@media(min-width:483px) {
+  .vnpay-info {
+    display   : none;
+    margin-top: 80px;
+  }
+
+  .place-order1 {
+    display: none;
+  }
+
+  form {
+    display: block;
+  }
+
+  .cash {
+    display: block;
+  }
+
+  .vnpay {
+    display: block;
+  }
+
+  .Yorder {
+    display: block !important;
+  }
+
+  .place-order {
+    display: block;
+  }
 }

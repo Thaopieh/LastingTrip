@@ -1,11 +1,11 @@
 const express = require("express");
 const { Reviews } = require("../models");
+const uploadCloud = require("../middlewares/upload/cloudinary.config");
 const {
   createReview,
   deleteReview,
   getAllReview,
   updateReview,
-  uploadFile,
   getFullReview,
 } = require("../controllers/reviews.controllers");
 const { authenticate } = require("../middlewares/authen/authenticate");
@@ -14,8 +14,12 @@ const { checkExist } = require("../middlewares/validations/checkExist");
 const { uploadImage } = require("../middlewares/upload/upload-image");
 const ReviewRouter = express.Router();
 
-ReviewRouter.post("/create", authenticate, uploadImage("review"), createReview);
-ReviewRouter.post("/upFile", authenticate, uploadImage("review"), uploadFile);
+ReviewRouter.post(
+  "/create",
+  authenticate,
+  uploadCloud.single("file"),
+  createReview
+);
 ReviewRouter.get("/", getAllReview);
 ReviewRouter.put("/:id", checkExist(Reviews), updateReview);
 ReviewRouter.delete("/:id", checkExist(Reviews), deleteReview);

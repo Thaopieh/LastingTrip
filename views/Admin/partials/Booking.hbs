@@ -34,14 +34,15 @@
             <thead>
               <tr>
                 <th>STT</th>
-                <th>ID NGƯỜI DÙNG</th>
-                <th>HỌ TÊN</th>
                 <th>ID PHÒNG</th>
-                <th>NGÀY CHECK-IN</th>
-                <th>NGÀY CHECK-OUT</th>
+                <th>HỌ TÊN</th>
+                <th>ID NGƯỜI DÙNG</th>
                 <th>TỔNG TIỀN</th>
                 <th>TRẠNG THÁI</th>
+                <th>NGÀY CHECK-IN</th>
+                <th>NGÀY CHECK-OUT</th>
                 <th>YÊU CẦU ĐẶC BIỆT</th>
+                <th>CHỨC NĂNG</th>
 
               </tr>
             </thead>
@@ -53,45 +54,13 @@
       </div>
     </div>
     <div class="popup-overlay">
-      {{! <div class="popup"> }}
-      {{! <span class="close-btn">&times;</span> }}
-      {{! <h2>Chỉnh sửa</h2> }}
-      {{! <form id="updateForm"> }}
-      {{! <input type="text" id="name" name="name" placeholder="Tên khách sạn" value="${data.name}" required>
-                }}
-      {{! <input type="text" id="star" name="star" placeholder="Đánh giá" value="${data.star}" required> }}
-      {{! <input type="text" id="userRating" name="userRating" placeholder="Người dùng đánh giá"
-                    value="${data.userRating}" required> }}
-      {{! <input type="text" id="map" name="map" placeholder="Địa chỉ" value="${data.map}" required> }}
-      {{! <input type="text" id="linkMap" name="linkMap" placeholder="Link địa chỉ" value="${data.linkMap}"
-                    required> }}
-      {{! <input type="text" id="roomType" name="roomType" placeholder="Loại phòng" value="${data.roomType}"
-                    required> }}
-      {{! <input type="text" id="status" name="status" placeholder="Trạng thái" value="${data.status}"
-                    required> }}
-      {{! <input type="text" id="cost" name="cost" placeholder="Giá" value="${data.cost}" required> }}
-      {{! <input type="text" id="type" name="type" placeholder="Loại" value="${data.type}" required> }}
-      {{! <input type="text" id="embedMap" name="embedMap" placeholder="Map nhúng" value="${data.embedMap}"
-                    required> }}
-      {{! <div class="ebutton"> }}
-      {{! <input type="submit" value="Cập nhật"> }}
-      {{! </div> }}
-      {{! </form> }}
-      {{! </div> }}
-    </div>
 
-    {{! <div class="popup-overlay-delete">
-        <div class="popup-delete">
-            <h2>Thông báo</h2>
-            <p>Đã xóa khách sạn thành công</p>
-            <button class="close-btn1">Đóng</button>
-        </div>
-    </div> }}
+    </div>
 
     <div class="popup-overlay-delete">
       <div class="popup-delete">
         <h2>Xác nhận xóa</h2>
-        <p>Bạn có chắc chắn muốn xóa khách sạn này không?</p>
+        <p>Bạn có chắc chắn muốn xóa đơn đặt phòng này không?</p>
         <div class="btn-group">
           <button class="confirm-delete">Xác nhận</button>
           <button class="cancel-delete">Hủy</button>

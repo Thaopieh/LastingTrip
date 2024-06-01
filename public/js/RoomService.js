@@ -1,44 +1,57 @@
 $(document).ready(function () {
-  var room = localStorage.getItem("roomId");
+  // var room = localStorage.getItem("roomId");
+  var url = window.location.pathname;
+  var room = url.substring(url.lastIndexOf("/") + 1);
   function renderPage() {
     $.ajax({
       url: "http://localhost:3030/api/v1/roomAmenities/" + room,
       method: "GET",
       success: function (data) {
         console.log(data);
-        const optionsJSON = localStorage.getItem("Service"); // Retrieve options as JSON string from localStorage
-        const options = JSON.parse(optionsJSON);
-        var tableHtml = "";
-        data.forEach(function (service, index) {
-          // Tạo HTML cho từng hàng trong bảng
-          tableHtml += "<tr>";
-          tableHtml += "<td>" + (index + 1) + "</td>";
-          // Parse the JSON string to convert it to an array or object
+        fetch("http://localhost:3030/api/v1/amenities?type=1")
+          .then((response) => response.json())
+          .then((data1) => {
+            const amenities1 = data1;
+            console.log(amenities1);
+            // Lấy danh sách các amenities từ API và lưu vào biến
+            const amenities = amenities1;
 
-          if (Array.isArray(options)) {
-            // If options is an array, loop through and append each option to <select>
-            options.forEach(function (option) {
-              // console.log("option id", option.id);
-              // console.log("service", service.serviceId);
-              if (option.id === service.serviceId) {
-                tableHtml += "<td>" + option.name + "</td>";
+            var tableHtml = "";
+            data.forEach(function (service, index) {
+              // Tạo HTML cho từng hàng trong bảng
+              tableHtml += "<tr>";
+              tableHtml += "<td>" + (index + 1) + "</td>";
+
+              // Parse the JSON string to convert it to an array or object
+              if (Array.isArray(amenities)) {
+                // If amenities is an array, loop through and append each amenity to <td>
+                amenities.forEach(function (amenity) {
+                  console.log(amenity.id);
+                  if (amenity.id == service.serviceId) {
+                    tableHtml += "<td>" + amenity.name + "</td>";
+                  }
+                });
               }
+
+              tableHtml += "<td>";
+              tableHtml +=
+                '<button type="button" class="updateService" value="' +
+                service.id +
+                '">Chỉnh sửa</button>';
+              tableHtml +=
+                '<button type="button" class="deleteRoom" value="' +
+                service.id +
+                '">Xóa</button>';
+              tableHtml += "</td>";
+              tableHtml += "</tr>";
             });
-          }
-          tableHtml += "<td>";
-          tableHtml +=
-            '<button type="button" class="updateService" value="' +
-            service.id +
-            '">Chỉnh sửa</button>';
-          tableHtml +=
-            '<button type="button" class="deleteRoom" value="' +
-            service.id +
-            '">Xóa</button>';
-          tableHtml += "</td>";
-          tableHtml += "</tr>";
-        });
-        // Render dữ liệu vào bảng
-        $(".room-table table tbody").html(tableHtml);
+
+            // Render dữ liệu vào bảng
+            $(".room-table table tbody").html(tableHtml);
+          })
+          .catch((error) => {
+            console.error("Lỗi khi gọi API:", error);
+          });
       },
       error: function (xhr, status, error) {
         console.error(error);
@@ -115,7 +128,7 @@ $(document).ready(function () {
     event.preventDefault(); // Prevent default form submission behavior
 
     const selectedOptionId = $("#service-room").val(); // Get the selected option's ID
-    const IdRoom = localStorage.getItem("IdRoom"); // Retrieve the hotel ID from localStorage
+    const IdRoom = localStorage.getItem("roomId"); // Retrieve the hotel ID from localStorage
     console.log("ID:", IdRoom);
     if (selectedOptionId && IdRoom) {
       console.log("Creating new service...");
@@ -280,14 +293,15 @@ $(document).ready(function () {
         });
 
         $(".ebutton").click(function () {
-          const id = $(this).val();
-          const RoomId = localStorage.getItem("IdRoom");
+          // const id = $(this).val();
+          const id = $(".updateService").val();
+          const RoomId = room;
           const serviceId = $("#serviceDropdown").val();
 
           // Kiểm tra các giá trị cần thiết trước khi gửi yêu cầu AJAX
           if (!RoomId || !serviceId || !id) {
             console.log("Id:", id);
-            console.log("HotelId:", RoomId);
+            console.log("RoomId:", RoomId);
             console.log("AmenityId:", serviceId);
             alert("Vui lòng chọn đầy đủ thông tin trước khi cập nhật.");
             return; // Ngăn chặn việc gửi yêu cầu nếu dữ liệu không hợp lệ

@@ -12,6 +12,7 @@ const { BookingRouter } = require("./Booking.router");
 const { urlImageRoom } = require("./urlImageRoom.routers");
 const { urlImageHotel } = require("./urlImageHotel.routers");
 const { vnpayRouter } = require("./vnpay.routers");
+const { CouponRouter } = require("./coupon.routers");
 const rootRouter = express.Router();
 
 rootRouter.use("/users", userRouter);
@@ -27,6 +28,7 @@ rootRouter.use("/urlImageRoom", urlImageRoom);
 rootRouter.use("/urlImageHotel", urlImageHotel);
 rootRouter.use("/booking", BookingRouter);
 rootRouter.use("/vnpay", vnpayRouter);
+rootRouter.use("/coupon", CouponRouter);
 module.exports = {
   rootRouter,
 };

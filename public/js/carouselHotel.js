@@ -10,17 +10,41 @@ $(document).ready(() => {
     },
     carousel_favorite: {
       containerId: "carousel_Trending",
-      sortType: "deCsc_rating",
+      sortType: "desc_rating",
     },
   };
 
-  // ham chuyen int thanh string
+  // Function to convert number to string with commas
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  // Gọi API và hiển thị dữ liệu cho mỗi container
-  // Gọi API và hiển thị dữ liệu cho mỗi container
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a");
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e");
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, "i");
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o");
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u");
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y");
+    slug = slug.replace(/đ/gi, "d");
+    slug = slug.replace(
+      /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+      ""
+    );
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-/gi, "-");
+    slug = "@" + slug + "@";
+    slug = slug.replace(/\@\-|\-\@|\@/gi, "");
+    slug = slug.trim();
+    return slug;
+  }
+
+  // Fetch and display data for each container
   Object.values(containerData).forEach((containerConfig) => {
     const { containerId, sortType } = containerConfig;
     const container = $("#" + containerId);
@@ -31,54 +55,63 @@ $(document).ready(() => {
       data: { sortType: sortType },
       success: (data) => {
         data.forEach((item, index) => {
-          // Kiểm tra nếu khách sạn đã tồn tại trong container
+          // Check if the hotel already exists in the container
           if ($("#" + item.id).length === 0) {
-            const imgFeature = item.UrlImageHotels.map((item1) => {
-              return item1.url;
-            });
-            const imgRender = imgFeature[0];
+            // Validate data
+            if (
+              !item.name ||
+              !item.cost ||
+              !item.UrlImageHotels ||
+              item.UrlImageHotels.length === 0
+            ) {
+              return;
+            }
+
+            const imgFeature = item.UrlImageHotels.map(
+              (item1) => item1.url
+            ).filter(Boolean);
+            const imgRender = imgFeature.length > 0 ? imgFeature[0] : "";
+
+            // Skip rendering if there's no valid image URL
+            if (!imgRender) {
+              return;
+            }
+
             let activeClass = index == 0 ? "active" : "";
-
             const formattedCost = numberWithCommas(item.cost);
-
-            const card = `<div class="carousel-item ${activeClass}" id=${item.id}">
-            <a href="/hotel/${item.id}" target="_blank"  class="hotel-link" >
-              <div class="card" >
-                <div class="img-wrapper">
-                  <img src="${imgRender}" alt=${item.name}>
+            const slug = ChangeToSlug(item.name);
+            const card = `<div class="carousel-item ${activeClass}" id=${
+              item.id
+            }">
+              <a href="/hotel/${slug}/${
+              item.id
+            }" target="_blank" class="hotel-link">
+                <div class="card">
+                  <div class="img-wrapper">
+                    <img src="${imgRender}" alt="${item.name}">
+                  </div>
+                  <div class="card-body">
+                    <a class="click-item" href="/hotel/${slug}/${
+              item.id
+            }" target="_blank">
+                      <h5 class="card-title">${item.name}</h5>
+                    </a>
+                    <p class="card-text">${item.map || ""}</p>
+                    <a href="/hotel/${slug}/${
+              item.id
+            }" class="btn btn-primary"><span class="from">From</span> VND ${formattedCost}</a>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <a class="click-item" href="/hotel/${item.id}" target="_blank">
-                    <h5 class="card-title">${item.name}</h5>
-                  </a>
-                  <p class="card-text">${item.map}</p>
-                  <a href="#" class="btn btn-primary"><span class="from">From</span> VND
-                    ${formattedCost}</a>
-                </div>
-              </div>
-            </a>
-          </div>`;
+              </a>
+            </div>`;
 
             container.append(card);
           }
         });
       },
+      error: (err) => {
+        console.error(`Error fetching data for container ${containerId}:`, err);
+      },
     });
-  });
-});
-
-$(document).ready(function () {
-  // Xử lý sự kiện khi người dùng nhấp vào một liên kết khách sạn
-  $(".hotel-link").click(function (event) {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
-
-    // Lấy href của liên kết
-    var href = $(this).attr("href");
-
-    // Lấy id khách sạn từ href
-    var hotelId = href.split("/").pop();
-
-    // Chuyển hướng đến trang khách sạn và truyền id khách sạn qua URL
-    window.location.href = "/hotel/" + hotelId;
   });
 });

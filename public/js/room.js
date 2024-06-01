@@ -1,9 +1,9 @@
 $(document).ready(function () {
   var hotelId1 = localStorage.getItem("hotelId");
-
+  console.log(hotelId1);
   function renderPage() {
     $.ajax({
-      url: "http://localhost:3030/api/v1/rooms/",
+      url: `http://localhost:3030/api/v1/rooms?hotelId=${hotelId1}`,
       method: "GET",
       data: { hotelId: hotelId1 },
       success: function (data) {
@@ -12,23 +12,21 @@ $(document).ready(function () {
         data.forEach(function (room, index) {
           // Tạo HTML cho từng hàng trong bảng
           tableHtml += "<tr>";
-          tableHtml += "<td>" + room.id + "</td>";
-          tableHtml += "<td>" + room.name + "</td>";
+          tableHtml += `<td data-title="ID";>` + (index + 1) + "</td>";
+          tableHtml += `<td data-title="Tên">` + room.name + "</td>";
           if (room.status == "1") {
-            tableHtml += "<td>" + "Còn phòng" + "</td>";
+            tableHtml += '<td data-title="Trạng thái">' + "Còn phòng" + "</td>";
           } else {
-            tableHtml += "<td>" + "Hết phòng" + "</td>";
+            tableHtml += `<td data-title="Trạng thái">` + "Hết phòng" + "</td>";
           }
-          tableHtml += "<td>" + room.price + "</td>";
-          tableHtml += "<td>" + room.quantity + "</td>";
-          tableHtml += "<td>" + room.quantity_people + "</td>";
-          tableHtml += "<td>" + room.type_bed + "</td>";
-          tableHtml += `<td><i class='fa-solid fa-image' data-id='${room.id}'></i></td>`; // Add icon with data-id attribute
-          tableHtml += "<td>";
+          tableHtml += `<td data-title="Giá">` + room.price + "</td>";
+          tableHtml += `<td data-title="Số lượng">` + room.quantity + "</td>";
           tableHtml +=
-            '<button type="button" class="updateRoom" value="' +
-            room.id +
-            '">Chỉnh sửa</button>';
+            `<td data-title="Số lượng người">` + room.quantity_people + "</td>";
+          tableHtml += `<td data-title="Loại phòng">` + room.type_bed + "</td>";
+          tableHtml += `<td data-title="Hotel_ID">` + room.hotelId + "</td>";
+
+          tableHtml += `<td data-title="Chỉnh sửa/Xóa">`;
           tableHtml +=
             '<button type="button" class="deleteRoom" value="' +
             room.id +
@@ -37,6 +35,8 @@ $(document).ready(function () {
             '<button type="button" class="ManageRoomService" value="' +
             room.id +
             '">Quản Lý Dịch Vụ</button>';
+          tableHtml += `<td data-title="Hình ảnh"><i class='fa-solid fa-image' data-id='${room.id}'></i></td>`; // Add icon with data-id attribute
+
           tableHtml += "</td>";
           tableHtml += "</tr>";
         });
@@ -54,14 +54,14 @@ $(document).ready(function () {
 
   // Sự kiện khi click vào nút "Thêm"
   $(".room-search-create").click(function () {
-    $(".custom-popup-overlay").show();
-    $(".custom-popup").show();
+    $(".popup-overlay-addRoom").show();
+    $(".popup-addRoom").show();
   });
 
   // Sự kiện khi click vào nút "Đóng" trong popup
   $(".custom-close-btn").click(function () {
-    $(".custom-popup-overlay").hide();
-    $(".custom-popup").hide();
+    $(".popup-overlay-addRoom").hide();
+    $(".popup-addRoom").hide();
   });
   $(document).on("click", ".deleteRoom", function () {
     // Hiển thị overlay và popup
@@ -101,9 +101,7 @@ $(document).ready(function () {
     });
   });
 
-  $(".dkbutton").click(function () {
-    event.preventDefault(); // Prevent default form submission
-
+  $(".addRoombtn").click(function () {
     var formData = new FormData();
     var name = $("#name").val();
     var status = $("#status").val();
@@ -113,14 +111,16 @@ $(document).ready(function () {
     var type_bed = $("#type_bed").val();
     var hotelId = localStorage.getItem("hotelId");
 
-    var fileInput = document.getElementById("ImageRoom");
-    if (fileInput.files.length === 0) {
-      console.log(fileInput.files.length);
-      alert("sai");
-    }
-    for (var i = 0; i < fileInput.files.length; i++) {
-      formData.append("room", fileInput.files[i]); // Use 'files[]' to send as an array
-    }
+    // var fileInput = document.getElementById("ImageRoom");
+    // if (fileInput.files.length === 0) {
+    //   console.log(fileInput.files.length);
+    //   alert("sai");
+    // }
+    // for (var i = 0; i < fileInput.files.length; i++) {
+    //   formData.append("room", fileInput.files[i]); // Use 'files[]' to send as an array
+    // }
+    var fileInput = document.querySelector("input[type='file']");
+    var files = fileInput.files; // Danh sách các file đã chọn
 
     // Create FormData object and append form data
 
@@ -132,6 +132,12 @@ $(document).ready(function () {
     formData.append("type_bed", type_bed);
     formData.append("hotelId", hotelId);
 
+    // Lặp qua từng file đã chọn và thêm vào formData
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      formData.append("room", file); // Sử dụng '[]' để gửi dưới dạng mảng trên máy chủ
+    }
+
     // Make AJAX request
     $.ajax({
       url: "http://localhost:3030/api/v1/rooms/",
@@ -141,8 +147,9 @@ $(document).ready(function () {
       processData: false, // Important for FormData
       success: function (data) {
         renderPage();
-        $(".custom-popup-overlay").hide();
-        $(".custom-popup").hide();
+        alert("Thêm phòng thành công!");
+        $(".popup-overlay-addRoom").hide();
+        $(".popup-addRoom").hide();
         console.log("Room created:", data);
       },
       error: function (error) {
@@ -154,7 +161,7 @@ $(document).ready(function () {
   // Sự kiện khi click vào nút "Sửa"
   $(document).on("click", ".updateRoom", function () {
     var id = $(this).val();
-    $(".popup-overlay").show();
+    $(".popup-overlay-addRoom").show();
     // Gửi yêu cầu để lấy chi tiết người dùng
     $.ajax({
       url: `http://localhost:3030/api/v1/rooms/${id}`,
@@ -162,8 +169,8 @@ $(document).ready(function () {
       success: function (data) {
         console.log(data);
         const hotelId = localStorage.getItem("hotelId");
-        $(".popup-overlay").html(`
-          <div class="popup"> 
+        $(".popup-overlay-addRoom").html(`
+          <div class="popup-addRoom"> 
           <span class="close-btn">&times;</span> 
           <h2>Chỉnh sửa</h2> 
           <form id="updateForm"> 
@@ -206,7 +213,7 @@ $(document).ready(function () {
           <input type="text" id="price" name="price" placeholder="Giá" value="${
             data.price
           }" required> 
-          <label>Số lượng phòng</label>
+          <label>Số lượng phòng1</label>
           <select
             class="form-select"
             name="quantity"
@@ -287,7 +294,7 @@ $(document).ready(function () {
           });
         });
         $(".close-btn").click(function () {
-          $(".popup-overlay").hide();
+          $(".popup-overlay-addRoom").hide();
         });
       },
     });
@@ -300,6 +307,7 @@ $(document).ready(function () {
 
   $(document).on("click", ".fa-image", function () {
     var IdRoom = $(this).data("id");
+    console.log(IdRoom);
     var hotelId = localStorage.getItem("hotelId");
     localStorage.setItem("IdRoom", IdRoom);
     $("#imagePopupOverlay").css("display", "block");
@@ -383,7 +391,7 @@ $(document).ready(function () {
     // Gọi lại hàm renderPage để cập nhật trang
     renderPage(); // Giả sử renderPage() là hàm để load lại danh sách người dùng
   }
-  $("#addImageButton").on("click", function () {
+  $("#addImageButton2").on("click", function () {
     // Khi người dùng nhấp vào nút "Add Image", kích hoạt sự kiện click cho input[type=file] ẩn
     $("#imageInput").click();
   });
@@ -415,7 +423,7 @@ $(document).ready(function () {
 
   // Sự kiện click cho nút "Confirm"
   $("#confirm").on("click", function () {
-    var fileInput = document.querySelector("input[type='file']");
+    var fileInput = document.querySelector(".dienmau input[type='file']");
     var file = fileInput.files;
     console.log("file", file);
     var formData = new FormData();

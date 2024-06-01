@@ -2,35 +2,43 @@
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    font-weight: normal;
-    /* font: 12px / 1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; */
-    font-display: swap;
-    padding: 0px;
-    margin: 0px;
+  width       : 100%;
+  height      : 100%;
+  font-weight : normal;
+  /* font     : 12px / 1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  font-display: swap;
+  padding     : 0px;
+  margin      : 0px;
 }
 
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin     : 0;
+  padding    : 0;
+  box-sizing : border-box;
   font-family: 'Poppins', sans-serif;
 }
 
 .template {
-  display: flex;
+
+  display       : flex;
   flex-direction: row;
 
 }
-.body-left{
+
+.body-left {
+
   background-color: #2EB6F9;
 
-  width:20%;
+  width   : 230px;
+  position: fixed;
+  top     : 0;
+  bottom  : 0;
 }
-.body-right{
-  width: 80%;
+
+.body-right {
+  width      : 100%;
+  margin-left: 230px;
 }
 
 .menu {
@@ -41,101 +49,183 @@ body {
   position: sticky; */
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
-  padding: 5px;
+  top     : 0;
+  padding : 5px;
 }
 
-.menu .menu-content
-{
+.menu .menu-content {
   position: sticky;
-  top: 0;
-  z-index: 10; /* giá trị z-index để đảm bảo hiển thị trên các phần tử khác */
+  top     : 0;
+  z-index : 10;
+  /* giá trị z-index để đảm bảo hiển thị trên các phần tử khác */
 }
 
 .menu .logo {
-  height: 60px;
+  height  : 60px;
   position: sticky;
 
   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .menu .logo a {
-  color: #fff;
-  font-size: 25px;
-  font-weight: bold;
-  line-height: 60px;
+  color          : #fff;
+  font-size      : 25px;
+  font-weight    : bold;
+  line-height    : 60px;
   text-decoration: none;
-  padding-left: 20px;
+  padding-left   : 20px;
 }
 
 .menu ul {
-  list-style: none;
+  list-style : none;
   padding-top: 20px;
 }
 
 .menu li {
-  margin-top: 6px;
-  padding: 14px 20px;
-  display: flex;
+  margin-top : 6px;
+  padding    : 14px 17px;
+  display    : flex;
   align-items: center;
 }
 
 .menu i {
-  color: #fff;
-  font-size: 20px;
+  color        : #fff;
+  font-size    : 20px;
   padding-right: 8px;
 }
 
 .menu a {
-  color: #ffffff;
-  font-size: 15px;
+  color          : #ffffff;
+  font-size      : 15px;
   text-decoration: none;
-  font-weight: 600px;
+  font-weight    : 600px;
 }
 
 .menu li:hover {
   border-left: 1px solid #fff;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  box-shadow : 0 0 4px rgba(255, 255, 255, 0.5);
 }
+
 .active {
   background-color: #666;
-  color: red;
+  color           : red;
 }
+
 .social_media {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 20px;
+  position  : absolute;
+  left      : 50%;
+  transform : translateX(-50%);
+  bottom    : 20px;
   list-style: none;
-  cursor: pointer;
+  cursor    : pointer;
 }
 
 .social_media i {
   text-decoration: none;
-  padding: 0 5px;
-  color: #fff;
-  opacity: 0.6;
-  font-size: 20px;
+  padding        : 0 5px;
+  color          : #fff;
+  opacity        : 0.6;
+  font-size      : 20px;
 }
 
 .social_media i:hover {
-  opacity: 1;
+  opacity   : 1;
   transition: all 0.2s linear;
-  transform: scale(1.01);
+  transform : scale(1.01);
 }
 
 .main_box {
-  background: url('https://anhdepfree.com/wp-content/uploads/2018/12/50-hinh-nen-mau-xanh-dep-nhat-1.jpeg') right no-repeat;
-  background-size: cover;
-  height: 100vh;
-  width: 100%;
-  display: flex;
+  background        : url('https://anhdepfree.com/wp-content/uploads/2018/12/50-hinh-nen-mau-xanh-dep-nhat-1.jpeg') right no-repeat;
+  background-size   : cover;
+  height            : 100vh;
+  width             : 100%;
+  display           : flex;
   /* justify-content: flex-end; */
-   /* Đẩy menu về phía bên phải */
+  /* Đẩy menu về phía bên phải */
 }
 
 #contentManageRoom,
 #contentBooking,
-#contentAddHotel{
+#contentAddHotel,
+#chart {
   display: none;
+}
+
+.menu-content .logo i {
+  display      : none;
+  font-size    : 25px;
+  padding-right: 0;
+}
+
+@media (max-width:440px) {
+  .body-left {
+
+    overflow  : hidden;
+    transition: all 0.2s linear;
+    width     : 60px;
+    z-index   : 100000;
+
+  }
+
+  .body-right {
+
+    margin-left: 60px;
+  }
+
+  .menu-content .logo {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+  }
+
+  .menu-content .logo a {
+    display    : none;
+    white-space: nowrap;
+  }
+
+
+  .menu-content .logo .fa-bars {
+    display: block;
+  }
+
+  .menu-content ul {
+    padding-left: 0;
+  }
+
+  .menu-content .btn a {
+    display    : none;
+    white-space: nowrap;
+  }
+
+  .show-menu {
+    position  : fixed;
+    width     : 230px;
+    transition: all 0.2s linear;
+    z-index   : 1000;
+  }
+
+  .show-menu .menu-content .btn a {
+    display: block;
+  }
+
+  .show-menu .menu-content ul {
+    padding-left: 2rem;
+  }
+
+  .show-menu .menu-content .logo .fa-bars {
+    display: none;
+  }
+
+  .show-menu .menu-content .logo .fa-xmark {
+    display      : block;
+    padding-right: 10px;
+  }
+
+  .show-menu .menu-content .logo a {
+    display: block;
+  }
+
+  .show-menu .menu-content .logo {
+    justify-content: space-between;
+  }
 }

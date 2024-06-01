@@ -6,7 +6,27 @@ document.addEventListener("DOMContentLoaded", () => {
   if (token) {
     // Nếu token có giá trị khác null, thay đổi HTML của phần tử li
     const signInSignUpLi = document.querySelector("#nav-login"); // Chọn phần tử li cần thay đổi
+    var href_val;
+    if (
+      localStorage.getItem("type") == "client" ||
+      localStorage.getItem("type") == "admin"
+    ) {
+      var href_val = "/userInfor";
+    } else if (localStorage.getItem("type") == "owner") {
+      var href_val = "/agentInfo";
+    }
 
+    if (
+      localStorage.getItem("type") == "admin" ||
+      localStorage.getItem("type") == "owner"
+    )
+      document.getElementById("supplierTime").style.display = "none";
+
+    const signIn = document.querySelector("#account");
+    signIn.innerHTML = `         <a href="/userInfor" class="btn-group1">  <i class="fa-regular fa-user"></i>
+  ${userName}</a>
+
+</button>`;
     // HTML mới cho phần tử li nếu có token
     signInSignUpLi.innerHTML = `
             <div class="btn-group1">
@@ -16,12 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     ${userName}
                 </button>
                 <ul class="dropdown-menu" id="dropdownshown">
-                    <li><a class="dropdown-item" href="/userInfor">Thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item2" href="${href_val}">Thông tin cá nhân</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li id="logout"><a class="dropdown-item" href="/">Đăng xuất</a></li>
                 </ul>
             </div>
         `;
+
     document.getElementById("logout").addEventListener("click", function () {
       // Xóa token khỏi local storage
       localStorage.removeItem("token");
@@ -93,25 +114,41 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".toUserInfo").addEventListener("click", function () {
     // Kiểm tra nếu có token
     if (token) {
-      // Di chuyển đến trang userInfor
-      window.location.href = "/userInfor";
-    } else {
-      // Hiển thị thông báo yêu cầu đăng nhập
-      alert("Vui lòng đăng nhập để xem thông tin cá nhân.");
-      // Chuyển hướng đến trang login
-      window.location.href = "/signin";
+      if (
+        localStorage.getItem("type") == "client" ||
+        localStorage.getItem("type") == "admin"
+      ) {
+        // Di chuyển đến trang userInfor
+        window.location.href = "/userInfor";
+      } else if (localStorage.getItem("type") == "owner") {
+        // Di chuyển đến trang userInfor
+        window.location.href = "/agentInfo";
+      } else {
+        // Hiển thị thông báo yêu cầu đăng nhập
+        alert("Vui lòng đăng nhập để xem thông tin cá nhân.");
+        // Chuyển hướng đến trang login
+        window.location.href = "/signin";
+      }
     }
   });
   document.querySelector(".toUserInf").addEventListener("click", function () {
     // Kiểm tra nếu có token
     if (token) {
-      // Di chuyển đến trang userInfor
-      window.location.href = "/userInfor";
-    } else {
-      // Hiển thị thông báo yêu cầu đăng nhập
-      alert("Vui lòng đăng nhập để xem thông tin cá nhân.");
-      // Chuyển hướng đến trang login
-      window.location.href = "/signin";
+      if (
+        localStorage.getItem("type") == "client" ||
+        localStorage.getItem("type") == "admin"
+      ) {
+        // Di chuyển đến trang userInfor
+        window.location.href = "/userInfor";
+      } else if (localStorage.getItem("type") == "owner") {
+        // Di chuyển đến trang userInfor
+        window.location.href = "/agentInfo";
+      } else {
+        // Hiển thị thông báo yêu cầu đăng nhập
+        alert("Vui lòng đăng nhập để xem thông tin cá nhân.");
+        // Chuyển hướng đến trang login
+        window.location.href = "/signin";
+      }
     }
   });
 });

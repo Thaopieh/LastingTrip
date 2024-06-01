@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Success</title>
+</head>
+
+<body>
+    <script>
+        // Function to get query parameters
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const pairs = queryString.split('&');
+            pairs.forEach(pair => {
+                const [key, value] = pair.split('=');
+                params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Get the token and id from query parameters
+        const params = getQueryParams();
+        const token = params.token;
+        const userId = params.id;
+        const name = params.name;
+        const type = params.type;
+        // Set them in LocalStorage
+        if (token) {
+            localStorage.setItem('token', token);
+        }
+        if (userId) {
+            localStorage.setItem('id', userId);
+        }
+        if (name) {
+            localStorage.setItem('userName', name);
+        }
+        if(type)
+        {
+            localStorage.setItem('type',type)
+        }
+
+        // Redirect to the main page or wherever
+     window.location.href = "http://localhost:3030"; // Change to the appropriate URL
+    </script>
+</body>
+
+</html>

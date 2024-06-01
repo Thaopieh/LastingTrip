@@ -23,9 +23,6 @@
       <div class="room-container">
         <div class="room-search">
           <p>QUẢN LÝ PHÒNG</p>
-          <div class="room-search-btn">
-            <div class="room-search-create">Thêm phòng</div>
-          </div>
         </div>
         <div class="room-table">
           <table>
@@ -38,9 +35,9 @@
                 <th>Số lượng</th>
                 <th>Số lượng người</th>
                 <th>Loại phòng</th>
-                <th>Image</th>
+                <th>Hotel ID</th>
                 <th>Chức năng</th>
-
+                <th>Hình ảnh</th>
               </tr>
             </thead>
             <tbody>
@@ -63,8 +60,8 @@
         <div class="image-container">
           <!-- Danh sách ảnh sẽ được tạo và thêm vào đây bằng JavaScript -->
         </div>
-        <div class="button-row">
-          <button id="addImageButton">Add Image</button>
+        <div class="button-row dienmau">
+          <button id="addImageButton2">Add Image</button>
           <input type="file" id="imageInput" style="display: none;" multiple />
           <button id="confirm">Confirm</button>
         </div>
@@ -118,33 +115,39 @@
             oninvalid="this.setCustomValidity('Vui lòng nhập giá')"
             oninput="this.setCustomValidity('')"
           />
-          <label for="">Số lượng phòng</label>
-          <select
-            class="form-select"
-            name="quantity"
-            id="quantity"
-            placeholder="Số lượng phòng *"
-          >
-            <option value="1">1 phòng</option>
-            <option value="2">2 phòng</option>
-            <option value="3">3 phòng</option>
-            <option value="4">4 phòng</option>
-            <option value="5">5 phòng</option>
-            <option value="6">6 phòng</option>
-          </select>
+          <div class="row">
+            <div class="col-6">
+              <label for="">Số lượng phòng</label>
+              <select
+                class="form-select"
+                name="quantity"
+                id="quantity"
+                placeholder="Số lượng phòng *"
+              >
+                <option value="1">1 phòng</option>
+                <option value="2">2 phòng</option>
+                <option value="3">3 phòng</option>
+                <option value="4">4 phòng</option>
+                <option value="5">5 phòng</option>
+                <option value="6">6 phòng</option>
+              </select>
+            </div>
+            <div class="col-6">
 
-          <label for="">Số lượng người</label>
-          <select
-            class="form-select"
-            name="quantity_people"
-            id="quantity_people"
-            placeholder="Số lượng người *"
-          >
-            <option value="1">1 người</option>
-            <option value="2">2 người</option>
-            <option value="3">3 người</option>
-            <option value="4">4 người</option>
-          </select>
+              <label for="">Số lượng người1</label>
+              <select
+                class="form-select"
+                name="quantity_people"
+                id="quantity_people"
+                placeholder="Số lượng người *"
+              >
+                <option value="1">1 người</option>
+                <option value="2">2 người</option>
+                <option value="3">3 người</option>
+                <option value="4">4 người</option>
+              </select>
+            </div>
+          </div>
 
           <label for="">Loại giường</label>
           <select
@@ -167,13 +170,13 @@
       </div>
     </div>
     {{!
-    <div class="popup-overlay-delete">
-        <div class="popup-delete">
-            <h2>Thông báo</h2>
-            <p>Đã xóa khách sạn thành công</p>
-            <button class="close-btn1">Đóng</button>
-        </div>
-    </div> }}
+  <div class="popup-overlay-delete">
+    <div class="popup-delete">
+      <h2>Thông báo</h2>
+      <p>Đã xóa khách sạn thành công</p>
+      <button class="close-btn1">Đóng</button>
+    </div>
+  </div> }}
 
     <div class="popup-overlay-delete">
       <div class="popup-delete">

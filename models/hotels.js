@@ -1,6 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 const { Op, literal } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class Hotels extends Model {
     /**
@@ -43,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
           await roomService.destroy({
             where: {
               roomId: {
-                [Op.in]: sequelize.literal(
+                [Op.in]: literal(
                   `(SELECT id FROM Rooms WHERE hotelId = ${hotelId})`
                 ),
               },
@@ -53,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
           await imgRoom.destroy({
             where: {
               IdRoom: {
-                [Op.in]: sequelize.literal(
+                [Op.in]: literal(
                   `(SELECT id FROM Rooms WHERE hotelId = ${hotelId})`
                 ),
               },
@@ -79,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
               await hotel.updateAverageUserRating();
               await hotel.updateMinPriceHotel();
             }
-          } else {
+          } else if (hotels) {
             await hotels.updateAverageUserRating();
             await hotels.updateMinPriceHotel();
           }
@@ -92,36 +93,43 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  // Phương thức để tính trung bình số userRating cho mỗi khách sạn
   Hotels.prototype.updateAverageUserRating = async function () {
-    const { Reviews } = sequelize.models;
     const hotelId = this.id;
 
     const [result] = await sequelize.query(`
       UPDATE Hotels AS h
-      SET userRating = COALESCE((
-        SELECT AVG(rating)
+      SET userRating = (
+        SELECT ROUND(AVG(r.rating), 1)
         FROM Reviews AS r
         WHERE r.hotelId = ${hotelId}
-      ), 0)
-      WHERE h.id = ${hotelId}
+        HAVING COUNT(r.rating) > 0
+      )
+      WHERE h.id = ${hotelId} AND EXISTS (
+        SELECT 1
+        FROM Reviews AS r
+        WHERE r.hotelId = ${hotelId}
+      )
     `);
 
     return result;
   };
 
   Hotels.prototype.updateMinPriceHotel = async function () {
-    const { Rooms } = sequelize.models;
     const hotelId = this.id;
 
     const [result] = await sequelize.query(`
       UPDATE Hotels AS h
-      SET cost = COALESCE((
+      SET cost = (
         SELECT MIN(price)
         FROM Rooms AS r
         WHERE r.hotelId = ${hotelId}
-      ))
-      WHERE h.id = ${hotelId}
+        HAVING COUNT(r.price) > 0
+      )
+      WHERE h.id = ${hotelId} AND EXISTS (
+        SELECT 1
+        FROM Rooms AS r
+        WHERE r.hotelId = ${hotelId}
+      )
     `);
 
     return result;

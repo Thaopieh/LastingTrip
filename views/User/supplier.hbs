@@ -288,47 +288,15 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <!-- Back to top button -->
-      <button
-        type="button"
-        class="btn btn-danger btn-floating btn-lg"
-        id="btn-back-to-top"
-      >
-        <i class="fas fa-arrow-up" id="mid"></i>
-      </button>
-    </div>
-
-    <div class="service-chat">
-      <button
-        type="button"
-        class="btn btn-danger btn-floating btn-lg"
-        id="service-chat"
-      >
-        <i class="fa-solid fa-headset" id="mid"></i>
-      </button>
-    </div>
-
-    <div class="chatbot">
-      <button
-        type="button"
-        class="btn btn-danger btn-floating btn-lg"
-        id="chatbot"
-      >
-        <i class="fa-solid fa-robot" id="mid"></i>
-      </button>
-    </div>
-    
     <script>
-document.getElementById("register").addEventListener("click", function (event) {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
-    var href = this.getAttribute("href");
-    localStorage.setItem("type", "owner");
-    window.location.href = "/register/";
-});
-
-
-
+      document.getElementById("register").addEventListener("click", function
+      (event) { event.preventDefault(); var href = this.getAttribute("href");
+      localStorage.setItem("type", "owner"); window.location.href =
+      "/register/"; });
+      document.getElementById("loggin").addEventListener("click", function
+      (event) { event.preventDefault(); var href = this.getAttribute("href");
+      localStorage.setItem("type", "owner"); window.location.href = "/signin/";
+      });
 
     </script>
 
@@ -345,7 +313,6 @@ document.getElementById("register").addEventListener("click", function (event) {
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script src="/js/backToTop.js"></script>
 
   </body>
 </html>

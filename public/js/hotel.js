@@ -8,11 +8,14 @@ $(document).ready(function () {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
   $.ajax({
     url: "http://localhost:3030/api/v1/hotels/" + hotelId,
     method: "GET",
 
     success: function (data) {
+      $("title").text(data.name);
+
       // Cập nhật nội dung trang khách sạn
       const formattedCost = numberWithCommas(data.cost);
       const beforeCost = numberWithCommas((data.cost * 120) / 100);
@@ -97,11 +100,11 @@ $(document).ready(function () {
           ${formattedCost} VND
         </div>
         <div class="col-5 select-rooms">
-          <button class="btn room">Chọn phòng</button>
+        <button class="btn room" onclick="scrollToElement(event, 'room-id')">Chọn phòng</button>
         </div>
       </div>
     </div>
-    <a href="#" data-bs-toggle="modal" data-bs-target="#imgModal" onclick="showContent('hotel-upload')">
+    <a  data-bs-toggle="modal" data-bs-target="#imgModal" onclick="showContent('hotel-upload')">
     <div id="detailed-img" class="row detailed-img">
       <table id="img-carousel">
 
@@ -122,8 +125,8 @@ $(document).ready(function () {
             <div class="row">
               <div class="col-4">
                 <div id="list-hotel-upload" class="list-group">
-                  <a class="list-group-item list-group-item-action" href="#feature">Nổi bật</a>
-                  <a class="list-group-item list-group-item-action" href="#room">Phòng</a>
+                  <a class="list-group-item list-group-item-action"  onclick="scrollToElement(event, 'feature')">Nổi bật</a>
+                  <a class="list-group-item list-group-item-action" onclick="scrollToElement(event, 'room')">Phòng</a>
                 </div>
               </div>
               <div class="col-8">
@@ -152,58 +155,115 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(() => {
+$(document).ready(async function () {
   var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
-  $.ajax({
-    url: "http://localhost:3030/api/v1/reviews?hotelId=" + hotelId,
-    method: "GET",
-    success: (data) => {
-      data.forEach((item, index) => {
-        let activeClass = index == 0 ? "active" : "";
-        const createdAtDate = new Date(item.createdAt);
-        const formattedDate = createdAtDate.toLocaleDateString();
-        const card = `<div class="carousel-item ${activeClass}">
-          <a href="#">
-            <div class="card">
-              <div class="card-head">
-                <div class="card-avatar">
-                  <img src="../img/BecomeSupplier/content01.jpg" alt="...">
-                </div>
-                <div class="card-info">
-                  <h5 class="card-title">${item.guestName}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">${formattedDate}</h6>
-                </div>
-              </div>
-              <div class="card-body">
-                <p class="card-text">
-                  ${item.description}
-                </p>
-              </div>
-            </div>
-          </a>
-        </div>`;
+  let slug = url.split("/")[2];
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a");
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e");
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, "i");
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o");
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u");
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y");
+    slug = slug.replace(/đ/gi, "d");
+    slug = slug.replace(
+      /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+      ""
+    );
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-/gi, "-");
+    slug = "@" + slug + "@";
+    slug = slug.replace(/\@\-|\-\@|\@/gi, "");
+    slug = slug.trim();
+    return slug;
+  }
 
-        $("#carousel-comment").append(card); // Đặt giá trị của #carousel-comment trong dấu ngoặc kép
+  function findHotelBySlug(slug) {
+    return fetch("http://localhost:3030/api/v1/hotels/")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Lỗi khi gọi API");
+        }
+        return response.json();
+      })
+      .then((hotels) => {
+        // Tìm khách sạn với slug tương ứng trong danh sách
+        const hotel = hotels.find((hotel) => ChangeToSlug(hotel.name) == slug);
+        return hotel;
+      })
+      .catch((error) => {
+        console.error("Lỗi khi gọi API:", error);
+        throw error;
       });
-      if (data.length > 4) {
-        $("#carousel-controls").show();
-      }
-    },
-  });
+  }
+  var hotel = await findHotelBySlug(slug);
+  var hotelId = hotel.id;
 });
 
-$(document).ready(() => {
+$(document).ready(async function () {
   var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  let slug = url.split("/")[2];
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a");
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e");
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, "i");
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o");
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u");
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y");
+    slug = slug.replace(/đ/gi, "d");
+    slug = slug.replace(
+      /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+      ""
+    );
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-/gi, "-");
+    slug = "@" + slug + "@";
+    slug = slug.replace(/\@\-|\-\@|\@/gi, "");
+    slug = slug.trim();
+    return slug;
+  }
+
+  function findHotelBySlug(slug) {
+    return fetch("http://localhost:3030/api/v1/hotels/")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Lỗi khi gọi API");
+        }
+        return response.json();
+      })
+      .then((hotels) => {
+        // Tìm khách sạn với slug tương ứng trong danh sách
+        const hotel = hotels.find((hotel) => ChangeToSlug(hotel.name) == slug);
+        return hotel;
+      })
+      .catch((error) => {
+        console.error("Lỗi khi gọi API:", error);
+        throw error;
+      });
+  }
+  var hotel = await findHotelBySlug(slug);
+  var hotelId = hotel.id;
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+  let arrayRoom = [];
+
   $.ajax({
     url: "http://localhost:3030/api/v1/rooms?hotelId=" + hotelId,
     method: "GET",
 
     success: (data) => {
+      arrayRoom = data.map((room) => room.id);
       data.forEach((item) => {
         const imgFeature = item.UrlImageRooms.map((item1) => {
           return item1.url;
@@ -228,8 +288,6 @@ $(document).ready(() => {
         }
 
         imgClickHTML += "</div>\n";
-
-        console.log(imgClickHTML);
 
         $("#clickRoom").append(imgClickHTML);
 
@@ -304,9 +362,6 @@ $(document).ready(() => {
                         <span>Không hoàn tiền</span>
                       </div>
                       <div class="info"><span>Xác nhận nhanh chóng</span></div>
-                      <div class="info">
-                        <span>Thanh toán ${paymentType} </span>
-                      </div>
                       <div class="info"><span>Đặt tối đa ${
                         item.quantity
                       } phòng</span></div>
@@ -325,48 +380,9 @@ $(document).ready(() => {
                   <div class="col-lg-5">
                     <div class="room-price">
                       <p>VND ${numberWithCommas(item.price)}</p>
-                      <a href="#" class="btn btn-primary booking" data-room-id="${
+                      <button class="btn btn-primary booking" data-room-id="${
                         item.id
-                      }">Đặt phòng</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-5">
-                    <div class="hotel_room">
-                      <div class="saleRoom_saleRoomItemBox-reservationNotesInfo_premiumInfo__80Cez">Giá tốt nhất bao
-                        gồm
-                        <span class="saleRoomItemBox-reservationNotesInfo_premiumTitle"
-                          style="font-weight: bold;"> bữa sáng
-                        </span>
-                      </div>
-                      <div class="hotel_info">
-                        <div class="info">
-                          <span>Bao gồm 2 bữa sáng</span>
-                        </div>
-                        <div class="info">
-                          <span>Không hoàn tiền</span>
-                        </div>
-                        <div class="info">
-                          <span>Xác nhận nhanh chóng</span>
-                        </div>
-                        <div class="info">
-                          <span>Thanh toán ${paymentType}</span>
-                        </div>
-                        <div class="info"><span>Đặt tối đa 2 phòng</span></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-2">
-                    <div class="people">
-                      <i class="fa-solid fa-user"></i>
-                      <i class="fa-solid fa-user"></i>
-                    </div>
-                  </div>
-                  <div class="col-lg-5">
-                    <div class="room-price">
-                      <p>VND 6,256,742</p>
-                      <a href="#" class="btn btn-primary">Đặt phòng</a>
+                      }">Đặt phòng</button>
                     </div>
                   </div>
                 </div>
@@ -379,9 +395,150 @@ $(document).ready(() => {
       });
     },
   });
+  function loadReviews() {
+    $.ajax({
+      url: "http://localhost:3030/api/v1/reviews?hotelId=" + hotelId,
+      method: "GET",
+      success: (data) => {
+        if (!data) {
+          return;
+        }
+        $("#carousel-comment").empty(); // Xóa các đánh giá cũ
+        data.forEach((item, index) => {
+          let activeClass = index == 0 ? "active" : "";
+          const createdAtDate = new Date(item.createdAt);
+          const formattedDate = createdAtDate.toLocaleDateString();
+          const card = `<div class="carousel-item ${activeClass}">
+          <a >
+            <div class="card">
+              <div class="card-head">
+                <div class="card-avatar">
+                  <img src="${item.guestAvatar}">
+                </div>
+                <div class="card-info">
+                  <h5 class="card-title">${item.guestName}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">${formattedDate}</h6>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="card-text">${item.description}</p>
+              </div>
+            </div>
+          </a>
+        </div>`;
+          $("#carousel-comment").append(card);
+        });
+        if (data.length > 4) {
+          $("#carousel-controls").show();
+        }
+      },
+      error: (xhr, status, error) => {
+        console.error("Error loading reviews:", error);
+        $(".review").hide();
+      },
+    });
+  }
+
+  // Tải danh sách đánh giá khi trang được tải
+  loadReviews();
+
+  var guestId = localStorage.getItem("id");
+  guestId = parseInt(guestId, 10);
+
+  // Xử lý gửi biểu mẫu đánh giá
+  function fetchUserBookings(userId) {
+    $.ajax({
+      url: `http://localhost:3030/api/v1/booking?user_id=` + userId, // Đường dẫn tới API hoặc endpoint để lấy thông tin booking
+      type: "GET", // Loại yêu cầu là GET
+      contentType: "application/json",
+      success: function (data) {
+        data.forEach((booking) => {
+          if (arrayRoom.includes(booking.room_id)) {
+            $(".send-review").show();
+          }
+        });
+      },
+      error: function (xhr, status, error) {
+        // Xử lý lỗi khi yêu cầu không thành công
+
+        console.error("Error fetching user bookings:", error);
+      },
+    });
+  }
+  fetchUserBookings(guestId);
+
+  document
+    .querySelector("#reviewForm")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      var ratingValue = document.querySelector(
+        "input[name='rating']:checked"
+      ).value;
+      var rating = parseInt(ratingValue, 10);
+      var content = document.querySelector("textarea[name='content']").value;
+      var hotelId = window.location.pathname.split("/").pop();
+      hotelId = parseInt(hotelId, 10);
+      var guestId = localStorage.getItem("id");
+      guestId = parseInt(guestId, 10);
+
+      if (!guestId || !hotelId || rating === undefined || !content) {
+        console.log("Invalid input data");
+        return;
+      }
+
+      var fileInput = document.querySelector("input[type='file']");
+      var file = fileInput.files[0];
+      const token = localStorage.getItem("token");
+
+      var formData = new FormData();
+      formData.append("file", file);
+      formData.append("rating", rating);
+      formData.append("description", content);
+      formData.append("hotelId", hotelId);
+      formData.append("guestId", guestId);
+
+      try {
+        const response = await fetch(
+          "http://localhost:3030/api/v1/reviews/create",
+          {
+            method: "POST",
+            body: formData,
+            headers: { token },
+          }
+        );
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error("Unauthorized: Please log in to submit a review.");
+          } else {
+            throw new Error(
+              `Network response was not ok: ${response.statusText}`
+            );
+          }
+        }
+
+        const data = await response.json();
+        loadReviews();
+
+        document.querySelector("input[name='rating']:checked").checked = false;
+        document.querySelector("textarea[name='content']").value = "";
+        document.querySelector("input[type='file']").value = "";
+        alert("Review submitted successfully!");
+      } catch (error) {
+        console.error("Error:", error);
+        if (
+          error.message === "Unauthorized: Please log in to submit a review."
+        ) {
+          alert("Bạn vui lòng đăng nhập để thực hiện đánh giá.");
+        } else {
+          alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
+        }
+      }
+    });
 });
 
-$(document).ready(function () {
+$(document).ready(async function () {
   // Xử lý sự kiện khi người dùng nhấp vào một liên kết khách sạn
   $(".hotel-link").click(function (event) {
     event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
@@ -393,16 +550,62 @@ $(document).ready(function () {
     var hotelId = href.split("/").pop();
 
     // Chuyển hướng đến trang khách sạn và truyền id khách sạn qua URL
-    window.location.href = "/hotel/" + hotelId;
+    window.location.href = "/";
   });
 
   const token = localStorage.getItem("token");
   if (token) {
-    $(".send-review").show();
+    $(".login-banner").hide();
+    $(".get-lower-price").hide();
   }
 
   var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
+  let slug = url.split("/")[2];
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a");
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e");
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, "i");
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o");
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u");
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y");
+    slug = slug.replace(/đ/gi, "d");
+    slug = slug.replace(
+      /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+      ""
+    );
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-/gi, "-");
+    slug = "@" + slug + "@";
+    slug = slug.replace(/\@\-|\-\@|\@/gi, "");
+    slug = slug.trim();
+    return slug;
+  }
+
+  function findHotelBySlug(slug) {
+    return fetch("http://localhost:3030/api/v1/hotels/")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Lỗi khi gọi API");
+        }
+        return response.json();
+      })
+      .then((hotels) => {
+        // Tìm khách sạn với slug tương ứng trong danh sách
+        const hotel = hotels.find((hotel) => ChangeToSlug(hotel.name) == slug);
+        return hotel;
+      })
+      .catch((error) => {
+        console.error("Lỗi khi gọi API:", error);
+        throw error;
+      });
+  }
+  var hotel = await findHotelBySlug(slug);
+  var hotelId = hotel.id;
   $.ajax({
     url: "http://localhost:3030/api/v1/hotels/" + hotelId,
     method: "GET",
@@ -412,7 +615,6 @@ $(document).ready(function () {
       rating.text(data.userRating);
       // Kiểm tra nếu không có dữ liệu hoặc không có hình ảnh
       if (!data || !data.UrlImageHotels || data.UrlImageHotels.length === 0) {
-        console.log("Không có dữ liệu hoặc không có hình ảnh.");
         return;
       }
 
@@ -480,11 +682,38 @@ $(document).ready(function () {
   });
 });
 
+const token = localStorage.getItem("token");
+
 $(document).on("click", ".booking", function () {
-  var roomId = $(this).data("room-id");
-  var url = window.location.pathname;
-  var hotelId = url.substring(url.lastIndexOf("/") + 1);
-  window.location.href = `http://localhost:3030/payment?hotelId=${hotelId}&roomId=${roomId}`;
+  if (token) {
+    var roomId = $(this).data("room-id");
+    var url = window.location.pathname;
+    var hotelId = url.substring(url.lastIndexOf("/") + 1);
+    const Sdata = localStorage.getItem("searchData");
+    var hotelData = JSON.parse(Sdata);
+    console.log(hotelData.checkInDate);
+    //Send AJAX request to check availability
+    $.ajax({
+      url: `http://localhost:3030/api/v1/booking/checkAvailability?checkInDate=${hotelData.checkInDate}&checkOutDate=${hotelData.checkOutDate}&roomId=${roomId}&quantity=${hotelData.numberOfRooms}`,
+      type: "GET",
+      success: (data) => {
+        console.log(data);
+        if (data) {
+          // If available rooms exist, redirect to payment page
+          window.location.href = `http://localhost:3030/payment?hotelId=${hotelId}&roomId=${roomId}`;
+        } else {
+          // If no available rooms, show a message
+          alert("Không có phòng trống cho ngày đã chọn");
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("Error checking availability:", errorThrown);
+        alert("Có lỗi xảy ra khi kiểm tra phòng trống. Vui lòng thử lại sau.");
+      },
+    });
+  } else {
+    alert("Bạn cần đăng nhập để thực hiện đặt phòng");
+  }
 });
 
 const findhotel = () => {
@@ -512,3 +741,11 @@ $("#search-hotel").on("click", function () {
   // Gọi hàm findhotel() khi nút được nhấp
   findhotel();
 });
+
+// Hàm xử lý cuộn đến phần tử mục tiêu
+function scrollToElement(event, id) {
+  event.preventDefault();
+  document.getElementById(id).scrollIntoView({
+    behavior: "smooth",
+  });
+}

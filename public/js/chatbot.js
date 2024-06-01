@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.querySelector(".close-btn");
   const chatbox = document.querySelector(".chatbox");
   const sendChatBtn = document.getElementById("send-btn");
-  const fileInput = document.querySelector('input[type="file"]');
+  const fileInput = document.querySelector(' .chat-input input[type="file"]');
   const sendBtn = document.getElementById("send-btn");
   const token = localStorage.getItem("token");
   $("#send-btn").click(function () {
-    const fileInput = document.querySelector('input[type="file"]');
+    const fileInput = document.querySelector('.chat-input input[type="file"]');
 
     // Kiểm tra nếu có file được chọn
     if (fileInput.files.length > 0) {

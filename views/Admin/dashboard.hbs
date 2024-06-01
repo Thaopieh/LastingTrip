@@ -1,61 +1,64 @@
 <html lang="en" dir="ltr">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Zone</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Zone</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-    />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
-    <link rel="stylesheet" href="/css/dashboard.css" />
-  </head>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
 
-  <body>
-    <div class="template">
+<body>
+  <div class="template">
 
-      <div class="body-left">
-        <div class="menu">
+    <div class="body-left">
+      <div class="menu">
         <div class="menu-content" id="menu-content">
           <div class="logo">
-          <a href="/" style="text-align: center;">Lasting Trip</a>
-         </div>
-         <ul>
-        
-          <li class="btn actives"id="button1">
-            <i class="fas fa-user"></i>
-            <a href="#">NGƯỜI DÙNG</a>
-          </li>
-          <li class="btn" id="button2">
-            <i class="fas fa-hotel"></i>
-            <a href="#">KHÁCH SẠN</a>
-          </li>
+            <a href="/" style="text-align: center;">Lasting Trip</a>
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          <ul>
 
-          <li class="btn" id="button3">
-            <i class="fas fa-list-alt"></i>
-            <a href="#">ĐƠN ĐẶT HÀNG</a>
-          </li>
+            <li class="btn actives" id="button1">
+              <i class="fas fa-user"></i>
+              <a href="#">NGƯỜI DÙNG</a>
+            </li>
+            <li class="btn" id="button2">
+              <i class="fas fa-hotel"></i>
+              <a href="#">KHÁCH SẠN</a>
+            </li>
 
-          <li class="btn" id="button4">
-            <i class="fa-solid fa-chart-simple"></i>
-            <a href="#">Thống kê</a>
-          </li>
-   
-          <li class="btn"  id="button6">
-            <i class="fas fa-sign-out-alt"></i>
-            <a href="#">Log out</a>
-          </li>
+            <li class="btn" id="button3">
+              <i class="fas fa-list-alt"></i>
+              <a href="#">ĐƠN ĐẶT HÀNG</a>
+            </li>
 
-        </ul>
+            <li class="btn" id="button4">
+              <i class="fa-solid fa-chart-simple"></i>
+              <a href="#">THỐNG KÊ</a>
+            </li>
+            <li class="btn" id="button5">
+              <i class="fa-solid fa-chart-simple"></i>
+              <a href="#">MÃ GIẢM GIÁ</a>
+            </li>
+
+            <li class="btn" id="button6">
+              <i class="fas fa-sign-out-alt"></i>
+              <a href="#">ĐĂNG XUẤT</a>
+            </li>
+
+          </ul>
         </div>
 
       </div>
-      </div>
+    </div>
 
-      <div class="body-right">
-<div class="content">
+    <div class="body-right">
+      <div class="content">
 
         <div id="content1">{{>ManageUser}}</div>
         <div id="content2">{{>ManageHotel}}</div>
@@ -63,21 +66,20 @@
         <div id="contentManageRoom">{{>room}}</div>
         <div id="contentBooking">{{>Booking}}</div>
         <div id="chart">{{>chart}}</div>
+        <div id="manageCoupon">{{>coupon}}</div>
 
 
-        
+
 
       </div>
 
-      </div>
-      
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
-    ></script>
-    <script src="/js/dashboard.js"></script>
 
-  </body>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+  <script src="/js/dashboard.js"></script>
+
+</body>
 
 </html>

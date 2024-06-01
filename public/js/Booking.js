@@ -15,21 +15,22 @@ $(document).ready(function () {
           tableHtml += '<td class="col1">' + booking.full_name + "</td>";
           tableHtml += '<td class="col2">' + booking.user_id + "</td>";
           tableHtml += '<td class="col2">' + booking.total_price + "</td>";
-          tableHtml += '<td class="col1">' + booking.status + "</td>";
-          tableHtml += '<td class="col1">' + booking.check_in_date + "</td>";
-          tableHtml += '<td class="col1">' + booking.check_out_date + "</td>";
+          if (booking.status)
+            tableHtml += '<td class="col1">' + "Đã thanh toán" + "</td>";
+          else tableHtml += '<td class="col1">' + "Chưa thanh toán" + "</td>";
+
+          tableHtml +=
+            '<td class="col1">' + booking.check_in_date.slice(0, 10) + "</td>";
+          tableHtml +=
+            '<td class="col1">' + booking.check_out_date.slice(0, 10) + "</td>";
           tableHtml += '<td class="col1">' + booking.special_requests + "</td>";
           tableHtml += "<td>";
 
           // Thêm button Chỉnh sửa
-          tableHtml +=
-            '<button type="button" class="updatehotel" value="' +
-            booking.id +
-            '">Chỉnh sửa</button>';
 
           // Thêm button Xóa và lưu ID của khách sạn trong thuộc tính data-id của icon
           tableHtml +=
-            '<button type="button" class="deleteHotel" value="' +
+            '<button type="button" class="deleteBooking" value="' +
             booking.id +
             '">Xóa</button>';
 
@@ -73,25 +74,7 @@ $(document).ready(function () {
   });
 
   // Sự kiện khi click vào nút "Xóa"
-  // $(document).on("click", ".deleteHotel", function () {
-  //     let id = $(this).val();
-  //     // Gửi yêu cầu xóa người dùng
-  //     $.ajax({
-  //         url: `http://localhost:3030/api/v1/hotels/deleteHotel/${id}`,
-  //         method: "DELETE",
-  //         success: function (data) {
-  //             renderPage();
-  //             $(".popup-overlay-delete").show();
-  //             $(".popup-delete").show();
-  //         },
-  //         error: function (error) {
-  //             console.log("Lỗi khi xóa người dùng", error);
-  //         },
-  //     });
-  // });
-
-  // Sự kiện khi click vào nút "Xóa"
-  $(document).on("click", ".deleteHotel", function () {
+  $(document).on("click", ".deleteBooking", function () {
     let id = $(this).val();
 
     // Hiển thị hộp thoại xác nhận xóa
@@ -106,6 +89,7 @@ $(document).ready(function () {
   $(".confirm-delete").click(function () {
     // Lấy ID người dùng từ thuộc tính data
     let id = $(".popup-delete").attr("data-id");
+    console.log("id booking", id);
 
     // Gửi yêu cầu xóa người dùng
     $.ajax({
@@ -121,7 +105,7 @@ $(document).ready(function () {
       },
       error: function (error) {
         // Xử lý lỗi
-        console.log("Đã xảy ra lỗi khi xóa người dùng:", error);
+        console.log("Đã xảy ra lỗi khi xóa booking:", error);
       },
     });
   });
@@ -130,37 +114,6 @@ $(document).ready(function () {
   $(".cancel-delete").click(function () {
     $(".popup-overlay-delete").hide();
     $(".popup-delete").hide();
-  });
-
-  // Sự kiện khi người dùng xác nhận xóa
-  $(".confirm-btn").click(function () {
-    // Lấy ID người dùng từ thuộc tính data
-    let id = $(".popup-confirm").attr("data-id");
-
-    // Gửi yêu cầu xóa người dùng
-    $.ajax({
-      url: `http://localhost:3030/api/v1/booking/${id}`,
-      method: "DELETE",
-
-      success: function (data) {
-        // Xử lý thành công
-        $(".popup-overlay-confirm").hide();
-        $(".popup-confirm").hide();
-
-        // Gọi lại hàm renderPage để cập nhật trang
-        renderPage();
-      },
-      error: function (error) {
-        // Xử lý lỗi
-        console.log("Đã xảy ra lỗi khi xóa khách sạn:", error);
-      },
-    });
-  });
-
-  // Sự kiện khi người dùng hủy bỏ việc xóa
-  $(".cancel-btn").click(function () {
-    $(".popup-overlay-confirm").hide();
-    $(".popup-confirm").hide();
   });
 
   $(".dkbutton").on("click", function () {

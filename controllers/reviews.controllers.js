@@ -1,18 +1,10 @@
 const { Reviews, Hotels, User } = require("../models");
 const { Op } = require("sequelize");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const createReview = async (req, res) => {
   try {
     const { rating, description, hotelId, guestId } = req.body;
-    console.log("Đánh giá: " + rating);
-    console.log(typeof rating);
-    console.log("Nội dung: " + description);
-    console.log(typeof description);
-
-    console.log("user-id " + guestId);
-    console.log(typeof guestId);
-
-    console.log("hotel id " + hotelId);
-    console.log(typeof hotelId);
 
     if (!guestId || !hotelId || rating === undefined || !description) {
       return res.status(400).json({ error: "Invalid input data" });
@@ -26,33 +18,19 @@ const createReview = async (req, res) => {
     };
 
     const { file } = req;
+    console.log(file);
     if (file) {
       const imagePath = file.path;
-      var cleanedPath = imagePath.replace(/^public/, "");
-      const urlImage = `localhost:3030${cleanedPath}`;
-      newReviewData.file = urlImage;
+      newReviewData.file = imagePath;
     }
 
     const newReview = await Reviews.create(newReviewData);
+    console.log(newReviewData);
 
     res.status(201).send(newReview);
   } catch (error) {
     res.status(500).send(error);
   }
-};
-
-const uploadFile = async (req, res) => {
-  const { file } = req;
-  const imagePath = file.path;
-  var cleanedPath = imagePath.replace(/^public/, "");
-  const urlImage = `localhost:3030${cleanedPath}`;
-  const { user } = req;
-  const commentFound = await Reviews.findOne({
-    id: user.id,
-  });
-  commentFound.file = urlImage;
-  await commentFound.save();
-  res.send(commentFound);
 };
 
 const getAllReview = async (req, res) => {
@@ -68,7 +46,7 @@ const getAllReview = async (req, res) => {
         },
         {
           model: User,
-          attributes: ["name"],
+          attributes: ["name", "url"],
         },
       ],
     });
@@ -87,6 +65,7 @@ const getAllReview = async (req, res) => {
       hotelName: review.Hotel.name,
       guestId: review.guestId,
       guestName: review.User.name,
+      guestAvatar: review.User.url,
     }));
 
     res.status(200).json(reviewsWithInfo);
@@ -158,6 +137,5 @@ module.exports = {
   updateReview,
   getDetailReview,
   getAllReview,
-  uploadFile,
   getFullReview,
 };

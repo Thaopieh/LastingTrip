@@ -1,9 +1,9 @@
-$(document).on("click", ".hotel-link", function (event) {
-  event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
-  var href = $(this).attr("href");
-  var hotelId = href.split("/").pop();
-  window.location.href = "/hotel/" + hotelId;
-});
+// $(document).on("click", ".hotel-link", function (event) {
+//   event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+//   var href = $(this).attr("href");
+//   var hotelId = href.split("/").pop();
+//   window.location.href = "/hotel/" + hotelId;
+// });
 function clearSelection() {
   var radios = document.getElementsByName("option");
   radios.forEach(function (radio) {
@@ -62,6 +62,30 @@ $(document).ready(() => {
   if (token) {
     $("#broadcast").show();
   }
+  function ChangeToSlug(title) {
+    var slug;
+    slug = title.toLowerCase();
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a");
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e");
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, "i");
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o");
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u");
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y");
+    slug = slug.replace(/đ/gi, "d");
+    slug = slug.replace(
+      /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+      ""
+    );
+    slug = slug.replace(/ /gi, "-");
+    slug = slug.replace(/\-\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-\-/gi, "-");
+    slug = slug.replace(/\-\-/gi, "-");
+    slug = "@" + slug + "@";
+    slug = slug.replace(/\@\-|\-\@|\@/gi, "");
+    slug = slug.trim();
+    return slug;
+  }
 
   $("#registerTime").on("click", function () {
     window.location.href = "/register";
@@ -78,33 +102,24 @@ $(document).ready(() => {
   });
 
   const loaddata = (data) => {
-    const numberOfResultsElement = $("#numberOfResults");
+    const numberOfResultsElement = document.getElementById("numberOfResults");
     const count = data.filter((item) => item.hasOwnProperty("id")).length;
 
-    // Cập nhật nội dung của phần tử HTML
-    numberOfResultsElement.text(count);
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    numberOfResultsElement.textContent = count;
 
-    const container = $("#hotelList");
-    container.empty(); // Xóa dữ liệu cũ trước khi render dữ liệu mới
-    let i = 1;
-    let j = 1;
-    let q = 1;
-    data.forEach((item, index) => {
+    const container = document.getElementById("hotelList");
+    container.innerHTML = ""; // Clear old data
+
+    data.forEach((item) => {
+      const slug = ChangeToSlug(item.name);
       const formattedCost = numberWithCommas(item.cost);
-
-      const imgFeature = item.UrlImageHotels.map((item1) => {
-        return item1.url;
-      });
+      const imgFeature = item.UrlImageHotels.map((item1) => item1.url);
       const imgRender = imgFeature[0];
       const reviews = item.Reviews.map((review) => ({
         rating: review.rating,
         description: review.description,
       }));
       const description = reviews[0] ? reviews[0].description : "Tốt";
-      console.log(reviews);
 
       const roomType = item.Rooms.map((room) => ({
         roomName: room.name,
@@ -113,23 +128,19 @@ $(document).ready(() => {
         status: room.status,
       }));
 
-      let roomWithMaxPrice; // Declare roomWithMaxPrice variable outside the if block
-
-      // Check if there are rooms available
-      roomWithMaxPrice = roomType.reduce((prev, current) => {
-        // Chỉ xem xét các phòng có status bằng 1
+      let roomWithMaxPrice = roomType.reduce((prev, current) => {
         if (current.status) {
           return prev.price < current.price ? prev : current;
         } else {
           return prev;
         }
-      }, roomType[0]); // Sử dụng roomType[0] làm giá trị khởi tạo
+      }, roomType[0]);
 
       let statusRoom = roomWithMaxPrice.status
         ? "Còn phòng"
         : "Tạm hết loại phòng này";
 
-      let peope_num = `<i class="fa-solid fa-user"></i>`.repeat(
+      let peopleNum = `<i class="fa-solid fa-user"></i>`.repeat(
         roomWithMaxPrice.numPeople
       );
 
@@ -137,7 +148,7 @@ $(document).ready(() => {
       const card = `
         <div class="card mb-3">
           <div class="row img-adjust g-0">
-            <a href="/hotel/${item.id}" class="hotel-link wrap-img">
+            <a href="/hotel/${slug}/${item.id}" class="hotel-link wrap-img">
               <div class="col-md-4">
                 <img src="${imgRender}" alt="...">
               </div>
@@ -146,7 +157,7 @@ $(document).ready(() => {
               <div class="card-body">
                 <div class="head-title">
                   <h5 class="card-title">
-                    <a href="/hotel/${item.id}" class="hotel-link">${item.name}</a>
+                    <a href="/hotel//${slug}/${item.id}" class="hotel-link">${item.name}</a>
                     ${stars}
                   </h5>
                   <div class="card-describle">
@@ -159,14 +170,14 @@ $(document).ready(() => {
                 </div>
                 <div class="room-type-price">
                   <div class="room-type">
-                    <p>${roomWithMaxPrice.roomName} ${peope_num}<i class="fa-solid fa-bath"></i><i class="fa-solid fa-bed"></i></p>
+                    <p>${roomWithMaxPrice.roomName} ${peopleNum}<i class="fa-solid fa-bath"></i><i class="fa-solid fa-bed"></i></p>
                     <p class="card-text">
                       <small class="text-body-secondary">${statusRoom}</small>
                     </p>
                   </div>
                   <div class="room-price">
                     <p>VND ${formattedCost}</p>
-                    <a href="#" class="btn btn-primary">Kiểm tra</a>
+                    <a href="/hotel/${slug}/${item.id}" class="btn btn-primary">Kiểm tra</a>
                   </div>
                 </div>
                 <div class="get-lower-price" id="broadcast">
@@ -177,8 +188,98 @@ $(document).ready(() => {
           </div>
         </div>
       `;
-      container.append(card);
+      container.insertAdjacentHTML("beforeend", card);
     });
+
+    let thisPage = 1;
+    let limit = 5;
+    let list = document.querySelectorAll("#hotelList .card");
+
+    function loadItem() {
+      let beginGet = limit * (thisPage - 1);
+      let endGet = limit * thisPage - 1;
+
+      list.forEach((item, key) => {
+        if (key >= beginGet && key <= endGet) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      });
+      listPage();
+    }
+    function listPage() {
+      let count = Math.ceil(list.length / limit);
+      let paginationElement = document.querySelector(".listPage");
+      paginationElement.innerHTML = "";
+
+      if (thisPage !== 1) {
+        let prev = document.createElement("li");
+        prev.innerText = "Prev";
+        prev.classList.add("pagination-prev");
+        prev.setAttribute("onclick", `changePage(${thisPage - 1})`);
+        paginationElement.appendChild(prev);
+      }
+
+      if (count <= 1) {
+        return;
+      }
+
+      const createPageItem = (pageNum) => {
+        let page = document.createElement("li");
+        page.innerText = pageNum;
+        page.classList.add("pagination-page");
+        if (pageNum === thisPage) {
+          page.classList.add("active");
+        }
+        page.setAttribute("onclick", `changePage(${pageNum})`);
+        return page;
+      };
+
+      paginationElement.appendChild(createPageItem(1));
+
+      if (thisPage > 3) {
+        let dots = document.createElement("li");
+        dots.innerText = "...";
+        dots.classList.add("pagination-dots");
+        paginationElement.appendChild(dots);
+      }
+
+      let startPage = Math.max(2, thisPage - 1);
+      let endPage = Math.min(count - 1, thisPage + 1);
+
+      for (let i = startPage; i <= endPage; i++) {
+        paginationElement.appendChild(createPageItem(i));
+      }
+
+      if (thisPage < count - 2) {
+        let dots = document.createElement("li");
+        dots.innerText = "...";
+        dots.classList.add("pagination-dots");
+        paginationElement.appendChild(dots);
+      }
+
+      if (count > 1) {
+        paginationElement.appendChild(createPageItem(count));
+      }
+
+      if (thisPage !== count) {
+        let next = document.createElement("li");
+        next.innerText = "Next";
+        next.classList.add("pagination-next");
+        next.setAttribute("onclick", `changePage(${thisPage + 1})`);
+        paginationElement.appendChild(next);
+      }
+
+      paginationElement.style.display = list.length > limit ? "block" : "none";
+    }
+
+    window.changePage = function (i) {
+      thisPage = i;
+      loadItem();
+    };
+
+    loadItem();
   };
 
   // Xử lý sự kiện khi thay đổi các filter

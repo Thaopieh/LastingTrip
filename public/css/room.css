@@ -530,7 +530,7 @@
     gap: 10px; /* Adjust spacing between buttons */
   }
   
-    #addImageButton {
+    #addImageButton,  #addImageButton1, #addImageButton2  {
       width: 45%;
       padding: 10px 20px; /* Đặt giá trị padding cho nút */
       font-size: 16px; /* Đặt kích thước font chữ của nút */

@@ -15,6 +15,9 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER
       },
+      hotel_id: {
+        type: Sequelize.INTEGER
+      },
       check_in_date: {
         type: Sequelize.DATE
       },
@@ -37,6 +40,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 1
       },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -35,106 +35,48 @@
                     <div id="message" style="display: none;"></div>
                     <div class="booking-detail">
                         <ul class="list-group">
-                            <li class="list-group-item personal-info-item">Thông tin cá nhân</a></li>
-
-                            <li class="list-group-item"><a href="#">My Booking</a></li>
-                            <li class="list-group-item" id="logout-btn"><a href="#">Đăng xuất</a></li>
+                            <li class="list-group-item dashboard"><a href="/dashboard">Dashboard</a></li>
+                            <li class="list-group-item user-info-item">Thông tin cá nhân</li>
+                            <li class="list-group-item my-booking-item">My Booking</li>
+                            <li class="list-group-item log-out-item" id="logout-btn">Đăng xuất</li>
                         </ul>
                     </div>
                 </div> {{!-- end of body body_left --}}
 
                 <div class="body_right">
-                    {{!-- <div class="account-secure">
-                        <h2>Bảo mật tài khoản</h2>
-                        <div class="account">
-                            <div class="account-email ">
-                                <div class="email-info ">
-                                    <div class="email-head">
-                                        <i class="fa-regular fa-envelope"></i>
-                                        <span>Email</span>
-                                    </div>
-                                    <div class="email-acc">
-                                        <span>2252****@gm.uit.edu.vn</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="account-numberPhone ">
-                                <div class="numberPhone-info ">
-                                    <div class="numberPhone-head">
-                                        <i class="fa-regular fa-envelope"></i>
-                                        <span>Số điện thoại</span>
-                                    </div>
-                                    <div class="email-acc">
-                                        <span>2252****@gm.uit.edu.vn</span>
-                                    </div>
-                                </div>
+                    <div class="user-info"></div>
+                    <div class="my-booking">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    {{!-- <th>ID NGƯỜI DÙNG</th> --}}
+                                    <th>HỌ TÊN</th>
+                                    <th>TÊN PHÒNG</th>
+                                    <th>NGÀY CHECK-IN</th>
+                                    <th>NGÀY CHECK-OUT</th>
+                                    <th>TỔNG TIỀN</th>
+                                    <th>TRẠNG THÁI</th>
+                                    <th>YÊU CẦU ĐẶC BIỆT</th>
 
-                            </div>
-                            <div class="account-pass">
-                                <div class="pass-info">
-                                    <div class="pass-head">
-                                        <i class="fa-solid fa-lock"></i>
-                                        <span>Password</span>
-                                    </div>
-                                    <div class="pass-acc">
-                                        <span>*********</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{!-- render boooking lisst off a usser --}}
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="profile">
-                        <h2>Thông tin cá nhân</h2>
-                        <div class="profile-detail ">
-                            <div class="profile1">
-                                <div class="name col-6">
-                                    <div class="title-name">
-                                        <i class="fa-regular fa-user"></i>
-                                        <span>Tên</span>
-                                    </div>
-                                    <div class="user-name">
-                                        Trinh Thao
-                                    </div>
-                                </div>
-                                <div class="name col-6">
-                                    <div class="title-name">
-                                        <i class="fa-regular fa-user"></i>
-                                        <span>Ngày sinh</span>
-                                    </div>
-                                    <div class="user-name">
-                                        Trinh Thao
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="profile2">
-                                <div class="birth col-6">
-                                    <div class="title-name">
-                                        <i class="fa-regular fa-calendar"></i>
-                                        <span>Giới tính</span>
-                                    </div>
-                                    <div class="user-name">
-                                        01/12/2004
-                                    </div>
-                                </div>
-                                <div class="birth col-6">
-                                    <div class="title-name">
-                                        <i class="fa-solid fa-venus-mars"></i>
-                                        <span>Loại người dùng</span>
-                                    </div>
-                                    <div class="user-name">
-                                        Nữ
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                    <div class="log-out"></div>
 
-                    {{!-- end of profile --}}
-
-                </div> {{!-- end of body Right --}}
+                </div>
+                {{!-- end of body Right --}}
 
                 <div class="popup-overlay-updateInfo">
                     {{!-- //update info form render here --}}
+                </div>
+
+                <div class="popup-overlay-update-pass">
+
                 </div>
                 <div class="popup-overlay-delete">
                     <div class="popup-delete">
@@ -173,6 +115,10 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="../js/userInfo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.2.0/bcrypt.min.js"
+        integrity="sha512-BJZhA/ftU3DVJvbBMWZwp7hXc49RJHq0xH81tTgLlG16/OkDq7VbNX6nUnx+QY4bBZkXtJoG0b0qihuia64X0w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 
 </html>

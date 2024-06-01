@@ -1,42 +1,58 @@
 $(document).ready(function () {
-  var hotelId1 = localStorage.getItem("hotelId");
+  // var hotelId1 = localStorage.getItem("hotelId");
+  var url = window.location.pathname;
+  var hotelId1 = url.substring(url.lastIndexOf("/") + 1);
+
   function renderPage() {
     $.ajax({
       url: "http://localhost:3030/api/v1/hotelAmenities/" + hotelId1,
       method: "GET",
       success: function (data) {
         console.log(data);
-        const optionsJSON = localStorage.getItem("Service"); // Retrieve options as JSON string from localStorage
-        const options = JSON.parse(optionsJSON);
-        var tableHtml = "";
-        data.forEach(function (service, index) {
-          // Tạo HTML cho từng hàng trong bảng
-          tableHtml += "<tr>";
-          tableHtml += "<td>" + (index + 1) + "</td>";
-          // Parse the JSON string to convert it to an array or object
+        fetch("http://localhost:3030/api/v1/amenities?type=0")
+          .then((response) => response.json())
+          .then((data1) => {
+            const amenities1 = data1;
+            console.log(amenities1);
+            // Lấy danh sách các amenities từ API và lưu vào biến
+            const amenities = amenities1;
 
-          if (Array.isArray(options)) {
-            // If options is an array, loop through and append each option to <select>
-            options.forEach(function (option) {
-              if (option.id === service.amenityId) {
-                tableHtml += "<td>" + option.name + "</td>";
+            var tableHtml = "";
+            data.forEach(function (service, index) {
+              // Tạo HTML cho từng hàng trong bảng
+              tableHtml += "<tr>";
+              tableHtml += "<td>" + (index + 1) + "</td>";
+
+              // Parse the JSON string to convert it to an array or object
+              if (Array.isArray(amenities)) {
+                // If amenities is an array, loop through and append each amenity to <td>
+                amenities.forEach(function (amenity) {
+                  console.log(amenity.id);
+                  if (amenity.id == service.amenityId) {
+                    tableHtml += "<td>" + amenity.name + "</td>";
+                  }
+                });
               }
+
+              tableHtml += "<td>";
+              tableHtml +=
+                '<button type="button" class="updateService" value="' +
+                service.id +
+                '">Chỉnh sửa</button>';
+              tableHtml +=
+                '<button type="button" class="deleteService" value="' +
+                service.id +
+                '">Xóa</button>';
+              tableHtml += "</td>";
+              tableHtml += "</tr>";
             });
-          }
-          tableHtml += "<td>";
-          tableHtml +=
-            '<button type="button" class="updateService" value="' +
-            service.id +
-            '">Chỉnh sửa</button>';
-          tableHtml +=
-            '<button type="button" class="deleteService" value="' +
-            service.id +
-            '">Xóa</button>';
-          tableHtml += "</td>";
-          tableHtml += "</tr>";
-        });
-        // Render dữ liệu vào bảng
-        $(".room-table table tbody").html(tableHtml);
+
+            // Render dữ liệu vào bảng
+            $(".room-table table tbody").html(tableHtml);
+          })
+          .catch((error) => {
+            console.error("Lỗi khi gọi API:", error);
+          });
       },
       error: function (xhr, status, error) {
         console.error(error);
@@ -44,7 +60,6 @@ $(document).ready(function () {
       },
     });
   }
-
   renderPage();
   async function ServiceHotel() {
     try {
@@ -152,13 +167,11 @@ $(document).ready(function () {
 
   // Function to perform the create operation
   ServiceHotel();
-
   // Sự kiện khi click vào nút "Thêm"
   $(".room-search-create").click(function () {
     $(".custom-popup-overlay").show();
     $(".custom-popup").show();
   });
-
   // Sự kiện khi click vào nút "Đóng" trong popup
   $(".custom-close-btn").click(function () {
     $(".custom-popup-overlay").hide();
@@ -242,27 +255,26 @@ $(document).ready(function () {
 
         // Generate and display the popup overlay with update form
         const popupContent = `
-                    <div class="popup"> 
-                        <span class="close-btn">&times;</span> 
-                        <h2>Chỉnh sửa</h2> 
-                        <form id="updateForm"> 
-                            <select id="serviceDropdown" name="serviceDropdown">
-                                ${options
-                                  .map(
-                                    (option) =>
-                                      `<option value="${option.id}">${option.name}</option>`
-                                  )
-                                  .join("")}
-                            </select>
-                            <div class="ebutton"> 
-                                <input type="submit" value="Cập nhật"> 
-                            </div> 
-                        </form> 
-                    </div>
-                `;
+        <div class="popup"> 
+            <span class="close-btn">&times;</span> 
+            <h2>Chỉnh sửa</h2> 
+            <form id="updateForm"> 
+                <select id="serviceDropdown" name="serviceDropdown">
+                    ${options
+                      .map(
+                        (option) =>
+                          `<option value="${option.id}">${option.name}</option>`
+                      )
+                      .join("")}
+                </select>
+                <div class="ebutton"> 
+                    <input type="submit" value="Cập nhật"> 
+                </div> 
+            </form> 
+        </div>
+    `;
 
         $(".popup-overlay").html(popupContent);
-
         // Set the initial selected option in the dropdown
         $("#serviceDropdown").val(data[0].amenityId); // Set the value to the current amenityId
 

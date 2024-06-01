@@ -10,6 +10,9 @@
     background-color: #fff;
     color: blue;
 }
+.dashboard{
+    display: none;
+}
 
 .nav-item .dropdown-menu a {
     color: black;
@@ -19,6 +22,41 @@
     color: black;
 }
 
+body {
+    background-color: whitesmoke;
+}
+
+@media (max-width:1029px) {
+    table thead tr {
+        display: none;
+    }
+
+    table tr {
+        display: block;
+    }
+
+    .my-booking th,
+    .my-booking td {
+        padding   : 8px;
+        text-align: end !important;
+    }
+
+    table td {
+
+        display: block;
+
+    }
+
+    table td::before {
+        content    : attr(data-title)":";
+        float      : left;
+        font-weight: 600;
+    }
+}
+
+
+
+
 .body_container,
 .footer__main {
     padding: 20px 20px 0px;
@@ -26,13 +64,16 @@
 }
 
 .body_container,
-.account-email,
-.account-pass,
 .profile-head {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    /* flex-direction: row;
+    justify-content: space-between; */
     /* align-items : center; */
+}
+
+.my-booking,
+.personal-info {
+    display: none;
 }
 
 .account-email,
@@ -50,10 +91,10 @@
 
 .account-secure,
 .profile {
-    /* margin-bottom: 30px; */
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
+    margin-top: 10px;
 }
 
 .account {
@@ -81,7 +122,7 @@
 }
 
 .member {
-    background-color: #fff;
+    /* background-color: #fff; */
     height: 50px;
     margin-bottom: 10px;
     display: flex;
@@ -106,29 +147,45 @@
     font-weight: 700;
 }
 
-.body_right button {
+.update-pass-btn {
+    color: #3264ff;
+    text-decoration: underline;
+    text-align: right;
+    cursor: pointer;
+    margin-left: 10px;
+    border: none;
+    background-color: whitesmoke;
+
+}
+
+.updateInfo,
+.deleteUser {
     color: #3264ff;
     border: none;
     background-color: whitesmoke;
     border-radius: 8px;
     padding: 10px;
+    margin: 0 20px;
 }
 
-.body_right button:hover {
+.updateInfo:hover,
+.deleteUser:hover {
     background-color: #3264ff;
     color: whitesmoke;
 }
 
-footer {
-    background-color: #fff;
-    margin: 15px 0;
+/* footer  */
+footer img {
+    width: 1176px;
+    height: 499px;
 }
 
 .footer__main {
+    min-width: 50%;
+    padding: 64px 20px 0px;
+    margin: 0 10%;
     display: flex;
     justify-content: space-between;
-    padding: 0 10px;
-
 }
 
 .footer__main .footer__item {
@@ -147,6 +204,11 @@ footer {
     padding-bottom: 35px;
     font-size: 14px;
     color: #0f294d;
+}
+
+.footer__item img {
+    width: 50px;
+    height: 50px;
 }
 
 .footer__item a {
@@ -169,15 +231,6 @@ footer {
     border-bottom: 1px solid #e4e4e4;
     padding-top: 32px;
     padding-bottom: 35px;
-}
-
-.footer__item img {
-    width: 50px;
-    height: 50px;
-}
-
-.footer__item a {
-    margin: 10px;
 }
 
 .Copyright p {
@@ -215,15 +268,12 @@ footer {
 .nav-item .dropdown-menu li:hover a{
     color: black;
 } */
-.body_container,
-.footer__main {
+.body_container {
     padding: 20px 20px 0px;
     margin: 0 10%;
 }
 
 .body_container,
-.account-email,
-.account-pass,
 .profile-head {
     display: flex;
     flex-direction: row;
@@ -231,17 +281,6 @@ footer {
     /* align-items : center; */
 }
 
-.account-email,
-.account-pass,
-.name,
-.birth {
-    background-color: whitesmoke;
-    border-radius: 8px;
-    width: 50%;
-    height: 70px;
-    margin: 0 20px;
-    padding: 10px;
-}
 
 .account-secure,
 .profile {
@@ -273,6 +312,22 @@ footer {
     background-color: #fff;
 }
 
+.user-info-item:hover,
+.my-booking-item:hover,
+.log-out-item:hover {
+    cursor: pointer;
+    background-color: #cccccc;
+}
+
+.empty-booking {
+    background-color: white;
+}
+
+.empty-booking .col-7 {
+    padding: 20px;
+}
+
+
 .body_right {
     /* border: 1px solid black; */
     width: 75%;
@@ -280,7 +335,7 @@ footer {
 }
 
 .member {
-    background-color: #fff;
+    /* background-color: #fff; */
     height: 50px;
     margin-bottom: 10px;
     display: flex;
@@ -299,17 +354,6 @@ footer {
     margin: 0 10px;
 }
 
-.user-name,
-.email-acc,
-.pass-acc {
-    font-weight: 700;
-}
-
-.body_right button {
-    color: #3264ff;
-    border: none;
-    background-color: whitesmoke;
-}
 
 #footer-bg {
     display: none;
@@ -398,7 +442,8 @@ footer {
     }
 }
 
-*/ .popup-overlay-updateInfo {
+*/ .popup-overlay-updateInfo,
+.popup-overlay-update-pass {
     display: none;
     position: fixed;
     top: 0;
@@ -409,7 +454,8 @@ footer {
     z-index: 999;
 }
 
-.popup-overlay-updateInfo {
+.popup-overlay-updateInfo,
+.popup-overlay-update-pass {
     display: none;
     position: fixed;
     top: 0;
@@ -462,7 +508,18 @@ footer {
 }
 
 .popup-updateInfo input[type="text"],
-.popup-updateInfo input[type="email"] {
+.popup-updateInfo input[type="email"],
+.popup-updateInfo input[type="date"],
+.popup-overlay-update-pass input[type="password"],
+.popup-updateInfo select {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.popup-updateInfo .col-6 input[type="text"] {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #cccccc;
@@ -533,34 +590,71 @@ footer {
     background-color: #0056b3;
 }
 
+.my-booking {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.my-booking table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.my-booking th,
+.my-booking td {
+    padding: 8px;
+    text-align: center;
+}
+
+.my-booking th {
+    background-color: white;
+}
+
+.my-booking tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.my-booking tbody tr:hover {
+    background-color: #ddd;
+}
+
 
 .avatar-container {
     position: relative;
 }
 
 .avatar {
-    width: 80px; /* Adjust size as needed */
-    height: 80px; /* Adjust size as needed */
+    width: 80px;
+    /* Adjust size as needed */
+    height: 80px;
+    /* Adjust size as needed */
     border-radius: 50%;
 }
-.booking-detail 
-{
-    margin-top: 40px ;
+
+.booking-detail {
+    margin-top: 40px;
 }
+
 .edit-button {
     position: absolute;
-    top: 75%; /* Position at the bottom of the avatar */
+    top: 75%;
+    /* Position at the bottom of the avatar */
     left: 40%;
-    background: none; /* Remove background */
-    border: none; /* Remove border */
+    background: none;
+    /* Remove background */
+    border: none;
+    /* Remove border */
     cursor: pointer;
-    font-size: 16px; /* Adjust size of the icon */
+    font-size: 16px;
+    /* Adjust size of the icon */
     padding: 5px;
 }
 
 #confirmAvatarButton {
     display: block;
-    margin-top: 10px; /* Adjust as needed */
+    margin-top: 10px;
+    /* Adjust as needed */
     padding: 8px 16px;
     background-color: #4CAF50;
     color: white;

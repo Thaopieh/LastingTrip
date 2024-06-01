@@ -103,7 +103,7 @@
               <label class="form-check-label" for="king-bed">Giường King</label>
             </div>
           </span>
-          <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-bed_type')" id="btn-more-bed_type">Xem
+          <button class="change-color" onclick="showMoreFunc('btn-more-bed_type')" id="btn-more-bed_type">Xem
             thêm</button>
         </div>
 
@@ -148,7 +148,7 @@
               <label class="form-check-label" for="airport">Đưa đón sân bay</label>
             </div>
           </span>
-          <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-property-fac-and-services')"
+          <button class="change-color" onclick="showMoreFunc('btn-more-property-fac-and-services')"
             id="btn-more-property-fac-and-services">Xem thêm</button>
         </div>
 
@@ -190,8 +190,8 @@
               <label class="form-check-label" for="mountain-view-room">Phòng view núi</label>
             </div>
           </span>
-          <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-room_type')"
-            id="btn-more-room_type">Xem thêm</button>
+          <button class="change-color" onclick="showMoreFunc('btn-more-room_type')" id="btn-more-room_type">Xem
+            thêm</button>
         </div>
 
         <div class="col-10 services_room">
@@ -223,7 +223,7 @@
               <label class="form-check-label" for="balcony">Ban công</label>
             </div>
           </span>
-          <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-room-fac-and-services')"
+          <button class="change-color" onclick="showMoreFunc('btn-more-room-fac-and-services')"
             id="btn-more-room-fac-and-services">Xem thêm</button>
         </div>
 
@@ -290,8 +290,8 @@
                 <label class="form-check-label" for="king-bed">Giường King</label>
               </div>
             </span>
-            <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-bed_type1')"
-              id="btn-more-bed_type1">Xem thêm</button>
+            <button class="change-color" onclick="showMoreFunc('btn-more-bed_type1')" id="btn-more-bed_type1">Xem
+              thêm</button>
           </div>
 
           <div class="col-10 services_hotel">
@@ -335,7 +335,7 @@
                 <label class="form-check-label" for="airport">Đưa đón sân bay</label>
               </div>
             </span>
-            <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-property-fac-and-services1')"
+            <button class="change-color" onclick="showMoreFunc('btn-more-property-fac-and-services1')"
               id="btn-more-property-fac-and-services1">Xem thêm</button>
           </div>
 
@@ -377,8 +377,8 @@
                 <label class="form-check-label" for="mountain-view-room">Phòng view núi</label>
               </div>
             </span>
-            <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-room_type1')"
-              id="btn-more-room_type1">Xem thêm</button>
+            <button class="change-color" onclick="showMoreFunc('btn-more-room_type1')" id="btn-more-room_type1">Xem
+              thêm</button>
           </div>
 
           <div class="col-10 services_room">
@@ -410,7 +410,7 @@
                 <label class="form-check-label" for="balcony">Ban công</label>
               </div>
             </span>
-            <button class="btn btn-primary btn-sm" onclick="showMoreFunc('btn-more-room-fac-and-services1')"
+            <button class="change-color" onclick="showMoreFunc('btn-more-room-fac-and-services1')"
               id="btn-more-room-fac-and-services1">Xem thêm</button>
           </div>
 
@@ -437,16 +437,16 @@
                     Sắp xếp theo: Đề xuất
                   </button>
                   <ul class="dropdown-menu" id="dropdowshown">
-                    <li><a class="dropdown-item" href="#" data-value="asc_price"
+                    <li><a class="dropdown-item"  data-value="asc_price"
                         onclick="changeSort('Giá tăng dần')">Giá tăng dần</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="desc_rating"
+                    <li><a class="dropdown-item"  data-value="desc_rating"
                         onclick="changeSort('Xếp hạng sao')">Xếp hạng sao (từ cao đến thấp)</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="desc_feedback"
+                    <li><a class="dropdown-item"  data-value="desc_feedback"
                         onclick="changeSort('Đánh giá hàng đầu')">Đánh giá hàng đầu</a></li>
                     <li>
                       <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#" data-value="desc_price"
+                    <li><a class="dropdown-item"  data-value="desc_price"
                         onclick="changeSort('Giá giảm dần')">Giá giảm dần</a></li>
                   </ul>
 
@@ -460,7 +460,9 @@
           <div class="item_info">
             <div id="hotelList">
             </div>
-
+            <ul class="listPage">
+           
+            </ul>
 
 
 
@@ -497,7 +499,6 @@
   </script>
   {{!--
   <script src="../public/js/hotelList.js"></script> --}}
-  <script src="/js/backToTop.js"></script>
   <script src="/js/hotelList.js"></script>
 </body>
 

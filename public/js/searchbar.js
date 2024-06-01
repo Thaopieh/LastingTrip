@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Lặp qua tất cả các phần tử có class là "dropdown-item"
   console.log("Document is ready.");
   // Lấy ngày hiện tại
-  // Lấy ngày hiện tại
   var today = new Date();
   var todayString = today.toISOString().split("T")[0];
 
@@ -10,6 +9,28 @@ document.addEventListener("DOMContentLoaded", function () {
   var nextDay = new Date(today);
   nextDay.setDate(today.getDate() + 1);
   var nextDayString = nextDay.toISOString().split("T")[0];
+
+  function setDefaultLocalStorageData() {
+    const defaultData = {
+      location: "",
+      checkInDate: todayString,
+      checkOutDate: nextDayString,
+      numberOfRooms: 1,
+      numberOfAdults: 1,
+      numberOfChildren: 0,
+    };
+
+    // Kiểm tra xem đã có dữ liệu trong localStorage chưa
+    const existingData = localStorage.getItem("searchData");
+    if (!existingData) {
+      // Nếu không có, thiết lập dữ liệu mặc định
+      localStorage.setItem("searchData", JSON.stringify(defaultData));
+      console.log("Default search data set in localStorage.");
+    }
+  }
+
+  // Gọi hàm setDefaultLocalStorageData khi tài liệu đã tải xong
+  setDefaultLocalStorageData();
 
   // Đặt giá trị min và giá trị mặc định cho check-in là hôm nay
   var checkInInput = document.getElementById("checkIn");
@@ -145,6 +166,7 @@ const collectAndSendData = () => {
   localStorage.removeItem("searchData");
   // Convert searchData to JSON and store in localStorage
   localStorage.setItem("searchData", JSON.stringify(searchData));
+
   console.log("New search data saved to localStorage.");
 };
 
@@ -160,51 +182,97 @@ for (var i = 0; i < dropdownItems.length; i++) {
   addButton.addEventListener("click", function (event) {
     event.stopPropagation(); // Prevent dropdown close
 
-    // Get the item type of the clicked dropdown item
     var itemType = this.parentNode.getAttribute("data-type");
-
     var count = parseInt(this.parentNode.getAttribute("data-count")) + 1;
+
     if (count <= 10 && count >= 1) {
       this.parentNode.setAttribute("data-count", count);
 
-      // Update count based on item type
       if (itemType === "room") {
         document.getElementById("room-item-count").textContent = count;
+        updateAdultCount(count);
       } else if (itemType === "adults") {
         document.getElementById("adults-item-count").textContent = count;
       } else if (itemType === "children") {
         document.getElementById("children-item-count").textContent = count;
       }
-      updateDropdownButton(); // Update dropdown button
+      updateDropdownButton();
+      updateButtonStyles();
     }
   });
+
   subtractButton.addEventListener("click", function (event) {
     event.stopPropagation(); // Prevent dropdown close
 
-    // Get the item type of the clicked dropdown item
     var itemType = this.parentNode.getAttribute("data-type");
-
     var count = parseInt(this.parentNode.getAttribute("data-count")) - 1;
+
     if (
       (itemType === "children" && count >= 0) ||
-      (itemType !== "children" && count >= 1)
+      (itemType === "room" && count >= 1) ||
+      (itemType === "adults" && count >= getRoomCount())
     ) {
       this.parentNode.setAttribute("data-count", count);
 
-      // Update count based on item type
       if (itemType === "room") {
         document.getElementById("room-item-count").textContent = count;
+        updateAdultCount(count);
       } else if (itemType === "adults") {
         document.getElementById("adults-item-count").textContent = count;
       } else if (itemType === "children") {
         document.getElementById("children-item-count").textContent = count;
       }
-      updateDropdownButton(); // Update dropdown button
+      updateDropdownButton();
+      updateButtonStyles();
     }
   });
 }
 
-// Cập nhật nội dung nút dropdown
+function getRoomCount() {
+  return parseInt(document.getElementById("room-item-count").textContent);
+}
+
+function updateAdultCount(roomCount) {
+  var adultsCount = parseInt(
+    document.getElementById("adults-item-count").textContent
+  );
+  if (adultsCount < roomCount) {
+    document.getElementById("adults-item-count").textContent = roomCount;
+    document
+      .querySelector('.dropdown-item[data-type="adults"]')
+      .setAttribute("data-count", roomCount);
+  }
+}
+
+function updateButtonStyles() {
+  dropdownItems.forEach(function (item) {
+    var itemType = item.getAttribute("data-type");
+    var count = parseInt(item.getAttribute("data-count"));
+    var addButton = item.querySelector(".add-btn");
+    var subtractButton = item.querySelector(".subtract-btn");
+
+    if (count >= 10) {
+      addButton.style.backgroundColor = "#ccc";
+      addButton.disabled = true;
+    } else {
+      addButton.style.backgroundColor = "";
+      addButton.disabled = false;
+    }
+
+    if (
+      (itemType === "children" && count <= 0) ||
+      (itemType !== "children" && count <= 1) ||
+      (itemType === "adults" && count <= getRoomCount())
+    ) {
+      subtractButton.style.backgroundColor = "#ccc";
+      subtractButton.disabled = true;
+    } else {
+      subtractButton.style.backgroundColor = "";
+      subtractButton.disabled = false;
+    }
+  });
+}
+
 function updateDropdownButton() {
   var roomCount = parseInt(
     document.getElementById("room-item-count").textContent
@@ -223,6 +291,7 @@ function updateDropdownButton() {
     childrenCount +
     " Children ";
 }
+
 var dropdown = document.getElementById("myDropdown");
 var dropdownBtn = document.getElementById("drop-all");
 
@@ -234,6 +303,7 @@ document.addEventListener("click", function (event) {
     dropdown.style.display = "none";
   }
 });
+
 // Function to toggle the dropdown when clicking on the button
 dropdownBtn.addEventListener("click", function () {
   console.log("da click");
@@ -243,4 +313,40 @@ dropdownBtn.addEventListener("click", function () {
   } else {
     dropdown.style.display = "none";
   }
+});
+
+// Call updateButtonStyles initially to set the correct styles
+updateButtonStyles();
+
+const cities = [
+  "Đà Nẵng",
+  "Quảng Bình",
+  "Nha Trang",
+  "Vịnh Hạ Long",
+  "Quảng Ninh",
+  "Phú Quốc",
+  "Huế",
+  "Hà Nội",
+  "HCM",
+];
+
+const input = document.getElementById("hotel-destination");
+const autocomplete = document.getElementById("autocomplete");
+
+input.addEventListener("input", function () {
+  const inputValue = this.value.toLowerCase();
+  autocomplete.innerHTML = "";
+  const matches = cities.filter((city) =>
+    city.toLowerCase().includes(inputValue)
+  );
+  matches.forEach((match) => {
+    const suggestion = document.createElement("div");
+    suggestion.innerText = match;
+    suggestion.addEventListener("click", function () {
+      input.value = match;
+      autocomplete.innerHTML = "";
+    });
+    autocomplete.appendChild(suggestion);
+  });
+  // Xử lý sự kiện khi ô nhập mất focus (blur)
 });

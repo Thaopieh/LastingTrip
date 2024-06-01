@@ -1,0 +1,80 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/paymentmethod.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="title">
+        <h2>Phương Thức Thanh Toán</h2>
+      </div>
+      <div class="d-flex">
+        <div class="method">  
+        <div class="Yorder" style="height: 550px;">
+          <table>
+            <tr>
+              <th colspan="2">Đơn hàng của bạn</th>
+            </tr>
+            <tr>
+              <td><span id="hotelName"></span></td>
+              <td><span id="RoomName"></span></td>
+            </tr>
+            <tr>
+              <td><span id="checkIn"></span></td>
+              <td style="padding-left: 25px"><span
+                  id="checkOut"
+                  style="color: #262626;"
+                ></span></td>
+            </tr>
+            <tr>
+                <td>Số lượng phòng</td>
+                <td><span id="NumberRoom"></span></td>
+            </tr>
+            <tr>
+              <td>Tổng cộng</td>
+              <td id="totalPrice">2.300.000</td>
+            </tr>
+            <tr>
+              <td style="border: 0; padding-bottom: 10">Thông tin khách hàng:
+              </td>
+              <td style="border: 0; padding-bottom: 10"><span
+                  id="fullName"
+                  style="padding-left: 40px;"
+                ></span></td>
+            </tr>
+            <tr>
+              <td style="border: 0; padding-top: 10; padding-bottom:10px"></td>
+              <td style="border: 0; padding-top: 0; padding-bottom: 10px"><span
+                  id="email"
+                ></span></td>
+            </tr>
+            <tr>
+              <td style=" padding-top: 10; padding-bottom: 25px"></td>
+              <td style=" padding-top: 0; padding-bottom: 25px"><span
+                  id="numberphone"
+                ></span></td>
+            </tr>
+            <tr>
+                <td style="border: 0;"><span>Trạng Thái:</span></td>
+                <td style="border: 0;">Chưa thanh toán</td>
+            </tr>
+          </table><br/>
+        </div>
+      </div>
+    </div>
+    <a  class="return">Quay lại trang chủ</a>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="/js/resultTT.js"></script>
+
+  </body>
+
+</html>

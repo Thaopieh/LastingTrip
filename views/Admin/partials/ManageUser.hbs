@@ -1,11 +1,7 @@
 <link rel="stylesheet" href="/css/user.css" />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="/css/adminhotel.css" />
 
@@ -27,7 +23,7 @@
             <th>SDT</th>
             <th>LOẠI</th>
             <th>CHỨC NĂNG</th>
-            <th>HÌNH ẢNH</th>
+            {{!-- <th>HÌNH ẢNH</th> --}}
           </tr>
         </thead>
         <tbody>
@@ -37,45 +33,19 @@
 
     </div>
     <div class="popup-overlay-update">
-
     </div>
+
     <div class="custom-popup-overlay-user">
       <div class="custom-popup-user">
         <span class="custom-close-btn">&times;</span>
         <h2>Add new user</h2>
         <form id="signupForm">
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-            autocomplete="current-password"
-            required
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            autocomplete="current-password"
-            required
-          />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            autocomplete="current-password"
-            required
-          />
+          <input type="text" id="name" name="name" placeholder="Name" autocomplete="current-password" required />
+          <input type="email" id="email" name="email" placeholder="Email" autocomplete="current-password" required />
+          <input type="password" id="password" name="password" placeholder="Password" autocomplete="current-password"
+            required />
           <div class="input-group">
-            <input
-              type="text"
-              id="numberPhone"
-              name="numberPhone"
-              placeholder="Number Phone"
-              required
-            />
+            <input type="text" id="numberPhone" name="numberPhone" placeholder="Number Phone" required />
             <select id="typeSelect" name="type">
               <option value="">Chọn loại</option>
               <option value="admin">admin</option>

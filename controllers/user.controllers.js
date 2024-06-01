@@ -39,6 +39,23 @@ const register = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+const loginGG = async (req, res) => {
+  const user = req.body;
+
+  const token = jwt.sign(
+    { id: user.id, email: user.email, type: user.type },
+    "firewallbase64",
+    { expiresIn: 60 * 60 }
+  );
+
+  res.status(200).send({
+    message: "successful",
+    token,
+    type: user.type,
+    id: user.id,
+    name: user.name,
+  });
+};
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -59,6 +76,7 @@ const login = async (req, res) => {
       res.status(200).send({
         message: "successful",
         token,
+        name: user.name,
         type: user.type,
         id: user.id,
       });
@@ -109,7 +127,7 @@ const editUser = async (req, res) => {
   console.log("10");
   try {
     const userId = req.params.id;
-    const { name, email, numberPhone, type } = req.body;
+    const { name, email, password, numberPhone, birthDate, gender, type, cccd, address } = req.body;
     const detailUser = await User.findOne({
       where: {
         id: userId,
@@ -122,9 +140,15 @@ const editUser = async (req, res) => {
       });
     }
     if (name) detailUser.name = name;
-    if (email) detailUser.email = email; // Chỉnh sửa tại đây
+    if (email) detailUser.email = email;
+    if (password) detailUser.password = password;
     if (numberPhone) detailUser.numberPhone = numberPhone;
+    if (birthDate) detailUser.birthDate = birthDate;
+    if (gender) detailUser.gender = gender;
     if (type) detailUser.type = type;
+    if (cccd) detailUser.cccd = cccd;
+    if (address) detailUser.address = address;
+
     const updateUser = await detailUser.save();
     if (!updateUser)
       res.status(400).send({
@@ -136,6 +160,35 @@ const editUser = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+const updatePassword = async (req, res) => {
+  const { userId, currentPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // So sánh mật khẩu hiện tại với mật khẩu đã được băm trong cơ sở dữ liệu
+    const isPasswordValid = bcrypt.compareSync(currentPassword, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid current password' });
+    }
+
+    // Băm mật khẩu mới
+    const salt = bcrypt.genSaltSync(10);
+    const hashedNewPassword = bcrypt.hashSync(newPassword, salt);
+    // Cập nhật mật khẩu mới
+    await user.update({ password: hashedNewPassword });
+
+    return res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error('Error updating password:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -205,4 +258,7 @@ module.exports = {
   deleteUser,
   updateImage,
   getDetailUser,
+  // checkEmailExist,
+  updatePassword,
+  loginGG
 };

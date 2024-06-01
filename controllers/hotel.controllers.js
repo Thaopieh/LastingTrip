@@ -11,7 +11,7 @@ const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 // const amenities = require("../models/amenities");
 const createHotel = async (req, res) => {
-  const { name, star, map, TypeHotel, cost, payment, ownerId } = req.body;
+  const { name, star, map, TypeHotel, payment, ownerId } = req.body;
 
   try {
     // Create the hotel record
@@ -20,7 +20,6 @@ const createHotel = async (req, res) => {
       star,
       map,
       TypeHotel,
-      cost,
       payment,
       ownerId,
     });
