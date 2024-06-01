@@ -49,7 +49,7 @@ Nhóm chúng em gồm 5 thành viên:
 
 # Giới thiệu đồ án
 
-Link deploy web:
+Link deploy web: https://lastingtrip-674584f294be.herokuapp.com/
 
 ## Lý do chọn đề tài
 
