@@ -182,11 +182,11 @@ Trong jQuery, bạn có thể xử lý sự kiện bằng cách sử dụng các
 
 ```javascript
 $('#element').on('click', function() {
-    alert('Đã click vào phần tử');
+    alert('Element clicked');
 });
 
 $('#button').click(function() {
-    alert('Đã click vào nút');
+    alert('Button clicked');
 });
 ```
 #### 5.jQuery và ReactJS có cách tiếp cận khác nhau trong việc quản lý và thao tác DOM:
