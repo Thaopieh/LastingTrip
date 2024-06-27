@@ -188,6 +188,7 @@ $('#element').on('click', function() {
 $('#button').click(function() {
     alert('Đã click vào nút');
 });
-####5.jQuery và ReactJS có cách tiếp cận khác nhau trong việc quản lý và thao tác DOM:
+```
+#### 5.jQuery và ReactJS có cách tiếp cận khác nhau trong việc quản lý và thao tác DOM:
 - **jQuery:** Thao tác DOM trực tiếp, dẫn đến cập nhật trực tiếp trên trang web và có thể ảnh hưởng đến hiệu suất.
 - **ReactJS:** Sử dụng Virtual DOM. React cập nhật trạng thái và props trên Virtual DOM trước, sau đó so sánh với DOM thật để chỉ cập nhật những phần thay đổi. Điều này giúp tối ưu hiệu suất và trải nghiệm người dùng.
