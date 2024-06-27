@@ -154,3 +154,30 @@ Bên cạnh đó, xây dựng một trang web đặt phòng khách sạn sẽ gi
 
 ![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)
 ![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD)
+### Question relate to Jquery
+1.Làm thế nào để sử dụng và tích hợp các plugin vào dự án thực tế?
++Để sử dụng và tích hợp các plugin vào dự án thực tế, bạn cần thực hiện các bước sau:
++Chọn plugin phù hợp: Tìm plugin đáp ứng yêu cầu của dự án trên các thư viện như npm, jQuery plugins, hoặc GitHub.
++Cài đặt plugin: Sử dụng npm, yarn, hoặc tải trực tiếp file plugin và thêm vào dự án của bạn.
++Gọi plugin: Thêm file JavaScript của plugin vào dự án và gọi nó trong mã nguồn của bạn. Đối với các plugin jQuery, bạn có thể gọi plugin sau khi tài liệu đã sẵn sàng với $(document).ready().
++Cấu hình plugin: Đọc tài liệu của plugin để biết cách cấu hình và tùy chỉnh plugin cho phù hợp với nhu cầu của dự án.
++Kiểm tra và sửa lỗi: Chạy dự án và kiểm tra xem plugin hoạt động đúng không. Sửa lỗi nếu có.
+2.
++Bubbling: Khi một sự kiện xảy ra, nó sẽ "bùng lên" (bubbling) từ phần tử nhỏ nhất lên phần tử cha của nó, sau đó lên phần tử ông, và tiếp tục lên các phần tử cha khác cho đến khi đạt đến phần tử cao nhất trong cây DOM. Để ngăn chặn sự kiện "bùng lên", bạn có thể sử dụng phương thức event.stopPropagation() hoặc event.preventDefault().
++Capturing: Ngược lại với "bubbling", sự kiện sẽ "bắt đầu" từ phần tử cha và "chạy" xuống các phần tử con. Để bắt đầu sự kiện từ phần tử cha, bạn có thể sử dụng tham số true trong phương thức on() hoặc bind().
+3.Sự khác biệt giữa phương thức $(document).ready() và $(window).load() là gì:
++$(document).ready(): Hàm này được gọi khi DOM (Document Object Model) đã sẵn sàng, tức là khi HTML đã được tải và xử lý xong, nhưng các tài nguyên như hình ảnh, video có thể chưa được tải xong.
+$(window).load(): Hàm này được gọi khi tất cả tài nguyên của trang, bao gồm cả hình ảnh và video, đã được tải xong.
+4.Làm thế nào để xử lý sự kiện trong jQuery:
++Trong jQuery, bạn có thể xử lý sự kiện bằng cách sử dụng các phương thức như .on(), .off(), .trigger(), và các phương thức shorthand như .click(), .hover. Ví dụ:
+$('#element').on('click', function() {
+    alert('Element clicked');
+});
+$('#button').click(function() {
+    alert('Button clicked');
+});
+5.Sự khác biệt khi làm việc với DOM giữa jQuery và ReactJS là gì, giải thích:
+jQuery và ReactJS có cách tiếp cận khác nhau trong việc quản lý và thao tác DOM.
+jQuery: jQuery trực tiếp thao tác DOM, nghĩa là mỗi lần bạn thay đổi DOM, nó sẽ ảnh hưởng ngay lập tức đến trang web. Điều này có thể dẫn đến hiệu suất kém khi cần cập nhật nhiều phần tử.
+ReactJS: React sử dụng một cơ chế gọi là Virtual DOM. Khi trạng thái (state) hoặc thuộc tính (props) thay đổi, React sẽ cập nhật Virtual DOM trước, sau đó so sánh với DOM thật để xác định sự thay đổi và chỉ cập nhật những phần thay đổi đó. Điều này giúp tối ưu hiệu suất.
+
