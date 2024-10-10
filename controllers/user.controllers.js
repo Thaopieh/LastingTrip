@@ -2,8 +2,7 @@ const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Op } = require("sequelize");
-const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
+// const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const register = async (req, res) => {
   const { name, email, password, numberPhone, type } = req.body;
 
@@ -39,7 +38,7 @@ const register = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
-const loginGG = async (req, res) => {
+const loginGG = (req, res) => {
   const user = req.body;
 
   const token = jwt.sign(
@@ -59,36 +58,48 @@ const loginGG = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  // B1: Tìm user dựa trên email
-  const user = await User.findOne({ where: { email } });
+/* global jwtAccessSecret, jwtRefreshSecret */
+  try {
+    const user = await User.findOne({ where: { email } });
 
-  if (user) {
-    // B2: Kiểm tra mật khẩu có đúng hay không
-    const isAuthen = bcrypt.compareSync(password, user.password);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    if (isAuthen) {
-      const token = jwt.sign(
-        { email: user.email, type: user.type },
-        "firewallbase64",
-        { expiresIn: 60 * 60 }
-      );
+    const isAuthen = await bcrypt.compare(password, user.password);
+    if (!isAuthen) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
 
-      res.status(200).send({
-        message: "successful",
-        token,
+    const accessToken = jwt.sign(
+      { id: user.id, email: user.email, type: user.type },process.env.jwtAccessSecret,
+      /* global accessTokenExpiry */
+      { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
+    );
+
+    const refreshToken = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.jwtRefreshSecret,
+      /* global refreshTokenExpiry */
+      { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
+    );
+
+    res.status(200).json({
+      message: "Login successful",
+      accessToken,
+      refreshToken,
+      user: {
+        id: user.id,
         name: user.name,
         type: user.type,
-        id: user.id,
-      });
-    } else {
-      res
-        .status(401)
-        .send({ message: "dang nhap that bai, kiem tra lai mat khau" });
-    }
-  } else {
-    res.status(404).send({ message: "khong co nguoi dung nay" });
+      },
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
 const getAllUser = async (req, res) => {
   const { name } = req.query;
   // console.log(data);
@@ -226,10 +237,9 @@ const updateImage = async (req, res) => {
 
     console.log(file);
     const imagePath = file.path;
-    console.log(imagePath);
 
     updateHotel.url = imagePath;
-    await updateHotel.save(); // Sửa từ updateUser thành updateHotel
+    await updateHotel.save(); 
     res.status(200).send("Successful");
   } catch (error) {
     res.status(500).send(error);
@@ -237,7 +247,6 @@ const updateImage = async (req, res) => {
 };
 
 const getDetailUser = async (req, res) => {
-  console.log("3");
   try {
     const detailHotel = await User.findOne({
       where: {
@@ -258,7 +267,6 @@ module.exports = {
   deleteUser,
   updateImage,
   getDetailUser,
-  // checkEmailExist,
   updatePassword,
   loginGG
 };

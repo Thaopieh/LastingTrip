@@ -17,7 +17,7 @@ const createAmenity = async (req, res) => {
 const getAllAmenity = async (req, res) => {
   const { name, type } = req.query;
   try {
-    let queryOptions = {};
+    const queryOptions = {};
 
     if (name) {
       queryOptions.name = {
@@ -52,39 +52,6 @@ const getDetailAmenity = async (req, res) => {
     res.status(500).send(error);
   }
 };
-
-// const updateAmenity = async (req, res) => {
-//   const { id } = req.params;
-//   const { name, adress, province } = req.body;
-//   try {
-//     const detailAmenity = await Amenitys.findOne({
-//       where: {
-//         id,
-//       },
-//     });
-//     detailAmenity.name = name;
-//     detailAmenity.adress = adress;
-//     detailAmenity.province = province;
-//     await detailAmenity.save();
-//     res.status(200).send(detailAmenity);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// };
-
-// // const deleteAmenity = async (req, res) => {
-// //   const { id } = req.params;
-// //   try {
-// //     await Amenity.destroy({
-// //       where: {
-// //         id,
-// //       },
-// //     });
-// //     res.status(200).send("xoa thanh cong");
-// //   } catch (error) {
-// //     res.status(500).send(error);
-// //   }
-// // };
 
 module.exports = {
   createAmenity,

@@ -1,15 +1,21 @@
-const { User } = require("../models");
+const { User, Token } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-require("dotenv").config();
+
+// Hardcoded secrets and keys (NOT RECOMMENDED for production)
+const JWT_ACCESS_SECRET = 'password1000'; // Replace with your access token secret
+const JWT_REFRESH_SECRET = 'autorefresh'; // Replace with your refresh token secret
+const JWT_SECRET = 'firewallbase64'; // For password reset token
+const EMAIL_USERNAME = '22521444@gm.uit.edu.vn'; // Your email
+const EMAIL_PASSWORD = 'fhdg itam dsjv hnpy'; // Your email password
+const ACCESS_TOKEN_EXPIRY = '1h'; // Access token expiry time
+const REFRESH_TOKEN_EXPIRY = '7d'; // Refresh token expiry time
 
 const register = async (req, res) => {
   const { name, email, password, numberPhone } = req.body;
   try {
-    // tao ra mot chuoi ngau nhien
     const salt = bcrypt.genSaltSync(10);
-    // ma hoa chuoi salt + password
     const hashPassword = bcrypt.hashSync(password, salt);
     const newUser = await User.create({
       name,
@@ -22,36 +28,63 @@ const register = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
 const login = async (req, res) => {
   const { email, password } = req.body;
-  // b1 tìm user dựa trên email
-  // b2 kiểm tra mật khẩu có đúng hay không
-  const user = await User.findOne({
-    where: {
-      email,
-    },
-  });
-  if (user) {
-    const token = jwt.sign(
-      { email: user.email, type: user.type },
-      "firewallbase64",
-      { expiresIn: 60 * 60 }
-    );
-    const isAuthen = bcrypt.compareSync(password, user.password);
-    if (isAuthen) {
-      res
-        .status(200)
-        .send({ message: "successful", token, type: user.type, id: user.id });
+
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (user) {
+      const isAuthen = bcrypt.compareSync(password, user.password);
+      if (isAuthen) {
+        const accessToken = jwt.sign(
+          { id: user.id, email: user.email, type: user.type },
+          JWT_ACCESS_SECRET,
+          { expiresIn: ACCESS_TOKEN_EXPIRY }
+        );
+
+        const refreshToken = jwt.sign(
+          { id: user.id, email: user.email },
+          JWT_REFRESH_SECRET,
+          { expiresIn: REFRESH_TOKEN_EXPIRY }
+        );
+
+        // Ensure that the Token model is correctly defined and imported
+        if (!Token) {
+          console.error("Token model is not defined or imported correctly");
+          return res.status(500).send({ message: "Internal server error: Token model not found" });
+        }
+
+        // Create a new token entry in the database
+        await Token.create({
+          user_id: user.id,
+          access_token: accessToken,
+          refresh_token: refreshToken,
+          expires_at: new Date(Date.now() + 3600 * 1000), // Token expires in 1 hour
+          status: "active",
+        });
+
+        res.status(200).send({
+          message: "successful",
+          accessToken,
+          refreshToken,
+          user: {
+            id: user.id,
+            name: user.name,
+            type: user.type,
+          },
+        });
+      } else {
+        res.status(401).send({ message: "Invalid password" });
+      }
     } else {
-      res
-        .status(500)
-        .send({ message: "dang nhap that bai, kiem tra lai mat khau" });
+      res.status(404).send({ message: "User not found" });
     }
-  } else {
-    res.status(404).send({ message: "khong co nguoi dung nay" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Internal server error" });
   }
 };
-
 const forgotPassword = async (req, res) => {
   const { email } = req.body;
   try {
@@ -60,62 +93,55 @@ const forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Generate JWT token
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: "1h" });
 
-    // Send email with reset password link
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
+        user: EMAIL_USERNAME,
+        pass: EMAIL_PASSWORD,
       },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USERNAME,
+      from: EMAIL_USERNAME,
       to: email,
       subject: "Password Reset Request",
       text: `Your password reset token is: ${token}`,
     };
 
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "Password reset email sent" });
+    return res.status(200).json({ message: "Password reset email sent" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 const resetPassword = async (req, res) => {
   const { token, newpassword } = req.body;
-  console.log("new passs", newpassword);
 
   if (!newpassword) {
     return res.status(400).json({ message: "New password is required" });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     const user = await User.findOne({ where: { email: decoded.email } });
-    console.log(user);
 
     if (!user) {
       return res.status(404).json({ message: "Invalid or expired token" });
     }
 
-    // Reset password
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(newpassword, salt);
     user.password = hashPassword;
     await user.save();
 
-    res.status(200).json({ message: "Password reset successfully" });
+    return res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 

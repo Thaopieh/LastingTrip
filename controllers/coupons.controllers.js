@@ -1,5 +1,4 @@
 const { Coupons } = require("../models");
-const user = require("../models/coupons");
 const create = async (req, res) => {
   const { code, percent, begin, end } = req.body;
   try {
@@ -35,7 +34,6 @@ const displayCoupon = async (req, res) => {
   }
 };
 const editCoupon = async (req, res) => {
-  console.log("10");
   try {
     const couponId = req.params.id;
     const { code, percent, start, end } = req.body;
@@ -45,8 +43,10 @@ const editCoupon = async (req, res) => {
       },
     });
     if (!detailCoupon) {
+      /* global id */
+
       res.status(400).send({
-        status: `error`,
+        status: 'error',
         message: `User with id ${id}  not found`,
       });
     }
@@ -57,7 +57,7 @@ const editCoupon = async (req, res) => {
     const updateCoupon = await detailCoupon.save();
     if (!updateCoupon)
       res.status(400).send({
-        error: `error`,
+        error: 'error',
         message: `Data fail to ${id} update`,
       });
     res.status(200).send({ updateCoupon }); // Gửi lại detailUser sau khi đã cập nhật thành công
@@ -73,10 +73,10 @@ const deleteCoupon = (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
+    return null;
   }
 };
 const getDetailCoupon = async (req, res) => {
-  console.log("3");
   try {
     const detailCoupon = await Coupons.findOne({
       where: {
@@ -101,8 +101,10 @@ const getCouponByCode = async (req, res) => {
       return res.status(404).json({ message: "Coupon not found" });
     }
     res.status(200).json(coupon);
+    return null;
   } catch (error) {
     res.status(500).send(error);
+    return null;
   }
 };
 

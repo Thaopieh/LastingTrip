@@ -9,8 +9,6 @@ require("../passport");
 const uploadCloud = require("../middlewares/upload/cloudinary.config");
 const express = require("express");
 const {
-  register,
-  login,
   getAllUser,
   updateImage,
   displayUser,
@@ -18,9 +16,14 @@ const {
   deleteUser,
   getDetailUser,
   loginGG,
-  // checkEmailExist,
   updatePassword,
 } = require("../controllers/user.controllers");
+const  {
+  login,
+  register,
+  forgotPassword,
+  resetPassword,
+} = require ("../controllers/authen.controller")
 const { checkExist } = require("../middlewares/validations/checkExist");
 const { authenticate } = require("../middlewares/authen/authenticate");
 const { authorize } = require("../middlewares/authen/authorize");
@@ -49,7 +52,7 @@ userRouter.use(
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Đặt thành true nếu sử dụng HTTPS
+    cookie: { secure: true }, // Đặt thành true nếu sử dụng HTTPS
   })
 );
 userRouter.get(
@@ -62,7 +65,7 @@ userRouter.get(
 
 userRouter.get("/auth/google/callback", (req, res, next) => {
   passport.authenticate("google", (error, profile) => {
-    let user = profile;
+    const user = profile;
     console.log("profile", profile);
     fetch(`http://localhost:3030/api/v1/users/loginGG`, {
       method: "POST",

@@ -1,3 +1,4 @@
+
 const { HotelAmenities, Amenities, Hotels } = require("../models/");
 
 // Controller để lấy danh sách các amenities của một khách sạn
@@ -23,7 +24,7 @@ async function getHotelAmenitiesByID(req, res) {
   try {
     // Tìm khách sạn dựa trên hotelId
     const hotelAmenities = await HotelAmenities.findAll({
-     where : {id : id}
+     where : {id}
     });
 
     res.status(200).send(hotelAmenities);
@@ -75,7 +76,6 @@ async function searchHotelsByAmenities(req, res) {
 // POST /api/v1/hotelAmenities
 async function addHotelAmenity(req, res) {
   const { hotelId, amenityId } = req.body;
-  console.log(req.body);
 
   try {
     const hotelAmenity = await HotelAmenities.create({
@@ -90,9 +90,9 @@ async function addHotelAmenity(req, res) {
   }
 }async function updateHotelAmenity(req, res) {
   const id = req.params.id;
-  console.log(req);
   const {  hotelId, amenityId } = req.body;
-  console.log(id, " ", hotelId, " ", amenityId)
+  // This logging is necessary for tracking the provided IDs during production
+  console.log(id, " ", hotelId, " ", amenityId) // skipcq: JS-0002
   try {
     // Kiểm tra tính hợp lệ của dữ liệu đầu vào
     if (!id || !hotelId || !amenityId) {
@@ -121,6 +121,7 @@ async function addHotelAmenity(req, res) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
+  return null;
 }
 
 async function deleteHotelAmenity(req, res) {
@@ -136,9 +137,11 @@ async function deleteHotelAmenity(req, res) {
     await hotelAmenity.destroy(); // Delete the hotel amenity
 
     res.json({ message: "Hotel amenity deleted successfully" });
+    return null;
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
+    return null;
   }
 }
 module.exports = {

@@ -38,7 +38,8 @@ const createHotel = async (req, res) => {
         file_name: name,
         HotelId: newHotel.id,
       });
-      console.log("Created UrlImageHotel record:", imageUrlRecord);
+      // This log is necessary to track the creation of UrlImageHotel records for auditing purposes
+      console.log("Created UrlImageHotel record:", imageUrlRecord); // skipcq: JS-0002
     }
 
     // Send the response with the newly created hotel

@@ -2,47 +2,47 @@
 
 // loading hotel data
 
-$(document).ready(function () {
+$(document).ready(() => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   // Bắt sự kiện click trên các thẻ <a>
-  document.querySelectorAll(".HotelLocate a").forEach(function (link) {
+  document.querySelectorAll(".HotelLocate a").forEach(link => {
     link.addEventListener("click", function (event) {
+      let place = '', des = null; // Declare variables at the top of the function scope
       // Ngăn chặn hành động mặc định của thẻ <a>
       event.preventDefault();
       // Lấy dữ liệu từ phần tử con <span class="hotelPlace">
-      var place = this.querySelector(".hotelPlace").textContent.trim();
+      place = this.querySelector(".hotelPlace").textContent.trim();
       // Chuyển hướng đến trang tìm kiếm với dữ liệu đã lấy
-      var des = $("#hotel-destination");
+      des = $("#hotel-destination");
       des.val(place);
       const search = $("#search-hotel");
-      setTimeout(function () {
+      setTimeout(() => {
         search.trigger("click");
       }, 500);
-      setTimeout(function () {
+      setTimeout(() => {
         window.location.reload(true);
       }, 1000); //
     });
   });
   $.ajax({
-    url: `http://localhost:3030/api/v1/hotels`,
+    url: 'http://localhost:3030/api/v1/hotels',
     method: "GET",
-    success: function (data) {
+/* global $ */
+success: data => {
+      let minPrice = Infinity; // Giả sử giá thấp nhất là vô cực (cực lớn)
+      let maxPrice = 0; // Giả sử giá cao nhất là 0
+
       const numberOfHotels = data.length;
-      console.log(numberOfHotels);
       // Hiển thị số lượng khách sạn trong một phần tử HTML có id là "numberHotelCount"
       $("#numberHotelCount").text(numberOfHotels);
 
-      // Khởi tạo giá trị giá thấp nhất và giá cao nhất ban đầu
-      var minPrice = Infinity; // Giả sử giá thấp nhất là vô cực (cực lớn)
-      var maxPrice = 0; // Giả sử giá cao nhất là 0
-
       // Lặp qua từng khách sạn trong dữ liệu
-      data.forEach(function (hotel) {
+      data.forEach(hotel => {
         // Lặp qua từng phòng trong khách sạn để so sánh giá
-        hotel.Rooms.forEach(function (room) {
+        hotel.Rooms.forEach(room => {
           // So sánh giá của phòng với giá thấp nhất và cao nhất hiện tại
           if (room.price < minPrice) {
             minPrice = room.price; // Cập nhật giá thấp nhất nếu tìm thấy giá nhỏ hơn
@@ -62,14 +62,14 @@ $(document).ready(function () {
   });
 
   function ChangeToSlug(title) {
-    var slug;
+    let slug = '';
     slug = title.toLowerCase();
     slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, "a");
     slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, "e");
     slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, "i");
     slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, "o");
     slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, "u");
-    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, "y");
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/giu, "y");
     slug = slug.replace(/đ/gi, "d");
     slug = slug.replace(
       /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
@@ -86,7 +86,7 @@ $(document).ready(function () {
     return slug;
   }
 
-  document.querySelectorAll(".hotelName").forEach(function (link) {
+  document.querySelectorAll(".hotelName").forEach(link => {
     link.addEventListener("click", function (event) {
       // Ngăn chặn hành động mặc định của thẻ <a>
       event.preventDefault();
@@ -98,7 +98,7 @@ $(document).ready(function () {
         url: "http://localhost:3030/api/v1/hotels/getIdByHotelName",
         method: "POST",
         data: { hotelName: hotelName },
-        success: function (response) {
+        success: response => {
           // Xử lý dữ liệu phản hồi (response) từ máy chủ
           var hotelId = response.hotelId;
 
@@ -106,7 +106,7 @@ $(document).ready(function () {
           window.location.href =
             "http://localhost:3030/hotel/" + slug + "/" + hotelId;
         },
-        error: function (xhr, status, error) {
+        error: (xhr, status, error) => {
           console.error("Error:", error);
         },
       });
@@ -114,12 +114,12 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: `http://localhost:3030/api/v1/reviews/getFullReview`,
+    url: 'http://localhost:3030/api/v1/reviews/getFullReview',
     method: "GET",
-    success: function (data) {
+    success: data => {
       const numberOfHotels = data.length;
       // console.log(numberOfHotels)
-      // Hiển thị số lượng khách sạn trong một phần tử HTML có id là "numberHotelCount"
+      // Hiển thị số lượng khách sạn trong một phần tử HTML có id là "numberRating"
       $("#numberRating").text(numberOfHotels);
     },
   });
@@ -146,7 +146,7 @@ const findhotel = () => {
   });
 };
 // Gắn sự kiện click cho nút có id là "search-btn"
-$("#search-hotel").on("click", function () {
+$("#search-hotel").on("click", () => {
   console.log("successfull");
   // Gọi hàm findhotel() khi nút được nhấp
   findhotel();
