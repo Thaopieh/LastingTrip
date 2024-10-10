@@ -17,6 +17,4 @@ DB_USER=b222956f7ce284
 DB_PASSWORD=3fbc4e05
 DB_NAME=heroku_0f4e26bb0b88096
 API_URL=https://lastingtrip-674584f294be.herokuapp.com
-GOOGLE_CLIENT_ID="761053041493-u7n4vjre35unj1ftfkn76grgl934oepq.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET="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"
 SECRET_KEY="Q3lHn2QG502CmrSug/KXQ8t0Hmykb5H94SuGhU/SSFU="
