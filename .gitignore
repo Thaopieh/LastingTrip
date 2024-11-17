@@ -1,0 +1,15 @@
+# Các tệp và thư mục không cần upload lên Git
+node_modules/
+.env
+*.log
+
+# Nếu có thư mục build hoặc dist, bạn cũng có thể thêm vào
+build/
+dist/
+
+# Nếu bạn sử dụng hệ thống IDE (ví dụ: VS Code), có thể thêm thêm thư mục sau:
+.vscode/
+
+# Thêm tệp hệ thống của OS, như trên macOS, Windows:
+.DS_Store
+Thumbs.db
